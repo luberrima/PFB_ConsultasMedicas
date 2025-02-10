@@ -15,3 +15,12 @@ Colores más usados: blanco de fondo y alguna variación de azul como color prin
 Ilustraciones sencillas soul-less
 Tipografias san serif
 Todo claro y minimal
+
+
+EJEMPLOS:
+
+Ejemplo de tarjetas para la valoracion de los facultativos:
+
+https://www.doctoralia.es/buscar?q=Cardi%C3%B3logo&loc=&filters%5Bspecializations%5D%5B%5D=10&filters%5Bonline_only%5D=1
+https://www.saludonnet.com/centros-medicos/medicina-general/provincia/valladolid/1-consulta
+
