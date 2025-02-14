@@ -22,9 +22,15 @@ server.use(cors(/* { origin: FRONTEND_HOST } */));
 server.use(router);
 
 /* errores */
-
-
-
+// Gestor de ruta no encontrada 404
+server.use((req, res, next) => {
+    const resourcePath = req.path
+    const error = new Error(`No se encontro el recurso: ${resourcePath}`);
+    error.httpStatus = 404;
+    error.code = 'RESOURCE_NOT_FOUND';
+    //mandamos el error al gestor de errores para que lo saque el.
+    next(error)
+})
 
 //gestor de errores
 
