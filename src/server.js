@@ -3,20 +3,26 @@ import morgan from 'morgan';
 import fileupload from 'express-fileupload';
 import cors from 'cors';
 import path from 'path';
-
 import { router } from './routes/indexRouter.js';
 
 import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';
-
+/*esto es para probar*/
+import { uploadMiddleware } from './middlewares/uploadMiddleware.js';
 export const server = express();
 
 /* MIDLEWARES */
 server.use(morgan('dev'));
 server.use(express.json());
-server.use(fileupload());
+server.use(fileupload({ useTempFiles: true, tempFileDir: '/tmp/' })); 
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
 server.use(cors(/* { origin: FRONTEND_HOST } */));
+
+/*  RUTA PARA SUBIR ARCHIVOS */
+server.post('/upload', uploadMiddleware, (req, res) => {
+    res.json({ message: 'Archivo subido con éxito', filePath: req.filePath });
+});
+
 
 /* ROUTERS */
 server.use(router);
