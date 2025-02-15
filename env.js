@@ -8,6 +8,9 @@ export const {
 	MYSQL_PORT,
     ADMIN_USER,
     ADMIN_PASSWORD,
-    ADMIN_EMAIL
-	
+    ADMIN_EMAIL,
+	FRONTEND_HOST,
+	UPLOADS_DIR,
+	PORT
+
 } = process.env;
