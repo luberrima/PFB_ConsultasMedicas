@@ -1,25 +1,15 @@
-import bcrypt from 'bcrypt';
-import crypto from 'crypto';
+import { hashPasswordUtil } from '../../utils/hashPasswordUtil.js';
+import { generateUUIDUtil } from '../../utils/generateUUIDUtil.js';
 import randomstring from 'randomstring';
 import { insertUserModel } from '../../models/users/insertUserModel.js';
-import { insertDoctorModel } from '../../models/users/insertDoctorModel.js';
 
-export const registerUserService = async (username, email, password, role, skillId, collegeNumber, dateOfCollege) => {
-    const id = crypto.randomUUID();
-    const passwordHash = await bcrypt.hash(password, 10);
+export const registerUserService = async (username, email, password) => {
+    const id = generateUUIDUtil();
+    const passwordHash = await hashPasswordUtil(password);
     const registrationCode = randomstring.generate(15);
-    const result = await insertUserModel({ id, username, email, password: passwordHash, role, registrationCode });
-
+    const result = await insertUserModel({ id, username, email, password: passwordHash, role: 'paciente', registrationCode });
     if (result.affectedRows !== 1) {
         throw new Error('No se pudo insertar el usuario');
     }
-
-    if (role === 'doctor') {
-        const doctorResult = await insertDoctorModel({ id: crypto.randomUUID(), userId: id, skillId, collegeNumber, dateOfCollege });
-        if (doctorResult.affectedRows !== 1) {
-            throw new Error('No se pudo insertar el doctor');
-        }
-    }
-
-    return { id, username, email, role, registrationCode };
+    return { id, username, email, registrationCode, role: 'paciente' };
 };

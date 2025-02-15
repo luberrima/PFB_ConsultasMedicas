@@ -1,10 +1,10 @@
 import { getPool } from '../../db/getPool.js';
 
-export const insertDoctorModel = async ({ id, userId, skillId, collegeNumber, dateOfCollege }) => {
-    const pool = getPool();
+export const insertDoctorModel = async ({ id, userId, collegeNumber, dateOfCollege, skillId }) => {
+    const pool = await getPool();
     const [result] = await pool.query(
-        `INSERT INTO doctors (id, userId, skillId, collegeNumber, dateOfCollege) VALUES (?, ?, ?, ?, ?)`,
-        [id, userId, skillId, collegeNumber, dateOfCollege]
+        `INSERT INTO doctors (id, userId, collegeNumber, dateOfCollege, skillId) VALUES (?, ?, ?, ?, ?)`,
+        [id, userId, collegeNumber, dateOfCollege, skillId]
     );
     return result;
 };
