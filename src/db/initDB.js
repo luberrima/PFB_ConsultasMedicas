@@ -1,6 +1,7 @@
 import path from 'path';
 import { getPool } from './getPool.js';
 import { MYSQL_DATABASE,ADMIN_USER,ADMIN_EMAIL,ADMIN_PASSWORD} from '../../env.js';
+import { registerUserService } from '../services/users/registerUserService.js';
 /*import { createPathUtil, deletePathUtil } from '../utils/foldersUtils.js';*/
 
 export const initDb = async () => {
@@ -152,29 +153,19 @@ VALUES
 
     // Insert usuarios admin (datos de admin en .env)
 
+    const user = await registerUserService(ADMIN_USER, ADMIN_EMAIL, ADMIN_PASSWORD);
+    console.log("usuario creado con Nombre ",ADMIN_USER);
+    await pool.query(
+      `UPDATE users SET role = ?, active = ?, registrationCode = '' WHERE id = ?`,
+      ['admin', 1, user.id]
+    );
+    console.log(`usuario con Nombre ${ADMIN_USER} ha sido convertido a Administrador`);
 
+    
 
 
     
-/*
-await pool.query(`
-  INSERT INTO users
-(id,
-username,
-email,
-password,
-role,
-active)
-VALUES
-(${UUIDadmin},
-${UUIDadmin},
-${UUIDadmin},
-${UUIDadmin},
-"admin",
- TRUE
- );
-`);
-*/
+
 
 
 
@@ -200,7 +191,7 @@ ${UUIDadmin},
 		process.exit(0);
 	} catch (error) {
 		console.error('Error al inicializar la base de datos');
-        console.log(error);
+    console.log(error);
 		process.exit(1);
 	}
 };
