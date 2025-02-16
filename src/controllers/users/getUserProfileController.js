@@ -1,6 +1,6 @@
 import {selectUserByIdModel} from '../../models/users/selectUserByIdModel.js';
 
-export const getUserProfileController = async (requestAnimationFrame, resizeBy, next) => {
+export const getUserProfileController = async (req, res, next) => {
     try {
         const { userid } = req.params;
 
