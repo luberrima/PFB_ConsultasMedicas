@@ -38,16 +38,7 @@ ninguna skill si esta esta siendo usada por algun medico o consulta activa o arc
 y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrado de una skill este forzado a seleccionar otra para que todos los datos sean pasado a la nueva skill*/
 
 
-/*
 
-await pool.query(`
-  INSERT INTO skill
-(id,
-Name)
-VALUES
-(0,"UNDEFINED ERROR");
-`);
-*/
 
 		/* Crear tabla users la tabla user engloba usuarios doctores y administradores
     El campo Active es para activar un usuario  y activar entre "" a un doctor pero hasta que en el campo validate de la tabla 
