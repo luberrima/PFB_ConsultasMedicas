@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { selectUserByEmailModel } from '../../models/users/selectUserbyEmailModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
@@ -28,4 +29,14 @@ export const loginUserService = async (email, password) => {
     }
 
     //token
+    const payload = {
+        id: user.id,
+        role: user.role,
+    };
+
+    const token = jwt.sign(payload, SECRET, {
+        expiresIn: '24h',
+    });
+
+    return token;
 };

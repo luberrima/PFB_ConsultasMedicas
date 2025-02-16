@@ -24,13 +24,13 @@ server.use(router);
 /* errores */
 // Gestor de ruta no encontrada 404
 server.use((req, res, next) => {
-    const resourcePath = req.path
+    const resourcePath = req.path;
     const error = new Error(`No se encontro el recurso: ${resourcePath}`);
     error.httpStatus = 404;
     error.code = 'RESOURCE_NOT_FOUND';
     //mandamos el error al gestor de errores para que lo saque el.
-    next(error)
-})
+    next(error);
+});
 
 //gestor de errores
 
@@ -41,6 +41,6 @@ server.use((error, req, res, next) => {
         httpStatus: error.httpStatus || 500,
         status: 'ERROR!!!',
         code: error.code || 'INTERNAL _SERVER_ERROR',
-        message: error.message
+        message: error.message,
     });
-}); 
+});

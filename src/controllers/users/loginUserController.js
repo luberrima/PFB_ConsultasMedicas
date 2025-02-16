@@ -16,6 +16,12 @@ export const loginUserController = async (req, res, next) => {
 
         //Llamar al service de login. devuelve el token
         const token = await loginUserService(email, password);
+
+        res.status(200).send({
+            status: 'ok',
+            message: 'User logged',
+            data: token,
+        });
     } catch (error) {
         next(error);
     }
