@@ -6,5 +6,7 @@ export const insertUserModel = async ({ id, username, email, password, role, reg
         `INSERT INTO users (id, username, email, password, role, registrationCode) VALUES (?, ?, ?, ?, ?, ?)`,
         [id, username, email, password, role, registrationCode]
     );
+
+
     return result;
 };

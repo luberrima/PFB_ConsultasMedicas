@@ -6,7 +6,7 @@ import { loginUserController } from '../controllers/users/loginUserController.js
 
 export const usersRouter = express.Router();
 
-usersRouter.post('users/login', loginUserController);
+usersRouter.post('/users/login', loginUserController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
-/*usersRouter.post('/users/send-validation-email', sendValidationEmailController);  Falta el archivo utils sendEmailBrevoUtil.js  */ 
+/* usersRouter.post('/users/send-validation-email', sendValidationEmailController);  Falta el archivo utils sendEmailBrevoUtil.js  */ 

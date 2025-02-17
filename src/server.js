@@ -7,7 +7,7 @@ import path from 'path';
 import { router } from './routes/indexRouter.js';
 
 import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';
-import { bodyParserMiddleware } from './middlewares/bodyParserMiddleware.js';
+
 
 export const server = express();
 
@@ -16,7 +16,7 @@ server.use(morgan('dev'));
 
 //bodyParser
 server.use(express.json());
-server.post('*', bodyParserMiddleware);
+
 
 server.use(fileupload());
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);

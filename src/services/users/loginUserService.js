@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { selectUserByEmailModel } from '../../models/users/selectUserbyEmailModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
+import { SECRET } from '../../../env.js';
 
 export const loginUserService = async (email, password) => {
     //BUscar el usuario por el email

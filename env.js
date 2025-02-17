@@ -11,6 +11,7 @@ export const {
 	ADMIN_EMAIL,
 	FRONTEND_HOST,
 	UPLOADS_DIR,
+	SECRET,
 	PORT
 
 } = process.env;
