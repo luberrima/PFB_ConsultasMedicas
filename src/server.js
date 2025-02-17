@@ -19,7 +19,7 @@ server.use(morgan('dev'));
 server.use(express.json());
 server.post('*', bodyParserMiddleware);
 
->>>>>>> 1c1129c09fba313c68f7447c5bcb78d196233f9c
+
 server.use(fileupload());
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
