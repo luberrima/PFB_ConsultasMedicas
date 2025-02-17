@@ -1,6 +1,6 @@
 import { genereErrorUtils } from './genereErrorUtils.js';
 
-export const validateSchemaUtils = async (schema, data) => {
+export const validateSchemaUtil = async (schema, data) => {
     try {
         await schema.validateAsync(data);
     } catch (error) {

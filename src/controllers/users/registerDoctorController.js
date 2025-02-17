@@ -1,10 +1,10 @@
 import { newDoctorSchema } from '../../schemas/users/newDoctorSchema.js';
 import { registerDoctorService } from '../../services/users/registerDoctorService.js';
-import { validateSchemaUtils } from '../../utils/validateSchemaUtil.js';
+import { validateSchemaUtil } from '../../utils/validateSchemaUtil.js';
 
 export const registerDoctorController = async (req, res, next) => {
     try {
-        await validateSchemaUtils(newDoctorSchema, req.body);
+        await validateSchemaUtil(newDoctorSchema, req.body);
         const {
             username,
             email,
