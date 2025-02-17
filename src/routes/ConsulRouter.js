@@ -1,10 +1,9 @@
+import express from 'express';
+import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
+export const consulRouter = express.Router();
 
 
-
-export const usersRouter = express.Router();
-
-
-ConsulRouter.delete('/consul/:id', authUserMiddleware,
+consulRouter.delete('/consul/:id', authUserMiddleware,
     entryExistsMiddleware,
     canDoItMiddleware,
     editEntryController);
