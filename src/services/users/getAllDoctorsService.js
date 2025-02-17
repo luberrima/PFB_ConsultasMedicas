@@ -1,8 +1,8 @@
-import { selectUsersbyRoleModel } from '../../models/users/selectUsersbyRoleModel.js';
+import { usersJoinDoctorsModel } from '../../models/users/usersJoinDoctorsModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const getAllDoctorsService = async () => {
-    const doctors = await selectUsersbyRoleModel({ role: 'doctor' });
+    const doctors = await usersJoinDoctorsModel();
     if (!doctors.length) {
         throw genereErrorUtils(
             404,
