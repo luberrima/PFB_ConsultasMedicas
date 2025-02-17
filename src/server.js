@@ -11,7 +11,6 @@ import { bodyParserMiddleware } from './middlewares/bodyParserMiddleware.js';
 
 export const server = express();
 
-
 /* MIDDLEWARES */
 server.use(morgan('dev'));
 
@@ -19,11 +18,12 @@ server.use(morgan('dev'));
 server.use(express.json());
 server.post('*', bodyParserMiddleware);
 
-
 server.use(fileupload());
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
-server.use(cors(/* { origin: FRONTEND_HOST } */));
+
+//cors
+server.use(cors(/* { origin: FRONTEND_HOST } */)); //se comenta la variable de entorno durante el desarrollo pero al hacer deploy se tiene que descomentar y rellenar el dominio en .env
 
 /* ROUTERS */
 server.use(router);
