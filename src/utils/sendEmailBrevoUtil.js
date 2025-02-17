@@ -1,7 +1,7 @@
 import brevo from '@getbrevo/brevo';
 
 import { SMTP_USER, SMTP_API_KEY } from '../../env.js';
-import { generateErrorUtils } from './helpersUtils.js';
+import { genereErrorUtils } from './helpersUtils.js';
 
 const apiInstance = new brevo.TransactionalEmailsApi();
 apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, SMTP_API_KEY);
@@ -18,7 +18,7 @@ export const sendEmailBrevoUtil = async (to, subject, text) => {
         };
         await apiInstance.sendTransacEmail(sendSmtpEmail);
     } catch (error) {
-        throw generateErrorUtils(
+        throw genereErrorUtils(
             500,
             'SEND_EMAIL_ERROR',
             'Error al enviar el email'
