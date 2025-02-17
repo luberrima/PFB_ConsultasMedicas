@@ -1,6 +1,7 @@
 import path from 'path';
 import { getPool } from './getPool.js';
-import { MYSQL_DATABASE} from '../../env.js';
+import { MYSQL_DATABASE,ADMIN_USER,ADMIN_EMAIL,ADMIN_PASSWORD} from '../../env.js';
+import { registerUserService } from '../services/users/registerUserService.js';
 /*import { createPathUtil, deletePathUtil } from '../utils/foldersUtils.js';*/
 
 export const initDb = async () => {
@@ -16,7 +17,7 @@ export const initDb = async () => {
 		// Borrar las tablas si existen
 		console.log('Borrando tablas existentes 🗑 📑');
 		await pool.query(
-			'DROP TABLE IF EXISTS replys, documents, consultations, doctors,users,skill;'
+			'DROP TABLE IF EXISTS replys, documents, consultations, doctors,users,skills;'
 		);
 		console.log('Tablas borradas ✅ 📑');
 
@@ -25,25 +26,24 @@ export const initDb = async () => {
 
 
     await pool.query(`
-      CREATE TABLE skill (
+      CREATE TABLE skills (
       id INT AUTO_INCREMENT,
       Name VARCHAR(45) NOT NULL,
       PRIMARY KEY (id)
   );
 `);
 
+/*Aqui tenemos un problemita con la tabla skill o mas bien el problema es que usuario admin no deberia poder borrar 
+ninguna skill si esta esta siendo usada por algun medico o consulta activa o archivada ya que en la informacion creara que el valor no sea devuelto
+y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrado de una skill este forzado a seleccionar otra para que todos los datos sean pasado a la nueva skill*/
 
-/*
-await pool.query(`
-  INSERT INTO skill
-(id,
-Name)
-VALUES
-(0,"UNDEFINED ERROR");
-`);
-*/
 
-		// Crear tabla users
+
+
+		/* Crear tabla users la tabla user engloba usuarios doctores y administradores
+    El campo Active es para activar un usuario  y activar entre "" a un doctor pero hasta que en el campo validate de la tabla 
+    doctors no lo valide un admin no tendra poder para coger casos ni aparecera como doctor en el listado
+    */
 		await pool.query(`
         CREATE TABLE users (
         id CHAR(36) PRIMARY KEY NOT NULL,
@@ -64,7 +64,9 @@ VALUES
 
 
 
-	// Crear tabla doctors
+	/* Crear tabla doctors datos extra necesarios para los doctores el campo validate es necesario para que el administrador sea quien haga la validacion final de que 
+  la comprobacion de datos, este pueda validad al doctor.
+  */
 	await pool.query(`
         CREATE TABLE doctors (
         id CHAR(36) PRIMARY KEY NOT NULL,
@@ -76,13 +78,16 @@ VALUES
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (skillId) REFERENCES skill(id)
+        FOREIGN KEY (skillId) REFERENCES skills(id)
         
       );
     `);
 
 
-    // Crear tabla consultations
+    /* Crear tabla consultations el campo diagnostico es el campo para finalizar la consulta y 
+    sera el recipiente del diagnostico final, una vez dado el diagnostico se bloquearan las replys y se podra valorar
+  */
+
 		await pool.query(`
       CREATE TABLE consultations (
         id CHAR(36) PRIMARY KEY NOT NULL,
@@ -97,7 +102,7 @@ VALUES
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE, 
-        FOREIGN KEY (skillId) REFERENCES skill(id)
+        FOREIGN KEY (skillId) REFERENCES skills(id)
       );
     `);
 
@@ -115,6 +120,13 @@ VALUES
       );
     `);
 
+      /* la tabla de documentos que guardara toda la informacion relacionada con las consultas
+      He desactivado el borrado en cascada ya que un problema grave es que si se borra la referencia de los archivos 
+      podria pasar que se queden huerfanos por el servidor ocupando espacio inecesario entonces hasta.
+      
+      */
+
+
 
       await pool.query(`
       CREATE TABLE documents (
@@ -124,13 +136,37 @@ VALUES
         replyid CHAR(36),
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (replyid) REFERENCES replys(id) ON DELETE SET NULL,
-        FOREIGN KEY (consultationsId) REFERENCES consultations(id) ON DELETE SET NULL
+        FOREIGN KEY (replyid) REFERENCES replys(id),
+        FOREIGN KEY (consultationsId) REFERENCES consultations(id) 
   
       );
     `);
 
     // Insert usuarios admin (datos de admin en .env)
+
+    const user = await registerUserService(ADMIN_USER, ADMIN_EMAIL, ADMIN_PASSWORD);
+    console.log("usuario creado con Nombre ",ADMIN_USER);
+    await pool.query(
+      `UPDATE users SET role = ?, active = ?, registrationCode = '' WHERE id = ?`,
+      ['admin', 1, user.id]
+    );
+    console.log(`usuario con Nombre ${ADMIN_USER} ha sido convertido a Administrador`);
+
+    const skills = ['General','Traumatismos','Cardio','Urólogo','Otorrinolaringólogo','Anestesista'];
+
+    await Promise.all(
+      skills.map(skill => pool.query(`INSERT INTO skills (name) VALUES (?)`, skill))
+    );
+
+
+
+
+
+    
+
+
+    
+
 
 
 
@@ -156,7 +192,7 @@ VALUES
 		process.exit(0);
 	} catch (error) {
 		console.error('Error al inicializar la base de datos');
-        console.log(error);
+    console.log(error);
 		process.exit(1);
 	}
 };

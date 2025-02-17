@@ -1,26 +1,56 @@
-# PFB_ConsultasMedicas
+## 📌 Descripción del Proyecto
 
-- Apartado de Q&A con dudas ya resueltas
-- Cuestionario inicial que te derive al médico o especialidad que necesitas si no sabes a quien acudir
-- Sección en inicio con las rutas más comunes
-- Valoraciones a los médicos tras resolver los casos
-- Filtros por especialidad médica
-- Posibilidad de subir fotos
-- Cuestionario previo siempre: niveles de dolor/molestia, zona corporal, tipo de consulta, etc.
-- Posibilidad de publicar tu conversación como hilo para que comente más gente o para ayudar a la peña?
-- 2 opciones: consultar los foros por si se te resuelve la duda y hablar con los médicos
+Consultas Médicas Online es una plataforma diseñada para conectar pacientes y doctores de manera rápida y eficiente a través de Internet. Los pacientes pueden buscar médicos por especialidad y programar consultas, mientras que los médicos pueden gestionar y responder a las consultas de los pacientes. La plataforma permite la interacción segura entre ambos tipos de usuarios, facilitando la atención médica en línea.
 
-INVESTIGACIÓN GRÁFICA:
-Colores más usados: blanco de fondo y alguna variación de azul como color principal
-Ilustraciones sencillas soul-less
-Tipografias san serif
-Todo claro y minimal
+## 🚀 Características Principales
 
+-   👤 **Usuario No Registrado:**
+    Los usuarios no registrados pueden visualizar la landing page, registrarse con validación por correo electrónico e iniciar sesión con recuperación de contraseña.
 
-EJEMPLOS:
+-   🏥 **Usuarios Pacientes:**
+    Los pacientes pueden ver y gestionar sus consultas, realizar búsquedas por palabra clave, especialidad o gravedad, ordenar resultados, acceder a detalles de consultas y médicos, gestionar su perfil, crear y eliminar consultas sin respuestas, responder sus propias consultas y valorar respuestas médicas.
 
-Ejemplo de tarjetas para la valoracion de los facultativos:
+-   👨‍⚕️ **Usuarios Médicos:**
+    Los médicos pueden ver la lista de consultas disponibles, filtrar y ordenar como los pacientes, acceder a detalles de consultas, gestionar su perfil profesional, consultar su histórico de consultas, responder consultas dentro de su especialidad o asignadas, eliminar respuestas propias sin valoración y visualizar la lista de médicos con su media de valoraciones.
 
-https://www.doctoralia.es/buscar?q=Cardi%C3%B3logo&loc=&filters%5Bspecializations%5D%5B%5D=10&filters%5Bonline_only%5D=1
-https://www.saludonnet.com/centros-medicos/medicina-general/provincia/valladolid/1-consulta
+## 🛠 Tecnologías Utilizadas
 
+-   **Backend:** Node.js con Express.js
+
+-   **Base de datos:** MySQL con mysql2
+
+-   **Autenticación:** JSON Web Token (jsonwebtoken), bcrypt para hash de contraseñas
+
+-   **Validaciones:** Joi
+
+-   **Manejo de archivos:** express-fileupload
+
+-   **Configuración y seguridad:** dotenv, cors, crypto, randomstring
+
+-   **Utilidades:** path
+
+-   **Desarrollo:** Morgan y Nodemon (solo en desarrollo)
+
+## 📌 Instalación y Configuración
+
+**Clonar el repositorio:**
+
+> git clone git@github.com:luberrima/PFB_ConsultasMedicas.git
+
+**Instalar las dependencias:**
+
+> npm install
+
+**Configurar las variables de entorno:**
+
+> Copiar el archivo .env.example y renombrarlo a .env. Completar los valores según la configuración del entorno.
+
+**Ejecutar la base de datos:**
+
+> npm run initDb
+
+**Iniciar el servidor:**
+
+> npm start
+
+##

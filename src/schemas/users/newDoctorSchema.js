@@ -1,4 +1,5 @@
 import joi from 'joi';
+import { joiErrorMessages } from '../joiErrorMessages.js';
 export const newDoctorSchema = joi.object({
     username: joi.string().min(3).max(50).required(),
     email: joi.string().email().required(),
