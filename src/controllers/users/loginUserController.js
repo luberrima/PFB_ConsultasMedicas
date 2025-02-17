@@ -20,7 +20,7 @@ export const loginUserController = async (req, res, next) => {
         res.status(200).send({
             status: 'ok',
             message: 'User logged',
-            data: token,
+            data: { token },
         });
     } catch (error) {
         next(error);
