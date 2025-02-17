@@ -35,7 +35,7 @@ Consultas Médicas Online es una plataforma diseñada para conectar pacientes y 
 
 **Clonar el repositorio:**
 
-> git clone https://github.com/tu-repositorio.git
+> git clone git@github.com:luberrima/PFB_ConsultasMedicas.git
 
 **Instalar las dependencias:**
 
