@@ -1,11 +1,13 @@
 import { loginUserService } from '../../services/users/loginUserService.js';
-import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
+import { genereErrorUtils } from '../../utils/genereErrorUtils.js'
+
+
 
 export const loginUserController = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        //Validar si hay datos
+         //Validar si hay datos
         if (!email || !password) {
             throw genereErrorUtils(
                 400,

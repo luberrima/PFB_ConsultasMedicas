@@ -17,7 +17,7 @@ export const initDb = async () => {
 		// Borrar las tablas si existen
 		console.log('Borrando tablas existentes 🗑 📑');
 		await pool.query(
-			'DROP TABLE IF EXISTS replys, documents, consultations, doctors,users,skill;'
+			'DROP TABLE IF EXISTS replys, documents, consultations, doctors,users,skills;'
 		);
 		console.log('Tablas borradas ✅ 📑');
 
@@ -26,7 +26,7 @@ export const initDb = async () => {
 
 
     await pool.query(`
-      CREATE TABLE skill (
+      CREATE TABLE skills (
       id INT AUTO_INCREMENT,
       Name VARCHAR(45) NOT NULL,
       PRIMARY KEY (id)
@@ -78,7 +78,7 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (skillId) REFERENCES skill(id)
+        FOREIGN KEY (skillId) REFERENCES skills(id)
         
       );
     `);
@@ -102,7 +102,7 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updatedAt TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE, 
-        FOREIGN KEY (skillId) REFERENCES skill(id)
+        FOREIGN KEY (skillId) REFERENCES skills(id)
       );
     `);
 
@@ -151,6 +151,16 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
       ['admin', 1, user.id]
     );
     console.log(`usuario con Nombre ${ADMIN_USER} ha sido convertido a Administrador`);
+
+    const skills = ['General','Traumatismos','Cardio','Urólogo','Otorrinolaringólogo','Anestesista'];
+
+    await Promise.all(
+      skills.map(skill => pool.query(`INSERT INTO skills (name) VALUES (?)`, skill))
+    );
+
+
+
+
 
     
 
