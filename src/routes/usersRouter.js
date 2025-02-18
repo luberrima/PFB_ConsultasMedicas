@@ -4,8 +4,8 @@ import { registerDoctorController } from '../controllers/users/registerDoctorCon
 /*import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';*/
 import { loginUserController } from '../controllers/users/loginUserController.js';
 import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
-import {editUserPassController} from '../controllers/users/editUserPassController.js'
-import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
+import editUserPassController from '../controllers/users/editUserPassController.js' //Si usas un export default no necesitas llaves.
+/*import { recoveryPassController } from '../controllers/users/recoveryPassController.js';   servidor indica que falta PFB_ConsultasMedicas\src\models\users\updateRecoverPassModel.js*/
 
 export const usersRouter = express.Router();
 

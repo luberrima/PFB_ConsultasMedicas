@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import {getPool} from '../../db/getPool.js';
-import {selectUserByRecoverPassModel} from './selectUserByRecoveryPassCodeModel.js';
+import {selectUserByRecoverPassModel} from './selectUserByRecoveryPassCodeModel.js';//El fichero estaba mal nombrado lo renombrado.
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const updateUserPassModel = async (recoverPassCode, newPass) => {
