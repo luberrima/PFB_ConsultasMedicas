@@ -7,11 +7,12 @@ import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Correc
 import editUserPassController from '../controllers/users/editUserPassController.js' //Si usas un export default no necesitas llaves.
 /*import { recoveryPassController } from '../controllers/users/recoveryPassController.js';   servidor indica que falta PFB_ConsultasMedicas\src\models\users\updateRecoverPassModel.js*/
 import { activeUserController } from '../controllers/users/activeUserController.js';
+import {getUserDoctorByIdController} from '../controllers/users/getUserDoctorByIdController.js'
 
 export const usersRouter = express.Router();
 
 usersRouter.post('/users/login', loginUserController);
-usersRouter.post('/users/login', loginUserController);
+usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
 usersRouter.put('/users/validate/:registrationCode', activeUserController);

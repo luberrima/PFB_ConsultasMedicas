@@ -6,9 +6,6 @@ export const getAllSkillsService = async () => {
         const skill = await selectAllskillModel();
      
 
-    console.log("console de controler:",skill);
-    console.log()
-
     return skill;
 
 
