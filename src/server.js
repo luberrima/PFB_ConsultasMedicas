@@ -15,7 +15,10 @@ import { staticFilesMiddleware } from "./middlewares/staticFilesMiddleware.js";
 export const server = express();
 
 /* MIDDLEWARES */
+/* MIDDLEWARES */
 server.use(morgan('dev'));
+
+//bodyParser
 
 //bodyParser
 server.use(express.json());
@@ -37,10 +40,13 @@ server.use(router);
 // Gestor de ruta no encontrada 404
 server.use((req, res, next) => {
     const resourcePath = req.path;
+    const resourcePath = req.path;
     const error = new Error(`No se encontro el recurso: ${resourcePath}`);
     error.httpStatus = 404;
     error.code = 'RESOURCE_NOT_FOUND';
     //mandamos el error al gestor de errores para que lo saque el.
+    next(error);
+});
     next(error);
 });
 
@@ -52,5 +58,7 @@ server.use((error, req, res, next) => {
         status: 'ERROR!!!',
         code: error.code || 'INTERNAL _SERVER_ERROR',
         message: error.message,
+        message: error.message,
     });
+});
 });
