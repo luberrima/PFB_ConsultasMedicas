@@ -1,16 +1,18 @@
 import bcrypt from 'bcrypt';
-import {getPool} from '../../db/getPool.js';
-import {selectUserByRecoverPassModel} from './selectUserByRecoveryPassCodeModel.js';//El fichero estaba mal nombrado lo renombrado.
+import { getPool } from '../../db/getPool.js';
+import { selectUserByRecoveryPassCodeModel } from './selectUserByRecoveryPassCodeModel.js'; //El fichero estaba mal nombrado lo renombrado.
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const updateUserPassModel = async (recoverPassCode, newPass) => {
     const pool = await getPool();
 
-    const user = await selectUserByRecoverPassModel(recoverPassCode);
+    const user = await selectUserByRecoveryPassCodeModel(recoverPassCode);
     console.log({ user, recoverPassCode });
- 
+
     if (!user) {
-        throw genereErrorUtils('Codigo de recuperación incorrecto o usuario no encontrado');
+        throw genereErrorUtils(
+            'Codigo de recuperación incorrecto o usuario no encontrado'
+        );
     }
 
     const hashedPass = await bcrypt.hash(newPass, 10);
@@ -20,4 +22,3 @@ export const updateUserPassModel = async (recoverPassCode, newPass) => {
         [hashedPass, recoverPassCode]
     );
 };
-

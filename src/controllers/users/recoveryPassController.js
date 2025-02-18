@@ -1,6 +1,6 @@
 import randomstring from 'randomstring';
-import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
-import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
+import { selectUserByEmailModel } from '../../models/users/selectUserByEmailModel.js';
+import { updateRecoveryPassModel } from '../../models/users/updateRecoveryPassModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const recoveryPassController = async (req, res, next) => {
@@ -15,7 +15,7 @@ export const recoveryPassController = async (req, res, next) => {
 
         const recoverPassCode = randomstring.generate(10);
 
-        await updateRecoverPassModel(email, recoverPassCode);
+        await updateRecoveryPassModel(email, recoverPassCode);
 
         res.send({
             status: 'ok',
@@ -25,4 +25,3 @@ export const recoveryPassController = async (req, res, next) => {
         next(error);
     }
 };
-

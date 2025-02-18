@@ -1,7 +1,6 @@
-import {updateUserPassModel} from '../../models/users/updateUserPassModel.js';
+import { updateUserPassModel } from '../../models/users/updateUserPassModel.js';
 
-
-const editUserPassController = async (req, res, next) => {
+export const editUserPassController = async (req, res, next) => {
     try {
         const { recoverPassCode, newPass } = req.body;
 
@@ -15,5 +14,3 @@ const editUserPassController = async (req, res, next) => {
         next(err);
     }
 };
-
-export default editUserPassController;

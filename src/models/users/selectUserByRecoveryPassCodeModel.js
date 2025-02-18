@@ -1,7 +1,7 @@
-import {getPool} from '../../db/getPool.js';
+import { getPool } from '../../db/getPool.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
-export const selectUserByRecoverPassModel = async (recoverPassCode) => {
+export const selectUserByRecoveryPassCodeModel = async (recoverPassCode) => {
     const pool = await getPool();
 
     const [users] = await pool.query(
@@ -10,7 +10,9 @@ export const selectUserByRecoverPassModel = async (recoverPassCode) => {
     );
 
     if (users.length === 0) {
-        throw genereErrorUtils('El usuario con ese código de recuperación no existe');
+        throw genereErrorUtils(
+            'El usuario con ese código de recuperación no existe'
+        );
     }
 
     return users[0];

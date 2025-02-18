@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { selectUserByEmailModel } from '../../models/users/selectUserbyEmailModel.js';
+import { selectUserByEmailModel } from '../../models/users/selectUserByEmailModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 import { SECRET } from '../../../env.js';
 

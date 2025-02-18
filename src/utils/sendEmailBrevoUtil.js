@@ -1,7 +1,7 @@
 import brevo from '@getbrevo/brevo';
 
-import { SMTP_USER, SMTP_API_KEY } from '../../env.js';
-import { genereErrorUtils } from './helpersUtils.js';
+import { SMTP_USER, SMTP_API_KEY } from './../../.env';
+import { genereErrorUtils } from './genereErrorUtils.js';
 
 const apiInstance = new brevo.TransactionalEmailsApi();
 apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, SMTP_API_KEY);
@@ -13,7 +13,7 @@ export const sendEmailBrevoUtil = async (to, subject, text) => {
 
         sendSmtpEmail.htmlContent = text;
         sendSmtpEmail.sender = {
-            name: 'Equipo de Travel Diary',
+            name: 'Equipo de GoodDoctor',
             email: SMTP_USER,
         };
         await apiInstance.sendTransacEmail(sendSmtpEmail);
