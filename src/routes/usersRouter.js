@@ -4,13 +4,18 @@ import { registerDoctorController } from '../controllers/users/registerDoctorCon
 /*import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';*/
 import { loginUserController } from '../controllers/users/loginUserController.js';
 import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
+import {editUserPassController} from '../controllers/users/editUserPassController.js'
+import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
 
 export const usersRouter = express.Router();
 
 usersRouter.post('/users/login', loginUserController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
-/* usersRouter.post('/users/send-validation-email', sendValidationEmailController);  Falta el archivo utils sendEmailBrevoUtil.js  */ 
+/* usersRouter.post('/users/send-validation-email', sendValidationEmailController);
+
+userRouter.post('/users/password/recover', recoveryPassController);
+userRouter.put('/users/password', editUserPassController);  Falta el archivo utils sendEmailBrevoUtil.js  */ 
 
 // Ruta para subir archivos
 usersRouter.post("/users/upload", uploadMiddleware, (req, res) => {
