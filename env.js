@@ -8,6 +8,7 @@ export const {
 	MYSQL_PORT,
 	FRONTEND_HOST,
 	UPLOADS_DIR,
-	PORT
+	PORT,
+	SECRET,
 
 } = process.env;
