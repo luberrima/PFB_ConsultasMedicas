@@ -13,7 +13,7 @@ export const sendEmailBrevoUtil = async (to, subject, text) => {
 
         sendSmtpEmail.htmlContent = text;
         sendSmtpEmail.sender = {
-            name: 'Equipo de Good Doctor',
+            name: 'Equipo de Travel Diary',
             email: SMTP_USER,
         };
         await apiInstance.sendTransacEmail(sendSmtpEmail);

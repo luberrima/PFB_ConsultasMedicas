@@ -9,9 +9,9 @@ export const {
 	ADMIN_USER,
 	ADMIN_PASSWORD,
 	ADMIN_EMAIL,
-	FRONTEND_HOST,
-	UPLOADS_DIR,
 	SECRET,
-	PORT
+	PORT,
+	SMTP_USER,
+	SMTP_API_KEY
 
 } = process.env;

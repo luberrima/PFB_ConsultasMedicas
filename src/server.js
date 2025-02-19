@@ -1,29 +1,37 @@
+
+
 import express from 'express';
 import morgan from 'morgan';
 import fileupload from 'express-fileupload';
 import cors from 'cors';
 import path from 'path';
-
 import { router } from './routes/indexRouter.js';
-
-import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';
+/*import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';*/
+/*esto es para probar*/
+/*import { uploadMiddleware } from "./middlewares/uploadMiddleware.js"; // Corrección aquí
+import { staticFilesMiddleware } from "./middlewares/staticFilesMiddleware.js";*/
 
 
 export const server = express();
 
 /* MIDDLEWARES */
+/* MIDDLEWARES */
 server.use(morgan('dev'));
 
 //bodyParser
+
+//bodyParser
 server.use(express.json());
+server.use(fileupload({ useTempFiles: true, tempFileDir: '/tmp/' })); 
+/*const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);*/
+/*server.use('/uploads', express.static(uploadsDir));*/
+/*staticFilesMiddleware(server);*/ 
+/*server.use(cors( { origin: FRONTEND_HOST } ));*/
 
-
-server.use(fileupload());
-const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
-server.use('/uploads', express.static(uploadsDir));
-
-//cors
-server.use(cors(/* { origin: FRONTEND_HOST } */)); //se comenta la variable de entorno durante el desarrollo pero al hacer deploy se tiene que descomentar y rellenar el dominio en .env
+/* RUTA PARA SUBIR ARCHIVOS */
+/*server.post('/upload', uploadMiddleware, (req, res) => {
+    res.json({ message: 'Archivo subido con éxito', filePath: req.filePath });
+});*/
 
 /* ROUTERS */
 server.use(router);
@@ -39,11 +47,10 @@ server.use((req, res, next) => {
     next(error);
 });
 
-//gestor de errores
 
+// Gestor de errores
 server.use((error, req, res, next) => {
     console.error(error);
-    //Manda la respuesta predefinida
     res.status(error.httpStatus || 500).send({
         httpStatus: error.httpStatus || 500,
         status: 'ERROR!!!',
@@ -51,3 +58,4 @@ server.use((error, req, res, next) => {
         message: error.message,
     });
 });
+

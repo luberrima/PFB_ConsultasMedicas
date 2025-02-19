@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {genereErrorUtils} from '../utils/genereErrorUtils';
+import {genereErrorUtils} from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
 
 export const authUser = (req, res, next) => {
