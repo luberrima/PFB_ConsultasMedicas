@@ -1,20 +1,20 @@
 import jwt from 'jsonwebtoken';
-import {genereErrorUtils} from '../utils/genereErrorUtils';
+import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
 
-export const authUser = (req, res, next) => {
+export const authUserMiddleware = (req, res, next) => {
     try {
-        
+
         const { authorization } = req.headers;
 
-        if(!authorization){
+        if (!authorization) {
             throw genereErrorUtils('No se recibió el token', 401);
         }
 
         let tokenInfo;
 
         try {
-            
+
             tokenInfo = jwt.verify(authorization, process.env.SECRET);
 
         } catch (error) {

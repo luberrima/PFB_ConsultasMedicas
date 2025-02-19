@@ -4,7 +4,7 @@ export const activeUserController = async (req, res, next) => {
 
 	try {
 		const { registrationCode } = req.params;
-
+		// Comprobar si hay código de registro
 		if (!registrationCode) {
 			throw generateErrorUtils(
 				400,
@@ -15,13 +15,11 @@ export const activeUserController = async (req, res, next) => {
 
 		const user = await activeUserService(registrationCode);
 
-		res
-			.status(200)
-			.send({
-				status: 'ok',
-				message: 'Usuario activado. Inicia sesión',
-				data: user,
-			});
+		res.status(200).send({
+			status: 'ok',
+			message: 'Usuario activado. Inicia sesión',
+			data: user,
+		});
 	} catch (error) {
 		next(error);
 	}

@@ -22,10 +22,10 @@ server.use(morgan('dev'));
 
 //bodyParser
 server.use(express.json());
-server.use(fileupload({ useTempFiles: true, tempFileDir: '/tmp/' })); 
+server.use(fileupload({ useTempFiles: true, tempFileDir: '/tmp/' }));
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
-staticFilesMiddleware(server); 
+staticFilesMiddleware(server);
 server.use(cors(/* { origin: FRONTEND_HOST } */));
 
 /* RUTA PARA SUBIR ARCHIVOS */
@@ -50,12 +50,15 @@ server.use((req, res, next) => {
 
 // Gestor de errores
 server.use((error, req, res, next) => {
-    console.error(error);
+    //console.error(error);
+
     res.status(error.httpStatus || 500).send({
         httpStatus: error.httpStatus || 500,
         status: 'ERROR!!!',
         code: error.code || 'INTERNAL _SERVER_ERROR',
         message: error.message,
     });
+
+    //res.status(500).send("Hola")
 });
 

@@ -1,11 +1,11 @@
 import { voteDoctorSchema } from '../../schemas/consultations/voteDoctorSchema.js';
 import { voteDoctorService } from '../../services/consultations/voteDoctorService.js';
-import { validateSchema } from '../../utils/validateSchema.js';
+import { validateSchemaUtil } from '../../utils/validateSchemaUtil.js';
 
 export const voteDoctorController = async (req, res, next) => {
     try {
         const { id } = req.params;
-        await validateSchema(voteDoctorSchema, req.body);
+        await validateSchemaUtil(voteDoctorSchema, req.body);
         const { vote } = req.body;
         await voteDoctorService(id, vote);
         res.status(200).send({
