@@ -1,6 +1,8 @@
 import express from 'express';
 import { registerUserController } from '../controllers/users/registerUserController.js';
 import { registerDoctorController } from '../controllers/users/registerDoctorController.js';
+
+import { getDoctorsWithRatingsController } from '../controllers/users/getDoctorsWithRatingsController.js';
 /*import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';*/
 import { loginUserController } from '../controllers/users/loginUserController.js';
 import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
@@ -9,12 +11,16 @@ import editUserPassController from '../controllers/users/editUserPassController.
 import { activeUserController } from '../controllers/users/activeUserController.js';
 import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js'
 
+
 export const usersRouter = express.Router();
 
 usersRouter.post('/users/login', loginUserController);
 usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
+
+usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
+
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 /* usersRouter.post('/users/send-validation-email', sendValidationEmailController);
 
