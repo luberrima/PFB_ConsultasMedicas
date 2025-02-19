@@ -14,15 +14,15 @@ export const newConsultController = async (req, res, next) => {
         const userId = req.user.id;
 
         //  Obtener la info del body
-        const { title, skillId, description, gravedad } = req.body;
-        console.log('Body', req.body);
+        const { title, skillId, description} = req.body;
+        console.log('Body en controller', req.body);
 
         //  Obtener las recetas
 
         let Receta = [];
 
         if (req.files) {
-            console.log('req.files', req.files);
+            console.log('req.files en controller', req.files);
             Receta = Object.values(req.files);
         }
 
@@ -49,7 +49,7 @@ export const newConsultController = async (req, res, next) => {
             skillId,
             description,
         });
-
+        console.log("controler cosult",consult);
         console.log("AQUI")
 
         // Crear las recetas en la base de datos solo si hay 

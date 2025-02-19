@@ -20,7 +20,7 @@ export const authUserMiddleware = (req, res, next) => {
         } catch (error) {
             throw genereErrorUtils('Las creedenciales no son validas', 401);
         }
-
+        
         req.user = tokenInfo;
 
         next();

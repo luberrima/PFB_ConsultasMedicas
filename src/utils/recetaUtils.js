@@ -17,10 +17,13 @@ export const saveRecetaUtil = async (userRelativePath, arch, width) => {
     // Ruta de la foto
     const RecipePath = path.join(process.cwd(), userRelativePath, RecipeName);
 
-    console.log('Archivo recibida: ', arch);
+  
     const archSharp = sharp(arch.data); // Crear un objeto sharp con la imagen
+   
     archSharp.resize(width); // Redimensionar la imagen
+    
     archSharp.jpeg({ quality: 100 }); // Convertir la imagen a jpeg con calidad 90. El valor por defecto 80
+   
     await archSharp.toFile(RecipePath); // Guardar la imagen
 
     // Lo mismo que las tres líneas anteriores en una sola línea

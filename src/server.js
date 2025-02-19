@@ -1,15 +1,15 @@
-
-
 import express from 'express';
 import morgan from 'morgan';
 import fileupload from 'express-fileupload';
 import cors from 'cors';
 import path from 'path';
+
 import { router } from './routes/indexRouter.js';
+
 import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';
 /*esto es para probar*/
 import { uploadMiddleware } from "./middlewares/uploadMiddleware.js"; // Corrección aquí
-import { staticFilesMiddleware } from "./middlewares/staticFilesMiddleware.js";
+/*import { staticFilesMiddleware } from "./middlewares/staticFilesMiddleware.js";*/
 
 
 export const server = express();
@@ -22,10 +22,10 @@ server.use(morgan('dev'));
 
 //bodyParser
 server.use(express.json());
-server.use(fileupload({ useTempFiles: true, tempFileDir: '/tmp/' }));
+server.use(fileupload());
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
-staticFilesMiddleware(server);
+/*staticFilesMiddleware(server);*/
 server.use(cors(/* { origin: FRONTEND_HOST } */));
 
 /* RUTA PARA SUBIR ARCHIVOS */

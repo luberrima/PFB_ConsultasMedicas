@@ -5,22 +5,27 @@ import { insertRecetaModel } from '../../models/consultations/insertRecetaModel.
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 import { saveRecetaUtil } from '../../utils/recetaUtils.js';
 
-export const newRecetaService = async (userId, recetaId, arch) => {
+export const newRecetaService = async (userId, recetaId, archs) => {
 
-    const processedarch = [];
+    const processedRecetas = [];
+
+    console.log("userid de archs",userId);
+    console.log("recetaid de archs",recetaId);
+    console.log("archs de arch",archs);
 
 
     const archRelativePath = path.join('src/uploads/entries', userId, recetaId);
 
-    for (const arch of arch) {
+    for (const arch of archs) {
         // Generar un ID único 
-        const recetaId = crypto.randomUUID();
+        const docrecetaId = crypto.randomUUID();
 
         //  Guardar la receta
         const recetaName = await saveRecetaUtil(archRelativePath, arch, 800);
+        console.log("recetaName de service",recetaName);
 
         // Guardar la información 
-        const result = await insertRecetaModel(recetaId, ConsultId, recetaName);
+        const result = await insertRecetaModel( docrecetaId, recetaId, recetaName);
 
         // Si no se pudo insertar 
         if (result.affectedRows !== 1) {
@@ -33,9 +38,9 @@ export const newRecetaService = async (userId, recetaId, arch) => {
 
         // Agregar la información  al array
         processedRecetas.push({
-            id: recetaId,
+            id:  docrecetaId,
             recetaName,
-            consultId,
+            recetaId,
         });
     }
 
