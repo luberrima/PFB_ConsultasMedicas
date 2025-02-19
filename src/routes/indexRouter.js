@@ -1,8 +1,12 @@
 import express from 'express';
 import { usersRouter } from './usersRouter.js';
-//import { consulRouter } from './ConsulRouter.js';
+
+import { consultationsRouter } from './consultationsRouter.js';
+
 
 export const router = express.Router();
 
 router.use(usersRouter);
-//router.use(consulRouter);
+
+router.use(consultationsRouter);  
+
