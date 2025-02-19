@@ -25,3 +25,4 @@ export const sendEmailBrevoUtil = async (to, subject, text) => {
         );
     }
 };
+
