@@ -1,5 +1,3 @@
-
-
 import express from 'express';
 import morgan from 'morgan';
 import fileupload from 'express-fileupload';
@@ -9,24 +7,24 @@ import { router } from './routes/indexRouter.js';
 import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';
 /*esto es para probar*/
 import { uploadMiddleware } from "./middlewares/uploadMiddleware.js"; // Corrección aquí
-import { staticFilesMiddleware } from "./middlewares/staticFilesMiddleware.js";
-
 
 export const server = express();
 
 /* MIDDLEWARES */
-/* MIDDLEWARES */
+
 server.use(morgan('dev'));
 
 //bodyParser
-
-//bodyParser
 server.use(express.json());
-server.use(fileupload({ useTempFiles: true, tempFileDir: '/tmp/' }));
+
+// Acepto peticiones con body de tipo form-data
+server.use(fileupload());
+
+// Configuro directorio recursos estaticos
 const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
-staticFilesMiddleware(server);
-server.use(cors(/* { origin: FRONTEND_HOST } */));
+
+server.use(cors());
 
 /* RUTA PARA SUBIR ARCHIVOS */
 server.post('/upload', uploadMiddleware, (req, res) => {
@@ -58,7 +56,5 @@ server.use((error, req, res, next) => {
         code: error.code || 'INTERNAL _SERVER_ERROR',
         message: error.message,
     });
-
-    //res.status(500).send("Hola")
 });
 
