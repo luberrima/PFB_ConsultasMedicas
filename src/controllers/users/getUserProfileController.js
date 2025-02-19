@@ -1,4 +1,4 @@
-import {selectUserByIdModel} from '../../models/users/selectUserByIdModel.js';
+import { selectUserByIdModel } from '../../models/users/selectUserByIdModel.js';
 
 export const getUserProfileController = async (req, res, next) => {
     try {

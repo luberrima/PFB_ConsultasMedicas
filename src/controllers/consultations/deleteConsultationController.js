@@ -2,13 +2,13 @@ import deleteConsulationModel from '../../models/consultations/deleteConsultatio
 
 export const deleteConsultationController = async (req, res, next) => {
     try {
-        const { ConsultationsId } = req.params;
+        const { consultationId } = req.params;
 
-        await deleteConsulationModel(ConsultationsId);
+        await deleteConsulationModel(consultationId);
 
         res.send({
             status: 'ok',
-            message: `La consulta con id ${ConsultationsId} y todos sus elementos fueron eliminados`,
+            message: `La consulta con id ${consultationId} y todos sus elementos fueron eliminados`,
         });
     } catch (error) {
         next(error);

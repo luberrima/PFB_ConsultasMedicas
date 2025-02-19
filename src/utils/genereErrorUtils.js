@@ -5,5 +5,4 @@ export const genereErrorUtils = (status, code, message) => {
     error.httpStatus = status;
     error.code = code;
     return error;
-}
-
+};

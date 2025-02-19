@@ -1,4 +1,7 @@
-import { checkConsultationVoteModel, updateConsultationVoteModel } from '../../models/consultations/voteDoctorModel.js';
+import {
+    checkConsultationVoteModel,
+    updateConsultationVoteModel,
+} from '../../models/consultation/voteDoctorModel.js';
 
 export const voteDoctorService = async (consultationId, vote) => {
     const consultation = await checkConsultationVoteModel(consultationId);

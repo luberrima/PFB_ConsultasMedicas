@@ -1,14 +1,16 @@
 import { getPool } from '../../db/getPool.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
-import sendEmailBrevoUtils from '../../utils/sendEmailBrevoUtil.js';
+import { sendEmailBrevoUtil } from '../../utils/sendEmailBrevoUtil.js';
 
-export const updateRecoveryPassModel = async (email, recoverPassCode) => {
+export const updateRecoveryPassModel = async (email, recoveryPassCode) => {
     const pool = await getPool();
 
-    await pool.query(`UPDATE users SET recoverPassCode = ? WHERE email = ?`, [
-        recoverPassCode,
+    await pool.query(`UPDATE users SET recoveryPassCode = ? WHERE email = ?`, [
+        recoveryPassCode,
         email,
     ]);
+
+    const to = email;
 
     const Subject = 'Recuperación de contraseña en GoodDoctor';
 
@@ -16,7 +18,7 @@ export const updateRecoveryPassModel = async (email, recoverPassCode) => {
             <p>¡Hola!</p>
             <p>Se ha solicitado la recuperación de contraseña para este email en GoodDoctor</p>
 
-            <p>Use el siguiente código para crear una nueva contraseña: ${recoverPassCode}</p>
+            <p>Use el siguiente código para crear una nueva contraseña: ${recoveryPassCode}</p>
 
             <p>Si no ha sido usted, puede ignorar este email</p>
 
@@ -26,10 +28,10 @@ export const updateRecoveryPassModel = async (email, recoverPassCode) => {
         `;
 
     try {
-        await sendEmailBrevoUtils(to, Subject, text);
+        await sendEmailBrevoUtil(to, Subject, text);
         console.log('Correo enviado exitosamente');
     } catch (err) {
-        console.error('Error al enviar el correo:', error);
-        throw genereErrorUtils('Error al enviar el correo');
+        console.error('Error al enviar el correo:', err);
+        throw genereErrorUtils(500, 'BOH', 'Error al enviar el correo');
     }
 };

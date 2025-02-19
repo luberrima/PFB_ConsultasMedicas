@@ -1,4 +1,4 @@
-import { getConsultationDetailModel } from '../../models/consultations/getConsultationDetailModel.js';
+import { getConsultationDetailModel } from '../../models/consultation/getConsultationDetailModel.js';
 
 export const getConsultationDetailService = async (consultationId) => {
     const consultationDetail = await getConsultationDetailModel(consultationId);

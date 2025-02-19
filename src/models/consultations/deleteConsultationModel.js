@@ -1,7 +1,7 @@
 import { getPool } from '../../db/getPool.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
-export const deleteConsulationModel = async (ConsultationsId) => {
+export const deleteConsulationModel = async (consultationId) => {
     const pool = await getPool();
 
     const [consultation] = await pool.query(
@@ -15,5 +15,5 @@ export const deleteConsulationModel = async (ConsultationsId) => {
         );
     }
 
-    await pool.query(`DELETE FROM consultations WHERE id=?`, [ConsultationsId]);
+    await pool.query(`DELETE FROM consultations WHERE id=?`, [consultationId]);
 };

@@ -23,6 +23,7 @@ consultationsRouter.post(
     voteDoctorController
 );
 consultationsRouter.delete(
-    '/consultations/:consultationsId',
+    '/consultations/:consultationId',
+    authUser,
     deleteConsultationController
 );

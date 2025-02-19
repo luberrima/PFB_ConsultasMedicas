@@ -8,7 +8,13 @@ export const createReplyController = async (req, res, next) => {
         const userRole = req.user.role;
         const userSkillId = req.user.skillId || null;
 
-        const newReply = await createReplyService({ consultationId, reply, userId, userRole, userSkillId });
+        const newReply = await createReplyService({
+            consultationId,
+            reply,
+            userId,
+            userRole,
+            userSkillId,
+        });
 
         res.status(201).send({
             status: 'ok',

@@ -6,7 +6,7 @@ export const insertReplyModel = async ({ consultationId, reply, userId }) => {
     const id = crypto.randomUUID();
 
     const [result] = await pool.query(
-        `INSERT INTO replys (id, reply, consultationsId, userId) VALUES (?, ?, ?, ?)`,
+        `INSERT INTO replys (id, reply, consultationId, userId) VALUES (?, ?, ?, ?)`,
         [id, reply, consultationId, userId]
     );
 

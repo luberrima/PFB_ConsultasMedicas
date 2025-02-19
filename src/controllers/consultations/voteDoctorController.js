@@ -1,5 +1,5 @@
-import { voteDoctorSchema } from '../../schemas/consultations/voteDoctorSchema.js';
-import { voteDoctorService } from '../../services/consultations/voteDoctorService.js';
+import { voteDoctorSchema } from '../../schemas/consultation/voteDoctorSchema.js';
+import { voteDoctorService } from '../../services/consultation/voteDoctorService.js';
 import { validateSchema } from '../../utils/validateSchema.js';
 
 export const voteDoctorController = async (req, res, next) => {
