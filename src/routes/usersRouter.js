@@ -6,11 +6,11 @@ import { getDoctorsWithRatingsController } from '../controllers/users/getDoctors
 /*import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';*/
 import { loginUserController } from '../controllers/users/loginUserController.js';
 import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
-import editUserPassController from '../controllers/users/editUserPassController.js' //Si usas un export default no necesitas llaves.
-/*import { recoveryPassController } from '../controllers/users/recoveryPassController.js';   servidor indica que falta PFB_ConsultasMedicas\src\models\users\updateRecoverPassModel.js*/
+import { editUserPassController } from '../controllers/users/editUserPassController.js'; //Si usas un export default no necesitas llaves.
+import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
 import { activeUserController } from '../controllers/users/activeUserController.js';
-import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js'
-
+import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js';
+import { sendRecoveryPassController } from '../controllers/users/sendRecoveryPassController.js';
 
 export const usersRouter = express.Router();
 
@@ -22,13 +22,15 @@ usersRouter.post('/users/register-doctor', registerDoctorController);
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
 
 usersRouter.put('/users/active/:registrationCode', activeUserController);
-/* usersRouter.post('/users/send-validation-email', sendValidationEmailController);
-
-userRouter.post('/users/password/recover', recoveryPassController);
-userRouter.put('/users/password', editUserPassController);  Falta el archivo utils sendEmailBrevoUtil.js  */
+// usersRouter.post('/users/send-validation-email', sendValidationEmailController);
+usersRouter.put('/users/password/edit', editUserPassController);
+usersRouter.post('/users/password/send-email', sendRecoveryPassController);
+usersRouter.post('/users/password/recovery', recoveryPassController);
 
 // Ruta para subir archivos
-usersRouter.post("/users/upload", uploadMiddleware, (req, res) => {
-    res.json({ message: "Archivo subido correctamente", filePath: req.filePath });
+usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
+    res.json({
+        message: 'Archivo subido correctamente',
+        filePath: req.filePath,
+    });
 });
-
