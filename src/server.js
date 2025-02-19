@@ -21,8 +21,7 @@ server.use(express.json());
 server.use(fileupload());
 
 // Configuro directorio recursos estaticos
-const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
-server.use('/uploads', express.static(uploadsDir));
+server.use('/uploads', express.static(UPLOADS_DIR));
 
 server.use(cors());
 
