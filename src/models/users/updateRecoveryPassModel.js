@@ -1,6 +1,6 @@
-import getPool from '../../database/getPool.js';
+import { getPool } from '../../db/getPool.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
-import sendEmailBrevoUtils from '../../utils/sendEmailBrevoUtil.js';
+import { sendEmailBrevoUtil } from '../../utils/sendEmailBrevoUtil.js';
 
 export const updateRecoverPassModel = async (email, recoverPassCode) => {
     const pool = await getPool();

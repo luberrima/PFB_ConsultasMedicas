@@ -1,7 +1,7 @@
 import brevo from '@getbrevo/brevo';
 
 import { SMTP_USER, SMTP_API_KEY } from '../../env.js';
-import { genereErrorUtils } from './helpersUtils.js';
+import { genereErrorUtils } from './genereErrorUtils.js';
 
 const apiInstance = new brevo.TransactionalEmailsApi();
 apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, SMTP_API_KEY);

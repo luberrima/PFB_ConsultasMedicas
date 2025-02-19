@@ -29,9 +29,9 @@ server.use('/uploads', express.static(uploadsDir));
 server.use(cors(/* { origin: FRONTEND_HOST } */));
 
 /* RUTA PARA SUBIR ARCHIVOS */
-server.post('/upload', uploadMiddleware, (req, res) => {
+/*server.post('/upload', uploadMiddleware, (req, res) => {
     res.json({ message: 'Archivo subido con éxito', filePath: req.filePath });
-});
+});*/
 
 /* ROUTERS */
 server.use(router);
