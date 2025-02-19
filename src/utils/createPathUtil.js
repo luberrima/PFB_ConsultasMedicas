@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import { genereErrorUtils } from './helpersUtils.js';
+import { genereErrorUtils } from './genereErrorUtils.js';
 
 // Función para borrar directorios
 export const deletePathUtil = async (path) => {

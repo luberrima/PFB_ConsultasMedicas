@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
-import { insertConsultModel } from '../../models/entries/insertEntryModel.js';
-import { genereErrorUtils } from '../../utils/helpersUtils.js';
+import { insertConsultModel } from '../../models/consultations/insertConsultModel.js';
+import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const newConsultService = async (consult) => {
 	

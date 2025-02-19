@@ -2,7 +2,7 @@ import joi from 'joi';
 import { imgSchema } from '../imgSchema.js';
 import { joiErrorMessages } from '../joiErrorMessages.js';
 
-export const newContultRecetaSchema = joi.object({
+export const newConsultRecetaSchema = joi.object({
 	img1: joi.object({
 		name: joi.string().required().messages({
 			'any.required': 'La foto 1 es obligatoria',

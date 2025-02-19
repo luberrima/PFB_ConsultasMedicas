@@ -1,8 +1,8 @@
 import path from 'path';
 import crypto from 'crypto';
 
-import { insertRecetaModel } from '../../models/photos/insertPhotoModel.js';
-import { genereErrorUtils } from '../../utils/helpersUtils.js';
+import { insertRecetaModel } from '../../models/consultations/insertRecetaModel.js';
+import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 import { saveRecetaUtil } from '../../utils/recetaUtils.js';
 
 export const newRecetaService = async (userId, recetaId, arch) => {
@@ -18,7 +18,7 @@ export const newRecetaService = async (userId, recetaId, arch) => {
 		const recetaId = crypto.randomUUID();
 
 		// 2. Guardar la foto en el sistema de archivos
-		const recetaName = await saveRecetaUtil(recetaRelativePath, arch, 800);
+		const recetaName = await saveRecetaUtil(archRelativePath, arch, 800);
 
 		// 3. Guardar la información de la foto en la base de datos
 		const result = await insertRecetaModel(recetaId, ConsultId, recetaName);

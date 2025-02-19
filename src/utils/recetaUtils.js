@@ -3,7 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 import crypto from 'crypto';
 
-import { genereErrorUtils } from './helpersUtils.js';
+import { genereErrorUtils } from './genereErrorUtils.js';
 import { createPathUtil } from './foldersUtils.js';
 
 // Función para guardar una foto. Debe recibi: type(avatar, entry), image, width, name

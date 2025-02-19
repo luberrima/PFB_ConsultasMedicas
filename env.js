@@ -10,5 +10,6 @@ export const {
 	UPLOADS_DIR,
 	PORT,
 	SECRET,
-
+	SMTP_USER,
+	SMTP_API_KEY
 } = process.env;
