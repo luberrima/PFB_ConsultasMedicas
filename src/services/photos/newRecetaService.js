@@ -9,9 +9,7 @@ export const newRecetaService = async (userId, recetaId, archs) => {
 
     const processedRecetas = [];
 
-    console.log("userid de archs",userId);
-    console.log("recetaid de archs",recetaId);
-    console.log("archs de arch",archs);
+ 
 
 
     const archRelativePath = path.join('src/uploads/entries', userId, recetaId);
