@@ -10,7 +10,6 @@ import { editUserPassController } from '../controllers/users/editUserPassControl
 import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
 import { activeUserController } from '../controllers/users/activeUserController.js';
 import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js';
-import { sendRecoveryPassController } from '../controllers/users/sendRecoveryPassController.js';
 
 export const usersRouter = express.Router();
 
@@ -24,7 +23,6 @@ usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 // usersRouter.post('/users/send-validation-email', sendValidationEmailController);
 usersRouter.put('/users/password/edit', editUserPassController);
-usersRouter.post('/users/password/send-email', sendRecoveryPassController);
 usersRouter.post('/users/password/recovery', recoveryPassController);
 
 // Ruta para subir archivos
