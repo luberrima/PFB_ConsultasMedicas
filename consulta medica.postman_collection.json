@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a27db8c3-dd2a-4856-b4cc-ea5d643df0c0",
-		"name": "consulta medica",
+		"_postman_id": "07b0ca4e-4d4a-4ceb-833a-8c8716bdf1d8",
+		"name": "consulta medica Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39998642"
+		"_exporter_id": "39994819"
 	},
 	"item": [
 		{
@@ -164,6 +164,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Doctorsid",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -264,6 +272,19 @@
 								"consult"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "getallskills",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
