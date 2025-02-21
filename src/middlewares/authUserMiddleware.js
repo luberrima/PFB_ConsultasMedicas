@@ -1,32 +1,35 @@
 import jwt from 'jsonwebtoken';
 import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
+import { SECRET } from '../../env.js';
 
 export const authUserMiddleware = (req, res, next) => {
     try {
-
-        const { authorization } = req.headers;
+        let { authorization } = req.headers;
 
         if (!authorization) {
-            throw genereErrorUtils('No se recibió el token', 401);
+            throw genereErrorUtils(401, 'NO_TOKEN', 'No se recibió el token');
         }
 
         let tokenInfo;
-
+        console.log('autorizacione antes es', authorization);
         try {
-
-            tokenInfo = jwt.verify(authorization, process.env.SECRET);
-
+            console.log(SECRET);
+            tokenInfo = jwt.verify(authorization, SECRET);
         } catch (error) {
-            throw genereErrorUtils('Las creedenciales no son validas', 401);
+            console.log(error);
+
+            throw genereErrorUtils(
+                401,
+                'CREDENCIALES_INVALIDAS',
+                'Las creedenciales no son validas'
+            );
         }
-        
+
         req.user = tokenInfo;
 
         next();
-
     } catch (error) {
         next(error);
     }
-}
-
+};

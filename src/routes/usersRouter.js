@@ -1,7 +1,7 @@
 import express from 'express';
 import { registerUserController } from '../controllers/users/registerUserController.js';
 import { registerDoctorController } from '../controllers/users/registerDoctorController.js';
-
+import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
 import { getDoctorsWithRatingsController } from '../controllers/users/getDoctorsWithRatingsController.js';
 /*import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';*/
 import { loginUserController } from '../controllers/users/loginUserController.js';
@@ -10,21 +10,19 @@ import { editUserPassController } from '../controllers/users/editUserPassControl
 import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
 import { activeUserController } from '../controllers/users/activeUserController.js';
 import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js';
+import { getUserByIdController } from '../controllers/users/getUserByIdController.js';
 
 export const usersRouter = express.Router();
-
+usersRouter.get('/users/:id', getUserByIdController);
 usersRouter.post('/users/login', loginUserController);
 usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
-
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
-
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 // usersRouter.post('/users/send-validation-email', sendValidationEmailController);
 usersRouter.put('/users/password/edit', editUserPassController);
 usersRouter.post('/users/password/recovery', recoveryPassController);
-
 // Ruta para subir archivos
 usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
     res.json({
