@@ -34,7 +34,7 @@ usersRouter.post('/users/password/recover', recoveryPassController);
 usersRouter.put('/users/password', editUserPassController);
 
 // Ruta para subir archivos
-usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
+/* usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
     res.json({ message: "Archivo subido correctamente", filePath: req.filePath });
-});
+}); */
 

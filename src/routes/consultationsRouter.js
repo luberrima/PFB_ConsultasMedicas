@@ -5,6 +5,9 @@ import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
 import { voteDoctorController } from '../controllers/consultations/voteDoctorController.js';
 import { newConsultController } from '../controllers/consultations/newConsultController.js';
 import { getAllConsultationController } from '../controllers/consultations/getAllConsultationController.js';
+import { consultExistsMiddleware } from '../middlewares/consultExistsMiddleware.js';
+import { canDoItMiddleware } from '../middlewares/canDoItMiddleware.js';
+import { deleteDiagnistConsultController } from '../controllers/consultations/deleteDiagnistConsultController.js';
 
 export const consultationsRouter = express.Router();
 
@@ -29,3 +32,11 @@ consultationsRouter.post(
     newConsultController
 );
 consultationsRouter.get('/consultations', getAllConsultationController);
+
+consultationsRouter.put(
+    '/consultations/removediagnost/:id',
+    authUserMiddleware,
+    consultExistsMiddleware,
+    canDoItMiddleware,
+    deleteDiagnistConsultController
+);

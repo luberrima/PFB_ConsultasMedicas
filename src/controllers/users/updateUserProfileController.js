@@ -7,7 +7,7 @@ export const updateUserProfileController = async (req, res, next) => {
         const newUserInfo = req.body;
 
         if (!newUserInfo) {
-            throw genereErrorUtils('No se han enviado datos para actualizar', 400);
+            throw genereErrorUtils(400, 'NO_DATA UPDATE', 'No se han enviado datos para actualizar',);
         }
 
         const updatedUser = await updateUserProfileService(id, newUserInfo);

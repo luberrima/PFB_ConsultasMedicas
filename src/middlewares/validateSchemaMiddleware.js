@@ -5,7 +5,7 @@ export const validateSchemaMiddleware = (schema) => (req, res, next) => {
 
     if (error) {
         const message = error.details.map((detail) => detail.message).join(', ');
-        return next(genereErrorUtils(`Error de validación: ${message}`, 400));
+        return next(genereErrorUtils(400, 'ERROR_VALIDATE', 'Error de validación'));
     }
 
     next();

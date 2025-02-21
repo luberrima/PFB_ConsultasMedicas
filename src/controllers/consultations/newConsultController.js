@@ -14,7 +14,7 @@ export const newConsultController = async (req, res, next) => {
         const userId = req.user.id;
 
         //  Obtener la info del body
-        const { title, skillId, description} = req.body;
+        const { title, skillId, description } = req.body;
         console.log('Body en controller', req.body);
 
         //  Obtener las recetas
@@ -49,7 +49,7 @@ export const newConsultController = async (req, res, next) => {
             skillId,
             description,
         });
-        console.log("controler cosult",consult);
+        console.log("controler cosult", consult);
         console.log("AQUI")
 
         // Crear las recetas en la base de datos solo si hay 
@@ -67,6 +67,7 @@ export const newConsultController = async (req, res, next) => {
         }
 
         // Responder 
+
         res.status(201).send({
             status: 'ok',
             message: 'Entrada creada',
@@ -77,7 +78,7 @@ export const newConsultController = async (req, res, next) => {
                 },
             },
         });
-        // res.status(201).send('Listo');
+
     } catch (error) {
         next(error);
     }

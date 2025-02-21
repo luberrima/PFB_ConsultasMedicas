@@ -50,7 +50,7 @@ server.use((req, res, next) => {
 
 // Gestor de errores
 server.use((error, req, res, next) => {
-    //console.error(error);
+    console.error(error);
 
     res.status(error.httpStatus || 500).send({
         httpStatus: error.httpStatus || 500,
