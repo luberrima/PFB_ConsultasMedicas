@@ -11,7 +11,6 @@ import { activeUserController } from '../controllers/users/activeUserController.
 import { updateUserProfileController } from '../controllers/users/updateUserProfileController.js';
 import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js';
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware.js';
-import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
 import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
 
 import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchema.js';
