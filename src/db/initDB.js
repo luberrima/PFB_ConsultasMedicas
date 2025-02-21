@@ -11,28 +11,26 @@ import { registerUserService } from '../services/users/registerUserService.js';
 import { createPathUtil, deletePathUtil } from '../utils/foldersUtils.js';
 
 export const initDb = async () => {
+    try {
+        // Obtener el pool de conexiones
+        const pool = await getPool();
 
-	try {
-		// Obtener el pool de conexiones
-		const pool = await getPool();
+        // Poner la DDBB en uso
+        console.log('Poniendo en uso la base de datos 📑');
+        await pool.query(`USE ${MYSQL_DATABASE}`);
+        console.log('Base de datos en uso ✅ 📑');
 
-		// Poner la DDBB en uso
-		console.log('Poniendo en uso la base de datos 📑');
-		await pool.query(`USE ${MYSQL_DATABASE}`);
-		console.log('Base de datos en uso ✅ 📑');
+        // Borrar las tablas si existen
+        console.log('Borrando tablas existentes 🗑 📑');
+        await pool.query(
+            'DROP TABLE IF EXISTS replys, documents, consultations, doctors,users,skills;'
+        );
+        console.log('Tablas borradas ✅ 📑');
 
-		// Borrar las tablas si existen
-		console.log('Borrando tablas existentes 🗑 📑');
-		await pool.query(
-			'DROP TABLE IF EXISTS replys, documents, consultations, doctors,users,skills;'
-		);
-		console.log('Tablas borradas ✅ 📑');
+        // Crear las tablas
+        console.log('Creando tablas de nuevo 📑');
 
-		// Crear las tablas
-		console.log('Creando tablas de nuevo 📑');
-
-
-    await pool.query(`
+        await pool.query(`
       CREATE TABLE skills (
       id INT AUTO_INCREMENT,
       Name VARCHAR(45) NOT NULL,
@@ -141,22 +139,37 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
       );
     `);
 
-    // Insert usuarios admin (datos de admin en .env)
+        // Insert usuarios admin (datos de admin en .env)
 
-    const user = await registerUserService(ADMIN_USER, ADMIN_EMAIL, ADMIN_PASSWORD);
-    console.log("usuario creado con Nombre ",ADMIN_USER);
-    await pool.query(
-      `UPDATE users SET role = ?, active = ?, registrationCode = '' WHERE id = ?`,
-      ['admin', 1, user.id]
-    );
-    console.log(`usuario con Nombre ${ADMIN_USER} ha sido convertido a Administrador`);
+        const user = await registerUserService(
+            ADMIN_USER,
+            ADMIN_EMAIL,
+            ADMIN_PASSWORD
+        );
+        console.log('usuario creado con Nombre ', ADMIN_USER);
+        await pool.query(
+            `UPDATE users SET role = ?, active = ?, registrationCode = '' WHERE id = ?`,
+            ['admin', 1, user.id]
+        );
+        console.log(
+            `usuario con Nombre ${ADMIN_USER} ha sido convertido a Administrador`
+        );
 
-    const skills = ['General','Traumatismos','Cardio','Urólogo','Otorrinolaringólogo','Anestesista'];
+        const skills = [
+            'General',
+            'Traumatismos',
+            'Cardio',
+            'Urólogo',
+            'Otorrinolaringólogo',
+            'Anestesista',
+        ];
 
-    await Promise.all(
-      skills.map(skill => pool.query(`INSERT INTO skills (name) VALUES (?)`, skill))
-    );
-		console.log('Tablas creadas ✅ 📑');
+        await Promise.all(
+            skills.map((skill) =>
+                pool.query(`INSERT INTO skills (name) VALUES (?)`, skill)
+            )
+        );
+        console.log('Tablas creadas ✅ 📑');
 
 		const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 

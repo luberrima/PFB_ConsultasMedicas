@@ -4,12 +4,12 @@ import { registerDoctorController } from '../controllers/users/registerDoctorCon
 import { getDoctorsWithRatingsController } from '../controllers/users/getDoctorsWithRatingsController.js';
 import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';
 import { loginUserController } from '../controllers/users/loginUserController.js';
-import editUserPassController from '../controllers/users/editUserPassController.js' //Si usas un export default no necesitas llaves.
+import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
+import { editUserPassController } from '../controllers/users/editUserPassController.js'; //Si usas un export default no necesitas llaves.
 import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
 import { activeUserController } from '../controllers/users/activeUserController.js';
 import { updateUserProfileController } from '../controllers/users/updateUserProfileController.js';
-import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js'
-
+import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js';
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware.js';
 import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Corrección en la importación
 import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
@@ -32,9 +32,14 @@ usersRouter.put('/users/send-validation-email', sendValidationEmailController);
 
 usersRouter.post('/users/password/recover', recoveryPassController);
 usersRouter.put('/users/password', editUserPassController);
+// usersRouter.post('/users/send-validation-email', sendValidationEmailController);
+usersRouter.put('/users/password/edit', editUserPassController);
+usersRouter.post('/users/password/recovery', recoveryPassController);
 
 // Ruta para subir archivos
-/* usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
-    res.json({ message: "Archivo subido correctamente", filePath: req.filePath });
-}); */
-
+usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
+    res.json({
+        message: 'Archivo subido correctamente',
+        filePath: req.filePath,
+    });
+});

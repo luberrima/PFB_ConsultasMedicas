@@ -5,7 +5,7 @@ import { genereErrorUtils } from './genereErrorUtils.js';
 
 const apiInstance = new brevo.TransactionalEmailsApi();
 apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, SMTP_API_KEY);
-export const sendEmailBrevoUtil = async (to, subject, text) => {
+export const sendEmailBrevoUtils = async (to, subject, text) => {
     try {
         const sendSmtpEmail = new brevo.SendSmtpEmail();
         sendSmtpEmail.subject = subject;
@@ -25,4 +25,3 @@ export const sendEmailBrevoUtil = async (to, subject, text) => {
         );
     }
 };
-
