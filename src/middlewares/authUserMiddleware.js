@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
 import { SECRET } from '../../env.js';
+import { SECRET } from '../../env.js';
 
 export const authUserMiddleware = (req, res, next) => {
     try {
@@ -18,20 +19,20 @@ export const authUserMiddleware = (req, res, next) => {
         try {
             console.log(SECRET);
             tokenInfo = jwt.verify(authorization, SECRET);
-
         } catch (error) {
             console.log(error);
 
-
-            throw genereErrorUtils(401, 'CREDENCIALES_INVALIDAS', 'Las creedenciales no son validas');
+            throw genereErrorUtils(
+                401,
+                'CREDENCIALES_INVALIDAS',
+                'Las creedenciales no son validas'
+            );
         }
 
         req.user = tokenInfo;
 
         next();
-
     } catch (error) {
         next(error);
     }
-}
-
+};

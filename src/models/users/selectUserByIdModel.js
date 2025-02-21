@@ -1,17 +1,18 @@
-import { getPool } from '../../db/getPool';
-import { genereErrorUtils } from '../../utils/genereErrorUtils';
+import { getPool } from '../../db/getPool.js';
 
 export const selectUserByIdModel = async (userId) => {
     const pool = await getPool();
 
-    const [users] = await pool.query(
-        `SELECT id, username, nombre, email, password, role, avatar, bio, active, registrationCode, recoveryPassCode, createdAt FROM users WHERE id = ?`,
+    const [user] = await pool.query(
+        `SELECT id, username, nombre, email, password, role, avatar, bio, active, registrationCode, recoveryPassCode, createdAt
+         FROM users 
+         WHERE id = ? AND active = 1`,
         [userId]
     );
 
-    if (users.length === 0) {
-        throw genereErrorUtils('El usuario no existe');
+    if (user.length === 0) {
+        throw genereErrorUtils('No existen usuarios');
     }
 
-    return users[0];
+    return user[0];
 };
