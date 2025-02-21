@@ -16,12 +16,12 @@ export const updateUserProfileService = async (userId, newUserInfo) => {
 
     const sameUsername = await selectUserByUsernameModel(cleanUserInfo.username);
     if (sameUsername && sameUsername.id !== userId) {
-        throw genereErrorUtils('El nombre de usuario ya existe', 400);
+        throw genereErrorUtils(400, 'EMAIL_EXITS', 'El nombre de usuario ya existe');
     }
 
     const sameEmail = await selectUserByEmailModel(cleanUserInfo.email);
     if (sameEmail && sameEmail.id !== userId) {
-        throw genereErrorUtils('El correo electrónico ya existe', 400);
+        throw genereErrorUtils(400, 'EMAIL_EXITS', 'El correo electrónico ya existe');
     }
 
     const updatedUser = await updateUserProfileModel(userId, cleanUserInfo);
