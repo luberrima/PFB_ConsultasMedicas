@@ -13,8 +13,6 @@ import { updateUserProfileController } from '../controllers/users/updateUserProf
 import { getUserDoctorByIdController } from '../controllers/users/getUserDoctorByIdController.js';
 import { getUserByIdController } from '../controllers/users/getUserByIdController.js';
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware.js';
-import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
-
 import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchema.js';
 import { getOwnUserDoctorController } from '../controllers/users/getOwnUserDoctorController.js';
 

@@ -15,11 +15,11 @@ export const selectUserDoctorByIdModel = async (userId) => {
         [userId]
     );
 
-    if (usersDoctor.length === 0) {
+   /* if (usersDoctor.length === 0) {
         throw genereErrorUtils(
             'El usuario no existe o esta inactivo/No validado'
         );
-    }
+    }*/
 
     return usersDoctor[0];
 };

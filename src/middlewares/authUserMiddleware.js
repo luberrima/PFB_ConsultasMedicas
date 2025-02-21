@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
 import { SECRET } from '../../env.js';
-import { SECRET } from '../../env.js';
 
 export const authUserMiddleware = (req, res, next) => {
     try {
