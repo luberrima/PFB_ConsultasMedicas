@@ -1,11 +1,13 @@
-import {updateUserPassModel} from '../../models/users/updateUserPassModel.js';
+import { updateUserPassModel } from '../../models/users/updateUserPassModel.js';
+import { validateSchemaUtil } from '../../utils/validateSchemaUtil.js';
+import { editUserPassSchema } from '../../schemas/users/editUserPassSchema.js';
 
-
-const editUserPassController = async (req, res, next) => {
+export const editUserPassController = async (req, res, next) => {
     try {
-        const { recoverPassCode, newPass } = req.body;
+        const { recoveryPassCode, newPass } = req.body;
 
-        await updateUserPassModel(recoverPassCode, newPass);
+        await validateSchemaUtil(editUserPassSchema, req.body);
+        await updateUserPassModel(recoveryPassCode, newPass);
 
         res.send({
             status: 'ok',
@@ -15,5 +17,3 @@ const editUserPassController = async (req, res, next) => {
         next(err);
     }
 };
-
-export default editUserPassController;
