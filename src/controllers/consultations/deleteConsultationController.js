@@ -11,12 +11,6 @@ export const deleteConsultationController = async (req, res, next) => {
 
         await deleteConsultationService(consultationId);
 
-        // if (consultationId.diagnostic !== null) {
-        //     res.send({
-        //         status: 'error',
-        //         message: `La consulta con id ${consultationId.id} tiene un diagnostico asociado.`,
-        //     });
-        // } else
         res.send({
             status: 'ok',
             message: `La consulta con id ${consultationId.id} y todos sus elementos fueron eliminados`,
