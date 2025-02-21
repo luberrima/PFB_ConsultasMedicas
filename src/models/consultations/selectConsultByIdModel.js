@@ -1,13 +1,12 @@
 import { getPool } from '../../db/getPool.js';
 
-export const selectconsultByIdModel = async (id) => {
-
+export const selectConsultByIdModel = async (id) => {
     //  Obtener la conexión con la base de datos
     const pool = await getPool();
 
     //  Realizar la consulta
     const [consulta] = await pool.query(
-        `SELECT * FROM consultations WHERE id = ?`
+        `SELECT * FROM consultations WHERE id = ?`,
         [id]
     );
 

@@ -1,6 +1,5 @@
 import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 
-
 export const canDoItMiddleware = async (req, res, next) => {
     // Tareas:
     // 1. Comprobar si el usuario puede editar una entrada
@@ -11,8 +10,11 @@ export const canDoItMiddleware = async (req, res, next) => {
 
         // ID del doctor propietario de la entrada
         const { doctorId } = req.entry;
+        const { userId } = req.entry;
         //
-        console.log('ID DEL DOCTOR', doctorId);
+        console.log('ID DEL USUARIO', userId);
+        console.log('ID USUARIO LOGUEADO', idUserLogged);
+        console.log('ID ENTRADA', doctorId);
 
         if (
             req.method === 'POST' &&
@@ -27,7 +29,7 @@ export const canDoItMiddleware = async (req, res, next) => {
             );
         } else if (req.method === 'DELETE') {
             // Permitir si el usuario es el dueño o es admin
-            if (idUserLogged !== doctorId && roleUserLogged !== 'admin') {
+            if (idUserLogged !== userId && roleUserLogged !== 'admin') {
                 throw genereErrorUtils(
                     403,
                     'FORBIDDEN',

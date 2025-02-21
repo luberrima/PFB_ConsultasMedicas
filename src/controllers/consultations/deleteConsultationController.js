@@ -1,14 +1,25 @@
-import { deleteConsulationModel } from '../../models/consultations/deleteConsultationModel.js';
+import { deleteConsultationService } from '../../services/consultations/deleteConsultationService.js';
 
 export const deleteConsultationController = async (req, res, next) => {
     try {
-        const { consultationId } = req.params;
+        console.log(
+            'ESTO ES EL REQ.ENTRY QUE LO ESTOY LLAMANDO EN UN SERVICIO',
+            req.entry
+        );
 
-        await deleteConsulationModel(consultationId);
+        const consultationId = req.entry;
 
+        await deleteConsultationService(consultationId);
+
+        // if (consultationId.diagnostic !== null) {
+        //     res.send({
+        //         status: 'error',
+        //         message: `La consulta con id ${consultationId.id} tiene un diagnostico asociado.`,
+        //     });
+        // } else
         res.send({
             status: 'ok',
-            message: `La consulta con id ${consultationId} y todos sus elementos fueron eliminados`,
+            message: `La consulta con id ${consultationId.id} y todos sus elementos fueron eliminados`,
         });
     } catch (error) {
         next(error);

@@ -1,6 +1,4 @@
-import { getConsultationByIdModel } from "../models/consultations/getConsultationByIdModel.js";
-import { getConsultByIdService } from "../services/consultations/getConsultByIdService.js";
-
+import { getConsultByIdService } from '../services/consultations/getConsultByIdService.js';
 
 export const consultExistsMiddleware = async (req, res, next) => {
     // Tareas:
@@ -9,7 +7,7 @@ export const consultExistsMiddleware = async (req, res, next) => {
 
     try {
         const { id } = req.params;
-        const entry = await getConsultationByIdModel(id);
+        const entry = await getConsultByIdService(id);
 
         // Adjuntar la entrada al objeto req
         req.entry = entry;
