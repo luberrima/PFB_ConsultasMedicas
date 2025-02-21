@@ -4,9 +4,9 @@ import {getOwnUserDoctorService} from '../../services/users/getOwnUserDoctorServ
 
 export const getOwnUserDoctorController = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { id } = req.user;
         
-        console.log(res);
+        console.log("el req user id?",id);
         const userDoctor = await getOwnUserDoctorService(id);
      
         delete userDoctor.password;

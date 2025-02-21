@@ -3,7 +3,7 @@ import { selectUserDoctorByIdModel } from '../../models/users/selectUserDoctorBy
 import { selectAverageVoteByDoctorIdModel } from '../../models/votes/selectAverageVoteByDoctorIdModel.js';
 
 export const getOwnUserDoctorService = async (id) => {
-   /*
+   
     const user = await selectUserDoctorByIdModel(id);
 
     if (!user) {
@@ -11,6 +11,13 @@ export const getOwnUserDoctorService = async (id) => {
             404,
             'USERDOCTOR_NOT_FOUND',
             'Doctor no encontrado o inactivo/No validado'
+        );
+    }
+    if (user.role!=="doctor"){
+        throw genereErrorUtils(
+            404,
+            'INVALID_ROLE_USER',
+            'Esta seccion es solo para doctores'
         );
     }
      
@@ -21,7 +28,7 @@ export const getOwnUserDoctorService = async (id) => {
 
     let doctoruser={...user }
 
-    if (!votes) {
+    if (votes.ConsultasTotales===0) {
 
         
         doctoruser.status="No evaluado";
@@ -31,9 +38,20 @@ export const getOwnUserDoctorService = async (id) => {
       doctoruser={...user, ...votes }
 
     }
+    if (!consult) {
+
+        
+        doctoruser.consult="Vacio";
+    }
+    else
+    {
+      doctoruser={...user, ...votes }
+      doctoruser.consult=consult;
+    }
+    console.log("valor de consult",consult);
+    console.log("valor de votes",votes);
+   
     
-    doctoruser.consult=consult;*/
-    
-    let doctoruser={}
+   
     return doctoruser;
 };

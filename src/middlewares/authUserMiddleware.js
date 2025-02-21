@@ -3,23 +3,24 @@ import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
 import { SECRET } from '../../env.js';
 
-export const authUserMiddleware = (req, res, next) => {
+export const authUserMiddleware = async (req, res, next) => {
     try {
 
         let { authorization } = req.headers;
-
+       
+       
 
         if (!authorization) {
             throw genereErrorUtils(401, 'NO_TOKEN', 'No se recibió el token');
         }
 
         let tokenInfo;
-        console.log('autorizacione antes es', authorization);
+       
         try {
             console.log(SECRET);
             tokenInfo = jwt.verify(authorization, SECRET);
         } catch (error) {
-            console.log(error);
+            
 
             throw genereErrorUtils(
                 401,
@@ -27,7 +28,7 @@ export const authUserMiddleware = (req, res, next) => {
                 'Las creedenciales no son validas'
             );
         }
-
+         
         req.user = tokenInfo;
 
         next();

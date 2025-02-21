@@ -178,11 +178,12 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
 		await deletePathUtil(uploadsDir);
 		console.log('Directorio de subida borrado ✅ 📂');
 
-		// Crear el directorio uploads y sus subdirectorios users y tweets
+		// Crear el directorio uploads y sus subdirectorios 
 		console.log('Creando directorios de subida 📂');
 		await createPathUtil(uploadsDir);
     console.log('Directorios de subida creados ✅ 📂');
-
+    await createPathUtil(avatarsDir);
+		const entriesDir = path.join(uploadsDir, 'entries');
         console.log('Todo ha ido bien 🚀');
 
         process.exit(0);

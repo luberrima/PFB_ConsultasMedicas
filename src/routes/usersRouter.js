@@ -17,14 +17,17 @@ import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchem
 import { getOwnUserDoctorController } from '../controllers/users/getOwnUserDoctorController.js';
 
 
+
 export const usersRouter = express.Router();
-usersRouter.get('/users/:id', getUserByIdController);
+
+console.log("activando rutas de usuario");
+
 usersRouter.post('/users/login', loginUserController);
 usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
-usersRouter.get('/users/doctors/own', authUserMiddleware, getOwnUserDoctorController); // Ruta para obtener los datos de tu propio usuario
+usersRouter.get('/users/doctorsown', authUserMiddleware, getOwnUserDoctorController); // Ruta para obtener los datos de tu propio usuario
 
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 usersRouter.put('/users/updateprofile', authUserMiddleware, validateSchemaMiddleware(updateUserProfileSchema), updateUserProfileController);
@@ -32,9 +35,11 @@ usersRouter.put('/users/send-validation-email', sendValidationEmailController);
 
 usersRouter.post('/users/password/recover', recoveryPassController);
 usersRouter.put('/users/password', editUserPassController);
+
 // usersRouter.post('/users/send-validation-email', sendValidationEmailController);
 usersRouter.put('/users/password/edit', editUserPassController);
 usersRouter.post('/users/password/recovery', recoveryPassController);
+usersRouter.get('/users/:id', getUserByIdController);
 // Ruta para subir archivos
 usersRouter.post('/users/upload', uploadMiddleware, (req, res) => {
     res.json({
