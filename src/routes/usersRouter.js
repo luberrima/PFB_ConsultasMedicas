@@ -15,6 +15,7 @@ import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; // Correc
 import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
 
 import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchema.js';
+import { getOwnUserDoctorController } from '../controllers/users/getOwnUserDoctorController.js';
 
 
 export const usersRouter = express.Router();
@@ -25,6 +26,7 @@ usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
 
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
+usersRouter.get('/users/doctors/own', authUserMiddleware, getOwnUserDoctorController); // Ruta para obtener los datos de tu propio usuario
 
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 usersRouter.put('/users/updateprofile', authUserMiddleware, validateSchemaMiddleware(updateUserProfileSchema), updateUserProfileController);
