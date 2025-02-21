@@ -5,9 +5,10 @@ import {
     ADMIN_USER,
     ADMIN_EMAIL,
     ADMIN_PASSWORD,
+    UPLOADS_DIR
 } from '../../env.js';
 import { registerUserService } from '../services/users/registerUserService.js';
-/*import { createPathUtil, deletePathUtil } from '../utils/foldersUtils.js';*/
+import { createPathUtil, deletePathUtil } from '../utils/foldersUtils.js';
 
 export const initDb = async () => {
 
@@ -157,7 +158,7 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
     );
 		console.log('Tablas creadas ✅ 📑');
 
-		/*const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
+		const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
 
 		// Borramos el directorio uploads y todo su contenido
 		console.log('Borrando directorio de subida 🗑 📂');
@@ -167,11 +168,7 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
 		// Crear el directorio uploads y sus subdirectorios users y tweets
 		console.log('Creando directorios de subida 📂');
 		await createPathUtil(uploadsDir);
-		const avatarsDir = path.join(uploadsDir, 'avatars');
-		await createPathUtil(avatarsDir);
-		const entriesDir = path.join(uploadsDir, 'entries');
-		await createPathUtil(entriesDir);
-		console.log('Directorios de subida creados ✅ 📂');*/
+    console.log('Directorios de subida creados ✅ 📂');
 
         console.log('Todo ha ido bien 🚀');
 
