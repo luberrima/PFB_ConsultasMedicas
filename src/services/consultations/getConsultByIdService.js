@@ -1,14 +1,11 @@
-
-import { selectconsultByIdModel } from '../../models/consultations/selectconsultByIdModel.js';
+import { selectConsultByIdModel } from '../../models/consultations/selectConsultByIdModel.js';
+import { selectPhotoByIdModel } from '../../models/photos/selectPhotoByIdModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
-
-
 export const getConsultByIdService = async (id) => {
-
     // Obtener la entrada de la base de datos.Lo va a hacer el modelo. Si no existe, devolver un error
 
-    const consulta = await selectconsultByIdModel(id);
+    const consulta = await selectConsultByIdModel(id);
 
     if (!consulta) {
         throw genereErrorUtils(
@@ -17,6 +14,11 @@ export const getConsultByIdService = async (id) => {
             'No se ha encontrado la Consulta'
         );
     }
+    console.log('HE PASADO 1');
+
+    const documents = await selectPhotoByIdModel(id);
+    consulta.documents = documents;
+    console.log('HE PASADO 2');
 
     return consulta;
 };

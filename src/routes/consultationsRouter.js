@@ -25,7 +25,9 @@ consultationsRouter.post(
 
     createReplyController
 );
+
 consultationsRouter.put(
+
     '/consultations/:id/vote',
 
     authUserMiddleware,
@@ -47,4 +49,11 @@ consultationsRouter.put(
     deleteDiagnistConsultController
 );
 
-consultationsRouter.delete('/consultations/:id', deleteConsultationController);
+consultationsRouter.delete(
+    '/consultations/:id',
+    authUserMiddleware,
+    consultExistsMiddleware,
+    canDoItMiddleware,
+    deleteConsultationController
+);
+
