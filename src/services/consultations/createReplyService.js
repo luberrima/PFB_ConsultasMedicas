@@ -31,7 +31,7 @@ export const createReplyService = async ({
         throw genereErrorUtils(
             401,
             'ID_ERROR',
-            'No puedes responder a consultas de otros pacientes'
+            'No puedes responder a consultas que no tienes asignadas'
         );
     }
 
