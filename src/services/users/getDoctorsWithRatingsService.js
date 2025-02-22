@@ -10,5 +10,13 @@ export const getDoctorsWithRatingsService = async () => {
             'No se han encontrado doctores'
         );
     }
+
+    doctors.forEach((doctor) => {
+        doctor.averageRating =
+            doctor.averageRating !== null
+                ? doctor.averageRating
+                : 'Sin valoraciones';
+    });
+
     return doctors;
 };
