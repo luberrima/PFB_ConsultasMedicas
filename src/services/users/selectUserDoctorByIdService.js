@@ -1,5 +1,6 @@
 import { selectUserDoctorByIdModel } from '../../models/users/selectUserDoctorByIdModel.js';
 import { selectAverageVoteByDoctorIdModel } from '../../models/votes/selectAverageVoteByDoctorIdModel.js';
+import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const selectUserDoctorByIdService = async (id) => {
     const user = await selectUserDoctorByIdModel(id);
@@ -11,22 +12,21 @@ export const selectUserDoctorByIdService = async (id) => {
             'Doctor no encontrado o inactivo/No validado'
         );
     }
-     
+
     const votes = await selectAverageVoteByDoctorIdModel(id);
-    let doctoruser={...user }
+    let doctoruser = { ...user }
 
-    if (!votes) {
+    if (votes.ConsultasTotales===0) {
 
-        
-        doctoruser.status="No evaluado";
+
+        doctoruser.status = "No evaluado";
     }
-    else
-    {
-      doctoruser={...user, ...votes }
+    else {
+        doctoruser = { ...user, ...votes }
 
     }
 
-    
-     
+
+
     return doctoruser;
 };

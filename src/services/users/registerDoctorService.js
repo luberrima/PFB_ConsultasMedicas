@@ -3,21 +3,50 @@ import { generateUUIDUtil } from '../../utils/generateUUIDUtil.js';
 import randomstring from 'randomstring';
 import { insertUserModel } from '../../models/users/insertUserModel.js';
 import { insertDoctorModel } from '../../models/users/insertDoctorModel.js';
+import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
-export const registerDoctorService = async (username, email, password, collegeNumber, dateOfCollege, skillId) => {
+export const registerDoctorService = async (
+    username,
+    email,
+    password,
+    collegeNumber,
+    dateOfCollege,
+    skillId
+) => {
     const userId = generateUUIDUtil();
     const doctorId = generateUUIDUtil();
     const passwordHash = await hashPasswordUtil(password);
     const registrationCode = randomstring.generate(15);
 
-    const userResult = await insertUserModel({ id: userId, username, email, password: passwordHash, role: 'doctor', registrationCode });
+    const userResult = await insertUserModel({
+        id: userId,
+        username,
+        email,
+        password: passwordHash,
+        role: 'doctor',
+        registrationCode,
+    });
     if (userResult.affectedRows !== 1) {
-        throw new Error('No se pudo insertar el usuario doctor');
+        throw genereErrorUtils(
+            401,
+            'REGISTER_FAILED',
+            'No se pudo insertar el usuario doctor'
+        );
     }
 
-    const doctorResult = await insertDoctorModel({ id: doctorId, userId, collegeNumber, dateOfCollege, skillId });
+    const doctorResult = await insertDoctorModel({
+        id: doctorId,
+        userId,
+        collegeNumber,
+        dateOfCollege,
+        skillId,
+    });
     if (doctorResult.affectedRows !== 1) {
-        throw new Error('No se pudo insertar el doctor');
+        throw genereErrorUtils(
+            401,
+            'REGISTER_FAILED',
+            'No se pudo insertar el usuario doctor'
+        );
     }
 
     return { id: userId, username, email, registrationCode, role: 'doctor' };

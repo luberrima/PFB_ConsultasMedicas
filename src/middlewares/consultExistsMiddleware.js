@@ -1,4 +1,8 @@
+
 import { getConsultByIdService } from '../services/consultations/getConsultByIdService.js';
+
+import { getConsultationByIdModel } from "../models/consultations/getConsultationByIdModel.js";
+
 
 export const consultExistsMiddleware = async (req, res, next) => {
     // Tareas:

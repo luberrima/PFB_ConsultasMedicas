@@ -25,7 +25,7 @@ export const canDoItMiddleware = async (req, res, next) => {
             throw genereErrorUtils(
                 403,
                 'FORBIDDEN',
-                'No puedes votar tu propia entrada'
+                'No puedes votar tu propia consulta'
             );
         } else if (req.method === 'DELETE') {
             // Permitir si el usuario es el dueño o es admin

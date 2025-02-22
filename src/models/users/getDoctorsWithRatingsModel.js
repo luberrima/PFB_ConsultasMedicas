@@ -6,7 +6,7 @@ export const getDoctorsWithRatingsModel = async () => {
     const [doctors] = await pool.query(
         `
             SELECT D.*, U.id AS userId, U.username, U.email, 
-                   COALESCE(AVG(C.vote), 0) AS averageRating
+                   AVG(C.vote) AS averageRating
             FROM doctors D
             LEFT JOIN users U ON D.userId = U.id
             LEFT JOIN consultations C ON D.userId = C.doctorId
