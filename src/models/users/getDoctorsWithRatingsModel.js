@@ -10,6 +10,7 @@ export const getDoctorsWithRatingsModel = async () => {
             FROM doctors D
             LEFT JOIN users U ON D.userId = U.id
             LEFT JOIN consultations C ON D.userId = C.doctorId
+            WHERE D.validate = 1
             GROUP BY D.id, U.id, U.username, U.email;
         `
     );
