@@ -10,6 +10,9 @@ export const voteDoctorService = async (consultationId, vote) => {
     if (consultation.vote !== null) {
         throw new Error('La consulta ya ha sido valorada anteriormente');
     }
+    if (consultation.diagnostic === null) {
+        throw new Error('La consulta no tiene diagnostico no puedes votarla');
+    }
 
     const result = await updateConsultationVoteModel(consultationId, vote);
 

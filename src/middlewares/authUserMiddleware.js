@@ -3,7 +3,7 @@ import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 import 'dotenv/config';
 import { SECRET } from '../../env.js';
 
-export const authUserMiddleware = (req, res, next) => {
+export const authUserMiddleware = async (req, res, next) => {
     try {
 
         let { authorization } = req.headers;
@@ -14,6 +14,8 @@ export const authUserMiddleware = (req, res, next) => {
         }
 
         let tokenInfo;
+        console.log('LA REQ JUSTO DESPUES DE LET TOKENINFO', req);
+
         console.log('autorizacione antes es', authorization);
         try {
             console.log(SECRET);
