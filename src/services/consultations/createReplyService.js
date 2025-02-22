@@ -27,11 +27,11 @@ export const createReplyService = async ({
         );
     }
 
-    if (consultation.userId !== userId) {
+    if (consultation.userId === userId) {
         throw genereErrorUtils(
             401,
             'ID_ERROR',
-            'No puedes responder a consultas que no tienes asignadas'
+            'No puedes responder a tu consultas'
         );
     }
 

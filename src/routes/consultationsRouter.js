@@ -9,6 +9,7 @@ import { consultExistsMiddleware } from '../middlewares/consultExistsMiddleware.
 import { canDoItMiddleware } from '../middlewares/canDoItMiddleware.js';
 import { deleteDiagnistConsultController } from '../controllers/consultations/deleteDiagnistConsultController.js';
 import { deleteConsultationController } from '../controllers/consultations/deleteConsultationController.js';
+import { editDiagnistConsultController } from '../controllers/consultations/editDiagnistConsultController.js';
 export const consultationsRouter = express.Router();
 
 consultationsRouter.get(
@@ -55,5 +56,12 @@ consultationsRouter.delete(
     consultExistsMiddleware,
     canDoItMiddleware,
     deleteConsultationController
+);
+consultationsRouter.put(
+    '/consultations/updatediagnost/:id',
+    authUserMiddleware,
+    consultExistsMiddleware,
+    canDoItMiddleware,
+    editDiagnistConsultController
 );
 
