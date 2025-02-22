@@ -183,8 +183,10 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
 		console.log('Creando directorios de subida 📂');
 		await createPathUtil(uploadsDir);
     console.log('Directorios de subida creados ✅ 📂');
-    await createPathUtil(AVATARDIR);
+    const avatarsDir = path.join(uploadsDir,AVATARDIR);
+    await createPathUtil(avatarsDir);
 		const entriesDir = path.join(uploadsDir, 'entries');
+    await createPathUtil(entriesDir);
         console.log('Todo ha ido bien 🚀');
 
         process.exit(0);
