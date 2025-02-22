@@ -12,31 +12,25 @@ import { deleteConsultationController } from '../controllers/consultations/delet
 export const consultationsRouter = express.Router();
 
 consultationsRouter.get(
-    
     '/consultations/:consultationId',
-   
+
     authUserMiddleware,
-   
+
     getConsultationDetailController
-
 );
 consultationsRouter.post(
-    
     '/consultations/:consultationId/replies',
-   
+
     authUserMiddleware,
-   
+
     createReplyController
-
 );
-consultationsRouter.post(
-    
+consultationsRouter.put(
     '/consultations/:id/vote',
-   
-    authUserMiddleware,
-   
-    voteDoctorController
 
+    authUserMiddleware,
+
+    voteDoctorController
 );
 consultationsRouter.post(
     '/new-consultation',
@@ -51,4 +45,6 @@ consultationsRouter.put(
     consultExistsMiddleware,
     canDoItMiddleware,
     deleteDiagnistConsultController
-);consultationsRouter.delete('/consultations/:id', deleteConsultationController);
+);
+
+consultationsRouter.delete('/consultations/:id', deleteConsultationController);
