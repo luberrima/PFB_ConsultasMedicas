@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { SECRET } from '../../env.js';
 
 export const authUserMiddleware = async (req, res, next) => {
+export const authUserMiddleware = async (req, res, next) => {
     try {
 
         let { authorization } = req.headers;

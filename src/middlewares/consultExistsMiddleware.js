@@ -1,5 +1,5 @@
 import { getConsultationByIdModel } from "../models/consultations/getConsultationByIdModel.js";
-import { getConsultByIdService } from "../services/consultations/getConsultByIdService.js";
+
 
 
 export const consultExistsMiddleware = async (req, res, next) => {
