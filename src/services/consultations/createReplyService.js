@@ -19,19 +19,11 @@ export const createReplyService = async ({
         );
     }
 
-    if (userRole === 'paciente') {
+    if (userRole === 'paciente' && consultation.userId !== userId) {
         throw genereErrorUtils(
             401,
-            'NOT_A_DOCTOR',
-            'No puedes responder a consultas siendo paciente'
-        );
-    }
-
-    if (consultation.userId !== userId) {
-        throw genereErrorUtils(
-            401,
-            'ID_ERROR',
-            'No puedes responder a consultas que no tienes asignadas'
+            'ROLE_ERROR',
+            'No puedes responder a consultas de otros pacientes'
         );
     }
 

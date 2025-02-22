@@ -15,11 +15,11 @@ import { getUserByIdController } from '../controllers/users/getUserByIdControlle
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware.js';
 import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchema.js';
 import { getOwnUserDoctorController } from '../controllers/users/getOwnUserDoctorController.js';
-
+import { uploadMiddleware } from '../middlewares/uploadMiddleware.js';
 
 export const usersRouter = express.Router();
 
-console.log("activando rutas de usuario");
+console.log('activando rutas de usuario');
 
 usersRouter.post('/users/login', loginUserController);
 usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
@@ -35,9 +35,6 @@ usersRouter.put(
     updateUserProfileController
 );
 usersRouter.put('/users/send-validation-email', sendValidationEmailController);
-
-usersRouter.post('/users/password/recover', recoveryPassController);
-usersRouter.put('/users/password', editUserPassController);
 
 // usersRouter.post('/users/send-validation-email', sendValidationEmailController);
 usersRouter.put('/users/password/edit', editUserPassController);
