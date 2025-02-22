@@ -5,7 +5,7 @@ import { authUserMiddleware } from '../middlewares/authUserMiddleware.js';
 import { getDoctorsWithRatingsController } from '../controllers/users/getDoctorsWithRatingsController.js';
 import { sendValidationEmailController } from '../controllers/users/sendValidationEmailController.js';
 import { loginUserController } from '../controllers/users/loginUserController.js';
-
+import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'; //
 import { editUserPassController } from '../controllers/users/editUserPassController.js'; //Si usas un export default no necesitas llaves.
 import { recoveryPassController } from '../controllers/users/recoveryPassController.js';
 import { activeUserController } from '../controllers/users/activeUserController.js';
@@ -26,10 +26,7 @@ usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
-
 usersRouter.get('/users/doctorsown', authUserMiddleware, getOwnUserDoctorController); // Ruta para obtener los datos de tu propio usuario
-
-
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 usersRouter.put(
     '/users/updateprofile',

@@ -32,6 +32,7 @@ export const getOwnUserDoctorService = async (id) => {
     } else {
         doctoruser = { ...user, ...votes };
     }
+    
     if (!consult) {
         doctoruser.consult = 'Vacio';
     } else {
