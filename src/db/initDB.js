@@ -5,7 +5,8 @@ import {
     ADMIN_USER,
     ADMIN_EMAIL,
     ADMIN_PASSWORD,
-    UPLOADS_DIR
+    UPLOADS_DIR,
+    AVATARDIR
 } from '../../env.js';
 import { registerUserService } from '../services/users/registerUserService.js';
 import { createPathUtil, deletePathUtil } from '../utils/foldersUtils.js';
@@ -182,8 +183,10 @@ y no se podra selecionar Se deberia evaluar que en el caso de endpoint de borrad
 		console.log('Creando directorios de subida 📂');
 		await createPathUtil(uploadsDir);
     console.log('Directorios de subida creados ✅ 📂');
+    const avatarsDir = path.join(uploadsDir,AVATARDIR);
     await createPathUtil(avatarsDir);
 		const entriesDir = path.join(uploadsDir, 'entries');
+    await createPathUtil(entriesDir);
         console.log('Todo ha ido bien 🚀');
 
         process.exit(0);

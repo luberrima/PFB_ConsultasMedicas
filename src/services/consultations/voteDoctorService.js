@@ -1,22 +1,42 @@
-import { checkConsultationVoteModel, updateConsultationVoteModel } from '../../models/consultations/voteDoctorModel.js';
+import {
+    checkConsultationVoteModel,
+    updateConsultationVoteModel,
+} from '../../models/consultations/voteDoctorModel.js';
+import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const voteDoctorService = async (consultationId, vote) => {
     const consultation = await checkConsultationVoteModel(consultationId);
 
     if (!consultation) {
-        throw new Error('Consulta no encontrada');
+        throw genereErrorUtils(
+            401,
+            'CONSULTATION_NOT_FOUND',
+            'No se pudo encontrar la consulta'
+        );
     }
 
     if (consultation.vote !== null) {
-        throw new Error('La consulta ya ha sido valorada anteriormente');
+        throw genereErrorUtils(
+            401,
+            'CONSULTATION_ALREADY_VOTED',
+            'La consulta ya ha sido valorada'
+        );
     }
     if (consultation.diagnostic === null) {
-        throw new Error('La consulta no tiene diagnostico no puedes votarla');
+        throw genereErrorUtils(
+            401,
+            'DIAGNOSTIC_NOT_FOUND',
+            'La consulta no tiene diagnóstico, no puedes votarla'
+        );
     }
 
     const result = await updateConsultationVoteModel(consultationId, vote);
 
     if (result.affectedRows !== 1) {
-        throw new Error('No se pudo registrar la valoración');
+        throw genereErrorUtils(
+            401,
+            'VOTE_FAILED',
+            'No se pudo registrar la valoración'
+        );
     }
 };

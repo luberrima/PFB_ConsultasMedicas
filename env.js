@@ -15,6 +15,7 @@ export const {
 	SMTP_API_KEY,
 	UPLOADS_DIR,
 	FRONTEND_HOST,
+	SECRET_PATH_ADMIN,
 	AVATARDIR
 
 } = process.env;
