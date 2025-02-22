@@ -9,8 +9,8 @@ export const getOwnAdminService = async (id) => {
     if (!admin) {
         throw genereErrorUtils(
             404,
-            'USERDOCTOR_NOT_FOUND',
-            'Doctor no encontrado o inactivo/No validado'
+            'ADMIN_NOT_FOUND',
+            'ADMIN no encontrado o inactivo/No validado'
         );
     }
     if (admin.role!=="admin"){

@@ -1,15 +1,13 @@
-import {getOwnAdminService} from '../../services/admin/getOwnAdminService.js';
+import {validateDoctorByIdService} from '../../services/admin/validateDoctorByIdService.js';
 
 export const validateDoctorByIdController = async (req, res, next) => {
     try {
-        const { id } = req.user;
+        const { doctorId,validate } = req.body;
         
-        console.log("el req user id?",req);
-        const admininfo = await validateDoctorByIdService(id);
+        console.log("el req user id?",req.body);
+        const admininfo = await validateDoctorByIdService(doctorId,validate);
      
-        delete admininfo.password;
-        delete userDoctor.registrationCode;
-        delete userDoctor.recoveryPassCode; 
+     
 
         res.send({
             status: 'ok',
