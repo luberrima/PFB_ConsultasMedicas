@@ -7,7 +7,7 @@ export const selectAverageVoteByDoctorIdModel = async (DoctorId) => {
     `SELECT 
     COUNT(*) AS ConsultasTotales,
     COUNT(diagnostic) AS total_respuestas,
-    AVG(CASE WHEN diagnostic IS NOT NULL THEN vote END) AS media_valoracion
+    AVG(CASE WHEN vote IS NOT NULL THEN vote END) AS media_valoracion
     FROM consultations 
     WHERE doctorId = ?`,
         [DoctorId]
