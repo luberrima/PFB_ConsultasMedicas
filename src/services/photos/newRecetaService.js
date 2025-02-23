@@ -5,11 +5,13 @@ import { insertRecetaModel } from '../../models/consultations/insertRecetaModel.
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 import { saveRecetaUtil } from '../../utils/recetaUtils.js';
 
-export const newRecetaService = async (userId, recetaId, archs) => {
+export const newRecetaService = async (userId, recetaId, archs, replyId) => {
 
     const processedRecetas = [];
 
- 
+     if (replyId === undefined){
+        replyId = null;
+     }
 
 
     const archRelativePath = path.join('src/uploads/entries', userId, recetaId);
@@ -23,7 +25,7 @@ export const newRecetaService = async (userId, recetaId, archs) => {
         console.log("recetaName de service",recetaName);
 
         // Guardar la información 
-        const result = await insertRecetaModel( docrecetaId, recetaId, recetaName);
+        const result = await insertRecetaModel( docrecetaId, recetaId, recetaName, replyId);
 
         // Si no se pudo insertar 
         if (result.affectedRows !== 1) {

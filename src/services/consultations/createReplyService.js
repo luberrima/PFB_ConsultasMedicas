@@ -18,7 +18,7 @@ export const createReplyService = async ({
             'La consulta no existe'
         );
     }
-      if (consultation.diagnostic !== Null) {
+      if (consultation.diagnostic !== null) {
         throw genereErrorUtils(
             401,
             'IS_CLOSET',
@@ -52,8 +52,17 @@ export const createReplyService = async ({
             'Solo puedes responder a consultas asignadas a ti'
         );
     }
+    const replyId = crypto.randomUUID();
 
-    const newReply = await insertReplyModel({ consultationId, reply, userId });
+    const newReply = await insertReplyModel({ replyId, consultationId, reply, userId });
 
-    return newReply;
+    if (newReply.affectedRows !== 1) {
+        throw genereErrorUtils(
+            401,
+            'REPLY_ERROR',
+            'No se modifico la respuesta'
+        );
+    }
+
+    return replyId;
 };
