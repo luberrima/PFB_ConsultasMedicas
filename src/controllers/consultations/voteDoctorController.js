@@ -5,7 +5,7 @@ import { validateSchemaUtil } from '../../utils/validateSchemaUtil.js';
 export const voteDoctorController = async (req, res, next) => {
 
     try {
-        console.log('QUE VIENE DE REQ', req.params);
+      
         const { id } = req.params;
         await validateSchemaUtil(voteDoctorSchema, req.body);
         const { vote } = req.body;

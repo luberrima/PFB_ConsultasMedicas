@@ -39,8 +39,7 @@ export const getOwnUserDoctorService = async (id) => {
         doctoruser = { ...user, ...votes };
         doctoruser.consult = consult;
     }
-    console.log('valor de consult', consult);
-    console.log('valor de votes', votes);
+
 
     return doctoruser;
 };

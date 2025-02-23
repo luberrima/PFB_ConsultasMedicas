@@ -4,7 +4,6 @@ import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const activeUserService = async (registrationCode) => {
 
-	console.log('registrationCode:', registrationCode);
 	const user = await selectUserByRegistrationCodeModel(registrationCode);
 	if (!user) {
 		throw genereErrorUtils(400, 'USER_NOT_FOUND', 'El usuario no existe');

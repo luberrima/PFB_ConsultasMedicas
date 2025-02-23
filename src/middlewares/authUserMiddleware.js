@@ -17,7 +17,7 @@ export const authUserMiddleware = async (req, res, next) => {
         let tokenInfo;
        
         try {
-            console.log(SECRET);
+            
             tokenInfo = jwt.verify(authorization, SECRET);
         } catch (error) {
             

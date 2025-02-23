@@ -13,7 +13,7 @@ export const updateDiagConsultByIdModel = async (diagnostic, id) => {
     );
 
     //  Devolver el resultado
-    console.log(result);
+   
     
     return result;
 };

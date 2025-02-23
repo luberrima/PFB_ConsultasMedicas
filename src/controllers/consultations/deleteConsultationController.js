@@ -2,10 +2,7 @@ import { deleteConsultationService } from '../../services/consultations/deleteCo
 
 export const deleteConsultationController = async (req, res, next) => {
     try {
-        console.log(
-            'ESTO ES EL REQ.ENTRY QUE LO ESTOY LLAMANDO EN UN SERVICIO',
-            req.entry
-        );
+
 
         const consultationId = req.entry;
 

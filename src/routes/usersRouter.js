@@ -20,7 +20,6 @@ import { userExistsMiddleware } from '../middlewares/userExistsMiddleware.js';
 
 export const usersRouter = express.Router();
 
-console.log('activando rutas de usuario');
 usersRouter.get(
     '/users/profile',
     authUserMiddleware,

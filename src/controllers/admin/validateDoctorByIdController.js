@@ -4,7 +4,6 @@ export const validateDoctorByIdController = async (req, res, next) => {
     try {
         const { doctorId,validate } = req.body;
         
-        console.log("el req user id?",req.body);
         const admininfo = await validateDoctorByIdService(doctorId,validate);
      
      

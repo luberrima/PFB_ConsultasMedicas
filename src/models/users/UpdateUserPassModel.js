@@ -7,7 +7,6 @@ export const updateUserPassModel = async (recoveryPassCode, newPass) => {
     const pool = await getPool();
 
     const user = await selectUserByrecoveryPassModel(recoveryPassCode);
-    console.log({ user, recoveryPassCode });
 
     if (!user) {
         throw genereErrorUtils(

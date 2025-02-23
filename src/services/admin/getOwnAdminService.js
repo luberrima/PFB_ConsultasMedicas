@@ -30,7 +30,6 @@ export const getOwnAdminService = async (id) => {
     admin.doctor=doctor;
    
    
-   console.log("Data en el servicio", admin);
     
    
     return  admin;

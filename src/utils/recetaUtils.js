@@ -29,7 +29,6 @@ export const saveRecetaUtil = async (userRelativePath, arch, width) => {
     // Lo mismo que las tres líneas anteriores en una sola línea
     // await sharp(image.data).resize(width).toFile(avatarPath);
 
-    console.log('Receta guardada en: ', RecipePath);
 
     return RecipeName;
 };
@@ -47,5 +46,4 @@ export const deleteRecetaUtil = async (RecipePath) => {
         }
     });
 
-    console.log(`Borrado correctamente la foto: ${RecipePath}`);
 };

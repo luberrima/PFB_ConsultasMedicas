@@ -12,10 +12,7 @@ export const canDoItMiddleware = async (req, res, next) => {
         const { doctorId } = req.entry;
         const { userId } = req.entry;
         //
-        console.log('ID DEL USUARIO', userId);
-        console.log('ID USUARIO LOGUEADO', idUserLogged);
-        console.log('ID ENTRADA', doctorId);
-
+   
         if (
             req.method === 'POST' &&
             req.body.value >= 1 &&
@@ -39,7 +36,7 @@ export const canDoItMiddleware = async (req, res, next) => {
         } else {
             // Para cualquier otro método, permitir solo si es el dueño
             if (idUserLogged !== doctorId) {
-                console.log('ID USERLOGEADO', idUserLogged);
+                
 
                 throw genereErrorUtils(
                     403,

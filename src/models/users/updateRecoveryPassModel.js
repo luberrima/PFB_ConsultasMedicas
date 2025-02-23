@@ -29,9 +29,7 @@ export const updateRecoveryPassModel = async (email, recoveryPassCode) => {
 
     try {
         await sendEmailBrevoUtils(to, Subject, text);
-        console.log('Correo enviado exitosamente');
-    } catch (err) {
-        console.error('Error al enviar el correo:', error);
+    }   catch (err) {
         throw genereErrorUtils('Error al enviar el correo');
     }
 };

@@ -14,11 +14,9 @@ export const getConsultByIdService = async (id) => {
             'No se ha encontrado la Consulta'
         );
     }
-    console.log('HE PASADO 1');
 
     const documents = await selectPhotoByIdModel(id);
     consulta.documents = documents;
-    console.log('HE PASADO 2');
 
     return consulta;
 };

@@ -15,7 +15,7 @@ export const createReplyController = async (req, res, next) => {
                 let Receta = [];
 
                 if (req.files) {
-                    console.log('req.files en controller', req.files);
+                   
                     Receta = Object.values(req.files);
                 }
 

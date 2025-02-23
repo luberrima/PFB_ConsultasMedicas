@@ -22,7 +22,6 @@ export const newRecetaService = async (userId, recetaId, archs, replyId) => {
 
         //  Guardar la receta
         const recetaName = await saveRecetaUtil(archRelativePath, arch, 800);
-        console.log("recetaName de service",recetaName);
 
         // Guardar la información 
         const result = await insertRecetaModel( docrecetaId, recetaId, recetaName, replyId);

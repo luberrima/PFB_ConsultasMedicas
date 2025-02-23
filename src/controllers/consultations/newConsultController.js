@@ -15,14 +15,14 @@ export const newConsultController = async (req, res, next) => {
 
         //  Obtener la info del body
         const { title, skillId, description } = req.body;
-        console.log('Body en controller', req.body);
+        
 
         //  Obtener las recetas
 
         let Receta = [];
 
         if (req.files) {
-            console.log('req.files en controller', req.files);
+          
             Receta = Object.values(req.files);
         }
 

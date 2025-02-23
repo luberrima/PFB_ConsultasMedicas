@@ -2,7 +2,6 @@ import { selectUserConsultModel } from '../../models/users/selectUserConsultMode
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const getOwnUserService = async (id) => {
-    console.log('lo que trae id en el service', id);
 
     const user = await selectUserConsultModel(id);
 
@@ -13,7 +12,6 @@ export const getOwnUserService = async (id) => {
             'Usuario no encontrado o inactivo'
         );
     }
-    console.log('lo que devuelve user en el service', user);
 
     return user;
 };

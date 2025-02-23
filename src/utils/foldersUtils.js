@@ -11,12 +11,10 @@ export const deletePathUtil = async (path) => {
 
         // Borrar el directorio de uploads y todo su contenido
         await fs.rm(path, { recursive: true });
-        console.log(`Borrado correctamente el contenido y el directorio: ${path}`);
     } catch (error) {
         // Si el directorio no existe, fs.access() lanzará un error y lo capturamos aquí
         if (error.code === 'ENOENT') {
             // El directorio no existe, no hacemos nada
-            console.log('No existe el directorio: ', path);
         } else {
             throw genereErrorUtils(
                 500,
@@ -33,13 +31,12 @@ export const createPathUtil = async (path) => {
         // Comprobar si el directorio de uploads existe
         await fs.access(path);
 
-        console.log(`Ya existe el directorio: ${path}`);
     } catch (error) {
         // Si el directorio no existe, fs.access() lanzará un error y lo capturamos aquí
         if (error.code === 'ENOENT') {
             // El directorio no existe, lo creamos
             await fs.mkdir(path, { recursive: true });
-            console.log(`Se ha creado correctamente el directorio: ${path}`);
+            
         } else {
             throw genereErrorUtils(
                 500,

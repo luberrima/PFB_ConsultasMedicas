@@ -5,7 +5,7 @@ export const getSkillByIdService = async (id) => {
        
         const skillName = await getSkillByIdModel(id);
 
-        console.log(skillName);
+  
     
 
     return skillName;

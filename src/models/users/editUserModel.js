@@ -4,7 +4,6 @@ import {genereErrorUtils} from '../../utils/genereErrorUtils.js';
 export const editUserModel = async ( username, nombre, email, userId) => {
     const pool = await getPool();
 
-    console.log(`${email} de model`); //comprobación
 
     const query = `
     UPDATE users

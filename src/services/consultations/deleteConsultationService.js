@@ -12,6 +12,6 @@ export const deleteConsultationService = async (consultation) => {
             'No se ha podido borrar la consulta'
         );
     }
-    console.log('Esto es lo que devuelve el result del service', result);
+
     return result;
 };
