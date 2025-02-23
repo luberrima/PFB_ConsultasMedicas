@@ -15,18 +15,28 @@ import { getUserByIdController } from '../controllers/users/getUserByIdControlle
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware.js';
 import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchema.js';
 import { getOwnUserDoctorController } from '../controllers/users/getOwnUserDoctorController.js';
-import { uploadMiddleware } from '../middlewares/uploadMiddleware.js';
+import { getOwnUserController } from '../controllers/users/getOwnUserController.js';
+import { userExistsMiddleware } from '../middlewares/userExistsMiddleware.js';
 
 export const usersRouter = express.Router();
 
 console.log('activando rutas de usuario');
-
+usersRouter.get(
+    '/users/profile',
+    authUserMiddleware,
+    userExistsMiddleware,
+    getOwnUserController
+);
 usersRouter.post('/users/login', loginUserController);
 usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
-usersRouter.get('/users/doctorsown', authUserMiddleware, getOwnUserDoctorController); // Ruta para obtener los datos de tu propio usuario
+usersRouter.get(
+    '/users/doctorsown',
+    authUserMiddleware,
+    getOwnUserDoctorController
+); // Ruta para obtener los datos de tu propio usuario
 usersRouter.put('/users/active/:registrationCode', activeUserController);
 usersRouter.put(
     '/users/updateprofile',

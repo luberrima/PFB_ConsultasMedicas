@@ -5,7 +5,7 @@ export const selectUserByIdModel = async (userId) => {
     const pool = await getPool();
 
     const [user] = await pool.query(
-        `SELECT id, username, nombre, email, password, role, avatar, bio, active, registrationCode, recoveryPassCode, createdAt
+        `SELECT id, username, nombre, email, role, avatar, bio, active, createdAt
          FROM users 
          WHERE id = ? AND active = 1`,
         [userId]
