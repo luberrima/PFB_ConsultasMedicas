@@ -10,6 +10,8 @@ import { canDoItMiddleware } from '../middlewares/canDoItMiddleware.js';
 import { deleteDiagnistConsultController } from '../controllers/consultations/deleteDiagnistConsultController.js';
 import { deleteConsultationController } from '../controllers/consultations/deleteConsultationController.js';
 import { editDiagnistConsultController } from '../controllers/consultations/editDiagnistConsultController.js';
+import { updateConsultationController } from '../controllers/consultations/updateConsultationController.js';
+
 export const consultationsRouter = express.Router();
 
 consultationsRouter.get(
@@ -65,3 +67,10 @@ consultationsRouter.put(
     editDiagnistConsultController
 );
 
+consultationsRouter.put(
+    "/consultations/:id",
+    authUserMiddleware,
+    consultExistsMiddleware,
+    canDoItMiddleware,
+    updateConsultationController
+);
