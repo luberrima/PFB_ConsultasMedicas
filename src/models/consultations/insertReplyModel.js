@@ -16,3 +16,5 @@ export const insertReplyModel = async ({ consultationId, reply, userId }) => {
 
     return { id, reply, consultationId, userId };
 };
+
+
