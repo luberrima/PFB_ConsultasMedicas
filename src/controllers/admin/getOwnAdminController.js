@@ -9,8 +9,8 @@ export const getOwnAdminController = async (req, res, next) => {
         const admininfo = await getOwnAdminService(id);
      
         delete admininfo.password;
-        delete userDoctor.registrationCode;
-        delete userDoctor.recoveryPassCode; 
+        delete admininfo.registrationCode;
+        delete admininfo.recoveryPassCode; 
 
         res.send({
             status: 'ok',
