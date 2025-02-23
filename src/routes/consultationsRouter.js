@@ -20,7 +20,7 @@ consultationsRouter.get(
     getConsultationDetailController
 );
 consultationsRouter.post(
-    '/consultations/:consultationId/replies',
+    '/consultations/replies',
 
     authUserMiddleware,
 

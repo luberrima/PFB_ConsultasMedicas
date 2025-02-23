@@ -49,8 +49,7 @@ export const newConsultController = async (req, res, next) => {
             skillId,
             description,
         });
-        console.log("controler cosult", consult);
-        console.log("AQUI")
+       
 
         // Crear las recetas en la base de datos solo si hay 
         let RecetaResult = [];
