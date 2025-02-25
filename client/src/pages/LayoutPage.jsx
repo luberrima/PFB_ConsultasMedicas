@@ -1,3 +1,17 @@
+
+
 export const LayoutPage = () => {
-  return <></>;
-};
+  return (
+    <>
+    <Navbar />
+    <main>
+      <h1>Layout</h1>
+      <Outlet />
+      
+    </main>
+  </>
+  )
+}
+
+
+

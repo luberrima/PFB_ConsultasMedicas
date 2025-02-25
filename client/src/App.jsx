@@ -1,10 +1,24 @@
-import { /*Route,*/ Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { HomePage } from './pages/HomePage.jsx';
+import { SignupPage } from './pages/SignupPage.jsx';
+import { LoginPage } from './pages/login.jsx';
+import { ValidatePage } from './pages/ValidatePage.jsx';
+import { LayoutPage } from "./pages/LayoutPage.jsx";
 
 function App() {
   return (
     <>
-      <Routes></Routes>
+      <Routes>
+        <Route path='/' element={<LayoutPage />}>
+          <Route index element={<HomePage />} />
+          <Route path='/signup' element={<SignupPage />} />
+					<Route path='/validate/:registrationCode'element={<ValidatePage />}/>
+					<Route path='/login' element={<LoginPage />} />
+          <Route path ='*' element=
+          {<h2>No Found</h2>}/>
+        </Route>
+      </Routes>
     </>
   );
 }
