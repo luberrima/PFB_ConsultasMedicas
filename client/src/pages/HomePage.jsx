@@ -2,9 +2,10 @@
 
 export const HomePage = () => {
   return (
-    <h2>
-      Home Page
-    </h2>
+    <>
+      <h2>PAGINA MENU</h2>
+      <img src= '../assets/good-doctor-logo.svg' alt='logo Good Doctor'/>
+    </>
   )
 }
 

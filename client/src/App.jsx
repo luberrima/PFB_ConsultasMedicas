@@ -15,8 +15,7 @@ function App() {
           <Route path='/signup' element={<SignupPage />} />
 					<Route path='/validate/:registrationCode'element={<ValidatePage />}/>
 					<Route path='/login' element={<LoginPage />} />
-          <Route path ='*' element=
-          {<h2>No Found</h2>}/>
+          <Route path ='*' element={<h2>No Found</h2>}/>
         </Route>
       </Routes>
     </>

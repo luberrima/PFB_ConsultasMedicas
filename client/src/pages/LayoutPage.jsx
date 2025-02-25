@@ -1,17 +1,16 @@
-
+import { Outlet } from 'react-router-dom';
 
 export const LayoutPage = () => {
   return (
     <>
-    <Navbar />
     <main>
-      <h1>Layout</h1>
+      <h1>GOOD DOCTOR</h1>
       <Outlet />
       
     </main>
   </>
-  )
-}
+  );
+};
 
 
 
