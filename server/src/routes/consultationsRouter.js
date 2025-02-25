@@ -40,7 +40,9 @@ consultationsRouter.post(
     authUserMiddleware,
     newConsultController
 );
-consultationsRouter.get('/consultations', getAllConsultationController);
+
+// Pasar por midleware authUser (necesito token)
+consultationsRouter.get('/consultations', authUserMiddleware, getAllConsultationController);
 
 consultationsRouter.put(
     '/consultations/removediagnost/:id',

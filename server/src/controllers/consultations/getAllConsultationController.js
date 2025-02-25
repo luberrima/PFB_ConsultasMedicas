@@ -2,11 +2,17 @@ import { getAllConsultationService } from "../../services/consultations/getAllCo
 
 export const getAllConsultationController = async (req, res, next)=> {
 try {
-    const consultations = await getAllConsultationService();
+
+    // pasar a getAllConsultationService id usuario y role (estan en req.user)
+    const consultations = await getAllConsultationService(req.user.id, req.user.role);
+  
     res.status(200).send({
         status: 'ok',
         message: 'lista de consultas',
-        data: { consultations },
+        data: { asignadas: [],
+          noasignadas: [],
+          resueltas: []
+         },
     });
 } catch (error) {
   next(error);  
