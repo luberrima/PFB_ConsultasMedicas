@@ -5,6 +5,7 @@ export const getUserByIdController = async (req, res, next) => {
         const { id } = req.params;
 
         const user = await getUserByIdService(id);
+        console.log("No estare tocando los huevos verdad?")
 
         res.send({
             status: 'ok',

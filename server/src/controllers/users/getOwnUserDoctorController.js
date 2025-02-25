@@ -1,5 +1,3 @@
-
-
 import {getOwnUserDoctorService} from '../../services/users/getOwnUserDoctorService.js';
 
 export const getOwnUserDoctorController = async (req, res, next) => {
@@ -9,9 +7,9 @@ export const getOwnUserDoctorController = async (req, res, next) => {
     
         const userDoctor = await getOwnUserDoctorService(id);
      
-        delete userDoctor.password;
-       /* delete userDoctor.registrationCode;
-        delete userDoctor.recoveryPassCode;*/
+        delete userDoctor.user[0].password;
+        delete userDoctor.user[0].registrationCode;
+        delete userDoctor.user[0].recoveryPassCode;
 
         res.send({
             status: 'ok',
