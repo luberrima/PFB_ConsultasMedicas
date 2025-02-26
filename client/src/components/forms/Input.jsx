@@ -2,7 +2,15 @@ import { useState } from 'react';
 import { Button } from '../Button.jsx';
 import { Icon } from '../Icon.jsx';
 
-export const Input = ({ handleChange, type, name, label, value }) => {
+export const Input = ({
+    handleChange,
+    type,
+    name,
+    label,
+    value,
+    errors,
+    placeholder,
+}) => {
     const [inputType, setInputType] = useState(type);
     const [showPass, setShowPass] = useState(false);
 
@@ -20,6 +28,8 @@ export const Input = ({ handleChange, type, name, label, value }) => {
                     type={inputType}
                     name={name}
                     value={value}
+                    autoComplete={`new-${name}`}
+                    placeholder={placeholder}
                 />
                 {type === 'password' && (
                     <Button
@@ -32,6 +42,14 @@ export const Input = ({ handleChange, type, name, label, value }) => {
                     </Button>
                 )}
             </div>
+            <span className="inputError" id={`error-${name}`}>
+                {errors?.map((error) => {
+                    if (error.context.key === name) {
+                        return error.message;
+                    }
+                    return null;
+                })}
+            </span>
         </label>
     );
 };

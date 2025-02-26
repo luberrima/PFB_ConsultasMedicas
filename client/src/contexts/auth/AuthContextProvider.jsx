@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
     const onLogin = async (token) => {
         try {
             setToken(token);
-            setLocalStorage('tokenGoodDoctor');
+            setLocalStorage('tokenGoodDoctor', token);
 
             const response = await getOwnUserService(token);
 
