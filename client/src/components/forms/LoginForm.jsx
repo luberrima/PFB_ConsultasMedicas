@@ -72,7 +72,7 @@ export const LoginForm = () => {
             />
             <Input
                 handleChange={handleChange}
-                label="password"
+                label="Contraseña"
                 type="password"
                 name="password"
                 value={data.password}

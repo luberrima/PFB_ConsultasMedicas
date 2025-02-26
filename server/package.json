@@ -1,33 +1,35 @@
 {
-  "type": "module",
-  "name": "pfb_consultasmedicas",
-  "version": "1.0.0",
-  "description": "- Apartado de Q&A con dudas ya resueltas\r - Cuestionario inicial que te derive al médico o especialidad que necesitas si no sabes a quien acudir\r - Sección en inicio con las rutas más comunes\r - Valoraciones a los médicos tras resolver los casos\r - Filtros por especialidad médica\r - Posibilidad de subir fotos\r - Cuestionario previo siempre: niveles de dolor/molestia, zona corporal, tipo de consulta, etc.\r - Posibilidad de publicar tu conversación como hilo para que comente más gente o para ayudar a la peña?\r - 2 opciones: consultar los foros por si se te resuelve la duda y hablar con los médicos",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "dev": "node --watch app.js",
-    "initDb": "node src/db/initDb.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@getbrevo/brevo": "^2.2.0",
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-fileupload": "^1.5.1",
-    "joi": "^17.13.3",
-    "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.5",
-    "path": "^0.12.7",
-    "randomstring": "^1.3.0",
-    "sharp": "^0.33.5"
-  },
-  "devDependencies": {
-    "morgan": "^1.10.0"
-  }
+    "type": "module",
+    "name": "pfb_consultasmedicas",
+    "version": "1.0.0",
+    "description": "- Apartado de Q&A con dudas ya resueltas\r - Cuestionario inicial que te derive al médico o especialidad que necesitas si no sabes a quien acudir\r - Sección en inicio con las rutas más comunes\r - Valoraciones a los médicos tras resolver los casos\r - Filtros por especialidad médica\r - Posibilidad de subir fotos\r - Cuestionario previo siempre: niveles de dolor/molestia, zona corporal, tipo de consulta, etc.\r - Posibilidad de publicar tu conversación como hilo para que comente más gente o para ayudar a la peña?\r - 2 opciones: consultar los foros por si se te resuelve la duda y hablar con los médicos",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "node --watch app.js",
+        "devnodemon": "nodemon app.js",
+        "initDb": "node src/db/initDb.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@getbrevo/brevo": "^2.2.0",
+        "bcrypt": "^5.1.1",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "express-fileupload": "^1.5.1",
+        "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2",
+        "mysql2": "^3.11.5",
+        "path": "^0.12.7",
+        "randomstring": "^1.3.0",
+        "sharp": "^0.33.5"
+    },
+    "devDependencies": {
+        "morgan": "^1.10.0",
+        "nodemon": "^3.1.9"
+    }
 }
