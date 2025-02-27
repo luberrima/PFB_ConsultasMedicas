@@ -17,6 +17,7 @@ function App() {
 					<Route path='/validate/:registrationCode'element={<ValidatePage />}/>
 					<Route path='/login' element={<LoginPage />} />
           <Route path='*' element={<NotFoundPage />} />
+          <Route path='/registro' element={<RegistroPage />} />
         </Route>
       </Routes> 
     </>
