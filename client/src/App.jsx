@@ -5,6 +5,7 @@ import { SignupPage } from './pages/SignupPage.jsx';
 import { LoginPage } from './pages/loginPage.jsx';
 import { ValidatePage } from './pages/ValidatePage.jsx';
 import { LayoutPage } from "./pages/LayoutPage.jsx";
+import { RegistroPage } from "./pages/RegistroPage.jsx";
 import NotFoundPage from './pages/NotFoundPage';
 function App() {
   return (

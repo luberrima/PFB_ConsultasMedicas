@@ -1,9 +1,18 @@
 import { Button } from "../components/Button.jsx";
 import { Icon } from "../components/Icon.jsx";
 import { CarruselDoctor } from "../components/Landing/CarruselDoctor.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 export const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleClickRegistro = () => {
+    navigate("/registro");
+  };
+  const handleClickLogin = () => {
+    navigate("/login");
+  };
 
   
   return (
@@ -34,8 +43,8 @@ export const HomePage = () => {
       <footer>
         <p3>Empieza a usar good doctor</p3>
         <p>Un lugar al que pertenecer, en el que puedes encontrar diagnóstico de médicos sobre tus dolencias y todo a unos pocos clips.</p>
-      <button>Registro</button>
-      <button>Login</button>
+      <button onClick={handleClickRegistro} className="registro">Registro</button>
+      <button onClick={handleClickLogin} className="login">Login</button>
 
       </footer>
       
