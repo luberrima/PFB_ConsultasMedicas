@@ -5,7 +5,7 @@ import { SignupPage } from './pages/SignupPage.jsx';
 import { LoginPage } from './pages/loginPage.jsx';
 import { ValidatePage } from './pages/ValidatePage.jsx';
 import { LayoutPage } from "./pages/LayoutPage.jsx";
-
+import NotFoundPage from './pages/NotFoundPage';
 function App() {
   return (
     <>
@@ -15,7 +15,7 @@ function App() {
           <Route path='/signup' element={<SignupPage />} />
 					<Route path='/validate/:registrationCode'element={<ValidatePage />}/>
 					<Route path='/login' element={<LoginPage />} />
-          <Route path ='*' element={<h2>No Found</h2>}/>
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes> 
     </>
