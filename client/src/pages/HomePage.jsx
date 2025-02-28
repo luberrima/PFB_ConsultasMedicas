@@ -57,7 +57,7 @@ export const HomePage = () => {
                 </section>
             </main>
             <footer>
-                <p3>Empieza a usar good doctor</p3>
+                <h3>Empieza a usar good doctor</h3>
                 <p>
                     Un lugar al que pertenecer, en el que puedes encontrar
                     diagnóstico de médicos sobre tus dolencias y todo a unos
