@@ -1,8 +1,8 @@
-// NavBar.jsx
+import './navbar.css';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LogOutButton } from './LogOutButton.jsx';
-import logo from '../assets/good-doctor-logo.svg';
+import logonavbar from '../assets/good-doctor-logo-navbar.svg';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
 
 export const NavBar = () => {
@@ -12,8 +12,8 @@ export const NavBar = () => {
         <nav className="navbar">
             <div className="navbar-container">
                 <div className="navbar-logo">
-                    <Link to="/" className="navbar-logo">
-                        <img src={logo} alt="logo Good Doctor" />
+                    <Link to="/">
+                        <img src={logonavbar} alt="logo Good Doctor" />
                     </Link>
                 </div>
 
@@ -21,17 +21,31 @@ export const NavBar = () => {
                     <Link to="/" className="navbar-link">
                         Inicio
                     </Link>
-                    <Link to="/about" className="navbar-link">
-                        Acerca de
-                    </Link>
-                    <Link to="/contact" className="navbar-link">
-                        Contacto
-                    </Link>
+
+                    {token ? (
+                        <Link
+                            to="*"
+                            className="navbar-link new-consultation-link"
+                        >
+                            Hacer una consulta
+                        </Link>
+                    ) : (
+                        <Link to="/signup" className="navbar-link">
+                            Registrarse
+                        </Link>
+                    )}
+
                     {token ? (
                         <LogOutButton />
                     ) : (
                         <Link to="/login" className="navbar-link">
                             Iniciar Sesión
+                        </Link>
+                    )}
+
+                    {token && (
+                        <Link to="/profile" className="navbar-link">
+                            Mi Perfil
                         </Link>
                     )}
                 </div>

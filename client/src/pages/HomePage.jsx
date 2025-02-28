@@ -1,11 +1,9 @@
 import { Button } from '../components/Button.jsx';
 //import { Icon } from "../components/Icon.jsx";
 
-import { LogOutButton } from '../components/LogOutButton.jsx';
 import { CarruselDoctor } from '../components/Landing/CarruselDoctor.jsx';
 import { useNavigate } from 'react-router-dom';
 
-import logo from '../assets/good-doctor-logo.svg'; // Logo
 import equipo from '../assets/Fotomedicos.png'; // Equipo medico
 import famila from '../assets/madrehijotablet.jpg'; // familiatablet
 
@@ -21,11 +19,6 @@ export const HomePage = () => {
 
     return (
         <>
-            <header>
-                <img src={logo} alt="logo Good Doctor" />
-                <h2>PAGINA MENU</h2>
-                <LogOutButton />
-            </header>
             <main>
                 <CarruselDoctor />
                 <section>

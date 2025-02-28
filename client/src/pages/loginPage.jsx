@@ -5,6 +5,7 @@ export const LoginPage = () => {
         <div>
             <h2>Login</h2>
             <LoginForm />
+            {/* añadir enlace de: no tienes cuenta? regisrate! */}
         </div>
     );
 };
