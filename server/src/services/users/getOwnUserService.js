@@ -1,4 +1,5 @@
 import { selectUserConsultModel } from '../../models/users/selectUserConsultModel.js';
+import { getConsultationByUserIDModel } from '../../models/consultations/getConsultationByUserIDModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
 export const getOwnUserService = async (id) => {
@@ -13,5 +14,20 @@ export const getOwnUserService = async (id) => {
         );
     }
 
-    return user;
+
+    const consult = await getConsultationByUserIDModel(id);
+    const data={};
+
+    if (!consult) {
+        data.consult = 'Vacio';
+    } else {
+        
+        data.consult = consult;
+    }
+    
+    data.user=user;
+
+   
+
+    return data;
 };

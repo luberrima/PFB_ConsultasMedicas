@@ -17,6 +17,8 @@ import { updateUserProfileSchema } from '../schemas/users/updateUserProfileSchem
 import { getOwnUserDoctorController } from '../controllers/users/getOwnUserDoctorController.js';
 import { getOwnUserController } from '../controllers/users/getOwnUserController.js';
 import { userExistsMiddleware } from '../middlewares/userExistsMiddleware.js';
+import { editUserInfoController } from '../controllers/users/editUserInfoController.js'
+import { editAvatarController} from '../controllers/users/editAvatarController.js'
 
 export const usersRouter = express.Router();
 
@@ -31,6 +33,9 @@ usersRouter.get('/users/doctors/:id', getUserDoctorByIdController);
 usersRouter.post('/users/register', registerUserController);
 usersRouter.post('/users/register-doctor', registerDoctorController);
 usersRouter.get('/users/doctors', getDoctorsWithRatingsController);
+usersRouter.put('/users/updateinfo', authUserMiddleware,editUserInfoController);
+usersRouter.put('/users/updateavatar', authUserMiddleware,editAvatarController);
+
 usersRouter.get(
     '/users/doctorsown',
     authUserMiddleware,

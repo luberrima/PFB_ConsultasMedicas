@@ -1,4 +1,4 @@
-import { getConsultationByIddoctorModel } from '../../models/consultations/getConsultationByIdDoctorModel.js';
+import { getConsultationByUserIDModel } from '../../models/consultations/getConsultationByUserIDModel.js';
 import { selectUserDoctorByIdModel } from '../../models/users/selectUserDoctorByIdModel.js';
 import { selectAverageVoteByDoctorIdModel } from '../../models/votes/selectAverageVoteByDoctorIdModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
@@ -23,20 +23,21 @@ export const getOwnUserDoctorService = async (id) => {
 
     const votes = await selectAverageVoteByDoctorIdModel(id);
 
-    const consult = await getConsultationByIddoctorModel(id);
+    const consult = await getConsultationByUserIDModel(id);
 
-    let doctoruser = { ...user };
+    let doctoruser = {};
 
     if (votes.ConsultasTotales === 0) {
-        doctoruser.status = 'No evaluado';
+        user.status = 'No evaluado';
+        doctoruser.user=user;
     } else {
-        doctoruser = { ...user, ...votes };
+        doctoruser.user= { ...user, ...votes };
     }
     
     if (!consult) {
         doctoruser.consult = 'Vacio';
     } else {
-        doctoruser = { ...user, ...votes };
+        
         doctoruser.consult = consult;
     }
 

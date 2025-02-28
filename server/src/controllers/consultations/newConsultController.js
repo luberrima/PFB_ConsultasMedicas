@@ -14,7 +14,7 @@ export const newConsultController = async (req, res, next) => {
         const userId = req.user.id;
 
         //  Obtener la info del body
-        const { title, skillId, description } = req.body;
+        const { title, skillId, description,gravedad,doctorId } = req.body;
         
 
         //  Obtener las recetas
@@ -48,6 +48,8 @@ export const newConsultController = async (req, res, next) => {
             title,
             skillId,
             description,
+            gravedad,
+            doctorId,
         });
        
 
