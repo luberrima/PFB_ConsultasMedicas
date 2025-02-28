@@ -5,10 +5,13 @@ import { SignupPage } from './pages/SignupPage.jsx';
 import { ValidatePage } from './pages/ValidatePage.jsx';
 import { LayoutPage } from './pages/LayoutPage.jsx';
 import { LoginPage } from './pages/LoginPage.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
         <>
+            <ToastContainer />
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
                     <Route index element={<HomePage />} />

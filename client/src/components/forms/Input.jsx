@@ -44,7 +44,7 @@ export const Input = ({
             </div>
             <span className="inputError" id={`error-${name}`}>
                 {errors?.map((error) => {
-                    if (error.context.key === name) {
+                    if (error.context && error.context.key === name) {
                         return error.message;
                     }
                     return null;

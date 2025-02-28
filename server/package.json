@@ -7,8 +7,8 @@
     "scripts": {
         "start": "node app.js",
         "dev": "node --watch app.js",
-        "devnodemon": "nodemon app.js",
-        "initDb": "node src/db/initDb.js"
+        "initDb": "node src/db/initDb.js",
+        "devnodemon": "nodemon app.js"
     },
     "keywords": [],
     "author": "",
@@ -29,7 +29,7 @@
         "sharp": "^0.33.5"
     },
     "devDependencies": {
-        "morgan": "^1.10.0",
-        "nodemon": "^3.1.9"
+        "nodemon": "^3.1.9",
+        "morgan": "^1.10.0"
     }
 }

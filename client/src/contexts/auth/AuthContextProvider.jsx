@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AuthContext } from './authContext.js';
+import { AuthContext } from './AuthContext.js';
 import { getFromLocalStorage, setLocalStorage } from '../../utils/helpers.js';
 import { getOwnUserService } from '../../services/fetchBackEnd.js';
 
@@ -36,16 +36,14 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
-    // const onLogOut = () => {
-    //     localStorage.removeItem('tokenGoodDoctor');
-    //     setToken(null);
-    //     setCurrentUser(null);
-    // }
+    const onLogOut = () => {
+        localStorage.removeItem('tokenGoodDoctor');
+        setToken(null);
+        setCurrentUser(null);
+    };
 
     return (
-        <AuthContext.Provider
-            value={{ token, currentUser, onLogin /*, onLogOut*/ }}
-        >
+        <AuthContext.Provider value={{ token, currentUser, onLogin, onLogOut }}>
             {children}
         </AuthContext.Provider>
     );
