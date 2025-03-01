@@ -6,7 +6,7 @@ export const editAvatarController = async (req, res, next) => {
         const { id } =req.user;
         const { avatar } = req.files;
 
-
+      
 
        // await validateSchemaUtil(editUserBioSchema, req.body);
         const result = await editAvatarService(id,avatar);
