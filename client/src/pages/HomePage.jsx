@@ -72,4 +72,5 @@ export const HomePage = () => {
             </footer>
         </>
     );
+    
 };

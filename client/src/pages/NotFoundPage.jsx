@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/good-doctor-logo.svg"; // Logo
 import notFoundImage from "../assets/notfound.png"; // Imagen del personaje con la manzana
 
-const NotFoundPage = () => {
+export const NotFoundPage = () => {
     const navigate = useNavigate(); 
 
     return (
@@ -42,4 +42,4 @@ const NotFoundPage = () => {
     );
 };
 
-export default NotFoundPage;
+
