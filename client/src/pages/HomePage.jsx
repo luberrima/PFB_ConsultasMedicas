@@ -9,6 +9,7 @@ import famila from '../assets/madrehijotablet.jpg'; // familiatablet
 
 export const HomePage = () => {
     const navigate = useNavigate();
+    
 
     const handleClickRegistro = () => {
         navigate('/registro');

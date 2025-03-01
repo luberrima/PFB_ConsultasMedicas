@@ -1,3 +1,4 @@
+import AppErrorBoundary from "./components/ErrorBoundary";
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { HomePage } from './pages/HomePage.jsx';
@@ -12,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
-        <>
+        <AppErrorBoundary> {/* Aquí envolvemos toda la app */}
             <ToastContainer />
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
@@ -26,7 +27,7 @@ function App() {
                     <Route path="*" element={<h2>Not Found</h2>} />
                 </Route>
             </Routes>
-        </>
+        </AppErrorBoundary>
     );
 }
 
