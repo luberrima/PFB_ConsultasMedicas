@@ -7,7 +7,7 @@ import { LoginPage } from './pages/loginPage.jsx';
 import { ValidatePage } from './pages/ValidatePage.jsx';
 import { LayoutPage } from './pages/LayoutPage.jsx';
 //import { RegistroPage } from './pages/RegistroPage.jsx';
-//import NotFoundPage from './pages/NotFoundPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,7 +24,7 @@ function App() {
                         element={<ValidatePage />}
                     />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="*" element={<h2>Not Found</h2>} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
         </AppErrorBoundary>
