@@ -17,7 +17,7 @@ export const LogOutButton = () => {
     return (
         <Button
             id="logout-btn"
-            className="logout-btn"
+            className="btn btn-naranja btn-logout"
             handleClick={handleLogout}
         >
             Cerrar Sesión

@@ -1,6 +1,94 @@
+@import './vars.css';
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Poppins;
+}
+
+.btn {
+    all: unset;
+    cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: none;
+}
+
+.btn-naranja {
+    background-color: var(--secondary-color);
+    color: var(--color-white);
+}
+
+.btn-naranja:hover {
+    background-color: var(--color-white);
+    color: var(--secondary-color);
+}
+
+.btn-azul {
+    background-color: var(--main-color);
+    color: var(--color-white);
+}
+
+.btn-azul:hover {
+    background-color: var(--color-white);
+    color: var(--main-color);
+}
+
+.btn-blanco {
+    background-color: var(--color-white);
+    color: var(--main-color);
+}
+
+.btn-blanco:hover {
+    background-color: var(--main-color);
+    color: var(--color-white);
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    margin-top: 20px;
+    padding: 50px;
+}
+
+.footer img {
+    width: 100px;
+    height: auto;
+}
+
+.footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer p {
+    font-size: 12px;
+}
+
+.footer-link {
+    padding: 5px;
+    color: var(--main-color);
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.footer-link:hover {
+    color: var(--secondary-color);
 }
