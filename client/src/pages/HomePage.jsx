@@ -6,8 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 import equipo from '../assets/Fotomedicos.png'; // Equipo medico
 import famila from '../assets/madrehijotablet.jpg'; // familiatablet
+import { useAllDoctor } from '../hooks/useAllDoctor.js';
+
 
 export const HomePage = () => {
+    
+    
+    const { doctors, loading, error } = useAllDoctor(); 
+     /* console.log('Esto es lo que tiene la homepage para ontar de doctores',doctors);  */
     const navigate = useNavigate();
     
 
@@ -21,7 +27,9 @@ export const HomePage = () => {
     return (
         <>
             <main>
-                <CarruselDoctor />
+                <CarruselDoctor doctors={doctors} />
+                
+                
                 <section>
                     <article>
                         <img src={equipo} alt="Foto de equipo medico" />
