@@ -10,8 +10,10 @@ import { LayoutPage } from './pages/LayoutPage.jsx';
 import NotFoundPage from './pages/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
 
 function App() {
+    
     return (
         <AppErrorBoundary> {/* Aquí envolvemos toda la app */}
             <ToastContainer />
@@ -24,6 +26,7 @@ function App() {
                         element={<ValidatePage />}
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/alldoctors" element={<AllDoctorPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
