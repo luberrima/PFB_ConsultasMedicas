@@ -8,7 +8,7 @@ export const LoginPage = () => {
     return (
         <div className="login-page">
             <img src={logo} alt="" />
-            <div className="login-card">
+            <div className="login">
                 <h2>¡Hola de nuevo!</h2>
                 <h1>Login</h1>
                 <p>Escribe tus datos para iniciar sesión</p>
