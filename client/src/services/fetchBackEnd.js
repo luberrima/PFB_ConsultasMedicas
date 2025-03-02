@@ -36,7 +36,7 @@ export const newConsultService = async (info, token) => {
 
 	const formData = new FormData();
 	formData.append('title', info.title || '');
-	formData.append('skill', info.skillId || '');
+	formData.append('skillId', info.skillId || '');
     formData.append('gravedad', info.gravedad || '');
     formData.append('doctorId', info.doctorId || '');
 	formData.append('description', info.description || '');

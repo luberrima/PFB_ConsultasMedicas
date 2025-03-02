@@ -17,13 +17,13 @@ export const ConsultForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 
+    
+
 
 	const handleSubmit = async (e) => {
 		try {
-			e.preventDefault();
-
+			e.preventDefault(); 
             
-
 			validate(newConsultSchema);
 
 			setIsLoading(true);
@@ -45,12 +45,11 @@ export const ConsultForm = () => {
 			toast.error(error.message || 'Error al registrar la consulta');
 		}
         
-        
 	};
 	return (
 		<Form className='new-consult-form' handleSubmit={handleSubmit}>
 			<Input label='title' name='title' value={info.title} handleChange={handleChange}/>
-			<Input label='skillId' name='skillId' value={info.skillId} handleChange={handleChange}/>
+			<Input label='skillId' type="number" name='skillId' value={info.skillId} handleChange={handleChange}/>
             <Input label='gravedad' name='gravedad' value={info.gravedad} handleChange={handleChange} />
             <Input label='doctorId' name='doctorId' value={info.doctorId} handleChange={handleChange} />
 			<Input
