@@ -1,11 +1,11 @@
-import React from 'react'
+import { RegisterForm } from "../components/forms/RegisterForm";
 
 export const RegistroPage = () => {
-  return (
-    <div>
-      RegistroPage
-    </div>
-  )
-}
-
+    return (
+        <div>
+            <h2>Registro</h2>
+            <RegisterForm />
+        </div>
+    );
+};
 
