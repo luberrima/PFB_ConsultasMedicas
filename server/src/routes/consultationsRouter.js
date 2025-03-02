@@ -11,7 +11,7 @@ import { deleteDiagnistConsultController } from '../controllers/consultations/de
 import { deleteConsultationController } from '../controllers/consultations/deleteConsultationController.js';
 import { editDiagnistConsultController } from '../controllers/consultations/editDiagnistConsultController.js';
 import { getConsultationBySkillController } from '../controllers/consultations/getConsultationBySkillController.js';
-import { takeEmpyConsultationController } from '../controllers/consultations/takeEmpyConsultationController.js'
+import { takeEmpyConsultationController } from '../controllers/consultations/takeEmpyConsultationController.js';
 export const consultationsRouter = express.Router();
 
 consultationsRouter.get(
@@ -31,7 +31,7 @@ consultationsRouter.put(
 );
 
 consultationsRouter.get(
-    '/consultations/id/:consultationId',
+    '/consultations/:consultationId',
 
     authUserMiddleware,
 
@@ -47,7 +47,6 @@ consultationsRouter.post(
 );
 
 consultationsRouter.put(
-
     '/consultations/:id/vote',
 
     authUserMiddleware,
@@ -83,4 +82,3 @@ consultationsRouter.put(
     canDoItMiddleware,
     editDiagnistConsultController
 );
-
