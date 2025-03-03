@@ -1,4 +1,5 @@
 import React from 'react';
+
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 export const CardDoctor = ({ doctor }) => {
     /* console.log('Esto es lo que tiene la CardDoctor para pintar de doctores',doctor);
