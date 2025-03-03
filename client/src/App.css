@@ -1,9 +1,269 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: black;
-  }
-  img {
-    max-width: 50px;
+.seccion {
+    padding: 50px;
+    min-height: 300px;
+}
+
+/* seccion logo inicio */
+.seccion-inicio {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    margin-top: -70px;
+    max-width: 100vw;
+}
+
+.seccion-inicio div {
+    width: 80vw;
+}
+
+.seccion-inicio img {
+    max-width: 100%;
+    height: auto;
+}
+
+.seccion-inicio img:first-child {
+    width: 120px;
+    margin-bottom: 25px;
+}
+
+.seccion-inicio p {
+    font-size: 16px;
+    color: var(--color-black);
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.seccion-inicio img:last-child {
+    all: unset;
+    width: 100%;
+    margin-right: -97px;
+}
+
+/* Seccion carrusel home */
+.seccion-carrusel {
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    text-align: center;
+}
+
+.seccion-carrusel h2 {
+    all: unset;
+    font-size: 24px;
+    font-weight: regular;
+    margin-bottom: 2rem;
+}
+
+.carrusel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.doctorsList {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.card-doctor-inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.card-doctor-inicio img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.card-doctor-inicio h3,
+.card-doctor-inicio p {
+    display: none;
+}
+
+.btn-carrusel {
+    all: unset;
+    color: var(--color-white);
+    transition: color 0.3s ease;
+}
+
+.btn-carrusel:hover {
+    color: var(--secondary-color);
+}
+
+/* Seccion info home */
+.seccion-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.seccion-info article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    gap: 3rem;
+}
+
+.seccion-info article div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+    align-items: center;
+    gap: 1rem;
+}
+
+.seccion-info article img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* seccion banner */
+.seccion-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--color-white);
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.seccion-banner h3 {
+    font-size: 24px;
+}
+
+.seccion-banner div {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* NOT FOUND PAGE */
+.notfound-container {
+    max-width: 100vw;
+    max-height: 100vh;
+    text-align: center;
+}
+
+.notfound-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.notfound-title {
+    font-size: 170px;
+    font-weight: 300;
+    color: var(--main-color);
+}
+
+.notfound-title .red {
+    color: var(--secondary-color);
+}
+
+.notfound-message {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.notfound-text {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.notfound-character img {
+    width: 40%;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: -1;
+}
+
+@media (min-width: 780px) {
+    /* seccion inicio */
+    .seccion-inicio {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: -130px;
+        margin-bottom: -50px;
+    }
+
+    .seccion-inicio div {
+        width: 100%;
+    }
+
+    /* Seccion carrusel home */
+
+    .carrusel {
+        gap: 4rem;
+    }
+
+    .doctorsList {
+        display: flex;
+        gap: 3rem;
+    }
+
+    .card-doctor-inicio {
+        gap: 0.2rem;
+    }
+
+    .card-doctor-inicio img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .card-doctor-inicio h3,
+    .card-doctor-inicio p {
+        display: block;
+    }
+
+    /* Seccion info home */
+
+    .seccion-info article {
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .seccion-info article div {
+        text-align: justify;
+    }
+
+    .seccion-info article img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
+
+    .seccion-info article:last-child {
+        flex-direction: row-reverse;
+    }
 }

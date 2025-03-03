@@ -1,5 +1,5 @@
-import './navbar.css';
 import React, { useContext } from 'react';
+import './navbar.css';
 import { Link } from 'react-router-dom';
 import { LogOutButton } from './LogOutButton.jsx';
 import logonavbar from '../assets/good-doctor-logo-navbar.svg';
@@ -35,17 +35,17 @@ export const NavBar = () => {
                         </Link>
                     )}
 
+                    {token && (
+                        <Link to="/profile" className="navbar-link">
+                            Mi Perfil
+                        </Link>
+                    )}
+
                     {token ? (
                         <LogOutButton />
                     ) : (
                         <Link to="/login" className="navbar-link">
                             Iniciar Sesión
-                        </Link>
-                    )}
-
-                    {token && (
-                        <Link to="/profile" className="navbar-link">
-                            Mi Perfil
                         </Link>
                     )}
                 </div>
