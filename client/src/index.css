@@ -92,3 +92,9 @@
 .footer-link:hover {
     color: var(--secondary-color);
 }
+
+.no-header-footer header,
+.no-header-footer footer {
+    display: none;
+    /* Oculta header y footer cuando el usuario está en la página de login */
+}

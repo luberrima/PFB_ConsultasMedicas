@@ -1,8 +1,8 @@
-import { Button } from '../components/Button.jsx';
+// import { Button } from '../components/Button.jsx';
 //import { Icon } from "../components/Icon.jsx";
 
 import { CarruselDoctor } from '../components/Landing/CarruselDoctor.jsx';
-import { useNavigate } from 'react-router-dom';
+import { Link /*useNavigate*/ } from 'react-router-dom';
 
 import logo from '../assets/good-doctor-logo.svg';
 import deco from '../assets/asset-home.svg';
@@ -13,14 +13,14 @@ import { useAllDoctor } from '../hooks/useAllDoctor.js';
 export const HomePage = () => {
     const { doctors /*loading, error*/ } = useAllDoctor();
     /* console.log('Esto es lo que tiene la homepage para ontar de doctores',doctors);  */
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const handleClickRegistro = () => {
-        navigate('/registro');
-    };
-    const handleClickLogin = () => {
-        navigate('/login');
-    };
+    // const handleClickRegistro = () => {
+    //     navigate('/registro');
+    // };
+    // const handleClickLogin = () => {
+    //     navigate('/login');
+    // };
 
     return (
         <>
@@ -35,12 +35,9 @@ export const HomePage = () => {
                             recusandae ratione autem quas dolores quos commodi
                             obcaecati possimus!
                         </p>
-                        <Button
-                            onClick={handleClickRegistro}
-                            className="btn btn-naranja"
-                        >
+                        <Link to="/signup" className="btn btn-naranja">
                             Registro
-                        </Button>
+                        </Link>
                     </div>
                     <div>
                         <img src={deco} alt="recurso decorativo" />
@@ -90,20 +87,14 @@ export const HomePage = () => {
                     </p>
                     <div>
                         <span>
-                            <Button
-                                onClick={handleClickRegistro}
-                                className="btn btn-azul"
-                            >
+                            <Link to="/signup" className="btn btn-azul">
                                 Registro
-                            </Button>
+                            </Link>
                         </span>
                         <span>
-                            <Button
-                                onClick={handleClickLogin}
-                                className="btn btn-blanco"
-                            >
+                            <Link to="/login" className="btn btn-blanco">
                                 Login
-                            </Button>
+                            </Link>
                         </span>
                     </div>
                 </section>
