@@ -8,10 +8,17 @@
     );
 }
 
+.new-consult-page {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to left, var(--secondary-color) 50%, white 50%);
+}
+
 .logo {
     position: absolute;
     top: 30px;
     left: 30px;
+    width: 120px;
 }
 
 .illustration {
@@ -22,7 +29,7 @@
     transform: translateX(-50%);
 }
 
-.login-card {
+.form-card {
     background-color: var(--color-white);
     border: 1px solid var(--color-black);
     border-radius: 10px;
@@ -41,22 +48,22 @@
     z-index: 5;
 }
 
-.login-card h2 {
+.form-card h2 {
     font-size: 18px;
     font-weight: 300;
 }
 
-.login-card h1 {
+.form-card h1 {
     font-size: 28px;
     font-weight: 500;
 }
 
-.login-card p {
+.form-card p {
     font-size: 14px;
     font-weight: 200;
 }
 
-.login-card p:first-child {
+.form-card p:first-child {
     font-size: 16px;
     font-weight: 400;
 }
@@ -68,25 +75,46 @@
     margin-left: 5px;
 }
 
-.login-form .input-container {
+.form {
+    width: 90%;
+}
+
+.form .input-container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.login-form input {
+.form input {
     margin-bottom: 1rem;
     padding: 5px 15px;
     border: 1px solid var(--color-black);
     border-radius: 5px;
     font-size: 14px;
-    flex-grow: 1;
+    width: 100%;
 }
 
-.login-form .visibility-btn {
+.form .visibility-btn {
     border: none;
     background: none;
     padding: 5px;
+}
+
+.img-input-fieldset {
+    border: none;
+}
+.img-input-container {
+    height: 50px;
+    border: none;
+}
+
+.img-input {
+    border: none;
+}
+
+.new-consult-illustration {
+    bottom: 0;
+    left: 50px;
 }
 
 @media (min-width: 780px) {
@@ -97,7 +125,12 @@
         transform: translateX(30%);
     }
 
-    .login-card {
-        width: 400px;
+    .new-consult-illustration {
+        bottom: 0;
+        left: -120px;
+    }
+
+    .form-card {
+        width: 500px;
     }
 }

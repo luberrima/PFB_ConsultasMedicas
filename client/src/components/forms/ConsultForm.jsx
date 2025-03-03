@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { Button } from '../Button.jsx';
-import { Icon } from '../Icon.jsx';
+// import { Icon } from '../Icon.jsx';
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { newConsultSchema } from '../../schemas/consultations/newConsultSchema.js';
@@ -41,48 +41,52 @@ export const ConsultForm = () => {
         }
     };
     return (
-        <Form className="new-consult-form" handleSubmit={handleSubmit}>
+        <Form className="form" handleSubmit={handleSubmit}>
             <Input
-                label="title"
+                label="Título de la consulta"
                 name="title"
+                type="text"
+                placeholder="Escribe aquí"
                 value={info.title}
                 handleChange={handleChange}
             />
             <Input
-                label="skillId"
+                label="Especialidad"
+                placeholder="Escribe aquí"
                 type="number"
                 name="skillId"
                 value={info.skillId}
                 handleChange={handleChange}
             />
             <Input
-                label="gravedad"
+                label="Gravedad"
                 name="gravedad"
                 value={info.gravedad}
                 handleChange={handleChange}
             />
             <Input
-                label="doctorId"
+                label="Especialista"
                 name="doctorId"
                 value={info.doctorId}
                 handleChange={handleChange}
             />
             <Input
-                label="Description"
+                label="Descripción"
                 type="textarea"
+                placeholder="Escribe aquí"
                 name="description"
                 value={info.description}
                 handleChange={handleChange}
             />
 
-            <ImageInput label="Image" name="images" previews={previews} />
+            <ImageInput label="Imágenes" name="images" previews={previews} />
             <Button
                 id="register"
-                className="submit"
+                className="btn btn-azul"
                 type="submit"
                 isLoading={isLoading}
             >
-                <Icon name="send" />
+                {/* <Icon name="send" /> */}
                 <span className="text">Consultar</span>
             </Button>
         </Form>
