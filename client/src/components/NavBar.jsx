@@ -24,7 +24,7 @@ export const NavBar = () => {
 
                     {token ? (
                         <Link
-                            to="*"
+                            to="/new-consult"
                             className="navbar-link new-consultation-link"
                         >
                             Hacer una consulta
