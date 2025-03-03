@@ -114,7 +114,7 @@ export const LoginForm = () => {
     };
 
     return (
-        <Form handleSubmit={handleSubmit} className="login-form">
+        <Form handleSubmit={handleSubmit} className="form">
             <Input
                 handleChange={handleChange}
                 label="Email"

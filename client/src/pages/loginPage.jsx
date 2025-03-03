@@ -18,7 +18,7 @@ export const LoginPage = () => {
             <Link to="/">
                 <img className="logo" src={logo} alt="logo Good Doctor" />
             </Link>
-            <div className="login-card">
+            <div className="form-card">
                 <h2>¡Hola de nuevo!</h2>
                 <h1>Login</h1>
                 <p>Escribe tus datos para iniciar sesión</p>

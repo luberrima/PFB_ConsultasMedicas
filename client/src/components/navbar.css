@@ -71,4 +71,7 @@
     .navbar-link {
         font-size: 18px;
     }
+    .btn-logout {
+        margin-top: 0;
+    }
 }
