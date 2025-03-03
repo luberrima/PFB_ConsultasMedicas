@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
-export const CardDoctor = ({doctor}) => {
-  /* console.log('Esto es lo que tiene la CardDoctor para pintar de doctores',doctor);
+export const CardDoctor = ({ doctor }) => {
+    /* console.log('Esto es lo que tiene la CardDoctor para pintar de doctores',doctor);
   console.log('Esto es lo que tiene Cardoctor doctores.name',doctor.username); */
  /* const entryPhotoPath = `${staticPath}/a/${doctor.userId}/${doctor.id}`; */
  console.log(`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`);

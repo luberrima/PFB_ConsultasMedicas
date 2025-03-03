@@ -22,7 +22,7 @@ export const Input = ({
     return (
         <label>
             <p>{label}</p>
-            <div>
+            <div className="input-container">
                 <input
                     onChange={handleChange}
                     type={inputType}
