@@ -31,7 +31,7 @@ consultationsRouter.put(
 );
 
 consultationsRouter.get(
-    '/consultations/id/:consultationId',
+    '/consultations/:consultationId',
 
     authUserMiddleware,
 

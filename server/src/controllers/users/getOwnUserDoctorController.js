@@ -7,9 +7,9 @@ export const getOwnUserDoctorController = async (req, res, next) => {
     
         const userDoctor = await getOwnUserDoctorService(id);
      
-        delete userDoctor.user[0].password;
-        delete userDoctor.user[0].registrationCode;
-        delete userDoctor.user[0].recoveryPassCode;
+        delete userDoctor.user.password;
+        delete userDoctor.user.registrationCode;
+        delete userDoctor.user.recoveryPassCode;
 
         res.send({
             status: 'ok',

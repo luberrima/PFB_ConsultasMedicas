@@ -11,10 +11,13 @@ import NotFoundPage from './pages/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
+import { NewConsultPage } from './pages/NewConsultPage.jsx';
+
 
 function App() {
     
     return (
+        
         <AppErrorBoundary> {/* Aquí envolvemos toda la app */}
             <ToastContainer />
             <Routes>
@@ -27,10 +30,12 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
+                    <Route path="/new-consult" element={<NewConsultPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
         </AppErrorBoundary>
+        
     );
 }
 
