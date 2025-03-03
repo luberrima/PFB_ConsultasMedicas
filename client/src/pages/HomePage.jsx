@@ -1,5 +1,4 @@
-import { Button } from '../components/Button.jsx';
-//import { Icon } from "../components/Icon.jsx";
+
 
 import { CarruselDoctor } from '../components/Landing/CarruselDoctor.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -7,13 +6,29 @@ import { useNavigate } from 'react-router-dom';
 import equipo from '../assets/Fotomedicos.png'; // Equipo medico
 import famila from '../assets/madrehijotablet.jpg'; // familiatablet
 import { useAllDoctor } from '../hooks/useAllDoctor.js';
+import React, { useContext } from 'react';
+import { AuthContext } from '../contexts/auth/AuthContext.js';
+import { Carruselconsultas } from '../components/Landing/CarruselConsultas.jsx';
+import { useAllConsultas } from '../hooks/useAllConsultas.js';
+import {jwtDecode } from 'jwt-decode';
+import { Carruselconsultaspasadas } from '../components/Landing/CarruselConsultaspasadas.jsx';
+import { CarruselconsultasNoA } from '../components/Landing/CarruselConsultasNoA.jsx';
+import { CarruselconsultasActivas } from '../components/Landing/CarruselConsultasActivas.jsx';
+import { useAllConsultasNoAsig } from '../hooks/useAllConsultasNoAsig.js';
 
 
 export const HomePage = () => {
+    const { token } = useContext(AuthContext);
+
+   const decodedToken = jwtDecode(token);
+   
     
     
     const { doctors, loading, error } = useAllDoctor(); 
-     /* console.log('Esto es lo que tiene la homepage para ontar de doctores',doctors);  */
+    const { consultas,loading2, error2 } = useAllConsultas(); 
+    const { consultasAllAs,loading3, error3 } = useAllConsultasNoAsig(); 
+
+    /* console.log('Esto es lo que tiene la homepage para ontar de Consultas',consultas);   */
     const navigate = useNavigate();
     
 
@@ -24,12 +39,37 @@ export const HomePage = () => {
         navigate('/login');
     };
 
+
     return (
         <>
             <main>
-                <CarruselDoctor doctors={doctors} />
-                
-                
+
+               <section>
+                    {
+                     decodedToken.role === "paciente" ?(
+                        <>
+                            <h3>Aqui tienes tus consultas</h3>
+                            <Carruselconsultas consultas={consultas} />
+                    </>
+                    ): decodedToken.role === "doctor" ?(<>
+                        <h3>Aqui tienes tus consultas Activas</h3>
+                        <CarruselconsultasActivas consultas={consultas} />
+                        <h3>Aqui tienes tus consultas Pasadas </h3>
+                        <Carruselconsultaspasadas consultas={consultas} />
+                        <h3>Aqui tienes consultas no asignadas</h3>
+                        <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
+                </>
+                ): (
+                    <h3>No tienes permisos para ver esta sección</h3>  // Mensaje para otros roles
+                  )
+                }
+               </section> 
+
+                <section>
+                    <h3>Conoce a Nuestros profesionales</h3>
+                        <CarruselDoctor doctors={doctors} />
+                </section>
+                                
                 <section>
                     <article>
                         <img src={equipo} alt="Foto de equipo medico" />
@@ -57,20 +97,16 @@ export const HomePage = () => {
                         </p>
                     </article>
                 </section>
+                
+            
             </main>
             <footer>
-                <h3>Empieza a usar good doctor</h3>
+                <h4>Empieza a usar good doctor</h4>
                 <p>
                     Un lugar al que pertenecer, en el que puedes encontrar
                     diagnóstico de médicos sobre tus dolencias y todo a unos
                     pocos clips.
                 </p>
-                <Button onClick={handleClickRegistro} className="registro">
-                    Registro
-                </Button>
-                <Button onClick={handleClickLogin} className="login">
-                    Login
-                </Button>
             </footer>
         </>
     );
