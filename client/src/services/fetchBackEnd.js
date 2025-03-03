@@ -55,6 +55,21 @@ export const newConsultService = async (info, token) => {
 	const { message, data } = await response.json();
 
 	if (!response.ok) throw new Error(message);
+	console.log("Valor de message",message);
+	console.log("Valor de data");
 
 	return { message, data };
+};
+
+export const getDoctorProfileService = async (id,token) => {
+    const response = await fetch(`${backEndPath}/users/doctors/${id}`, {
+        headers: {
+            Authorization: `${token}`,
+        },
+    });
+	const { message, data } = await response.json();
+
+	if (!response.ok) throw new Error(message);
+
+    return { message, data };
 };

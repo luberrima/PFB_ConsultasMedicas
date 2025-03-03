@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
 import { NewConsultPage } from './pages/NewConsultPage.jsx';
+import {DoctorUserProfilePage} from './pages/DoctorUserProfilePage.jsx'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
                     <Route path="/new-consult" element={<NewConsultPage />} />
+                    <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>

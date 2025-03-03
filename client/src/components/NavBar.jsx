@@ -7,6 +7,7 @@ import { AuthContext } from '../contexts/auth/AuthContext.js';
 
 export const NavBar = () => {
     const { token } = useContext(AuthContext);
+    
 
     return (
         <nav className="navbar">
