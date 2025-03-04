@@ -33,6 +33,10 @@ export const HomePage = () => {
     return (
         <>
             {decodedToken && decodedToken.role === 'paciente' ? (
+                //
+                // USUARIO REGISTRADO - PACIENTE
+                //
+
                 <>
                     <section className="seccion seccion-inicio">
                         <div className="logo-register">
@@ -53,6 +57,10 @@ export const HomePage = () => {
                     <CarruselDoctor doctors={doctors} />
                 </>
             ) : decodedToken && decodedToken.role === 'doctor' ? (
+                //
+                // USUARIO REGISTRADO - DOCTOR
+                //
+
                 <>
                     <h3>Aqui tienes tus consultas Activas</h3>
                     <CarruselconsultasActivas consultas={consultas} />
@@ -62,6 +70,10 @@ export const HomePage = () => {
                     <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
                 </>
             ) : (
+                //
+                // USUARIO NO REGISTRADO
+                //
+
                 <>
                     <section className="seccion seccion-inicio">
                         <div>
