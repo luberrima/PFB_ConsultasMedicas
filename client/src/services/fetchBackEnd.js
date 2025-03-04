@@ -51,7 +51,7 @@ export const getConsultationDetailService = async (consultationId, token) => {
         throw error;
     }
 };
-};
+
 
 export const newConsultService = async (info, token) => {
 

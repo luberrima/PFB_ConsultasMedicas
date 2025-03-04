@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
 import { NewConsultPage } from './pages/NewConsultPage.jsx';
 import {DoctorUserProfilePage} from './pages/DoctorUserProfilePage.jsx'
+import { ConsultationPage } from './pages/ConsultationPage.jsx';
 
 
 
