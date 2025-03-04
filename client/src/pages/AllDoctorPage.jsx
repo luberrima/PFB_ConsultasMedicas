@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardDoctor } from '../components/Landing/CardDoctor.jsx';
 import { useAllDoctor } from '../hooks/useAllDoctor.js';
+import { CardAllInfoDoctor } from '../components/CardAllInfoDoctor.jsx';
 
 
 export const AllDoctorPage = () => {
@@ -17,7 +17,7 @@ export const AllDoctorPage = () => {
       <ul className="DoctorsList">
         {/* Mapeamos todos los doctores para mostrarlos */}
         {doctorList.map((doctor) => (
-          <CardDoctor key={doctor.id} doctor={doctor} />
+          <CardAllInfoDoctor key={doctor.id} doctor={doctor} />
         ))}
       </ul>
     </div>

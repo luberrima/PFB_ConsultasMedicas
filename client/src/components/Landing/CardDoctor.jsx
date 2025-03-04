@@ -1,13 +1,9 @@
-import React from 'react';
-// import { Icon } from '../Icon.jsx'
-// import { Link } from 'react-router-dom';
+import React from 'react'
+import { Estrellas } from '../Estrellas.jsx';
 
-const staticPath = import.meta.env.VITE_BACKEND_STATIC;
+//const staticPath = import.meta.env.VITE_BACKEND_STATIC;
+
 export const CardDoctor = ({ doctor }) => {
-    /* console.log('Esto es lo que tiene la CardDoctor para pintar de doctores',doctor);
-  console.log('Esto es lo que tiene Cardoctor doctores.name',doctor.username); */
-    /* const entryPhotoPath = `${staticPath}/a/${doctor.userId}/${doctor.id}`; */
-
     return (
         <>
             <li className="card-doctor-inicio">
@@ -22,7 +18,7 @@ export const CardDoctor = ({ doctor }) => {
                 </a>
                 <h3>{doctor.username}</h3>
                 <p>{doctor.Name}</p>
-                <p>{doctor.averageRating}</p>
+                <Estrellas rating={doctor.averageRating}/>
             </li>
         </>
     );

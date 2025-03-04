@@ -50,20 +50,27 @@ export const ConsultForm = () => {
                 value={info.title}
                 handleChange={handleChange}
             />
-            <Input
-                label="Especialidad"
-                placeholder="Escribe aquí"
-                type="number"
-                name="skillId"
-                value={info.skillId}
-                handleChange={handleChange}
-            />
-            <Input
-                label="Gravedad"
-                name="gravedad"
-                value={info.gravedad}
-                handleChange={handleChange}
-            />
+           
+            <label>Especialidad</label>
+        <select name="skillId" value={info.skillId} onChange={handleChange}>
+            <option value="">Selecciona una especialidad</option>
+            <option value="1" title="General">1 - General</option>
+            <option value="2" title="Urólogo">2 - Urólogo</option>
+            <option value="3" title="Traumatismos">3 - Traumatismos</option>
+            <option value="4" title="Cardiología">4 - Cardiología</option>
+            <option value="5" title="Otorrinolaringólogo">5 - Otorrinolaringólogo</option>
+            <option value="6" title="Anestesia">6 - Anestesia</option>
+        </select>
+           
+            <label>Gravedad</label>
+        <select name="gravedad" value={info.gravedad} onChange={handleChange}>
+            <option value="">Selecciona la gravedad</option>
+            <option value="Leve">Leve</option>
+            <option value="Normal">Normal</option>
+            <option value="Moderada">Moderada</option>
+            <option value="Grave">Grave</option>
+            <option value="Urgente">Urgente</option>
+        </select>
             <Input
                 label="Especialista"
                 name="doctorId"
