@@ -23,6 +23,7 @@ export const CarruselDoctor = ({ doctors }) => {
     ];
 
     return (
+
         <div className="seccion seccion-carrusel">
             <h2>Algunos de nuestros médicos</h2>
             <div className="carrusel">
@@ -45,5 +46,6 @@ export const CarruselDoctor = ({ doctors }) => {
                 Regístrate
             </Link>
         </div>
+
     );
 };
