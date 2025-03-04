@@ -1,80 +1,72 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { newUserSchema } from "../../schemas/users/registerUserSchema";
-import { newDoctorSchema } from "../../schemas/users/registerUserDoctorSchema";
-import { validateSchemaUtil } from "../../utils/validateSchemaUtil";
-import { fetchBackEnd } from "../../services/fetchBackEnd";
-import { toast } from "react-toastify";
-import { Form } from "../forms/Form";
-import { Button } from "../Button";
+import { useNavigate } from 'react-router-dom';
+import { Input } from './Input.jsx';
+import { Button } from '../Button.jsx';
+import { useContext, useState } from 'react';
+import { newUserSchema } from '../../schemas/users/registerUserSchema.js';
+import { newDoctorSchema } from '../../schemas/users/registerUserDoctorSchema.js';
+import { Icon } from '../Icon.jsx';
+import { Form } from './Form.jsx';
+import { FormContext } from '../../contexts/forms/FormContext.js';
+import { registerUserService, registerDoctorService } from '../../services/fetchBackEnd.js';
+import { toast } from 'react-toastify';
 
 export const RegisterForm = () => {
-    const [userType, setUserType] = useState("paciente");
-    const schema = userType === "medico" ? newDoctorSchema : newUserSchema;
+    const { info, errors, validate, handleChange } = useContext(FormContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [userType, setUserType] = useState('patient');
+    const navigate = useNavigate();
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({ resolver: joiResolver(schema) });
-
-    const onSubmit = async (data) => {
-        const validatedData = validateSchemaUtil(schema, data);
-
-        if (validatedData.error) {
-            toast.error("Errores en el formulario. Revisa los campos.");
-            return;
-        }
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const endpoint = userType === "medico" ? "/doctors/register" : "/users/register";
-            await fetchBackEnd(endpoint, "POST", validatedData.value);
-            toast.success("Registro exitoso. Verifica tu email.");
+            const schema = userType === 'doctor' ? newDoctorSchema : newUserSchema;
+            const value = validate(schema);
+            setIsLoading(true);
+
+            const message = userType === 'doctor' 
+                ? await registerDoctorService(value) 
+                : await registerUserService(value);
+
+            const params = new URLSearchParams({ type: 'success', message });
+            setTimeout(() => {
+                navigate(`/login?${params.toString()}`);
+                toast.info('Comprueba tu correo para activar tu cuenta');
+            }, 6000);
         } catch (error) {
-            toast.error("Error en el registro. Inténtalo nuevamente.");
+            toast.error(error.message || 'Error al registrar el usuario');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <label>
-                Tipo de Usuario:
-                <select value={userType} onChange={(e) => setUserType(e.target.value)}>
-                    <option value="paciente">Paciente</option>
-                    <option value="medico">Médico</option>
-                </select>
-            </label>
-
-            <label>Nombre de usuario:</label>
-            <input {...register("username")} />
-            {errors.username && <p>{errors.username.message}</p>}
-
-            <label>Email:</label>
-            <input type="email" {...register("email")} />
-            {errors.email && <p>{errors.email.message}</p>}
-
-            <label>Contraseña:</label>
-            <input type="password" {...register("password")} />
-            {errors.password && <p>{errors.password.message}</p>}
-
-            {userType === "medico" && (
+        <Form className='register-form' handleSubmit={handleSubmit}>
+            <div className='user-type-switch'>
+                <label>
+                    <input type='radio' name='userType' value='patient' 
+                        checked={userType === 'patient'} 
+                        onChange={() => setUserType('patient')} /> Paciente
+                </label>
+                <label>
+                    <input type='radio' name='userType' value='doctor' 
+                        checked={userType === 'doctor'} 
+                        onChange={() => setUserType('doctor')} /> Médico
+                </label>
+            </div>
+            <Input label='User Name' type='text' name='username' value={info.username} errors={errors} handleChange={handleChange} />
+            <Input label='Email' type='email' name='email' value={info.email} errors={errors} handleChange={handleChange} />
+            <Input label='Password' type='password' name='password' value={info.password} errors={errors} handleChange={handleChange} />
+            {userType === 'doctor' && (
                 <>
-                    <label>Número de colegiado:</label>
-                    <input {...register("collegeNumber")} />
-                    {errors.collegeNumber && <p>{errors.collegeNumber.message}</p>}
-
-                    <label>Fecha de colegiación:</label>
-                    <input type="date" {...register("dateOfCollege")} />
-                    {errors.dateOfCollege && <p>{errors.dateOfCollege.message}</p>}
-
-                    <label>Especialidad (ID):</label>
-                    <input type="number" {...register("skillId")} />
-                    {errors.skillId && <p>{errors.skillId.message}</p>}
+                    <Input label='College Number' type='text' name='collegeNumber' value={info.collegeNumber} errors={errors} handleChange={handleChange} />
+                    <Input label='Date of College' type='date' name='dateOfCollege' value={info.dateOfCollege} errors={errors} handleChange={handleChange} />
+                    <Input label='Skill ID' type='number' name='skillId' value={info.skillId} errors={errors} handleChange={handleChange} />
                 </>
             )}
-
-            <Button type="submit">Registrarse</Button>
+            <Button id='register' className='submit' type='submit' isLoading={isLoading}>
+                <Icon name='send' />
+                <span className='text'>Register</span>
+            </Button>
         </Form>
     );
 };
