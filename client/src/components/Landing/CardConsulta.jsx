@@ -1,4 +1,5 @@
 import React from 'react';
+import { Estrellas } from '../Estrellas.jsx';
 
 // const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
@@ -22,11 +23,10 @@ export const CardConsulta = ({ consulta }) => {
                     </p>
                 </main>
                 <footer>
-                    <p>⭐️⭐️⭐️⭐️⭐️{consulta.vote}</p>
+                    <Estrellas rating={consulta.vote} />
                 </footer>
                 {/* <p>Diagnostico: {consulta.diagnostic}</p> */}
             </li>
         </>
     );
 };
-

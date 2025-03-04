@@ -15,7 +15,7 @@ const NotFoundPage = () => {
     }, []);
 
     return (
-        <main className="notfound-container">
+        <div className="error-container">
             {/* 🔹 Encabezado con el logo y la navegación */}
             <header className="notfound-header">
                 <img
@@ -36,13 +36,13 @@ const NotFoundPage = () => {
             </header>
 
             {/* 🔹 Sección principal con el 404 y el mensaje */}
-            <section className="notfound-content">
-                <h1 className="notfound-title">
+            <section className="error-content">
+                <h1 className="error-title">
                     <span className="red">4</span>0
                     <span className="red">4</span>
                 </h1>
-                <h2 className="notfound-message">Página no encontrada</h2>
-                <p className="notfound-text">
+                <h2 className="error-message">Página no encontrada</h2>
+                <p className="error-text">
                     Lo sentimos, la página que buscas no existe.
                 </p>
                 <Button
@@ -54,10 +54,10 @@ const NotFoundPage = () => {
             </section>
 
             {/* 🔹 Imagen del personaje con la manzana */}
-            <div className="notfound-character">
+            <div className="error-character">
                 <img src={notFoundImage} alt="Personaje con manzana" />
             </div>
-        </main>
+        </div>
     );
 };
 

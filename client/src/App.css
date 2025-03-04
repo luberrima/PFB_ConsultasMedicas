@@ -60,6 +60,15 @@
     width: 200px;
 }
 
+.seccion-consultas {
+    margin: 0 20px;
+}
+
+.seccion-consultas h3,
+.seccion-consultas h1 {
+    font-size: 35px;
+}
+
 /* Seccion carrusel home */
 .seccion-carrusel {
     background-color: var(--main-color);
@@ -112,6 +121,11 @@
 .card-doctor-inicio h3,
 .card-doctor-inicio p {
     display: none;
+}
+
+.rating-stars {
+    color: var(--secondary-color);
+    font-size: 16px;
 }
 
 .btn-carrusel {
@@ -180,53 +194,6 @@
     gap: 2rem;
     justify-content: center;
     align-items: center;
-}
-
-/* NOT FOUND PAGE */
-.notfound-container {
-    max-width: 100vw;
-    max-height: 100vh;
-    text-align: center;
-}
-
-.notfound-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.notfound-title {
-    font-size: 170px;
-    font-weight: 300;
-    color: var(--main-color);
-}
-
-.notfound-title .red {
-    color: var(--secondary-color);
-}
-
-.notfound-message {
-    font-size: 30px;
-    font-weight: 400;
-}
-
-.notfound-text {
-    font-size: 18px;
-    font-weight: 200;
-}
-
-.notfound-character img {
-    width: 40%;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: -1;
 }
 
 /* DETALLE MÉDICO PAGE */
@@ -311,6 +278,8 @@
     font-size: 16px;
     font-weight: 300;
 }
+
+/* ALL DOCTORS PAGE */
 
 @media (min-width: 780px) {
     /* seccion inicio */
