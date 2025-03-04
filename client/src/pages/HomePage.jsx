@@ -26,7 +26,7 @@ export const HomePage = () => {
 
     const { token } = useContext(AuthContext);
 
-   const decodedToken = jwtDecode(token);
+   const decodedToken = token ? jwtDecode(token): null ;
    
     
     
@@ -47,12 +47,12 @@ export const HomePage = () => {
 
                <section>
                     {
-                     decodedToken.role === "paciente" ?(
+                     decodedToken && decodedToken.role === "paciente" ?(
                         <>
                             <h3>Aqui tienes tus consultas</h3>
                             <Carruselconsultas consultas={consultas} />
                     </>
-                    ): decodedToken.role === "doctor" ?(<>
+                    ): decodedToken && decodedToken.role === "doctor" ?(<>
                         <h3>Aqui tienes tus consultas Activas</h3>
                         <CarruselconsultasActivas consultas={consultas} />
                         <h3>Aqui tienes tus consultas Pasadas </h3>
@@ -61,7 +61,7 @@ export const HomePage = () => {
                         <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
                 </>
                 ): (
-                    <h3>No tienes permisos para ver esta sección</h3>  // Mensaje para otros roles
+                    <h3>No olvides logearte para ver tus consultas</h3>  // Mensaje para otros roles
                   )
                 }
                </section>                 

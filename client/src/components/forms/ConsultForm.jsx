@@ -30,7 +30,7 @@ export const ConsultForm = () => {
                 type: 'success',
                 message,
             });
-
+            toast.success('Consulta registrada');
             setTimeout(() => {
                 setIsLoading(false);
                 navigate(`/?${params.toString()}`);
