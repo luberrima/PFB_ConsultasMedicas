@@ -10,14 +10,19 @@ import { LayoutPage } from './pages/LayoutPage.jsx';
 import NotFoundPage from './pages/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AllDoctorPage } from './pages/AllDoctorPage.jsx';
-import { ConsultationPage } from './pages/ConsultationPage.jsx';
+
+import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
+import { NewConsultPage } from './pages/NewConsultPage.jsx';
+import {DoctorUserProfilePage} from './pages/DoctorUserProfilePage.jsx'
+
+
 
 function App() {
     return (
-        <AppErrorBoundary>
-            {' '}
-            {/* Aquí envolvemos toda la app */}
+
+        
+        <AppErrorBoundary> {/* Aquí envolvemos toda la app */}
+
             <ToastContainer />
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
@@ -29,6 +34,8 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
+                    <Route path="/new-consult" element={<NewConsultPage />} />
+                    <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
                     <Route path="*" element={<NotFoundPage />} />
                     <Route
                         path="/consultations/:consultationId"
@@ -37,6 +44,7 @@ function App() {
                 </Route>
             </Routes>
         </AppErrorBoundary>
+        
     );
 }
 

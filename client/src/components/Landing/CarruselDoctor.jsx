@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CardDoctor } from './CardDoctor.jsx';
 import { Button } from '../Button.jsx';
 import { Icon } from '../Icon.jsx';
+import { Link } from 'react-router-dom';
 
 export const CarruselDoctor = ({ doctors }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,21 +23,29 @@ export const CarruselDoctor = ({ doctors }) => {
     ];
 
     return (
-        <>
-            <Button className="prev" handleClick={handleClickPrev}>
-                <Icon name="chevron_left" />
-            </Button>
-            <ul className="DoctorsList">
-                {Visibledoctors.map(
-                    (doctor, index) =>
-                        doctor.id && (
-                            <CardDoctor key={doctor.id} doctor={doctor} />
-                        )
-                )}
-            </ul>
-            <Button className="next" handleClick={handleClickNext}>
-                <Icon name="chevron_right" />
-            </Button>
-        </>
+
+        <div className="seccion seccion-carrusel">
+            <h2>Algunos de nuestros médicos</h2>
+            <div className="carrusel">
+                <Button className="btn-carrusel" handleClick={handleClickPrev}>
+                    <Icon name="arrow_back" />
+                </Button>
+                <ul className="doctorsList">
+                    {Visibledoctors.map(
+                        (doctor /*index*/) =>
+                            doctor.id && (
+                                <CardDoctor key={doctor.id} doctor={doctor} />
+                            )
+                    )}
+                </ul>
+                <Button className="btn-carrusel" handleClick={handleClickNext}>
+                    <Icon name="arrow_forward" />
+                </Button>
+            </div>
+            <Link to="/signup" className="btn btn-naranja">
+                Regístrate
+            </Link>
+        </div>
+
     );
 };
