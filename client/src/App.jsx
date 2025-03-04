@@ -13,8 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
 import { NewConsultPage } from './pages/NewConsultPage.jsx';
 import {DoctorUserProfilePage} from './pages/DoctorUserProfilePage.jsx'
-
-
+import { RecoveryPass } from "./pages/RecoveryPass.jsx";
+import { Profile } from "./pages/Profile.jsx";
 function App() {
     
     return (
@@ -30,10 +30,12 @@ function App() {
                         element={<ValidatePage />}
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/profile" element={<Profile />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
                     <Route path="/new-consult" element={<NewConsultPage />} />
                     <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
                     <Route path="*" element={<NotFoundPage />} />
+                    <Route path="/password/recoverypass" element={<RecoveryPass />} />
                 </Route>
             </Routes>
         </AppErrorBoundary>
