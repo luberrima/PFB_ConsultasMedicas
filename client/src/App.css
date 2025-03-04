@@ -1,3 +1,11 @@
+.page-title {
+    font-size: 38px;
+    text-align: center;
+    font-weight: 300;
+    color: var(--main-color);
+    margin: 30px 0;
+}
+
 .seccion {
     padding: 50px 70px;
     min-height: 300px;
@@ -163,7 +171,8 @@
 }
 
 .seccion-banner h3 {
-    font-size: 24px;
+    font-size: 28px !important;
+    color: var(--color-white);
 }
 
 .seccion-banner div {
@@ -220,6 +229,89 @@
     z-index: -1;
 }
 
+/* DETALLE MÉDICO PAGE */
+.ficha-medico {
+    width: 85vw;
+    margin: 30px auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.ficha-medico-container {
+    width: 100%;
+    /* padding: 20px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ficha-medico-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.ficha-medico-img img {
+    border: 1px solid var(--main-color);
+    width: 250px;
+    height: 250px;
+    margin: 25px;
+    border-radius: 100%;
+    display: block;
+}
+
+.ficha-medico-rating {
+    margin: 0 20px;
+}
+
+.ficha-medico-info,
+.ficha-medico-rating {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+}
+
+.ficha-medico-info ul,
+.ficha-medico-rating ul {
+    list-style: none;
+}
+
+.ficha-medico-info ul li,
+.ficha-medico-rating ul li {
+    margin: 25px 0;
+}
+
+.ficha-medico-rating ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ficha-medico-info ul li h3,
+.ficha-medico-rating h3 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.ficha-medico-rating h4 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.ficha-medico-info ul li p,
+.ficha-medico-rating ul li p {
+    font-size: 16px;
+    font-weight: 300;
+}
+
 @media (min-width: 780px) {
     /* seccion inicio */
     .seccion-inicio {
@@ -230,7 +322,6 @@
         margin-top: -50px;
         margin-bottom: 100px;
         min-height: 80vh;
-        border: 1px solid red;
     }
 
     .seccion-inicio div {
@@ -259,29 +350,38 @@
     /* Seccion carrusel home */
 
     .carrusel {
-        gap: 4rem;
+        gap: 3rem;
     }
 
     .doctorsList {
         display: flex;
-        gap: 3rem;
-    }
-
-    .card-doctor-inicio {
-        gap: 0.2rem;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: start;
+        gap: 2rem;
     }
 
     .card-doctor-inicio img {
         width: 120px;
-        height: 120px;
+        height: 150px;
     }
 
     .card-doctor-inicio h3,
     .card-doctor-inicio p {
         display: block;
+        margin: 5px;
+    }
+
+    .card-doctor-inicio h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--color-white);
     }
 
     /* Seccion info home */
+    .seccion-info {
+        padding: 40px;
+    }
 
     .seccion-info article {
         flex-direction: row;
@@ -300,5 +400,47 @@
 
     .seccion-info article:last-child {
         flex-direction: row-reverse;
+    }
+
+    /* PAGINA DETALLE MEDICO */
+
+    .ficha-medico {
+        width: 90vw;
+        gap: 3rem;
+    }
+
+    .ficha-medico-container {
+        flex-direction: row;
+        justify-content: start;
+        align-items: start;
+        gap: 3rem;
+    }
+
+    .ficha-medico-img {
+        border: 1px solid var(--main-color);
+        border-radius: 5px;
+    }
+
+    .ficha-medico-info,
+    .ficha-medico-rating {
+        padding: 50px 60px;
+    }
+
+    .ficha-medico-rating {
+        text-align: center;
+    }
+
+    .ficha-medico-info ul li h3,
+    .ficha-medico-rating h3 {
+        font-size: 25px;
+    }
+
+    .ficha-medico-rating h4 {
+        font-size: 19px;
+    }
+
+    .ficha-medico-info ul li p,
+    .ficha-medico-rating ul li p {
+        font-size: 18px;
     }
 }

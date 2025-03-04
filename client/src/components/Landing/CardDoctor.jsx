@@ -20,9 +20,9 @@ export const CardDoctor = ({ doctor }) => {
                         alt="Foto usuario"
                     />
                 </a>
-                <h3>Doctor: {doctor.username}</h3>
-                <p>Especialidad {doctor.Name}</p>
-                <p>Media de valoraciones {doctor.averageRating}</p>
+                <h3>{doctor.username}</h3>
+                <p>{doctor.Name}</p>
+                <p>{doctor.averageRating}</p>
             </li>
         </>
     );

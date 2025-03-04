@@ -7,7 +7,6 @@
     font-family: Poppins;
 }
 
-
 .btn {
     all: unset;
     cursor: pointer;
@@ -99,4 +98,3 @@
     display: none;
     /* Oculta header y footer cuando el usuario está en la página de login */
 }
-

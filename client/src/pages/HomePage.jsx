@@ -51,7 +51,7 @@ export const HomePage = () => {
                         </div>
                     </section>
                     <section>
-                        <h3>Aqui tienes tus consultas</h3>
+                        <h1 className="page-title">Tus Consultas</h1>
                         <Carruselconsultas consultas={consultas} />
                     </section>
                     <CarruselDoctor doctors={doctors} />
@@ -62,12 +62,30 @@ export const HomePage = () => {
                 //
 
                 <>
-                    <h3>Aqui tienes tus consultas Activas</h3>
-                    <CarruselconsultasActivas consultas={consultas} />
-                    <h3>Aqui tienes tus consultas Pasadas </h3>
-                    <Carruselconsultaspasadas consultas={consultas} />
-                    <h3>Aqui tienes consultas no asignadas</h3>
-                    <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
+                    <section className="seccion seccion-inicio">
+                        <div className="logo-register">
+                            <img src={logo} alt="logo de la app" />
+                        </div>
+                        <div>
+                            <img
+                                className="seccion-inicio-deco"
+                                src={deco}
+                                alt="recurso decorativo"
+                            />
+                        </div>
+                    </section>
+                    <section>
+                        <h1 className="page-title">Tus Consultas Activas</h1>
+                        <CarruselconsultasActivas consultas={consultas} />
+                    </section>
+                    <section>
+                        <h3 className="page-title">Tus Consultas Pasadas </h3>
+                        <Carruselconsultaspasadas consultas={consultas} />
+                    </section>
+                    <section>
+                        <h3 className="page-title">Consultas no asignadas</h3>
+                        <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
+                    </section>
                 </>
             ) : (
                 //
@@ -109,7 +127,7 @@ export const HomePage = () => {
                         <article>
                             <img src={equipo} alt="Foto de equipo medico" />
                             <div>
-                                <h3>Equipo medico a tu disposición</h3>
+                                <h3>Equipo médico a tu disposición</h3>
                                 <p>
                                     Un lugar al que pertenecer, en el que puedes
                                     encontrar una red amplia de médicos a tu
