@@ -8,8 +8,9 @@ export const Input = ({
     name,
     label,
     value,
-    errors,
+    // errors,
     placeholder,
+    className,
 }) => {
     const [inputType, setInputType] = useState(type);
     const [showPass, setShowPass] = useState(false);
@@ -22,7 +23,7 @@ export const Input = ({
     return (
         <label>
             <p>{label}</p>
-            <div>
+            <div className="input-container">
                 <input
                     onChange={handleChange}
                     type={inputType}
@@ -30,6 +31,7 @@ export const Input = ({
                     value={value}
                     autoComplete={`new-${name}`}
                     placeholder={placeholder}
+                    className={className}
                 />
                 {type === 'password' && (
                     <Button
@@ -42,14 +44,14 @@ export const Input = ({
                     </Button>
                 )}
             </div>
-            <span className="inputError" id={`error-${name}`}>
+            {/* <span className="inputError" id={`error-${name}`}>
                 {errors?.map((error) => {
                     if (error.context && error.context.key === name) {
                         return error.message;
                     }
                     return null;
                 })}
-            </span>
+            </span> */}
         </label>
     );
 };
