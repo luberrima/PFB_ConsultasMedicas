@@ -27,7 +27,6 @@ export const LoginForm = () => {
         // comprobar si hay token
 
         if (token) {
-            toast.info('¡Ya has iniciado sesión!');
             navigate('/');
         }
     }, [token, navigate]);

@@ -1,23 +1,23 @@
 .seccion {
-    padding: 50px 100px;
+    padding: 50px 70px;
     min-height: 300px;
 }
 
 /* seccion logo inicio */
+
 .seccion-inicio {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
-    margin-top: -180px;
+    /* min-height: 100vh; */
+    margin-top: 200px;
     max-width: 100vw;
     padding: 50px 0;
 }
 
 .seccion-inicio div:first-of-type {
-    width: 80vw;
-    margin: 50px 50px 50px 100px;
+    width: 100%;
 }
 
 .seccion-inicio img {
@@ -25,7 +25,8 @@
     height: auto;
 }
 
-.seccion-inicio img:first-child {
+.logo-app-noregister {
+    margin-top: 170px !important;
     width: 120px;
     margin-bottom: 25px;
 }
@@ -38,20 +39,27 @@
     margin: 30px 80px;
 }
 
-.seccion-inicio img:last-child {
+.seccion-inicio-deco {
     all: unset;
-    width: 100%;
-    margin-right: -100px;
+    width: 350px;
+    position: absolute;
+    top: 180px;
+    right: 0;
+}
+
+.logo-register img {
+    margin-top: -60px;
+    width: 200px;
 }
 
 /* Seccion carrusel home */
 .seccion-carrusel {
     background-color: var(--main-color);
+    color: var(--color-white);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--color-white);
     text-align: center;
 }
 
@@ -83,12 +91,14 @@
     padding: 5px;
 }
 
-.card-doctor-inicio img {
+.card-doctor-inicio-avatar {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    object-fit: cover;
+    border-radius: 100%;
     margin-bottom: 10px;
     align-self: center;
+    border: 1px solid red;
 }
 
 .card-doctor-inicio h3,
@@ -116,12 +126,12 @@
 }
 
 .seccion-info article {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
     gap: 3rem;
 }
 
@@ -136,7 +146,7 @@
 
 .seccion-info article img {
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
 }
 
@@ -217,14 +227,35 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-top: -130px;
-        margin-bottom: -50px;
+        margin-top: -50px;
+        margin-bottom: 100px;
+        min-height: 80vh;
+        border: 1px solid red;
     }
 
     .seccion-inicio div {
         width: 100%;
     }
 
+    .seccion-inicio-deco {
+        all: unset;
+        width: 500px;
+        position: absolute;
+        top: 100px;
+        right: 0;
+    }
+    .logo-app-noregister {
+        margin-top: 0;
+    }
+
+    .logo-register {
+        margin: auto 150px;
+    }
+
+    .logo-register img {
+        width: 70%;
+        max-width: 500px;
+    }
     /* Seccion carrusel home */
 
     .carrusel {
