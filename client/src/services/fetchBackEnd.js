@@ -65,6 +65,7 @@ export const getAllConsulNoAsigService = async (token) => {
     console.log('esto es lo que retorna el getAllConsultas No asginadas Service', data); 
     
 	return data;
+};
 
 
 export const getConsultationDetailService = async (consultationId, token) => {

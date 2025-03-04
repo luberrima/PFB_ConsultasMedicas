@@ -4,7 +4,8 @@
 
 
 import { CarruselDoctor } from '../components/Landing/CarruselDoctor.jsx';
-import { Link /*useNavigate*/ } from 'react-router-dom';
+import { Link, /*useNavigate*/ 
+useNavigate} from 'react-router-dom';
 
 import logo from '../assets/good-doctor-logo.svg';
 import deco from '../assets/asset-home.svg';
@@ -33,17 +34,10 @@ export const HomePage = () => {
     const { consultas,loading2, error2 } = useAllConsultas(); 
     const { consultasAllAs,loading3, error3 } = useAllConsultasNoAsig(); 
 
-    /* console.log('Esto es lo que tiene la homepage para ontar de Consultas',consultas);   */
+    
     const navigate = useNavigate();
     
 
-
-    // const handleClickRegistro = () => {
-    //     navigate('/registro');
-    // };
-    // const handleClickLogin = () => {
-    //     navigate('/login');
-    // };
 
 
     return (
@@ -70,14 +64,7 @@ export const HomePage = () => {
                     <h3>No tienes permisos para ver esta sección</h3>  // Mensaje para otros roles
                   )
                 }
-               </section> 
-
-                <section>
-                    <h3>Conoce a Nuestros profesionales</h3>
-                        <CarruselDoctor doctors={doctors} />
-                </section>
-                                
-                <section>
+               </section>                 
 
                 <section className="seccion seccion-inicio">
                     <div>
