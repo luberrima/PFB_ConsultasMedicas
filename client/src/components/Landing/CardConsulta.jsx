@@ -14,7 +14,7 @@ export const CardConsulta = ({consulta}) => {
     
 
 
-    <h5>Titulo: {consulta.Title}</h5>
+    <h5>Titulo: {consulta.title}</h5>
     <p>identificicador de consulta: {consulta.id}</p>
     <p>Gravedad; {consulta.gravedad}</p>
     <p>Descripcion: {consulta.description}</p>
