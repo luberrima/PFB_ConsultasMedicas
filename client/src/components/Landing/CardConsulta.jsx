@@ -1,30 +1,32 @@
-import React from 'react'
+import React from 'react';
 
+// const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
+export const CardConsulta = ({ consulta }) => {
+    return (
+        <>
+            <li className="card-consulta">
+                <header>
+                    <p>{consulta.Especialidad}</p>
+                    <p>{consulta.gravedad}</p>
+                </header>
+                <main>
+                    <h5>
+                        {/* Título de la consulta:  */}
+                        {consulta.title}
+                    </h5>
+                    {/* <p>identificicador de consulta: {consulta.id}</p> */}
+                    <p>
+                        {/* Descripcion:  */}
+                        {consulta.description}
+                    </p>
+                </main>
+                <footer>
+                    <p>⭐️⭐️⭐️⭐️⭐️{consulta.vote}</p>
+                </footer>
+                {/* <p>Diagnostico: {consulta.diagnostic}</p> */}
+            </li>
+        </>
+    );
+};
 
-const staticPath = import.meta.env.VITE_BACKEND_STATIC;
-
-export const CardConsulta = ({consulta}) => {
- 
- 
-  
-  return (
-    <>
-    <li>
-    
-
-
-    <h5>Titulo: {consulta.title}</h5>
-    <p>identificicador de consulta: {consulta.id}</p>
-    <p>Gravedad; {consulta.gravedad}</p>
-    <p>Descripcion: {consulta.description}</p>
-    <p>Especialidad {consulta.Especialidad}</p>
-    <p>Voto: {consulta.vote}</p>
-    <p>Diagnostico: {consulta.diagnostic}</p> 
-  
-    </li>
-    
-      
-    </>
-  )
-}
