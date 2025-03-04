@@ -1,5 +1,7 @@
+
 // import { Button } from '../components/Button.jsx';
 //import { Icon } from "../components/Icon.jsx";
+
 
 import { CarruselDoctor } from '../components/Landing/CarruselDoctor.jsx';
 import { Link /*useNavigate*/ } from 'react-router-dom';
@@ -9,11 +11,32 @@ import deco from '../assets/asset-home.svg';
 import equipo from '../assets/Fotomedicos.png'; // Equipo medico
 import famila from '../assets/madrehijotablet.jpg'; // familiatablet
 import { useAllDoctor } from '../hooks/useAllDoctor.js';
+import React, { useContext } from 'react';
+import { AuthContext } from '../contexts/auth/AuthContext.js';
+import { Carruselconsultas } from '../components/Landing/CarruselConsultas.jsx';
+import { useAllConsultas } from '../hooks/useAllConsultas.js';
+import {jwtDecode } from 'jwt-decode';
+import { Carruselconsultaspasadas } from '../components/Landing/CarruselConsultaspasadas.jsx';
+import { CarruselconsultasNoA } from '../components/Landing/CarruselConsultasNoA.jsx';
+import { CarruselconsultasActivas } from '../components/Landing/CarruselConsultasActivas.jsx';
+import { useAllConsultasNoAsig } from '../hooks/useAllConsultasNoAsig.js';
 
 export const HomePage = () => {
-    const { doctors /*loading, error*/ } = useAllDoctor();
-    /* console.log('Esto es lo que tiene la homepage para ontar de doctores',doctors);  */
-    // const navigate = useNavigate();
+
+    const { token } = useContext(AuthContext);
+
+   const decodedToken = jwtDecode(token);
+   
+    
+    
+    const { doctors, loading, error } = useAllDoctor(); 
+    const { consultas,loading2, error2 } = useAllConsultas(); 
+    const { consultasAllAs,loading3, error3 } = useAllConsultasNoAsig(); 
+
+    /* console.log('Esto es lo que tiene la homepage para ontar de Consultas',consultas);   */
+    const navigate = useNavigate();
+    
+
 
     // const handleClickRegistro = () => {
     //     navigate('/registro');
@@ -22,9 +45,40 @@ export const HomePage = () => {
     //     navigate('/login');
     // };
 
+
     return (
         <>
             <main>
+
+
+               <section>
+                    {
+                     decodedToken.role === "paciente" ?(
+                        <>
+                            <h3>Aqui tienes tus consultas</h3>
+                            <Carruselconsultas consultas={consultas} />
+                    </>
+                    ): decodedToken.role === "doctor" ?(<>
+                        <h3>Aqui tienes tus consultas Activas</h3>
+                        <CarruselconsultasActivas consultas={consultas} />
+                        <h3>Aqui tienes tus consultas Pasadas </h3>
+                        <Carruselconsultaspasadas consultas={consultas} />
+                        <h3>Aqui tienes consultas no asignadas</h3>
+                        <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
+                </>
+                ): (
+                    <h3>No tienes permisos para ver esta sección</h3>  // Mensaje para otros roles
+                  )
+                }
+               </section> 
+
+                <section>
+                    <h3>Conoce a Nuestros profesionales</h3>
+                        <CarruselDoctor doctors={doctors} />
+                </section>
+                                
+                <section>
+
                 <section className="seccion seccion-inicio">
                     <div>
                         <img src={logo} alt="logo de la app" />
@@ -47,6 +101,7 @@ export const HomePage = () => {
                 <CarruselDoctor doctors={doctors} />
 
                 <section className="seccion seccion-info">
+
                     <article>
                         <img src={equipo} alt="Foto de equipo medico" />
                         <div>
@@ -78,6 +133,7 @@ export const HomePage = () => {
                         </div>
                     </article>
                 </section>
+
                 <section className="seccion seccion-banner">
                     <h3>Empieza a usar good doctor</h3>
                     <p>
@@ -100,6 +156,7 @@ export const HomePage = () => {
                 </section>
             </main>
             <footer></footer>
+
         </>
     );
 };

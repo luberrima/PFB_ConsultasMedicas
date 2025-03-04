@@ -14,6 +14,7 @@
     "dayjs": "^1.11.13",
     "dayjs-plugin-utc": "^0.1.2",
     "joi": "^17.13.3",
+    "jwt-decode": "^4.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",

@@ -8,7 +8,7 @@ export const CardDoctor = ({ doctor }) => {
     /* console.log('Esto es lo que tiene la CardDoctor para pintar de doctores',doctor);
   console.log('Esto es lo que tiene Cardoctor doctores.name',doctor.username); */
  /* const entryPhotoPath = `${staticPath}/a/${doctor.userId}/${doctor.id}`; */
- console.log(`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`);
+
  
   
   return (
