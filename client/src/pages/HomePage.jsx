@@ -23,8 +23,6 @@ export const HomePage = () => {
     const { token } = useContext(AuthContext);
 
     const decodedToken = token ? jwtDecode(token) : null;
-    console.log('ESTO ES EL DECODEN TOKEN ID',decodedToken.id);
-    
 
     const { doctors /*, loading, error */ } = useAllDoctor();
     const { consultas /*,loading2, error2*/ } = useAllConsultas();
@@ -110,7 +108,7 @@ export const HomePage = () => {
                                 autem quas dolores quos commodi obcaecati
                                 possimus!
                             </p>
-                            <Link to="/registro" className="btn btn-naranja">
+                            <Link to="/signup" className="btn btn-naranja">
                                 Registro
                             </Link>
                         </div>
@@ -123,15 +121,7 @@ export const HomePage = () => {
                         </div>
                     </section>
 
-                    <span className="carrusel-inicio">
-                        <CarruselDoctor doctors={doctors} />
-                        <Link
-                            to="/signup"
-                            className="btn btn-naranja btn-registro-inicio"
-                        >
-                            Regístrate
-                        </Link>
-                    </span>
+                    <CarruselDoctor doctors={doctors} />
 
                     <section className="seccion seccion-info">
                         <article>
@@ -176,7 +166,7 @@ export const HomePage = () => {
                         </p>
                         <div>
                             <span>
-                                <Link to="/registro" className="btn btn-azul">
+                                <Link to="/signup" className="btn btn-azul">
                                     Registro
                                 </Link>
                             </span>

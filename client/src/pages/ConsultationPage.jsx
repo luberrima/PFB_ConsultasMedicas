@@ -145,6 +145,7 @@ import { ChatComponent } from '../components/ChatComponent.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { Carruselconsultas } from '../components/Landing/CarruselConsultas.jsx';
 import { CarruselconsultasActivas } from '../components/Landing/CarruselConsultasActivas.jsx';
+import { Estrellas } from '../components/Estrellas.jsx';
 
 export const ConsultationPage = () => {
     const { consultationId } = useParams();
@@ -168,12 +169,11 @@ export const ConsultationPage = () => {
             if (response.status === 'ok') {
                 setConsultation(response.data);
             } else {
-               /*  console.error('Error al obtener la consulta'); */
+                /*  console.error('Error al obtener la consulta'); */
             }
 
             const skills = await getAllSkillsService();
             setSkills(skills.skills || []);
-           
         };
         fetchData();
     }, [consultationId, token]);
@@ -196,7 +196,6 @@ export const ConsultationPage = () => {
         skills.find((skill) => skill.id === consultation.skillId)?.Name ||
         'Especialidad desconocida';
 
-
     const doctorSkillId = decodedToken?.skillId;
     const canTakeConsultation =
         isDoctor && doctorSkillId === consultation.skillId;
@@ -208,7 +207,7 @@ export const ConsultationPage = () => {
     console.log('hasdiagnostic:', hasDiagnostic);
     console.log('consultation:', consultation);
     console.log('getAllSkillsServide:', getAllSkillsService());
-    console.log('skill:', skill); */
+    console.log('skill:', skill);
 
     const handleChangeResponderConsulta = async () => {
         console.log('TOKEEEEEEEEN:', token);
@@ -277,7 +276,10 @@ export const ConsultationPage = () => {
 
             {/* Sección de chat (si no hay diagnóstico) */}
             {!hasDiagnostic && (
-                <ChatComponent consultationId={consultationId} consultation={consultation}/>
+                <ChatComponent
+                    consultationId={consultationId}
+                    consultation={consultation}
+                />
             )}
 
             {/* Diagnóstico y valoración (si hay diagnóstico) */}
@@ -293,6 +295,16 @@ export const ConsultationPage = () => {
                             <VoteForm consultationId={consultationId} />
                         </section>
                     )}
+                </>
+            )}
+
+            {hasDiagnostic && isDoctor && (
+                <>
+                    <section className="diagnostic">
+                        <h3>Valoración de tu respuesta</h3>
+
+                        <Estrellas value={consultation.vote} />
+                    </section>
                 </>
             )}
 
