@@ -4,11 +4,18 @@ import {
     getChatMessagesService,
     sendChatMessageService,
 } from '../services/fetchBackEnd.js';
+import { CarReplica } from './carReplica.jsx';
+import { jwtDecode } from 'jwt-decode';
 
-export const ChatComponent = ({ consultationId }) => {
+export const ChatComponent = ({ consultationId, consultation }) => {
+    
+    
     const { token, user } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    
+    /* console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG',decodedToken); */
+    
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -44,6 +51,11 @@ export const ChatComponent = ({ consultationId }) => {
     return (
         <section className="chat-container">
             <h3>Chat de la consulta</h3>
+            <ul> 
+            {consultation?.replies.map((repli) => (
+            <CarReplica key={repli.id} repli={repli} />
+            ))}
+        </ul>
             <div className="chat-messages">
                 {messages.map((msg) => (
                     <div
