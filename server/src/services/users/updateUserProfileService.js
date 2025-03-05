@@ -1,30 +1,18 @@
-import { selectUserByEmailModel } from '../../models/users/selectUserbyEmailModel.js';
-import { selectUserByUsernameModel } from '../../models/users/selectUserByUsernameModel.js';
-import { updateUserProfileModel } from '../../models/users/updateUserProfileModel.js';
+import { getUserById, updateUser } from '../../models/users/updateUserProfileModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
-export const updateUserProfileService = async (userId, newUserInfo) => {
-    const cleanUserInfo = {
-        username: newUserInfo.username ?? null,
-        nombre: newUserInfo.nombre ?? null,
-        email: newUserInfo.email ?? null,
-        bio: newUserInfo.bio ?? null,
-        collegeNumber: newUserInfo.collegeNumber ?? null,
-        dateOfCollege: newUserInfo.dateOfCollege ?? null,
-        skillId: newUserInfo.skillId ?? null,
-    };
-
-    const sameUsername = await selectUserByUsernameModel(cleanUserInfo.username);
-    if (sameUsername && sameUsername.id !== userId) {
-        throw genereErrorUtils(400, 'EMAIL_EXITS', 'El nombre de usuario ya existe');
+export const updateUserService = async (id, userData) => {
+    // Verificar si el usuario existe
+    const user = await getUserById(id);
+    if (!user) {
+        throw genereErrorUtils(404, 'USER_NOT_FOUND', 'Usuario no encontrado');
     }
 
-    const sameEmail = await selectUserByEmailModel(cleanUserInfo.email);
-    if (sameEmail && sameEmail.id !== userId) {
-        throw genereErrorUtils(400, 'EMAIL_EXITS', 'El correo electrónico ya existe');
+    // Actualizar los datos del usuario
+    const success = await updateUser(id, userData);
+    if (!success) {
+        throw genereErrorUtils(500, 'USER_UPDATE_FAILED', 'No se pudo actualizar el usuario');
     }
 
-    const updatedUser = await updateUserProfileModel(userId, cleanUserInfo);
-
-    return updatedUser;
+    return success;
 };

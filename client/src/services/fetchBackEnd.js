@@ -41,7 +41,7 @@ export const registerUserService = async (userData) => {
 };
 
 export const registerDoctorService = async (doctorData) => {
-    const response = await fetch(`${backEndPath}/doctors/register`, {
+    const response = await fetch(`${backEndPath}/users/register-doctor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(doctorData),
