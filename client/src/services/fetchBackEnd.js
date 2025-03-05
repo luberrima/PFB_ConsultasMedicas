@@ -6,8 +6,27 @@ export const getOwnUserService = async (token) => {
             Authorization: `${token}`,
         },
     });
+    
     return response;
 };
+
+export const getOwnUserService2 = async (token) => {
+    
+    const response = await fetch(`${backEndPath}/users/profile`,{
+		
+		headers: {
+			Authorization: `${token}`
+		}
+	});
+	
+	const { message, data } = await response.json();
+
+	if (!response.ok) throw new Error(message);
+
+    console.log("QUE TIENE EL DATA AQUI",data)
+    
+	return data;
+}
 
 export const getAllDoctorsService = async () => {
 

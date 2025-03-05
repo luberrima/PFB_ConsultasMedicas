@@ -15,6 +15,7 @@ import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
 import { NewConsultPage } from './pages/NewConsultPage.jsx';
 import {DoctorUserProfilePage} from './pages/DoctorUserProfilePage.jsx'
 import { ConsultationPage } from './pages/ConsultationPage.jsx';
+import { ProfileUserPage } from './pages/ProfileUserPage.jsx';
 
 
 
@@ -41,7 +42,8 @@ function App() {
                     <Route
                         path="/consultations/:consultationId"
                         element={<ConsultationPage />}
-                    />
+                        />
+                    <Route path="/Profile" element={<ProfileUserPage />} />
                 </Route>
             </Routes>
         </AppErrorBoundary>
