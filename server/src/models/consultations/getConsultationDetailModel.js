@@ -4,9 +4,13 @@ export const getConsultationDetailModel = async (consultationId) => {
     const pool = await getPool();
 
     const [consultationRows] = await pool.query(
-        `SELECT consultations.id, consultations.title, consultations.description, consultations.userId, consultations.skillId, consultations.gravedad, consultations.doctorId, consultations.diagnostic, consultations.vote, consultations.createdAt, consultations.updatedAt, users.username AS userName, users.email AS userEmail
+        `SELECT consultations.id, consultations.title, consultations.description, consultations.userId, consultations.skillId, consultations.gravedad, consultations.doctorId, consultations.diagnostic, consultations.vote, consultations.createdAt, consultations.updatedAt, userPatient.username AS userName, 
+            userPatient.email AS userEmail,
+            userDoctor.nombre AS doctorName
         FROM consultations
-        INNER JOIN users ON consultations.userId = users.id
+        INNER JOIN users AS userPatient ON consultations.userId = userPatient.id
+        LEFT JOIN doctors ON consultations.doctorId = doctors.id
+        LEFT JOIN users AS userDoctor ON doctors.userId = userDoctor.id
         WHERE consultations.id = ?`,
         [consultationId]
     );

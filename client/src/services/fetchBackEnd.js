@@ -129,6 +129,91 @@ export const getDoctorProfileService = async (id, token) => {
     return { message, data };
 };
 
+
+// FALTA GET ALL REPLIES CONTROLLER EN BACK
+export const getChatMessagesService = async (consultationId, token) => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/${consultationId}/replies`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+            }
+        );
+
+        // Si la respuesta es exitosa, devolvemos los datos
+        if (response.ok) {
+            const data = await response.json();
+            return { status: 'ok', data: data.messages }; // Asumimos que la API devuelve un array de mensajes bajo `data.messages`
+        } else {
+            // Si la respuesta no es exitosa, devolvemos un mensaje de error
+            const errorData = await response.json();
+            return {
+                status: 'error',
+                message: errorData.message || 'Error al obtener mensajes',
+            };
+        }
+    } catch (error) {
+        console.error('Error en getChatMessages:', error);
+        return { status: 'error', message: 'Error en la solicitud' };
+    }
+};
+
+// ESTO HAY QUE REVISARLO
+export const sendChatMessageService = async (
+    consultationId,
+    message,
+    token
+) => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/${consultationId}/replies`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`, // Agregar token para autenticación
+                },
+                body: JSON.stringify({
+                    message: message, // El mensaje que el usuario está enviando
+                }),
+            }
+        );
+
+        // Si la respuesta es exitosa, devolvemos el mensaje enviado
+        if (response.ok) {
+            const data = await response.json();
+            return { status: 'ok', data: data.message }; // Suponemos que la respuesta contiene el mensaje enviado
+        } else {
+            // Si hay error, devolver un mensaje de error
+            const errorData = await response.json();
+            return {
+                status: 'error',
+                message: errorData.message || 'Error al enviar el mensaje',
+            };
+        }
+    } catch (error) {
+        console.error('Error en sendChatMessage:', error);
+        return { status: 'error', message: 'Error en la solicitud' };
+    }
+};
+
+export const getAllSkillsService = async () => {
+    try {
+        const response = await fetch(`${backEndPath}/skills`);
+        const data = await response.json();
+        if (data.status === 'ok') {
+            return data.data;
+        }
+        console.log('data.data:', data.data);
+        throw new Error('Error al obtener las skills');
+    } catch (error) {
+        console.error('Error en getAllSkillsService:', error);
+        return [];
+
 export const registerUserService = async (userData) => {
     console.log('userdata en registeruserservice:', userData);
     try {
@@ -177,5 +262,6 @@ export const registerDoctorService = async (doctorData) => {
         return result.message; // Suponiendo que la respuesta contiene un mensaje
     } catch (error) {
         throw new Error(error.message || 'Error al registrar el médico');
+
     }
 };

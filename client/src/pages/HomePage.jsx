@@ -50,7 +50,7 @@ export const HomePage = () => {
                             />
                         </div>
                     </section>
-                    <section>
+                    <section className="seccion-consultas">
                         <h1 className="page-title">Tus Consultas</h1>
                         <Carruselconsultas consultas={consultas} />
                     </section>
@@ -74,15 +74,15 @@ export const HomePage = () => {
                             />
                         </div>
                     </section>
-                    <section>
+                    <section className="seccion-consultas">
                         <h1 className="page-title">Tus Consultas Activas</h1>
                         <CarruselconsultasActivas consultas={consultas} />
                     </section>
-                    <section>
+                    <section className="seccion-consultas">
                         <h3 className="page-title">Tus Consultas Pasadas </h3>
                         <Carruselconsultaspasadas consultas={consultas} />
                     </section>
-                    <section>
+                    <section className="seccion-consultas">
                         <h3 className="page-title">Consultas no asignadas</h3>
                         <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
                     </section>

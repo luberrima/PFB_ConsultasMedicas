@@ -1,22 +1,21 @@
-import React from "react";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; 
-
+import React from 'react';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 export const Estrellas = ({ rating }) => {
-    const maxStars = 5; 
+    const maxStars = 5;
 
     return (
-        <div style={{ color: "#FFD700", fontSize: "1.5rem" }}> 
+        <div className="rating-stars">
             {[...Array(maxStars)].map((_, index) => {
                 const starValue = index + 1;
                 return (
                     <span key={index}>
                         {rating >= starValue ? (
-                            <FaStar /> 
+                            <FaStar />
                         ) : rating >= starValue - 0.5 ? (
-                            <FaStarHalfAlt /> 
+                            <FaStarHalfAlt />
                         ) : (
-                            <FaRegStar /> 
+                            <FaRegStar />
                         )}
                     </span>
                 );
