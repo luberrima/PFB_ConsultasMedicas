@@ -129,6 +129,7 @@ export const getDoctorProfileService = async (id, token) => {
     return { message, data };
 };
 
+
 // FALTA GET ALL REPLIES CONTROLLER EN BACK
 export const getChatMessagesService = async (consultationId, token) => {
     try {
@@ -212,5 +213,55 @@ export const getAllSkillsService = async () => {
     } catch (error) {
         console.error('Error en getAllSkillsService:', error);
         return [];
+
+export const registerUserService = async (userData) => {
+    console.log('userdata en registeruserservice:', userData);
+    try {
+        const response = await fetch(`${backEndPath}/users/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+        console.log('RESPONSE:', response);
+
+        if (!response.ok) {
+            throw new Error('Error al registrar el usuario');
+        }
+
+        const result = await response.json();
+
+        console.log('RESULT:', result);
+        console.log('RESUKT.DATA:', result.data);
+        console.log('RESULT.DATA?.DATA', result.data?.data);
+        console.log('RESULT.DATA.DATA', result.data.data);
+
+        return result;
+    } catch (error) {
+        throw new Error(error.message || 'Error al registrar el usuario');
+    }
+};
+
+export const registerDoctorService = async (doctorData) => {
+    console.log('doctordata en registerdoctorservice:', doctorData);
+    try {
+        const response = await fetch(`${backEndPath}/users/register-doctor`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(doctorData), // Pasamos los datos aquí
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al registrar el médico');
+        }
+
+        const result = await response.json();
+        return result.message; // Suponiendo que la respuesta contiene un mensaje
+    } catch (error) {
+        throw new Error(error.message || 'Error al registrar el médico');
+
     }
 };
