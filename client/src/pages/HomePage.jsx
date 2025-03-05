@@ -23,6 +23,8 @@ export const HomePage = () => {
     const { token } = useContext(AuthContext);
 
     const decodedToken = token ? jwtDecode(token) : null;
+    console.log('ESTO ES EL DECODEN TOKEN ID',decodedToken.id);
+    
 
     const { doctors /*, loading, error */ } = useAllDoctor();
     const { consultas /*,loading2, error2*/ } = useAllConsultas();
