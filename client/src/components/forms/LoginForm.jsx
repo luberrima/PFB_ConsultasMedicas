@@ -27,7 +27,6 @@ export const LoginForm = () => {
         // comprobar si hay token
 
         if (token) {
-            toast.info('¡Ya has iniciado sesión!');
             navigate('/');
         }
     }, [token, navigate]);
@@ -114,10 +113,10 @@ export const LoginForm = () => {
     };
 
     return (
-        <Form handleSubmit={handleSubmit} className="form login-form">
+        <Form handleSubmit={handleSubmit} className="form">
             <Input
                 handleChange={handleChange}
-                label="email"
+                label="Email"
                 type="email"
                 name="email"
                 value={data.email}
@@ -133,7 +132,7 @@ export const LoginForm = () => {
                 errors={errors}
                 placeholder="Escribe aquí tu contraseña"
             />
-            <Button id="login-btn" type="submit" className="submit-btn">
+            <Button id="login-btn" type="submit" className="btn btn-naranja">
                 <p className="text-btn">Iniciar Sesión</p>
             </Button>
         </Form>

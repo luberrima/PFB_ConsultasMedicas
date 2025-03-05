@@ -1,0 +1,77 @@
+.lista-consultas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    margin: 40px 10px 70px;
+}
+
+.card-consulta {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding: 30px;
+    width: 70%;
+    min-height: 400px;
+    max-height: 600px;
+    margin: 20px;
+    box-shadow: 0.5px 0.5px 2px var(--color-black);
+}
+
+.card-consulta header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--main-color);
+    text-transform: uppercase;
+}
+
+.card-consulta header p:last-of-type {
+    color: var(--secondary-color);
+}
+
+.card-consulta main {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+}
+
+.card-consulta main h5 {
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--main-color);
+}
+
+.card-consulta main p {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: justify;
+    color: var(--color-black);
+}
+
+@media (min-width: 780px) {
+    .card-consulta {
+        width: 40%;
+        min-height: 400px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .card-consulta {
+        width: 29%;
+        min-height: 400px;
+    }
+}

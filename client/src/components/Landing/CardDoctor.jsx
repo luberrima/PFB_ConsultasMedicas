@@ -1,23 +1,25 @@
 import React from 'react'
-import { Icon } from '../Icon.jsx'
+import { Estrellas } from '../Estrellas.jsx';
 
-export const CardDoctor = ({doctor}) => {
-  /* console.log('Esto es lo que tiene la CardDoctor para pintar de doctores',doctor);
-  console.log('Esto es lo que tiene Cardoctor doctores.name',doctor.username); */
+//const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
-  
-  return (
-    <>
-    <li>
-    <Icon name='account_circle' />
-    <h3>Doctor: {doctor.username}</h3>
-    <p>Especialidad {doctor.skillId}</p>
-    <p>Media de valoraciones {doctor.averageRating}</p>
-    </li>
-    
-      
-    </>
-  )
-}
-
-
+export const CardDoctor = ({ doctor }) => {
+    return (
+        <>
+            <li className="card-doctor-inicio">
+                <a
+                    href={`/users/doctors/${doctor.userId}`}
+                    className="card-doctor-inicio-avatar"
+                >
+                    <img
+                        src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
+                        alt="Foto usuario"
+                    />
+                </a>
+                <h3>{doctor.username}</h3>
+                <p>{doctor.Name}</p>
+                <Estrellas rating={doctor.averageRating}/>
+            </li>
+        </>
+    );
+};
