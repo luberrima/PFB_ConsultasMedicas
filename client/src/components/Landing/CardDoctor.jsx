@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Estrellas } from '../Estrellas.jsx';
 
-//const staticPath = import.meta.env.VITE_BACKEND_STATIC;
+const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
 export const CardDoctor = ({ doctor }) => {
     return (
@@ -18,7 +18,7 @@ export const CardDoctor = ({ doctor }) => {
                 </a>
                 <h3>{doctor.username}</h3>
                 <p>{doctor.Name}</p>
-                <Estrellas rating={doctor.averageRating}/>
+                <Estrellas rating={doctor.averageRating} />
             </li>
         </>
     );
