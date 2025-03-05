@@ -134,25 +134,28 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
 import { Button } from '../components/Button.jsx';
-import { getConsultationDetailService } from '../services/fetchBackEnd.js';
+import {
+    getAllSkillsService,
+    getConsultationDetailService,
+} from '../services/fetchBackEnd.js';
 import { VoteForm } from '../components/forms/VoteForm.jsx';
 
 import { ChatComponent } from '../components/ChatComponent.jsx';
-import { FileUpload } from '../components/FileUpload.jsx';
 import { jwtDecode } from 'jwt-decode';
 
 export const ConsultationPage = () => {
     const { consultationId } = useParams();
     const { token } = useContext(AuthContext);
-    const [consultation, setConsultation] = useState(null);
     const decodedToken = token ? jwtDecode(token) : null;
+    const [consultation, setConsultation] = useState(null);
+    const [skills, setSkills] = useState([]);
 
     useEffect(() => {
         if (!consultationId || !token) {
             console.error('Falta el ID o el token');
             return;
         }
-        const fetchConsultation = async () => {
+        const fetchData = async () => {
             const response = await getConsultationDetailService(
                 consultationId,
                 token
@@ -163,8 +166,12 @@ export const ConsultationPage = () => {
             } else {
                 console.error('Error al obtener la consulta');
             }
+
+            const skills = await getAllSkillsService();
+            setSkills(skills.skills || []);
+            console.log('Skills:', skills);
         };
-        fetchConsultation();
+        fetchData();
     }, [consultationId, token]);
 
     if (!consultation) {
@@ -181,12 +188,17 @@ export const ConsultationPage = () => {
     const isPatient = decodedToken.role === 'paciente';
     const isDoctor = decodedToken.role === 'doctor';
     const hasDiagnostic = !!consultation.diagnostic;
+    const skill =
+        skills.find((skill) => skill.id === consultation.skillId)?.Name ||
+        'Especialidad desconocida';
 
     console.log('token:', token);
     console.log('decodedtoken:', decodedToken);
     console.log('ispatient:', isPatient);
     console.log('hasdiagnostic:', hasDiagnostic);
     console.log('consultation:', consultation);
+    console.log('getAllSkillsServide:', getAllSkillsService());
+    console.log('skill:', skill);
 
     return (
         <div>
@@ -201,13 +213,13 @@ export const ConsultationPage = () => {
 
                 {/* FALTA PONER LA SKILL CON NOMBRE */}
                 <p>
-                    <strong>Especialidad:</strong> {consultation.skillId}
+                    <strong>Especialidad:</strong> {skill}
                 </p>
 
                 {/* FALTA PONER EL DOCTOR CON NOMBRE */}
                 <p>
                     <strong>Especialista asignado:</strong>{' '}
-                    {consultation.doctorId || 'No hay especialista asignado'}
+                    {consultation.doctorName || 'No hay especialista asignado'}
                 </p>
                 <p>
                     <strong>Estado:</strong>{' '}
@@ -247,12 +259,6 @@ export const ConsultationPage = () => {
                     )}
                 </div>
             )}
-
-            {/* Sección de archivos */}
-            <div className="consulta-archivos">
-                <h3>Archivos subidos</h3>
-                <FileUpload consultationId={consultationId} />
-            </div>
         </div>
     );
 };

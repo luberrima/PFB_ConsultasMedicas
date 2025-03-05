@@ -200,36 +200,17 @@ export const sendChatMessageService = async (
     }
 };
 
-export const uploadFileService = async (consultationId, file, token) => {
-    const formData = new FormData(); // Crear un nuevo FormData para enviar los archivos
-    formData.append('file', file); // Agregar el archivo al FormData
-
+export const getAllSkillsService = async () => {
     try {
-        const response = await fetch(
-            `/api/consultations/${consultationId}/upload`,
-            {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${token}`, // Autenticación con el token del usuario
-                },
-                body: formData, // Enviar el FormData con el archivo
-            }
-        );
-
-        // Si la respuesta es exitosa, devolver los datos de la respuesta
-        if (response.ok) {
-            const data = await response.json();
-            return { status: 'ok', data: data }; // Suponemos que la API responde con un objeto con la información del archivo cargado
-        } else {
-            // Si la respuesta no es exitosa, devolver un error
-            const errorData = await response.json();
-            return {
-                status: 'error',
-                message: errorData.message || 'Error al subir el archivo',
-            };
+        const response = await fetch(`${backEndPath}/skills`);
+        const data = await response.json();
+        if (data.status === 'ok') {
+            return data.data;
         }
+        console.log('data.data:', data.data);
+        throw new Error('Error al obtener las skills');
     } catch (error) {
-        console.error('Error en uploadFileService:', error);
-        return { status: 'error', message: 'Error en la solicitud' };
+        console.error('Error en getAllSkillsService:', error);
+        return [];
     }
 };
