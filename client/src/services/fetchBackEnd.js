@@ -129,7 +129,6 @@ export const getDoctorProfileService = async (id, token) => {
     return { message, data };
 };
 
-
 // FALTA GET ALL REPLIES CONTROLLER EN BACK
 export const getChatMessagesService = async (consultationId, token) => {
     try {
@@ -213,6 +212,8 @@ export const getAllSkillsService = async () => {
     } catch (error) {
         console.error('Error en getAllSkillsService:', error);
         return [];
+    }
+};
 
 export const registerUserService = async (userData) => {
     console.log('userdata en registeruserservice:', userData);
@@ -262,6 +263,32 @@ export const registerDoctorService = async (doctorData) => {
         return result.message; // Suponiendo que la respuesta contiene un mensaje
     } catch (error) {
         throw new Error(error.message || 'Error al registrar el médico');
+    }
+};
 
+export const takeConsultationService = async (consultationId, token) => {
+    console.log('AAAAAAAAAA TOKEN TOKEN TOKEN:', token);
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/take/${consultationId}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al tomar la consulta');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Error en takeConsultationService:', error);
+        throw error;
     }
 };

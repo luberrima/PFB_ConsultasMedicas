@@ -49,7 +49,7 @@ export const ChatComponent = ({ consultationId, consultation }) => {
     };
 
     return (
-        <div className="chat-container">
+        <section className="chat-container">
             <h3>Chat de la consulta</h3>
             <ul> 
             {consultation?.replies.map((repli) => (
@@ -79,6 +79,6 @@ export const ChatComponent = ({ consultationId, consultation }) => {
                 />
                 <button onClick={handleSendMessage}>Enviar</button>
             </div>
-        </div>
+        </section>
     );
 };

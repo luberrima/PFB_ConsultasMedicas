@@ -36,37 +36,84 @@ export const NavBar = () => {
                 </div>
 
                 <div className="navbar-links">
-                    <Link to="/" className="navbar-link">
-                        Inicio
-                    </Link>
-
-                    {decodedToken && decodedToken.role === 'paciente' ? (
-                        <Link
-                            to="/new-consult"
-                            className="navbar-link new-consultation-link"
-                        >
-                            Hacer una consulta
-                        </Link>
-                    ) : decodedToken && decodedToken.role === 'doctor' ? (
-                        <></>
-                    ) : (
-                        <Link to="/signup" className="navbar-link">
-                            Registrarse
-                        </Link>
+                    {/* USUARIO NO REGISTRADO */}
+                    {!decodedToken && (
+                        <ul>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Inicio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/login" className="navbar-link">
+                                    Iniciar Sesión
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/registro" className="navbar-link">
+                                    Registro
+                                </Link>
+                            </li>
+                        </ul>
                     )}
 
-                    {token && (
-                        <Link to="/profile" className="navbar-link">
-                            Mi Perfil
-                        </Link>
+                    {/* USUARIO PACIENTE */}
+
+                    {decodedToken && decodedToken.role === 'paciente' && (
+                        <ul>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Inicio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Mi Perfil
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/alldoctors" className="navbar-link">
+                                    Doctores
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/new-consult"
+                                    className="navbar-link new-consultation-link"
+                                >
+                                    Hacer una consulta
+                                </Link>
+                            </li>
+                            <li>
+                                <LogOutButton />
+                            </li>
+                        </ul>
                     )}
 
-                    {token ? (
-                        <LogOutButton />
-                    ) : (
-                        <Link to="/login" className="navbar-link">
-                            Iniciar Sesión
-                        </Link>
+                    {/* USUARIO DOCTOR */}
+
+                    {decodedToken && decodedToken.role === 'doctor' && (
+                        <ul>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Inicio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Mi Perfil
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/alldoctors" className="navbar-link">
+                                    Doctores
+                                </Link>
+                            </li>
+
+                            <li>
+                                <LogOutButton />
+                            </li>
+                        </ul>
                     )}
                 </div>
             </div>
