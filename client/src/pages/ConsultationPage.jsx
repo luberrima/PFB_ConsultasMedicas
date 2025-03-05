@@ -160,16 +160,16 @@ export const ConsultationPage = () => {
                 consultationId,
                 token
             );
-            console.log('response:', response);
+            /* console.log('response:', response); */
             if (response.status === 'ok') {
                 setConsultation(response.data);
             } else {
-                console.error('Error al obtener la consulta');
+               /*  console.error('Error al obtener la consulta'); */
             }
 
             const skills = await getAllSkillsService();
             setSkills(skills.skills || []);
-            console.log('Skills:', skills);
+           
         };
         fetchData();
     }, [consultationId, token]);
@@ -192,13 +192,13 @@ export const ConsultationPage = () => {
         skills.find((skill) => skill.id === consultation.skillId)?.Name ||
         'Especialidad desconocida';
 
-    console.log('token:', token);
+    /* console.log('token:', token);
     console.log('decodedtoken:', decodedToken);
     console.log('ispatient:', isPatient);
     console.log('hasdiagnostic:', hasDiagnostic);
     console.log('consultation:', consultation);
     console.log('getAllSkillsServide:', getAllSkillsService());
-    console.log('skill:', skill);
+    console.log('skill:', skill); */
 
     return (
         <div>
@@ -243,7 +243,7 @@ export const ConsultationPage = () => {
 
             {/* Sección de chat (si no hay diagnóstico) */}
             {!hasDiagnostic && (
-                <ChatComponent consultationId={consultationId} />
+                <ChatComponent consultationId={consultationId} consultation={consultation}/>
             )}
 
             {/* Diagnóstico y valoración (si hay diagnóstico) */}

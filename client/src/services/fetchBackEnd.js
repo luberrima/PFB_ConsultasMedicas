@@ -58,8 +58,8 @@ export const getAllConsulNoAsigService = async (token) => {
 };
 
 export const getConsultationDetailService = async (consultationId, token) => {
-    console.log('token en service:', token);
-    console.log('id en servide:', consultationId);
+  /*   console.log('token en service:', token);
+    console.log('id en servide:', consultationId); */
     try {
         const response = await fetch(
             `${backEndPath}/consultations/${consultationId}`,
@@ -71,7 +71,7 @@ export const getConsultationDetailService = async (consultationId, token) => {
                 },
             }
         );
-        console.log('repsonse en service:', response);
+        /* console.log('repsonse en service:', response); */
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(
