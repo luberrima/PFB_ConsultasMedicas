@@ -6,36 +6,41 @@ const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 export const CardAllInfoDoctor = ({ doctor }) => {
     return (
         <>
-            <li className="card-doctor">
-                <header>
-                    <a href={`/users/doctors/${doctor.userId}`}>
-                        <img
-                            src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
-                            alt="Foto usuario"
-                        />
-                    </a>
-                    <div>
-                        <h3>{doctor.username}</h3>
-                        <p>{doctor.Name}</p>
-                        <span>
-                            <Estrellas rating={doctor.averageRating} />
-                        </span>
-                    </div>
-                </header>
-                {/* <p>Especialidad por numero: {doctor.skillId}</p> */}
-                <main>
-                    <p>{doctor.bio}</p>
-                </main>
-                {/* <p>Email: {doctor.email}</p>
+            <Link
+                to={`/users/doctors/${doctor.userId}`}
+                className="link-card-doctor"
+            >
+                <li className="card-doctor">
+                    <header>
+                        <a href={`/users/doctors/${doctor.userId}`}>
+                            <img
+                                src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
+                                alt="Foto usuario"
+                            />
+                        </a>
+                        <div>
+                            <h3>{doctor.username}</h3>
+                            <p>{doctor.Name}</p>
+                            <span>
+                                <Estrellas rating={doctor.averageRating} />
+                            </span>
+                        </div>
+                    </header>
+                    {/* <p>Especialidad por numero: {doctor.skillId}</p> */}
+                    <main>
+                        <p>{doctor.bio}</p>
+                    </main>
+                    {/* <p>Email: {doctor.email}</p>
                 <p>Numero de colegiado: {doctor.CollegeNumber}</p>
                 <p>Fecha de inicio en GoodDoctor: {doctor.credatedAt}</p>
                 <p>Identificacion en GoodDoctor {doctor.UserId}</p> */}
-                <footer>
-                    <Link to="/new-consult" className="btn btn-azul">
-                        Hacer una consulta
-                    </Link>
-                </footer>
-            </li>
+                    <footer>
+                        <Link to="/new-consult" className="btn btn-azul">
+                            Hacer una consulta
+                        </Link>
+                    </footer>
+                </li>
+            </Link>
         </>
     );
 };

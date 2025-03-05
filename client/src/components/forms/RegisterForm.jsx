@@ -4,7 +4,7 @@ import { Button } from '../Button.jsx';
 import { /* useContext, */ useState } from 'react';
 // import { newUserSchema } from '../../schemas/users/registerUserSchema.js';
 // import { newDoctorSchema } from '../../schemas/users/registerUserDoctorSchema.js';
-import { Icon } from '../Icon.jsx';
+
 import { Form } from './Form.jsx';
 // import { FormContext } from '../../contexts/forms/FormContext.js';
 import {
@@ -70,32 +70,39 @@ export const RegisterForm = () => {
     };
 
     return (
-        <Form className="register-form" handleSubmit={handleSubmit}>
-            <div className="user-type-switch">
-                <label>
+        <Form className="form" handleSubmit={handleSubmit}>
+            <span>¿Qué tipo de perfil eres?</span>
+            <div className="form-switch">
+                <div className="input-radio">
                     <input
                         type="radio"
+                        id="radio1"
                         name="userType"
                         value="patient"
                         checked={userType === 'patient'}
                         onChange={() => setUserType('patient')}
                     />{' '}
-                    Paciente
-                </label>
-                <label>
+                    <label htmlFor="radio1" className="radio-btn">
+                        Paciente
+                    </label>
+                </div>
+                <div className="input-radio">
                     <input
                         type="radio"
+                        id="radio2"
                         name="userType"
                         value="doctor"
                         checked={userType === 'doctor'}
                         onChange={() => setUserType('doctor')}
                     />{' '}
-                    Médico
-                </label>
+                    <label htmlFor="radio2" className="radio-btn">
+                        Médico
+                    </label>
+                </div>
             </div>
 
             <Input
-                label="User Name"
+                label="Nombre de Usuario"
                 type="text"
                 name="username"
                 value={userInfo ? userInfo.username : doctorInfo.username}
@@ -115,7 +122,7 @@ export const RegisterForm = () => {
                 }
             />
             <Input
-                label="Password"
+                label="Contraseña"
                 type="password"
                 name="password"
                 value={userInfo ? userInfo.password : doctorInfo.password}
@@ -127,7 +134,7 @@ export const RegisterForm = () => {
             {userType === 'doctor' && (
                 <>
                     <Input
-                        label="College Number"
+                        label="Nº de Colegiad@"
                         type="text"
                         name="collegeNumber"
                         value={doctorInfo.collegeNumber}
@@ -135,7 +142,7 @@ export const RegisterForm = () => {
                         handleChange={handleChangeDoctorInfo}
                     />
                     <Input
-                        label="Date of College"
+                        label="Fecha de Colegiad@"
                         type="date"
                         name="dateOfCollege"
                         value={doctorInfo.dateOfCollege}
@@ -143,7 +150,7 @@ export const RegisterForm = () => {
                         handleChange={handleChangeDoctorInfo}
                     />
                     <Input
-                        label="Skill ID"
+                        label="Especialidad"
                         type="number"
                         name="skillId"
                         value={doctorInfo.skillId}
@@ -154,12 +161,11 @@ export const RegisterForm = () => {
             )}
             <Button
                 id="register"
-                className="submit"
+                className="btn btn-azul"
                 type="submit"
                 isLoading={isLoading}
             >
-                <Icon name="send" />
-                <span className="text">Register</span>
+                <span className="text">Registrarse</span>
             </Button>
         </Form>
     );

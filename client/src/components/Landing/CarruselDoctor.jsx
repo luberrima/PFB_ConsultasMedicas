@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardDoctor } from './CardDoctor.jsx';
 import { Button } from '../Button.jsx';
 import { Icon } from '../Icon.jsx';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export const CarruselDoctor = ({ doctors }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +23,6 @@ export const CarruselDoctor = ({ doctors }) => {
     ];
 
     return (
-
         <div className="seccion seccion-carrusel">
             <h2>Algunos de nuestros médicos</h2>
             <div className="carrusel">
@@ -42,10 +41,6 @@ export const CarruselDoctor = ({ doctors }) => {
                     <Icon name="arrow_forward" />
                 </Button>
             </div>
-            <Link to="/signup" className="btn btn-naranja">
-                Regístrate
-            </Link>
         </div>
-
     );
 };

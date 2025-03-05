@@ -108,7 +108,7 @@ export const HomePage = () => {
                                 autem quas dolores quos commodi obcaecati
                                 possimus!
                             </p>
-                            <Link to="/signup" className="btn btn-naranja">
+                            <Link to="/registro" className="btn btn-naranja">
                                 Registro
                             </Link>
                         </div>
@@ -121,7 +121,15 @@ export const HomePage = () => {
                         </div>
                     </section>
 
-                    <CarruselDoctor doctors={doctors} />
+                    <span className="carrusel-inicio">
+                        <CarruselDoctor doctors={doctors} />
+                        <Link
+                            to="/signup"
+                            className="btn btn-naranja btn-registro-inicio"
+                        >
+                            Regístrate
+                        </Link>
+                    </span>
 
                     <section className="seccion seccion-info">
                         <article>
@@ -166,7 +174,7 @@ export const HomePage = () => {
                         </p>
                         <div>
                             <span>
-                                <Link to="/signup" className="btn btn-azul">
+                                <Link to="/registro" className="btn btn-azul">
                                     Registro
                                 </Link>
                             </span>

@@ -26,12 +26,12 @@ export const VoteForm = ({ onRatingSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="vote-form" onSubmit={handleSubmit}>
             <div className="rating-stars">
                 {[...Array(5)].map((_, index) => {
                     const starValue = index + 1;
                     return (
-                        <label key={index}>
+                        <label className="stars" key={index}>
                             <input
                                 type="radio"
                                 name="rating"
@@ -40,7 +40,7 @@ export const VoteForm = ({ onRatingSubmit }) => {
                                 style={{ display: 'none' }} // Ocultamos el radio
                             />
                             <FaStar
-                                size={30}
+                                size={60}
                                 color={
                                     starValue <= (hover || rating)
                                         ? 'var(--secondary-color)'

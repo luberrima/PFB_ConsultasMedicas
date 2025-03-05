@@ -137,16 +137,20 @@ import { Button } from '../components/Button.jsx';
 import {
     getAllSkillsService,
     getConsultationDetailService,
+    takeConsultationService,
 } from '../services/fetchBackEnd.js';
 import { VoteForm } from '../components/forms/VoteForm.jsx';
 
 import { ChatComponent } from '../components/ChatComponent.jsx';
 import { jwtDecode } from 'jwt-decode';
+import { Carruselconsultas } from '../components/Landing/CarruselConsultas.jsx';
+import { CarruselconsultasActivas } from '../components/Landing/CarruselConsultasActivas.jsx';
 
 export const ConsultationPage = () => {
     const { consultationId } = useParams();
     const { token } = useContext(AuthContext);
     const decodedToken = token ? jwtDecode(token) : null;
+
     const [consultation, setConsultation] = useState(null);
     const [skills, setSkills] = useState([]);
 
@@ -192,6 +196,10 @@ export const ConsultationPage = () => {
         skills.find((skill) => skill.id === consultation.skillId)?.Name ||
         'Especialidad desconocida';
 
+    const doctorSkillId = decodedToken?.skillId;
+    const canTakeConsultation =
+        isDoctor && doctorSkillId === consultation.skillId;
+
     console.log('token:', token);
     console.log('decodedtoken:', decodedToken);
     console.log('ispatient:', isPatient);
@@ -200,46 +208,70 @@ export const ConsultationPage = () => {
     console.log('getAllSkillsServide:', getAllSkillsService());
     console.log('skill:', skill);
 
+    const handleChangeResponderConsulta = async () => {
+        console.log('TOKEEEEEEEEN:', token);
+        try {
+            const data = await takeConsultationService(consultationId, token);
+            console.log('Consulta tomada exitosamente:', data);
+
+            setConsultation((prev) => ({ ...prev, doctorId: decodedToken.id }));
+        } catch (error) {
+            console.error('Error al tomar la consulta:', error);
+        }
+    };
+
     return (
-        <div>
-            <div className="consultation-info">
-                <h1 className="page-title">{consultation.title}</h1>
-                <p>
-                    <strong>Descripción:</strong> {consultation.description}
-                </p>
-                <p>
-                    <strong>Gravedad:</strong> {consultation.gravedad}
-                </p>
-
-                {/* FALTA PONER LA SKILL CON NOMBRE */}
-                <p>
-                    <strong>Especialidad:</strong> {skill}
-                </p>
-
-                {/* FALTA PONER EL DOCTOR CON NOMBRE */}
-                <p>
-                    <strong>Especialista asignado:</strong>{' '}
-                    {consultation.doctorName || 'No hay especialista asignado'}
-                </p>
-                <p>
-                    <strong>Estado:</strong>{' '}
-                    {hasDiagnostic ? 'Consulta terminada' : 'Consulta activa'}
-                </p>
-
+        <section className="consultation-page">
+            <h1 className="page-title">{consultation.title}</h1>
+            <section className="consultation-info">
+                <article>
+                    <h4>Descripción</h4> <p>{consultation.description}</p>
+                </article>
+                <article>
+                    <h4>Gravedad</h4> <p>{consultation.gravedad}</p>
+                </article>
+                <article>
+                    <h4>Especialidad</h4> <p>{skill}</p>
+                </article>
+                <article>
+                    <h4>Especialista asignado</h4>{' '}
+                    <p>
+                        {consultation.doctorName ||
+                            'No hay especialista asignado'}
+                    </p>
+                </article>
+                <article>
+                    <h4>Estado</h4>{' '}
+                    <p>
+                        {hasDiagnostic
+                            ? 'Consulta terminada'
+                            : 'Consulta activa'}
+                    </p>
+                </article>
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
                     <Button className="btn btn-naranja">
                         Eliminar Consulta
                     </Button>
                 )}
-
-                {/* FALTA EL HANDLE CHANGE. HAY QUE HACER UN FETCH A LA RUTA DE TAKE CONSULT CREO*/}
-                {!hasDiagnostic && isDoctor && (
-                    <Button className="btn btn-naranja">
+                {!hasDiagnostic && canTakeConsultation && (
+                    <Button
+                        className="btn btn-naranja"
+                        handleClick={handleChangeResponderConsulta}
+                    >
                         Responder a esta consulta
                     </Button>
                 )}
-            </div>
+                {!hasDiagnostic && isDoctor && !canTakeConsultation && (
+                    <p className="no-take-consultation">
+                        No puedes tomar esta consulta porque no coincide con tu
+                        especialidad.
+                    </p>
+                )}
+            </section>
+            <section>
+                <p>imagenes</p>
+            </section>
 
             {/* Sección de chat (si no hay diagnóstico) */}
             {!hasDiagnostic && (
@@ -248,17 +280,26 @@ export const ConsultationPage = () => {
 
             {/* Diagnóstico y valoración (si hay diagnóstico) */}
             {hasDiagnostic && isPatient && (
-                <div className="diagnostic">
-                    <h3>Diagnóstico:</h3>
-                    <p>{consultation.diagnostic}</p>
+                <>
+                    <section className="diagnostic">
+                        <h3>Diagnóstico</h3>
+                        <p>{consultation.diagnostic}</p>
+                    </section>
                     {isPatient && (
-                        <div className="vote-form">
+                        <section className="vote-form-section">
                             <h3>Valora el diagnóstico</h3>
                             <VoteForm consultationId={consultationId} />
-                        </div>
+                        </section>
                     )}
-                </div>
+                </>
             )}
-        </div>
+
+            <section className="otras-consultas">
+                <h2 className="page-title">Otras Consultas</h2>
+
+                {isPatient && <Carruselconsultas />}
+                {isDoctor && <CarruselconsultasActivas />}
+            </section>
+        </section>
     );
 };

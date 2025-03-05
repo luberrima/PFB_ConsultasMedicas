@@ -4,7 +4,17 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: start;
-    margin: 40px 10px 70px;
+    margin: 20px;
+}
+
+.link-card-consulta {
+    all: unset;
+    margin: auto;
+    padding: 0;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .card-consulta {
@@ -18,8 +28,12 @@
     width: 70%;
     min-height: 400px;
     max-height: 600px;
-    margin: 20px;
+    margin: 20px auto;
     box-shadow: 0.5px 0.5px 2px var(--color-black);
+}
+
+.card-consulta:hover {
+    box-shadow: 1px 1px 7px var(--main-color);
 }
 
 .card-consulta header {
@@ -63,15 +77,21 @@
 }
 
 @media (min-width: 780px) {
-    .card-consulta {
+    .link-card-consulta {
         width: 40%;
+    }
+    .card-consulta {
+        width: 100%;
         min-height: 400px;
     }
 }
 
 @media (min-width: 1000px) {
-    .card-consulta {
+    .link-card-consulta {
         width: 29%;
+    }
+    .card-consulta {
+        width: 100%;
         min-height: 400px;
     }
 }

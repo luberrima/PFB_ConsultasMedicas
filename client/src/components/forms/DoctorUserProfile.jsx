@@ -1,12 +1,12 @@
 import React /*, { useState }*/ from 'react';
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
-import { CardDoctor } from '../../components/Landing/CardDoctor.jsx';
 import { useAllDoctor } from '../../hooks/useAllDoctor.js';
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 import { useDoctorProfile } from '../../hooks/useDoctorProfile.js';
 import { useNavigate } from 'react-router-dom';
+import { CardAllInfoDoctor } from '../CardAllInfoDoctor.jsx';
 
 export const DoctorUserProfile = ({ doctorId }) => {
     console.log('doctor user profile id data', doctorId);
@@ -122,12 +122,13 @@ export const DoctorUserProfile = ({ doctorId }) => {
                     </ul>
                 </article>
             </section>
-            <section className="carrusel">
-                <ul className="DoctorsList">
+            <section className="ficha-medico-carrusel">
+                <h3 className="page-title">Otros Especialistas</h3>
+                <ul className="lista-doctores">
                     {/* Mapeamos todos los doctores para mostrarlos */}
                     {console.log('valor de doctorList en el ul', doctorList)}
                     {doctorList.map((doctor) => (
-                        <CardDoctor key={doctor.id} doctor={doctor} />
+                        <CardAllInfoDoctor key={doctor.id} doctor={doctor} />
                     ))}
                 </ul>
             </section>

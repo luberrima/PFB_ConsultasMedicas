@@ -5,7 +5,7 @@ export const Estrellas = ({ rating }) => {
     const maxStars = 5;
 
     return (
-        <div className="rating-stars">
+        <div className="rating-stars-2">
             {[...Array(maxStars)].map((_, index) => {
                 const starValue = index + 1;
                 return (
