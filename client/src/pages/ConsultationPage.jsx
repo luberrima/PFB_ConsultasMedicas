@@ -170,7 +170,7 @@ export const ConsultationPage = () => {
             if (response.status === 'ok') {
                 setConsultation(response.data);
             } else {
-                /*  console.error('Error al obtener la consulta'); */
+                  console.error('Error al obtener la consulta'); 
             }
 
             const skills = await getAllSkillsService();
@@ -201,32 +201,35 @@ export const ConsultationPage = () => {
     const canTakeConsultation =
         isDoctor && doctorSkillId === consultation.skillId;
 
-    console.log('token:', token);
+   /*  console.log('token:', token); */
 
-    console.log('decodedtoken:', decodedToken);
+    /* console.log('decodedtoken:', decodedToken);
     console.log('ispatient:', isPatient);
     console.log('hasdiagnostic:', hasDiagnostic);
     console.log('consultation:', consultation);
     console.log('getAllSkillsServide:', getAllSkillsService());
-    console.log('skill:', skill);
+    console.log('skill:', skill); */
 
     const handleChangeResponderConsulta = async () => {
         
         try {
             const data = await takeConsultationService(consultationId, token);
-            console.log('Consulta tomada exitosamente:', data);
+            /* console.log('Consulta tomada exitosamente:', data); */
 
             setConsultation((prev) => ({ ...prev, doctorId: decodedToken.id }));
         } catch (error) {
             console.error('Error al tomar la consulta:', error);
         }
     };
+   
 
-    const handleDeleteConsulta = async () => {
-        
+    const handlechangeDeleteConsulta = async () => {
+         console.log('Id de consulta:', consultationId); 
+        console.log('TOKEN:', token); 
+
         try {
             const data = await deleteConsultationService(consultationId, token);
-            console.log('Consulta borrada exitosamente:', data);
+             console.log('Consulta borrada exitosamente:', data); 
 
             const params = new URLSearchParams({
                 type: 'success',
@@ -276,10 +279,10 @@ export const ConsultationPage = () => {
                 </article>
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
-                    <Button className="btn btn-naranja"
-                    onClick={handleDeleteConsulta}>
+                    <button className="btn btn-naranja"
+                    onClick={handlechangeDeleteConsulta}>
                         Eliminar Consulta
-                    </Button>
+                    </button>
                 )}
                 {!hasDiagnostic && canTakeConsultation && (
                     <Button
