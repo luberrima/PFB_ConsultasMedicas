@@ -5,17 +5,15 @@ import {
     sendChatMessageService,
 } from '../services/fetchBackEnd.js';
 import { CarReplica } from './carReplica.jsx';
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
+import './chatComponent.css';
 
 export const ChatComponent = ({ consultationId, consultation }) => {
-    
-    
     const { token, user } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    
+
     /* console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG',decodedToken); */
-    
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -51,11 +49,11 @@ export const ChatComponent = ({ consultationId, consultation }) => {
     return (
         <section className="chat-container">
             <h3>Chat de la consulta</h3>
-            <ul> 
-            {consultation?.replies.map((repli) => (
-            <CarReplica key={repli.id} repli={repli} />
-            ))}
-        </ul>
+            <ul>
+                {consultation?.replies.map((repli) => (
+                    <CarReplica key={repli.id} repli={repli} />
+                ))}
+            </ul>
             <div className="chat-messages">
                 {messages.map((msg) => (
                     <div
@@ -77,7 +75,9 @@ export const ChatComponent = ({ consultationId, consultation }) => {
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Escribe tu mensaje..."
                 />
-                <button onClick={handleSendMessage}>Enviar</button>
+                <button className="btn btn-azul" onClick={handleSendMessage}>
+                    Enviar
+                </button>
             </div>
         </section>
     );

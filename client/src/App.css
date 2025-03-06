@@ -123,8 +123,9 @@
     border-radius: 100%;
     margin-bottom: 10px;
     align-self: center;
-    border: 1px solid red;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .card-doctor-inicio-avatar img {
@@ -436,19 +437,15 @@
     /* Seccion carrusel home */
 
     .carrusel {
-        gap: 3rem;
+        gap: 8rem;
     }
 
     .doctorsList {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: start;
-        gap: 2rem;
+        gap: 12rem;
     }
 
     .card-doctor-inicio img {
-        width: 120px;
+        width: 150px;
         height: 150px;
     }
 
