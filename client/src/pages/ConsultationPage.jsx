@@ -141,6 +141,8 @@ import {
     takeConsultationService,
 } from '../services/fetchBackEnd.js';
 import { VoteForm } from '../components/forms/VoteForm.jsx';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { ChatComponent } from '../components/ChatComponent.jsx';
 import { jwtDecode } from 'jwt-decode';
@@ -155,6 +157,8 @@ export const ConsultationPage = () => {
 
     const [consultation, setConsultation] = useState(null);
     const [skills, setSkills] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!consultationId || !token) {
@@ -211,7 +215,6 @@ export const ConsultationPage = () => {
     console.log('skill:', skill); */
 
     const handleChangeResponderConsulta = async () => {
-        
         try {
             const data = await takeConsultationService(consultationId, token);
             /* console.log('Consulta tomada exitosamente:', data); */
@@ -221,33 +224,36 @@ export const ConsultationPage = () => {
             console.error('Error al tomar la consulta:', error);
         }
     };
-   
+    
 
-    const handlechangeDeleteConsulta = async () => {
-         console.log('Id de consulta:', consultationId); 
-        console.log('TOKEN:', token); 
+    const handleDeleteConsulta = async () => {
+        const confirmDelete = window.confirm(
+            '¿Estás seguro de que deseas eliminar esta consulta? Esta acción no se puede deshacer.'
+        );
+
+
+        if (!confirmDelete) return;
 
         try {
-            const data = await deleteConsultationService(consultationId, token);
-             console.log('Consulta borrada exitosamente:', data); 
+            const response = await deleteConsultationService(
+                consultationId,
+                token
+            );
 
-            const params = new URLSearchParams({
-                type: 'success',
-                message,
-            });
+            if (response.status === 'ok') {
+                toast.success('Consulta eliminada correctamente');
 
-            toast.success('Consulta registrada');
-                        setTimeout(() => {
-                            setIsLoading(false);
-                            navigate(`/?${params.toString()}`);
-                        }, 3000);
-
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            } else {
+                throw new Error('No se pudo eliminar la consulta');
+            }
         } catch (error) {
             console.error('Error al borrar la consulta:', error);
+            toast.error('Hubo un problema al eliminar la consulta');
         }
     };
-
-    
 
     return (
         <section className="consultation-page">
@@ -279,10 +285,14 @@ export const ConsultationPage = () => {
                 </article>
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
-                    <button className="btn btn-naranja"
-                    onClick={handlechangeDeleteConsulta}>
+
+                    <Button
+                        className="btn btn-naranja"
+                        onClick={handleDeleteConsulta}
+                    >
+
                         Eliminar Consulta
-                    </button>
+                    </Button>
                 )}
                 {!hasDiagnostic && canTakeConsultation && (
                     <Button
