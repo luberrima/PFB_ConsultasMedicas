@@ -127,6 +127,11 @@
     overflow: hidden;
 }
 
+.card-doctor-inicio-avatar img {
+    width: 100%;
+    height: auto;
+}
+
 .card-doctor-inicio h3,
 .card-doctor-inicio p {
     display: none;
@@ -391,6 +396,9 @@
 }
 
 @media (min-width: 780px) {
+    .seccion {
+        padding: 100px;
+    }
     /* seccion inicio */
     .seccion-inicio {
         display: flex;
@@ -457,9 +465,6 @@
     }
 
     /* Seccion info home */
-    .seccion-info {
-        padding: 40px;
-    }
 
     .seccion-info article {
         flex-direction: row;

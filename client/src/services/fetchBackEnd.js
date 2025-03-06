@@ -58,7 +58,7 @@ export const getAllConsulNoAsigService = async (token) => {
 };
 
 export const getConsultationDetailService = async (consultationId, token) => {
-  /*   console.log('token en service:', token);
+    /*   console.log('token en service:', token);
     console.log('id en servide:', consultationId); */
     try {
         const response = await fetch(
@@ -267,7 +267,6 @@ export const registerDoctorService = async (doctorData) => {
 };
 
 export const takeConsultationService = async (consultationId, token) => {
-    
     try {
         const response = await fetch(
             `${backEndPath}/consultations/take/${consultationId}`,
@@ -294,28 +293,34 @@ export const takeConsultationService = async (consultationId, token) => {
 };
 
 export const deleteConsultationService = async (consultationId, token) => {
-    console.log('Esta es la ruta del fech', `${backEndPath}/consultations${consultationId}`);
-
-    const response = await fetch(`${backEndPath}/consultations/:${consultationId}`, {
-        method: 'DELETE',
-        headers: {
-            Authorization: `${token}`,
-        },
-    });
-    console.log('Que devuelve respose de consul no asignadas', response);
-
-    const { message, data } = await response.json();
-
-    if (!response.ok) throw new Error(message);
-
+    console.log('DELETE CONSTULTA:', token, consultationId);
     console.log(
-        'esto es lo que retorna el deleteConsultarionsService',
-        data
+        'Esta es la ruta del fech',
+        `${backEndPath}/consultations/${consultationId}`
     );
 
-    return data;
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/${consultationId}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+            }
+        );
+        console.log('Que devuelve respose de consul no asignadas', response);
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al eliminar la consulta');
+        }
+
+        return { status: 'ok', data };
+    } catch (error) {
+        console.error('Error en deleteConsultationService:', error);
+        return { status: 'error', message: error.message };
+    }
 };
-
-
-
-

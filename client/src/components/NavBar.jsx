@@ -115,6 +115,31 @@ export const NavBar = () => {
                             </li>
                         </ul>
                     )}
+
+                    {/* USUARIO ADMIN */}
+                    {decodedToken && decodedToken.role === 'admin' && (
+                        <ul>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Inicio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/" className="navbar-link">
+                                    Mi Perfil
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/alldoctors" className="navbar-link">
+                                    Doctores
+                                </Link>
+                            </li>
+
+                            <li>
+                                <LogOutButton />
+                            </li>
+                        </ul>
+                    )}
                 </div>
             </div>
         </nav>
