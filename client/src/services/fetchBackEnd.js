@@ -207,10 +207,10 @@ export const getAllSkillsService = async () => {
         if (data.status === 'ok') {
             return data.data;
         }
-        console.log('data.data:', data.data);
+        /* console.log('data.data:', data.data); */
         throw new Error('Error al obtener las skills');
     } catch (error) {
-        console.error('Error en getAllSkillsService:', error);
+         console.error('Error en getAllSkillsService:', error); 
         return [];
     }
 };
@@ -302,7 +302,7 @@ export const deleteConsultationService = async (consultationId, token) => {
             Authorization: `${token}`,
         },
     });
-    console.log('Que devuelve respose de consul no asignadas', response);
+    console.log('Que devuelve deleteconsult', response);
 
     const { message, data } = await response.json();
 

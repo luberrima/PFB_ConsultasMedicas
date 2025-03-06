@@ -4,6 +4,9 @@ import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 import { deleteConsultationByIdModel } from '../../models/consultations/deleteConsultationByIdModel.js';
 
 export const deleteConsultationService = async (consultation) => {
+
+    console.log('QUE TENGO EN SEVICE COMO consultation', consultation );
+    
     const result = await deleteConsultationByIdModel(consultation.id);
     if (result.affectedRows === 0) {
         throw genereErrorUtils(

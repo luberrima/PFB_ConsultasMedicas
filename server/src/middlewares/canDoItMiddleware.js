@@ -9,8 +9,16 @@ export const canDoItMiddleware = async (req, res, next) => {
         const { id: idUserLogged, role: roleUserLogged } = req.user;
 
         // ID del doctor propietario de la entrada
-        const { doctorId } = req.entry;
-        const { userId } = req.entry;
+        const { doctorId } = req.consutl || {};
+        const { userId } = req.consult || {};
+        console.log('QUE TENGO DE USER req', req );
+        console.log('QUE TENGO DE USER req.user', req.user ); 
+        console.log('QUE TENGO DE USER req.consut', req.consult );
+        console.log('QUE TENGO DE CandoItMidelware idUserLogged', idUserLogged);
+        console.log('QUE TENGO DE CandoItMidelware userId', userId);
+        console.log('QUE TENGO DE CandoItMidelware roleUserLogged', roleUserLogged);
+
+        
         //
    
         if (
