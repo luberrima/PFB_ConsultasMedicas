@@ -207,10 +207,10 @@ export const getAllSkillsService = async () => {
         if (data.status === 'ok') {
             return data.data;
         }
-        console.log('data.data:', data.data);
+        /* console.log('data.data:', data.data); */
         throw new Error('Error al obtener las skills');
     } catch (error) {
-        console.error('Error en getAllSkillsService:', error);
+         console.error('Error en getAllSkillsService:', error); 
         return [];
     }
 };
@@ -293,7 +293,9 @@ export const takeConsultationService = async (consultationId, token) => {
 };
 
 export const deleteConsultationService = async (consultationId, token) => {
+
     console.log('DELETE CONSTULTA:', token, consultationId);
+  
     console.log(
         'Esta es la ruta del fech',
         `${backEndPath}/consultations/${consultationId}`

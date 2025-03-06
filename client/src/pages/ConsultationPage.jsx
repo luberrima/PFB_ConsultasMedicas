@@ -174,7 +174,7 @@ export const ConsultationPage = () => {
             if (response.status === 'ok') {
                 setConsultation(response.data);
             } else {
-                /*  console.error('Error al obtener la consulta'); */
+                  console.error('Error al obtener la consulta'); 
             }
 
             const skills = await getAllSkillsService();
@@ -205,30 +205,32 @@ export const ConsultationPage = () => {
     const canTakeConsultation =
         isDoctor && doctorSkillId === consultation.skillId;
 
-    console.log('token:', token);
+   /*  console.log('token:', token); */
 
-    console.log('decodedtoken:', decodedToken);
+    /* console.log('decodedtoken:', decodedToken);
     console.log('ispatient:', isPatient);
     console.log('hasdiagnostic:', hasDiagnostic);
     console.log('consultation:', consultation);
     console.log('getAllSkillsServide:', getAllSkillsService());
-    console.log('skill:', skill);
+    console.log('skill:', skill); */
 
     const handleChangeResponderConsulta = async () => {
         try {
             const data = await takeConsultationService(consultationId, token);
-            console.log('Consulta tomada exitosamente:', data);
+            /* console.log('Consulta tomada exitosamente:', data); */
 
             setConsultation((prev) => ({ ...prev, doctorId: decodedToken.id }));
         } catch (error) {
             console.error('Error al tomar la consulta:', error);
         }
     };
+    
 
     const handleDeleteConsulta = async () => {
         const confirmDelete = window.confirm(
             '¿Estás seguro de que deseas eliminar esta consulta? Esta acción no se puede deshacer.'
         );
+
 
         if (!confirmDelete) return;
 
@@ -283,10 +285,12 @@ export const ConsultationPage = () => {
                 </article>
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
+
                     <Button
                         className="btn btn-naranja"
                         onClick={handleDeleteConsulta}
                     >
+
                         Eliminar Consulta
                     </Button>
                 )}
