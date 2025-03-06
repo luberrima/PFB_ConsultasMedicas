@@ -3,14 +3,16 @@ import { deleteConsultationService } from '../../services/consultations/deleteCo
 export const deleteConsultationController = async (req, res, next) => {
     try {
 
+        console.log('QUE TENGO DE USER req.consut', req.consult );
 
-        const consultationId = req.entry;
 
-        await deleteConsultationService(consultationId);
+        const consultation = req.consult;
+
+        await deleteConsultationService(consultation);
 
         res.send({
             status: 'ok',
-            message: `La consulta con id ${consultationId.id} y todos sus elementos fueron eliminados`,
+            message: `La consulta con id ${consultation.id} y todos sus elementos fueron eliminados`,
         });
     } catch (error) {
         next(error);
