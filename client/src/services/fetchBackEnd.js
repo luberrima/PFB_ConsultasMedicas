@@ -267,7 +267,7 @@ export const registerDoctorService = async (doctorData) => {
 };
 
 export const takeConsultationService = async (consultationId, token) => {
-    console.log('AAAAAAAAAA TOKEN TOKEN TOKEN:', token);
+    
     try {
         const response = await fetch(
             `${backEndPath}/consultations/take/${consultationId}`,
@@ -292,3 +292,30 @@ export const takeConsultationService = async (consultationId, token) => {
         throw error;
     }
 };
+
+export const deleteConsultationService = async (consultationId, token) => {
+    console.log('Esta es la ruta del fech', `${backEndPath}/consultations${consultationId}`);
+
+    const response = await fetch(`${backEndPath}/consultations/:${consultationId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `${token}`,
+        },
+    });
+    console.log('Que devuelve respose de consul no asignadas', response);
+
+    const { message, data } = await response.json();
+
+    if (!response.ok) throw new Error(message);
+
+    console.log(
+        'esto es lo que retorna el deleteConsultarionsService',
+        data
+    );
+
+    return data;
+};
+
+
+
+

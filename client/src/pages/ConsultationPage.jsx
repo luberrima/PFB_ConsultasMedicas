@@ -135,6 +135,7 @@ import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
 import { Button } from '../components/Button.jsx';
 import {
+    deleteConsultationService,
     getAllSkillsService,
     getConsultationDetailService,
     takeConsultationService,
@@ -210,7 +211,7 @@ export const ConsultationPage = () => {
     console.log('skill:', skill);
 
     const handleChangeResponderConsulta = async () => {
-        console.log('TOKEEEEEEEEN:', token);
+        
         try {
             const data = await takeConsultationService(consultationId, token);
             console.log('Consulta tomada exitosamente:', data);
@@ -220,6 +221,30 @@ export const ConsultationPage = () => {
             console.error('Error al tomar la consulta:', error);
         }
     };
+
+    const handleDeleteConsulta = async () => {
+        
+        try {
+            const data = await deleteConsultationService(consultationId, token);
+            console.log('Consulta borrada exitosamente:', data);
+
+            const params = new URLSearchParams({
+                type: 'success',
+                message,
+            });
+
+            toast.success('Consulta registrada');
+                        setTimeout(() => {
+                            setIsLoading(false);
+                            navigate(`/?${params.toString()}`);
+                        }, 3000);
+
+        } catch (error) {
+            console.error('Error al borrar la consulta:', error);
+        }
+    };
+
+    
 
     return (
         <section className="consultation-page">
@@ -251,14 +276,15 @@ export const ConsultationPage = () => {
                 </article>
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
-                    <Button className="btn btn-naranja">
+                    <Button className="btn btn-naranja"
+                    onClick={handleDeleteConsulta}>
                         Eliminar Consulta
                     </Button>
                 )}
                 {!hasDiagnostic && canTakeConsultation && (
                     <Button
                         className="btn btn-naranja"
-                        handleClick={handleChangeResponderConsulta}
+                        onClick={handleChangeResponderConsulta}
                     >
                         Responder a esta consulta
                     </Button>
