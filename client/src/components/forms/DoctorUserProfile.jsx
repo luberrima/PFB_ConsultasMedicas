@@ -2,6 +2,7 @@ import React /*, { useState }*/ from 'react';
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
 import { useAllDoctor } from '../../hooks/useAllDoctor.js';
+import avatardefault from "../../assets/avatar-default.jpg"
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 import { useDoctorProfile } from '../../hooks/useDoctorProfile.js';
@@ -66,6 +67,10 @@ export const DoctorUserProfile = ({ doctorId }) => {
                         <img
                             src={`${staticPath}/avatars/${doctorinfo?.userDoctor?.id}/${doctorinfo?.userDoctor?.avatar}`}
                             alt="Foto usuario"
+                            onError={(e) => {
+                                e.target.onerror = null;  
+                                e.target.src = avatardefault; 
+                            }}
                         />
                     </article>
                     <article className="ficha-medico-info">

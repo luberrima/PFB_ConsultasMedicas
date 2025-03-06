@@ -101,12 +101,7 @@ export const HomePage = () => {
                                 alt="logo de la app"
                             />
                             <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Corrupti laudantium iste
-                                suscipit aut beatae quaerat accusamus illo
-                                adipisci veniam minus, cumque recusandae ratione
-                                autem quas dolores quos commodi obcaecati
-                                possimus!
+                            Un lugar al que pertenecer, en el que puedes encontrar diagnóstico de médicos sobre tus dolencias y todo a unos pocos clips. Puedes formar parte de nuestra comunidad, ver tu historial de cosultas, con una red amplia de médicos a tu disposición y elección, ya que puedes ver el ratio de satisfacción de sus diagnósticos. Todo ello en un entorno cómodo e intuitivo, puedes verlo en tu Tablet, ordenador o teléfono. 
                             </p>
                             <Link to="/signup" className="btn btn-naranja">
                                 Registro

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Estrellas } from '../Estrellas.jsx';
+import avatardefault from "../../assets/avatar-default.jpg"
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
@@ -14,6 +15,10 @@ export const CardDoctor = ({ doctor }) => {
                     <img
                         src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
                         alt="Foto usuario"
+                        onError={(e) => {
+                            e.target.onerror = null;  
+                            e.target.src = avatardefault; 
+                        }}
                     />
                 </a>
                 <h3>{doctor.username}</h3>

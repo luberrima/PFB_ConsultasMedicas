@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Estrellas } from './Estrellas.jsx';
+import avatardefault from "../assets/avatar-default.jpg"
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 export const CardAllInfoDoctor = ({ doctor }) => {
@@ -16,6 +17,11 @@ export const CardAllInfoDoctor = ({ doctor }) => {
                             <img
                                 src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
                                 alt="Foto usuario"
+                                onError={(e) => {
+                                    e.target.onerror = null;  
+                                    e.target.src = avatardefault; 
+                                }}
+
                             />
                         </a>
                         <div>
