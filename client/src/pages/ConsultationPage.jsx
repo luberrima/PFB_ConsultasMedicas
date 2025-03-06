@@ -138,6 +138,7 @@ import {
     deleteConsultationService,
     getAllSkillsService,
     getConsultationDetailService,
+    getConsultationImages,
     takeConsultationService,
 } from '../services/fetchBackEnd.js';
 import { VoteForm } from '../components/forms/VoteForm.jsx';
@@ -173,8 +174,9 @@ export const ConsultationPage = () => {
             /* console.log('response:', response); */
             if (response.status === 'ok') {
                 setConsultation(response.data);
+                // IMÁGENES
             } else {
-                  console.error('Error al obtener la consulta'); 
+                console.error('Error al obtener la consulta');
             }
 
             const skills = await getAllSkillsService();
@@ -200,12 +202,13 @@ export const ConsultationPage = () => {
     const skill =
         skills.find((skill) => skill.id === consultation.skillId)?.Name ||
         'Especialidad desconocida';
+    const hasVote = consultation.vote;
 
     const doctorSkillId = decodedToken?.skillId;
     const canTakeConsultation =
         isDoctor && doctorSkillId === consultation.skillId;
 
-   /*  console.log('token:', token); */
+    /*  console.log('token:', token); */
 
     /* console.log('decodedtoken:', decodedToken);
     console.log('ispatient:', isPatient);
@@ -217,20 +220,18 @@ export const ConsultationPage = () => {
     const handleChangeResponderConsulta = async () => {
         try {
             const data = await takeConsultationService(consultationId, token);
-            /* console.log('Consulta tomada exitosamente:', data); */
+            console.log('Consulta tomada exitosamente:', data);
 
             setConsultation((prev) => ({ ...prev, doctorId: decodedToken.id }));
         } catch (error) {
             console.error('Error al tomar la consulta:', error);
         }
     };
-    
 
     const handleDeleteConsulta = async () => {
         const confirmDelete = window.confirm(
             '¿Estás seguro de que deseas eliminar esta consulta? Esta acción no se puede deshacer.'
         );
-
 
         if (!confirmDelete) return;
 
@@ -254,6 +255,23 @@ export const ConsultationPage = () => {
             toast.error('Hubo un problema al eliminar la consulta');
         }
     };
+
+    const images = getConsultationImages(
+        consultation.userId,
+        consultation.id,
+        consultation.files || []
+    );
+    console.log(
+        '📸FOTOS:',
+        consultation.userId,
+        '<USERID',
+        consultation.id,
+        '<CONSULTA ID',
+        consultation.arch,
+        '<FILES'
+    );
+
+    console.log('CONSULTATION:', consultation);
 
     return (
         <section className="consultation-page">
@@ -285,12 +303,10 @@ export const ConsultationPage = () => {
                 </article>
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
-
                     <Button
                         className="btn btn-naranja"
                         onClick={handleDeleteConsulta}
                     >
-
                         Eliminar Consulta
                     </Button>
                 )}
@@ -309,8 +325,24 @@ export const ConsultationPage = () => {
                     </p>
                 )}
             </section>
-            <section>
-                <p>imagenes</p>
+            <section className="consulta-archivos">
+                <h3>Archivos subidos</h3>
+
+                {images && images.length > 0 ? (
+                    // <div className="image-gallery">
+                    //     {images.map((img, index) => (
+                    //         <img
+                    //             key={index}
+                    //             src={img.url}
+                    //             alt={img.name}
+                    //             className="uploaded-image"
+                    //         />
+                    //     ))}
+                    // </div>
+                    console.log('images', images)
+                ) : (
+                    <p>No hay imágenes subidas para esta consulta.</p>
+                )}
             </section>
 
             {/* Sección de chat (si no hay diagnóstico) */}
@@ -322,7 +354,7 @@ export const ConsultationPage = () => {
             )}
 
             {/* Diagnóstico y valoración (si hay diagnóstico) */}
-            {hasDiagnostic && isPatient && (
+            {hasDiagnostic && isPatient && !hasVote && (
                 <>
                     <section className="diagnostic">
                         <h3>Diagnóstico</h3>
@@ -337,12 +369,12 @@ export const ConsultationPage = () => {
                 </>
             )}
 
-            {hasDiagnostic && isDoctor && (
+            {hasDiagnostic && (
                 <>
                     <section className="diagnostic">
-                        <h3>Valoración de tu respuesta</h3>
+                        <h3>Valoración de la respuesta</h3>
 
-                        <Estrellas value={consultation.vote} />
+                        <Estrellas rating={consultation.vote} />
                     </section>
                 </>
             )}

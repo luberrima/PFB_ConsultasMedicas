@@ -71,6 +71,7 @@ export const getConsultationDetailService = async (consultationId, token) => {
                 },
             }
         );
+        console.log('RESPONSE CONSULTATION:', response.data);
         /* console.log('repsonse en service:', response); */
         if (!response.ok) {
             const errorData = await response.json();
@@ -210,7 +211,7 @@ export const getAllSkillsService = async () => {
         /* console.log('data.data:', data.data); */
         throw new Error('Error al obtener las skills');
     } catch (error) {
-         console.error('Error en getAllSkillsService:', error); 
+        console.error('Error en getAllSkillsService:', error);
         return [];
     }
 };
@@ -293,9 +294,8 @@ export const takeConsultationService = async (consultationId, token) => {
 };
 
 export const deleteConsultationService = async (consultationId, token) => {
-
     console.log('DELETE CONSTULTA:', token, consultationId);
-  
+
     console.log(
         'Esta es la ruta del fech',
         `${backEndPath}/consultations/${consultationId}`
@@ -325,4 +325,15 @@ export const deleteConsultationService = async (consultationId, token) => {
         console.error('Error en deleteConsultationService:', error);
         return { status: 'error', message: error.message };
     }
+};
+
+export const getConsultationImages = (userId, consultationId, files = []) => {
+    if (!userId || !consultationId || files.length === 0) {
+        return [];
+    }
+
+    return files.map((file) => ({
+        url: `${backEndPath}/src/uploads/entries/${userId}/${consultationId}/${file.filename}`,
+        name: file.filename,
+    }));
 };

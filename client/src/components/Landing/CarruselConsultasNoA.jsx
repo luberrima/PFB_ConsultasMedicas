@@ -7,8 +7,13 @@ export const CarruselconsultasNoA = ({ consultasAllAs }) => {
     //  const photos = consultasAllAs?.consultas || [];
     console.log(consultasAllAs);
 
+    if (!consultasAllAs?.user?.consult) {
+        return <div> No tienes consultas</div>;
+    }
+
     return (
         <>
+            {/* cambiar la logica para que sean consultas que tengan consulta.doctorId vacio  */}
             <ul className="lista-consultas">
                 {consultasAllAs?.consultations?.length > 0 ? (
                     consultasAllAs?.consultations?.map(
