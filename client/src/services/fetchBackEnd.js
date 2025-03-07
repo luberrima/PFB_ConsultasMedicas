@@ -255,3 +255,131 @@ export const registerDoctorService = async (doctorData) => {
     if (!response.ok) throw new Error(message);
     return message;
 };
+
+
+export const deleteConsultationService = async (consultationId, token) => {
+    console.log('Esta es la ruta del fech', `${backEndPath}/consultations${consultationId}`);
+
+    const response = await fetch(`${backEndPath}/consultations/:${consultationId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `${token}`,
+        },
+    });
+    console.log('Que devuelve respose de consul no asignadas', response);
+
+    const { message, data } = await response.json();
+
+    if (!response.ok) throw new Error(message);
+
+    console.log(
+        'esto es lo que retorna el deleteConsultarionsService',
+        data
+    );
+
+    return data;
+};
+
+export const getConsultationImages = (userId, consultationId, files = []) => {
+
+
+
+    if (!userId || !consultationId || files.length === 0) {
+
+
+        return [];
+
+
+    }
+
+
+
+
+
+    return files.map((file) => ({
+
+
+        url: `${backEndPath}/src/uploads/entries/${userId}/${consultationId}/${file.filename}`,
+
+
+        name: file.filename,
+
+
+    }));
+
+
+};
+export const takeConsultationService = async (consultationId, token) => {
+
+
+
+    try {
+
+
+        const response = await fetch(
+
+
+            `${backEndPath}/consultations/take/${consultationId}`,
+
+
+            {
+
+
+                method: 'PUT',
+
+
+                headers: {
+
+
+                    'Content-Type': 'application/json',
+
+
+                    Authorization: `${token}`,
+
+
+                },
+
+
+            }
+
+
+        );
+
+
+
+
+
+        const data = await response.json();
+
+
+
+
+
+        if (!response.ok) {
+
+
+            throw new Error(data.message || 'Error al tomar la consulta');
+
+
+        }
+
+
+
+
+
+        return data;
+
+
+    } catch (error) {
+
+
+        console.error('Error en takeConsultationService:', error);
+
+
+        throw error;
+
+
+    }
+
+
+};
