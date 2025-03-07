@@ -161,8 +161,8 @@ export const RegisterForm = () => {
                 <label>Especialidad</label>
                 <select
                     name="skillId"
-                    value={info.skillId}
-                    onChange={handleChange}
+                    value={doctorInfo.skillId}
+                    onChange={handleChangeDoctorInfo}
                     className="form-select-input"
                 >
                     <option value="">Selecciona una especialidad</option>
