@@ -13,6 +13,7 @@ import {
 } from '../../services/fetchBackEnd.js';
 import { toast } from 'react-toastify';
 import { useForm } from '../../hooks/useForm.js';
+import { getallskills } from '../../hooks/getallskills.js';
 
 export const RegisterForm = () => {
     const {
@@ -28,6 +29,16 @@ export const RegisterForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [userType, setUserType] = useState('patient');
     const navigate = useNavigate();
+    const { skills } = getallskills();
+    const [selectedValue, setSelectedValue] = useState(""); 
+    const handleChange = (event) => {
+        console.log("Valor (event:", event);
+        console.log("Valor seleccionado:", event.target.value);
+        doctorInfo.skillId=event.target.value;
+        setSelectedValue(event.target.value);
+
+      };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -157,14 +168,20 @@ export const RegisterForm = () => {
                         errors={errors}
                         handleChange={handleChangeDoctorInfo}
                     />
-                    <Input
-                        label="Especialidad"
-                        type="number"
-                        name="skillId"
-                        value={doctorInfo.skillId}
-                        errors={errors}
-                        handleChange={handleChangeDoctorInfo}
-                    />
+                   
+
+                    <select
+                     label="Especialidad" 
+                     value={selectedValue}
+                     onChange={handleChange}
+                     >
+                    <option value="">Selecciona una opción</option>
+                    { skills?.data?.skills?.map((skill) => (
+                    <option key={ skill.id} value={skill.id}>
+                    { skill.Name} 
+                    </option>
+      ))}
+    </select>
                 </>
             )}
             <Button

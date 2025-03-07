@@ -383,3 +383,71 @@ export const takeConsultationService = async (consultationId, token) => {
 
 
 };
+
+
+
+export const  getAllSkills= async () => {
+
+
+
+    try {
+
+
+        const response = await fetch(
+
+
+            `${backEndPath}/skills`,
+
+
+            {
+
+
+                method: 'get',
+
+
+                
+
+
+            }
+
+
+        );
+
+
+
+
+
+        const data = await response.json();
+
+
+
+
+
+        if (!response.ok) {
+
+
+            throw new Error(data.message || 'Error al tomar la skills');
+
+
+        }
+
+
+
+
+
+        return data;
+
+
+    } catch (error) {
+
+
+        console.error('Error en takeConsultationService:', error);
+
+
+        throw error;
+
+
+    }
+
+
+};
