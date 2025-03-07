@@ -5,13 +5,14 @@ import { insertUserModel } from '../../models/users/insertUserModel.js';
 import { selectUserByEmailModel } from '../../models/users/selectUserByEmailModel.js';
 import { selectUserByUsernameModel } from '../../models/users/selectUserByUsernameModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
+import { sendEmailBrevoUtils } from '../../utils/sendEmailBrevoUtil.js';
 
 export const registerUserService = async (username, email, password) => {
     
         // Buscar si el usuario ya existe por username
         const userByUsername = await selectUserByUsernameModel(username);
         if (userByUsername) {
-            throw generateErrorUtils(
+            throw genereErrorUtils(
                 400,
                 'USER_ALREADY_EXISTS',
                 'El username ya existe. Prueba con otro o inicia sesión'
@@ -21,7 +22,7 @@ export const registerUserService = async (username, email, password) => {
         // Buscar si el usuario ya existe por email
         const userByEmail = await selectUserByEmailModel(email);
         if (userByEmail) {
-            throw generateErrorUtils(
+            throw genereErrorUtils(
                 400,
                 'EMAIL_ALREADY_EXISTS',
                 'El email ya existe. Prueba con otro o inicia sesión'
@@ -51,15 +52,19 @@ export const registerUserService = async (username, email, password) => {
 
     // Enviar el mail de confirmación
         // Asunto del email
-        const emailSubject = 'Activa tu cuenta de Travel Diary';
+        const emailSubject = 'Activa tu cuenta de Good Doctor';
+        console.log("paso por el asunto", emailSubject )
         // Cuerpo del email
         const emailText = `
-        <h2>¡Bienvenid@ ${username} a Travel Diary! 🗺️</h2>
+        <h2>¡Bienvenid@ ${username} a Good Doctor!</h2>
         <p>Gracias por registrarte en nuestra aplicación. Para activar tu cuenta, haz click en el siguiente enlace:</p>
         <p><a href="http://localhost:5173/validate/${registrationCode}">Activa tu cuenta</a></p>
         `;
+        console.log("paso por el texto", emailText )
         // Llamar al servicio que envía el email
-        await sendEmailBrevoUtil(email, emailSubject, emailText);
+        console.log("paso por al utils", email, emailSubject, emailText )
+        await sendEmailBrevoUtils(email, emailSubject, emailText);
+        
 
     return { id, username, email, registrationCode, role: 'paciente' };
 };
