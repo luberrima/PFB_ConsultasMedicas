@@ -87,7 +87,16 @@ export const HomePage = () => {
                         <CarruselconsultasNoA consultasAllAs={consultasAllAs} />
                     </section>
                 </>
-            ) : (
+            ) : decodedToken && decodedToken.role === 'admin' ? (
+                <>
+                <h3>ERES EL ADMINISTRADOR</h3>
+                <h2>Todos los pacientes</h2>
+                <h2>Todos los doctores</h2>
+
+                
+                
+                </>
+            ): (
                 //
                 // USUARIO NO REGISTRADO
                 //
