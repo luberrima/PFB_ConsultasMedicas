@@ -17,6 +17,8 @@ import { userExistsMiddleware } from '../middlewares/userExistsMiddleware.js';
 import { editUserInfoController } from '../controllers/users/editUserInfoController.js';
 import { editAvatarController} from '../controllers/users/editAvatarController.js';
 import { updateUserController } from '../controllers/users/updateUserProfileController.js';
+import { getDoctorsBySkillController } from '../controllers/users/getDoctorsBySkillController.js';
+
 
 export const usersRouter = express.Router();
 
@@ -44,6 +46,8 @@ usersRouter.put('/users/send-validation-email', sendValidationEmailController);
 usersRouter.put('/users/password/edit', editUserPassController);
 usersRouter.post('/users/password/recovery', recoveryPassController);
 usersRouter.get('/users/:id', getUserByIdController);
+
+usersRouter.get('/doctors/:skillId', getDoctorsBySkillController);
 
 // Nuevo endpoint actualizado
 usersRouter.put('/users/updateprofile', authUserMiddleware, updateUserController);

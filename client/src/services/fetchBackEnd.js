@@ -383,3 +383,23 @@ export const takeConsultationService = async (consultationId, token) => {
 
 
 };
+
+export const getDoctorsBySkill = async (skillId) => {
+    try {
+      const response = await fetch(`${backEndPath}/doctors/${skillId}`, {
+        headers: { "Accept": "application/json" }
+      });
+  
+      const contentType = response.headers.get("content-type");
+  
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("La respuesta no es JSON");
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en getDoctorsBySkill:", error);
+      throw error;
+    }
+  };

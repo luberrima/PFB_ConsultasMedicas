@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { newConsultSchema } from '../../schemas/consultations/newConsultSchema.js';
-import { newConsultService } from '../../services/fetchBackEnd.js';
+import { newConsultService, getDoctorsBySkill } from '../../services/fetchBackEnd.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -13,18 +13,35 @@ import { ImageInput } from './ImageInput.jsx';
 
 export const ConsultForm = () => {
     const { token } = useAuth();
-    const { info, previews, /*errors,*/ validate, handleChange } = useForm();
+    const { info, previews, validate, handleChange } = useForm();
     const [isLoading, setIsLoading] = useState(false);
+    const [doctors, setDoctors] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log("skillid :", info.skillId)
+        const fetchDoctors = async () => {
+            if (info.skillId) {
+                try {
+                    const data = await getDoctorsBySkill(info.skillId, token);
+                    setDoctors(data);
+                    console.log("Respuesta de la API:", data);
+                } catch (error) {
+                    toast.error(error.message || 'Error al cargar los médicos');
+                }
+            } else {
+                setDoctors([]);
+            }
+        };
+        fetchDoctors();
+    }, [info.skillId, token]);
 
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-
             validate(newConsultSchema);
-
             setIsLoading(true);
-            const { message /*, data*/ } = await newConsultService(info, token);
+            const { message } = await newConsultService(info, token);
 
             const params = new URLSearchParams({
                 type: 'success',
@@ -40,6 +57,7 @@ export const ConsultForm = () => {
             toast.error(error.message || 'Error al registrar la consulta');
         }
     };
+
     return (
         <Form className="form" handleSubmit={handleSubmit}>
             <Input
@@ -60,24 +78,12 @@ export const ConsultForm = () => {
                     className="form-select-input"
                 >
                     <option value="">Selecciona una especialidad</option>
-                    <option value="1" title="General">
-                        1 - General
-                    </option>
-                    <option value="2" title="Urólogo">
-                        2 - Urólogo
-                    </option>
-                    <option value="3" title="Traumatismos">
-                        3 - Traumatismos
-                    </option>
-                    <option value="4" title="Cardiología">
-                        4 - Cardiología
-                    </option>
-                    <option value="5" title="Otorrinolaringólogo">
-                        5 - Otorrinolaringólogo
-                    </option>
-                    <option value="6" title="Anestesia">
-                        6 - Anestesia
-                    </option>
+                    <option value="1">1 - General</option>
+                    <option value="2">2 - Urólogo</option>
+                    <option value="3">3 - Traumatismos</option>
+                    <option value="4">4 - Cardiología</option>
+                    <option value="5">5 - Otorrinolaringólogo</option>
+                    <option value="6">6 - Anestesia</option>
                 </select>
             </fieldset>
 
@@ -97,12 +103,24 @@ export const ConsultForm = () => {
                     <option value="Urgente">Urgente</option>
                 </select>
             </fieldset>
-            <Input
-                label="Especialista"
-                name="doctorId"
-                value={info.doctorId}
-                handleChange={handleChange}
-            />
+
+            <fieldset>
+                <label>Especialista (opcional)</label>
+                <select
+                    name="doctorId"
+                    value={info.doctorId || ''}
+                    onChange={handleChange}
+                    className="form-select-input"
+                >
+                    <option value="">Selecciona un especialista</option>
+                    {doctors.map((doctor) => (
+                        <option key={doctor.id} value={doctor.id}>
+                            {doctor.nombre}
+                        </option>
+                    ))}
+                </select>
+            </fieldset>
+
             <Input
                 label="Descripción"
                 type="textarea"
@@ -119,7 +137,6 @@ export const ConsultForm = () => {
                 type="submit"
                 isLoading={isLoading}
             >
-                {/* <Icon name="send" /> */}
                 <span className="text">Consultar</span>
             </Button>
         </Form>
