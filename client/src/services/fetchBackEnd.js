@@ -10,7 +10,6 @@ export const getOwnUserService = async (token) => {
 };
 
 export const getAllDoctorsService = async () => {
-    console.log('estoy dentro de getAllDoctorService');
 
     const response = await fetch(`${backEndPath}/users/doctors`);
 

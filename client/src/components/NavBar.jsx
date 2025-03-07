@@ -8,7 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 
 export const NavBar = () => {
     const { token } = useContext(AuthContext);
-    console.log('Token recibido en NavBar:', token);
+    
     let decodedToken = null;
 
     if (token && typeof token === 'string') {

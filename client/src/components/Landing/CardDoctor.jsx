@@ -4,7 +4,12 @@ import avatardefault from "../../assets/avatar-default.jpg"
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
+
+
 export const CardDoctor = ({ doctor }) => {
+    
+  console.log(`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`);
+
     return (
         <>
             <li className="card-doctor-inicio">
