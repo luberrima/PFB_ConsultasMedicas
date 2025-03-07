@@ -24,6 +24,12 @@ export const LoginPage = () => {
                 <p>Escribe tus datos para iniciar sesión</p>
                 <LoginForm />
                 <p>
+                    <p>
+                        ¿Olvidaste tu contraseña?{' '}
+                        <Link to="/password-recovery" className="form-link">
+                            Recupérala aquí
+                        </Link>
+                    </p>
                     ¿No tienes cuenta?
                     <Link to="/registro" className="form-link">
                         Regístrate

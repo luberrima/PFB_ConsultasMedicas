@@ -8,7 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 
 export const NavBar = () => {
     const { token } = useContext(AuthContext);
-    
+
     let decodedToken = null;
 
     if (token && typeof token === 'string') {
@@ -67,7 +67,7 @@ export const NavBar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/" className="navbar-link">
+                                <Link to="/profile" className="navbar-link">
                                     Mi Perfil
                                 </Link>
                             </li>

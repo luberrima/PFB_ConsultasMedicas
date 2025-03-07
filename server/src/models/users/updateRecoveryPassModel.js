@@ -11,25 +11,23 @@ export const updateRecoveryPassModel = async (email, recoveryPassCode) => {
     ]);
 
     const to = email;
-
     const Subject = 'Recuperación de contraseña en GoodDoctor';
+    const frontendHost = process.env.FRONTEND_HOST || 'http://localhost:3000';
+    const resetUrl = `${frontendHost}/password-reset/${recoveryPassCode}`;
 
     const text = `
-            <p>¡Hola!</p>
-            <p>Se ha solicitado la recuperación de contraseña para este email en GoodDoctor</p>
-
-            <p>Use el siguiente código para crear una nueva contraseña: ${recoveryPassCode}</p>
-
-            <p>Si no ha sido usted, puede ignorar este email</p>
-
-            <p>Un saludo,</p>
-            <p>El equipo de GoodDoctor</p>
-
-        `;
+        <p>¡Hola!</p>
+        <p>Se ha solicitado la recuperación de contraseña para este email en GoodDoctor.</p>
+        <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+        <p><a href="${resetUrl}">${resetUrl}</a></p>
+        <p>Si no has solicitado este cambio, ignora este correo.</p>
+        <p>Un saludo,</p>
+        <p>El equipo de GoodDoctor</p>
+    `;
 
     try {
         await sendEmailBrevoUtils(to, Subject, text);
-    }   catch (err) {
+    } catch (err) {
         throw genereErrorUtils('Error al enviar el correo');
     }
 };
