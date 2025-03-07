@@ -14,12 +14,19 @@ export const newConsultController = async (req, res, next) => {
         const userId = req.user.id;
 
         //  Obtener la info del body
-        const { title, skillId, description,gravedad,doctorId } = req.body;
+        let { title, skillId, description,gravedad,doctorId } = req.body;
         
 
         //  Obtener las recetas
 
         let Receta = [];
+
+        console.log("valor de doctorid",doctorId);
+        if (doctorId==="")
+        {
+            doctorId=null;
+            delete  req.body.doctorId;
+        }
 
         if (req.files) {
           

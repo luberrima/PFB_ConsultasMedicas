@@ -5,10 +5,10 @@ export const insertConsultModel = async (consult) => {
     //  Crear la conexión 
     const pool = await getPool();
    
-
+    console.log("valor de consult.doctorId",consult.doctorId);
     let result=[]
 
-    if (!consult.doctorId)
+    if (!consult.doctorId || consult.doctorId=="" )
     {  [result] = await pool.query(
         `INSERT INTO consultations (id, title, skillId, description, userId,gravedad )
     VALUES (?, ?, ?, ?, ?, ?)`,
