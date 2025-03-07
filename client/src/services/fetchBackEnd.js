@@ -53,7 +53,9 @@ export const getAllConsulNoAsigService = async (token) => {
         'esto es lo que retorna el getAllConsultas No asginadas Service',
         data
     );
-
+    
+    console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEE',data);
+    
     return data;
 };
 

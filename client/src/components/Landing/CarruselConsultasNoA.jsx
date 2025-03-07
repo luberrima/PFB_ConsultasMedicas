@@ -11,13 +11,9 @@ export const CarruselconsultasNoA = ({ consultasAllAs }) => {
         <>
             <ul className="lista-consultas">
                 {consultasAllAs?.consultations?.length > 0 ? (
-                    consultasAllAs?.consultations?.map(
-                        (consulta) =>
-                            consulta.doctorId !== null && (
-                                <CardConsulta
-                                    key={consulta.id}
-                                    consulta={consulta}
-                                />
+                    consultasAllAs?.consultations?.filter((consulta) => !consulta.doctorId) // Filtra consultas sin doctorId
+                    .map((consulta) => (
+                        <CardConsulta key={consulta.id} consulta={consulta} />
                             )
                     )
                 ) : (
