@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { CardAllInfoDoctor } from '../CardAllInfoDoctor.jsx';
 
 export const DoctorUserProfile = ({ doctorId }) => {
-    console.log('doctor user profile id data', doctorId);
+    
     const { doctorsbio /*, loadingbio, errorbio*/ } =
         useDoctorProfile(doctorId);
     const { doctors /*, loading, error*/ } = useAllDoctor();
@@ -26,10 +26,10 @@ export const DoctorUserProfile = ({ doctorId }) => {
         if (/* typeof */ doctorList === undefined) {
             return <div> Perfil del doctor No disponible</div>;
         } else {
-            console.log('datos cargados dedoctorList', doctorList);
+            
         }
 
-        console.log('datos cargados de doctorinfo', doctorinfo);
+        
 
         if (!doctorinfo?.userDoctor?.media_valoracion) {
             valoracion = 0;
@@ -131,7 +131,7 @@ export const DoctorUserProfile = ({ doctorId }) => {
                 <h3 className="page-title">Otros Especialistas</h3>
                 <ul className="lista-doctores">
                     {/* Mapeamos todos los doctores para mostrarlos */}
-                    {console.log('valor de doctorList en el ul', doctorList)}
+                   
                     {doctorList.map((doctor) => (
                         <CardAllInfoDoctor key={doctor.id} doctor={doctor} />
                     ))}
