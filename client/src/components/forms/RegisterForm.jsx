@@ -32,6 +32,8 @@ export const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+
+
             console.log('hasta aqui llega el try1');
             // const schema =
             //     userType === 'doctor' ? newDoctorSchema : newUserSchema;
@@ -49,6 +51,12 @@ export const RegisterForm = () => {
 
             setIsLoading(true);
             console.log('hasta aqui llega el try5');
+
+          
+            doctorInfo.username=userInfo.username;
+            doctorInfo.email=userInfo.email;
+            doctorInfo.password=userInfo.password;
+            
 
             const message =
                 userType === 'doctor'
