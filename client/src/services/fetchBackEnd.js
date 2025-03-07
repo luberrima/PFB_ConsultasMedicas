@@ -246,94 +246,12 @@ export const registerUserService = async (userData) => {
 };
 
 export const registerDoctorService = async (doctorData) => {
-    console.log('doctordata en registerdoctorservice:', doctorData);
-    try {
-        const response = await fetch(`${backEndPath}/users/register-doctor`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(doctorData), // Pasamos los datos aquí
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al registrar el médico');
-        }
-
-        const result = await response.json();
-        return result.message; // Suponiendo que la respuesta contiene un mensaje
-    } catch (error) {
-        throw new Error(error.message || 'Error al registrar el médico');
-    }
-};
-
-export const takeConsultationService = async (consultationId, token) => {
-    try {
-        const response = await fetch(
-            `${backEndPath}/consultations/take/${consultationId}`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `${token}`,
-                },
-            }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Error al tomar la consulta');
-        }
-
-        return data;
-    } catch (error) {
-        console.error('Error en takeConsultationService:', error);
-        throw error;
-    }
-};
-
-export const deleteConsultationService = async (consultationId, token) => {
-    console.log('DELETE CONSTULTA:', token, consultationId);
-
-    console.log(
-        'Esta es la ruta del fech',
-        `${backEndPath}/consultations/${consultationId}`
-    );
-
-    try {
-        const response = await fetch(
-            `${backEndPath}/consultations/${consultationId}`,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `${token}`,
-                },
-            }
-        );
-        console.log('Que devuelve respose de consul no asignadas', response);
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Error al eliminar la consulta');
-        }
-
-        return { status: 'ok', data };
-    } catch (error) {
-        console.error('Error en deleteConsultationService:', error);
-        return { status: 'error', message: error.message };
-    }
-};
-
-export const getConsultationImages = (userId, consultationId, files = []) => {
-    if (!userId || !consultationId || files.length === 0) {
-        return [];
-    }
-
-    return files.map((file) => ({
-        url: `${backEndPath}/src/uploads/entries/${userId}/${consultationId}/${file.filename}`,
-        name: file.filename,
-    }));
+    const response = await fetch(`${backEndPath}/users/register-doctor`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(doctorData),
+    });
+    const { message } = await response.json();
+    if (!response.ok) throw new Error(message);
+    return message;
 };

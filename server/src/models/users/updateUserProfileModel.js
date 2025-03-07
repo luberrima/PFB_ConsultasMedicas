@@ -1,36 +1,28 @@
 import { getPool } from '../../db/getPool.js';
-import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 
-export const updateUserProfileModel = async (userId, { username, nombre, email, bio, collegeNumber, dateOfCollege, skillId }) => {
+// Obtener un usuario por su ID
+export const getUserById = async (id) => {
     const pool = await getPool();
+    const [user] = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
+    return user.length > 0 ? user[0] : null; // Retorna el primer usuario o null si no existe
+};
 
-    const [user] = await pool.query('SELECT role FROM users WHERE id = ?', [userId]);
-
-    if (user.length === 0) {
-        throw genereErrorUtils('Usuario no encontrado', 404);
-    }
-
-    const role = user[0].role;
-
-    const [result] = await pool.query(
-        `UPDATE users SET username = ?, nombre = ?, email = ?, bio = ?, updatedAt = CURRENT_TIMESTAMP WHERE id = ?`,
-        [username, nombre, email, bio, userId]
-    );
-
-    if (result.affectedRows === 0) {
-        throw genereErrorUtils('No se pudo actualizar el perfil del usuario', 500);
-    }
-
-    if (role === 'doctor') {
-        const [doctorResult] = await pool.query(
-            `UPDATE doctors SET collegeNumber = ?, dateOfCollege = ?, skillId = ?, updatedAt = CURRENT_TIMESTAMP WHERE userId = ?`,
-            [collegeNumber, dateOfCollege, skillId, userId]
-        );
-
-        if (doctorResult.affectedRows === 0) {
-            throw genereErrorUtils('No se pudo actualizar el perfil del doctor', 500);
+// Actualizar los datos de un usuario
+export const updateUser = async (id, updatedUser) => {
+    const pool = await getPool();
+    const updateFields = Object.keys(updatedUser).reduce((fields, key) => {
+        if (updatedUser[key] !== undefined) {
+            fields.push(`${key} = ?`);
         }
+        return fields;
+    }, []);
+
+    const updateValues = Object.values(updatedUser).filter(value => value !== undefined);
+
+    if (updateFields.length > 0) {
+        const updateQuery = `UPDATE users SET ${updateFields.join(', ')} WHERE id = ?`;
+        await pool.query(updateQuery, [...updateValues, id]);
     }
 
-    return { id: userId, username, nombre, email, bio, collegeNumber, dateOfCollege, skillId };
+    return true;
 };

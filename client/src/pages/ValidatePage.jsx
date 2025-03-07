@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Loading } from '../components/Loading.jsx';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Loading } from '../components/Loading.jsx';
 
 export const ValidatePage = () => {
 	const { registrationCode } = useParams();

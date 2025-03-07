@@ -1,7 +1,14 @@
 import joi from 'joi';
+
 import { joiErrorMessages } from '../joiErrorMessages.js';
+
 export const newUserSchema = joi.object({
-    username: joi.string().min(3).max(50).required().messages(joiErrorMessages),
+    username: joi
+        .string()
+        .min(3)
+        .max(50)
+        .required()
+        .messages(joiErrorMessages),
     email: joi
         .string()
         .email({ tlds: { allow: false } })
