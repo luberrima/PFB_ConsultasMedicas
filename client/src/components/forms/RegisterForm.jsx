@@ -157,14 +157,35 @@ export const RegisterForm = () => {
                         errors={errors}
                         handleChange={handleChangeDoctorInfo}
                     />
-                    <Input
-                        label="Especialidad"
-                        type="number"
-                        name="skillId"
-                        value={doctorInfo.skillId}
-                        errors={errors}
-                        handleChange={handleChangeDoctorInfo}
-                    />
+                    <fieldset>
+                <label>Especialidad</label>
+                <select
+                    name="skillId"
+                    value={info.skillId}
+                    onChange={handleChange}
+                    className="form-select-input"
+                >
+                    <option value="">Selecciona una especialidad</option>
+                    <option value="1" title="General">
+                        1 - General
+                    </option>
+                    <option value="2" title="Urólogo">
+                        2 - Urólogo
+                    </option>
+                    <option value="3" title="Traumatismos">
+                        3 - Traumatismos
+                    </option>
+                    <option value="4" title="Cardiología">
+                        4 - Cardiología
+                    </option>
+                    <option value="5" title="Otorrinolaringólogo">
+                        5 - Otorrinolaringólogo
+                    </option>
+                    <option value="6" title="Anestesia">
+                        6 - Anestesia
+                    </option>
+                </select>
+            </fieldset>
                 </>
             )}
             <Button
