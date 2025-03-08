@@ -216,7 +216,6 @@ export const getAllSkillsService = async () => {
 };
 
 export const registerUserService = async (userData) => {
-    console.log('userdata en registeruserservice:', userData);
     try {
         const response = await fetch(`${backEndPath}/users/register`, {
             method: 'POST',
@@ -225,7 +224,6 @@ export const registerUserService = async (userData) => {
             },
             body: JSON.stringify(userData),
         });
-        console.log('RESPONSE:', response);
 
         if (!response.ok) {
             throw new Error('Error al registrar el usuario');
@@ -233,10 +231,6 @@ export const registerUserService = async (userData) => {
 
         const result = await response.json();
 
-        console.log('RESULT:', result);
-        console.log('RESUKT.DATA:', result.data);
-        console.log('RESULT.DATA?.DATA', result.data?.data);
-        console.log('RESULT.DATA.DATA', result.data.data);
 
         return result;
     } catch (error) {
