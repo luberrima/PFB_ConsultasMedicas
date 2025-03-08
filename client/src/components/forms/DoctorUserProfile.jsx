@@ -56,7 +56,7 @@ export const DoctorUserProfile = ({ doctorId }) => {
         }
     }
     const handleClickConsulta = () => {
-        navigate('/registro');
+        navigate(`/new-consult/${doctorId}/${doctorinfo?.userDoctor?.skillId}`)
     };
 
     return (
@@ -97,7 +97,7 @@ export const DoctorUserProfile = ({ doctorId }) => {
                             </li>
                         </ul>
                         <Button
-                            onClick={handleClickConsulta}
+                            handleClick={handleClickConsulta}
                             className="btn btn-azul"
                         >
                             Nueva consulta

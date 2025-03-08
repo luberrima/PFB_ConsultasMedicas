@@ -1,135 +1,3 @@
-// import { useContext, useEffect, useState } from 'react';
-// import { Link, useParams } from 'react-router-dom';
-// import { AuthContext } from '../contexts/auth/AuthContext.js';
-// import { Button } from '../components/Button.jsx';
-// import { getConsultationDetailService } from '../services/fetchBackEnd.js';
-// import { VoteForm } from '../components/forms/VoteForm.jsx';
-
-// export const ConsultationPage = () => {
-//     const { consultationId } = useParams();
-//     console.log('consultation id:', consultationId);
-//     const { token } = useContext(AuthContext);
-//     const [consultation, setConsultation] = useState(null);
-
-//     useEffect(() => {
-//         if (!consultationId || !token) {
-//             console.error('Falta el ID o el token');
-//             return;
-//         }
-//         const fetchConsultation = async () => {
-//             const response = await getConsultationDetailService(
-//                 consultationId,
-//                 token
-//             );
-//             console.log('response en consultationpage:', response);
-//             console.log('consultationId en consultation page:', consultationId);
-//             console.log('token en consultation page:', token);
-//             console.log('response.status:', response.status);
-
-//             if (response.status === 'ok') {
-//                 const data = await response.data;
-//                 setConsultation(data);
-//             } else {
-//                 console.error('Error al obtener la consulta');
-//             }
-//         };
-//         fetchConsultation();
-//     }, [consultationId, token]);
-
-//     if (!consultation) {
-//         return (
-//             <div>
-//                 <p>No hemos encontrado la consulta</p>
-//                 <Link to="/" className="btn btn-azul">
-//                     Vuelve a Inicio
-//                 </Link>
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div>
-//             <div className="consultation-info">
-//                 <h1 className="page-title">{consultation.title}</h1>
-//                 <span>
-//                     <h3>Descripción</h3>
-//                     <p>{consultation.description}</p>
-//                 </span>
-//                 <span>
-//                     <h3>Gravedad:</h3>
-//                     <p>{consultation.gravedad}</p>
-//                 </span>
-//                 <span>
-//                     <h3>Especialidad:</h3>
-//                     <p>{consultation.skillId}</p>
-//                 </span>
-//                 <span>
-//                     <h3>Especialista asignado:</h3>
-//                     <p>
-//                         {consultation.doctorId
-//                             ? consultation.doctorId
-//                             : 'No hay especialista asignado'}
-//                     </p>
-//                 </span>
-//                 <span>
-//                     <h3>Estado de la consulta:</h3>
-//                     <p>
-//                         {consultation.diagnostic
-//                             ? 'Consulta terminada'
-//                             : 'Consulta activa'}
-//                     </p>
-//                 </span>
-//                 <div
-//                     className={
-//                         consultation.diagnostic
-//                             ? 'buttons'
-//                             : 'buttons-no-display'
-//                     }
-//                 >
-//                     {/* Falta poner acciones a los botones */}
-//                     <Button className="btn btn-azul">Concluir consulta</Button>
-//                     <Button className="btn btn-naranja">
-//                         Eliminar Consulta
-//                     </Button>
-//                 </div>
-//             </div>
-
-//             {/* falta crear componentes fileupload y chat */}
-//             <div className="consulta-archivos">
-//                 <h3>Archivos subidos</h3>
-//                 {/* <FileUpload consultaId={id} /> */}
-//             </div>
-
-//             {/* !!!!!!! HAY QUE HACER UN CONTEXTO DE CUANDO HAY O NO DIAGNÓSTICO!!!!!!!
-//             y aplicarlo al chat, el diagnostico final y el rating (en los propios componentes)
-
-//             CHAT CONSULTA */}
-//             <div
-//                 className={
-//                     consultation.diagnostic ? 'hidden' : 'consultation-chat'
-//                 }
-//             >
-//                 {/* <ChatComponent consultaId={id} /> */}
-//             </div>
-
-//             {/* DIAGNÓSTICO */}
-//             <div className={consultation.diagnostic ? 'diagnostic' : 'hidden'}>
-//                 <h3>Tu Diagnóstico</h3>
-//                 <p>{consultation.diagnostic}</p>
-//             </div>
-
-//             {/* VOTACIÓN */}
-//             <div className={consultation.diagnostic ? 'vote-form' : 'hidden'}>
-//                 <h3>Tu Consulta</h3>
-//                 <p>Valora el diagnóstico de tu especialista</p>
-//                 <VoteForm />
-//             </div>
-//         </div>
-//     );
-// };
-
-///////
-
 import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
@@ -139,6 +7,7 @@ import {
     getAllSkillsService,
     getConsultationDetailService,
     getConsultationImages,
+    getDoctorDetailService,
     takeConsultationService,
 } from '../services/fetchBackEnd.js';
 import { VoteForm } from '../components/forms/VoteForm.jsx';
@@ -158,9 +27,43 @@ export const ConsultationPage = () => {
 
     const [consultation, setConsultation] = useState(null);
     const [skills, setSkills] = useState([]);
+    const [doctorName, setDoctorName] = useState('');
+    const [doctorSkill, setDoctorSkill] = useState('');
 
     const navigate = useNavigate();
 
+    //datos doctor
+    useEffect(() => {
+        const fetchDoctorName = async () => {
+            if (!consultation?.doctorId) return;
+
+            try {
+                const response = await getDoctorDetailService(
+                    consultation.doctorId,
+                    token
+                );
+
+                console.log('DOCTOR RESPONSE.DATA:', response.data);
+
+                if (response.status === 'ok' && response.data) {
+                    setDoctorName(response.data.userDoctor?.nombre);
+                    setDoctorSkill(response.data.userDoctor?.skillId);
+                } else {
+                    console.error(
+                        'Error al obtener el nombre del doctor:',
+                        response
+                    );
+                }
+            } catch (error) {
+                console.error('Error en fetchDoctorName:', error);
+            }
+        };
+        fetchDoctorName();
+    }, [consultation?.doctorId, token]);
+    // console.log('DOCTORNAME:', doctorName);
+    // console.log('DOCTORskill:', doctorSkill);
+
+    //datos consulta
     useEffect(() => {
         if (!consultationId || !token) {
             console.error('Falta el ID o el token');
@@ -171,7 +74,7 @@ export const ConsultationPage = () => {
                 consultationId,
                 token
             );
-            /* console.log('response:', response); */
+
             if (response.status === 'ok') {
                 setConsultation(response.data);
                 // IMÁGENES
@@ -180,6 +83,7 @@ export const ConsultationPage = () => {
             }
 
             const skills = await getAllSkillsService();
+
             setSkills(skills.skills || []);
         };
         fetchData();
@@ -198,33 +102,34 @@ export const ConsultationPage = () => {
 
     const isPatient = decodedToken.role === 'paciente';
     const isDoctor = decodedToken.role === 'doctor';
+
     const hasDiagnostic = !!consultation.diagnostic;
+
     const skill =
         skills.find((skill) => skill.id === consultation.skillId)?.Name ||
         'Especialidad desconocida';
-    const hasVote = consultation.vote;
 
-    const doctorSkillId = decodedToken?.skillId;
     const canTakeConsultation =
-        isDoctor && doctorSkillId === consultation.skillId;
+        (isDoctor && doctorSkill === consultation.skillId) ||
+        consultation.skillId === 'null';
 
-    /*  console.log('token:', token); */
-
-    /* console.log('decodedtoken:', decodedToken);
-    console.log('ispatient:', isPatient);
-    console.log('hasdiagnostic:', hasDiagnostic);
-    console.log('consultation:', consultation);
-    console.log('getAllSkillsServide:', getAllSkillsService());
-    console.log('skill:', skill); */
+    const hasVote = consultation.vote;
 
     const handleChangeResponderConsulta = async () => {
         try {
+            console.log('Intentando tomar la consulta...');
             const data = await takeConsultationService(consultationId, token);
             console.log('Consulta tomada exitosamente:', data);
 
-            setConsultation((prev) => ({ ...prev, doctorId: decodedToken.id }));
+            setConsultation((prev) => ({
+                ...prev,
+                doctorId: decodedToken.id,
+            }));
+
+            toast.success('Has tomado la consulta con éxito');
         } catch (error) {
-            console.error('Error al tomar la consulta:', error);
+            console.error('Error en handleChangeResponderConsulta:', error);
+            toast.error('No se pudo tomar la consulta');
         }
     };
 
@@ -261,17 +166,18 @@ export const ConsultationPage = () => {
         consultation.id,
         consultation.files || []
     );
-    console.log(
-        '📸FOTOS:',
-        consultation.userId,
-        '<USERID',
-        consultation.id,
-        '<CONSULTA ID',
-        consultation.arch,
-        '<FILES'
-    );
+    // console.log(
+    //     '📸FOTOS:',
+    //     consultation.userId,
+    //     '<USERID',
+    //     consultation.id,
+    //     '<CONSULTA ID',
+    //     consultation.arch,
+    //     '<FILES'
+    // );
 
-    console.log('CONSULTATION:', consultation);
+    // console.log('CONSULTATION:', consultation);
+    // console.log('¿El doctor puede tomar la consulta?', canTakeConsultation);
 
     return (
         <section className="consultation-page">
@@ -288,10 +194,7 @@ export const ConsultationPage = () => {
                 </article>
                 <article>
                     <h4>Especialista asignado</h4>{' '}
-                    <p>
-                        {consultation.doctorName ||
-                            'No hay especialista asignado'}
-                    </p>
+                    <p>{doctorName || 'No hay especialista asignado'}</p>
                 </article>
                 <article>
                     <h4>Estado</h4>{' '}
@@ -301,6 +204,7 @@ export const ConsultationPage = () => {
                             : 'Consulta activa'}
                     </p>
                 </article>
+
                 {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
                 {!hasDiagnostic && isPatient && (
                     <Button
@@ -310,14 +214,19 @@ export const ConsultationPage = () => {
                         Eliminar Consulta
                     </Button>
                 )}
+
                 {!hasDiagnostic && canTakeConsultation && (
                     <Button
                         className="btn btn-naranja"
-                        onClick={handleChangeResponderConsulta}
+                        handleClick={() => {
+                            console.log('botón pulsado');
+                            handleChangeResponderConsulta;
+                        }}
                     >
                         Responder a esta consulta
                     </Button>
                 )}
+
                 {!hasDiagnostic && isDoctor && !canTakeConsultation && (
                     <p className="no-take-consultation">
                         No puedes tomar esta consulta porque no coincide con tu
@@ -360,16 +269,15 @@ export const ConsultationPage = () => {
                         <h3>Diagnóstico</h3>
                         <p>{consultation.diagnostic}</p>
                     </section>
-                    {isPatient && (
-                        <section className="vote-form-section">
-                            <h3>Valora el diagnóstico</h3>
-                            <VoteForm consultationId={consultationId} />
-                        </section>
-                    )}
+
+                    <section className="vote-form-section">
+                        <h3>Valora el diagnóstico</h3>
+                        <VoteForm consultationId={consultationId} />
+                    </section>
                 </>
             )}
 
-            {hasDiagnostic && (
+            {hasDiagnostic && hasVote && (
                 <>
                     <section className="diagnostic">
                         <h3>Valoración de la respuesta</h3>
