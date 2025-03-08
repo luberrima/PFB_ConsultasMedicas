@@ -24,7 +24,7 @@ export const RegisterForm = () => {
         handleChangeDoctorInfo,
     } = useForm();
 
-    console.log('info:', userInfo);
+    
 
     const [isLoading, setIsLoading] = useState(false);
     const [userType, setUserType] = useState('patient');
@@ -32,8 +32,6 @@ export const RegisterForm = () => {
     const { skills } = getallskills();
     const [selectedValue, setSelectedValue] = useState(""); 
     const handleChange = (event) => {
-        console.log("Valor (event:", event);
-        console.log("Valor seleccionado:", event.target.value);
         doctorInfo.skillId=event.target.value;
         setSelectedValue(event.target.value);
 
@@ -45,23 +43,18 @@ export const RegisterForm = () => {
         try {
 
 
-            console.log('hasta aqui llega el try1');
             // const schema =
             //     userType === 'doctor' ? newDoctorSchema : newUserSchema;
-            console.log('hasta aqui llega el try2');
 
             // const validationResult = validate(schema);
-            console.log('hasta aqui llega el try3');
-
+            
             // if (validationResult) {
             //     // Si hay errores, no continuamos
             //     toast.error('Hay errores en el formulario');
             //     return;
             // }
-            console.log('hasta aqui llega el try4');
-
+          
             setIsLoading(true);
-            console.log('hasta aqui llega el try5');
 
           
             doctorInfo.username=userInfo.username;
@@ -73,14 +66,13 @@ export const RegisterForm = () => {
                 userType === 'doctor'
                     ? await registerDoctorService(doctorInfo)
                     : await registerUserService(userInfo);
-            console.log('hasta aqui llega el try6');
 
             const params = new URLSearchParams({ type: 'success', message });
             setTimeout(() => {
                 navigate(`/login?${params.toString()}`);
                 toast.info('Comprueba tu correo para activar tu cuenta');
             }, 2000);
-            console.log('hasta aqui llega el try7');
+           
         } catch (error) {
             toast.error(error.message || 'Error al registrar el usuario');
         } finally {

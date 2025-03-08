@@ -216,7 +216,7 @@ export const getAllSkillsService = async () => {
 };
 
 export const registerUserService = async (userData) => {
-    console.log('userdata en registeruserservice:', userData);
+    
     try {
         const response = await fetch(`${backEndPath}/users/register`, {
             method: 'POST',
@@ -225,7 +225,7 @@ export const registerUserService = async (userData) => {
             },
             body: JSON.stringify(userData),
         });
-        console.log('RESPONSE:', response);
+       
 
         if (!response.ok) {
             throw new Error('Error al registrar el usuario');
@@ -233,10 +233,7 @@ export const registerUserService = async (userData) => {
 
         const result = await response.json();
 
-        console.log('RESULT:', result);
-        console.log('RESUKT.DATA:', result.data);
-        console.log('RESULT.DATA?.DATA', result.data?.data);
-        console.log('RESULT.DATA.DATA', result.data.data);
+      
 
         return result;
     } catch (error) {
@@ -257,7 +254,7 @@ export const registerDoctorService = async (doctorData) => {
 
 
 export const deleteConsultationService = async (consultationId, token) => {
-    console.log('Esta es la ruta del fech', `${backEndPath}/consultations${consultationId}`);
+   
 
     const response = await fetch(`${backEndPath}/consultations/:${consultationId}`, {
         method: 'DELETE',
@@ -265,16 +262,10 @@ export const deleteConsultationService = async (consultationId, token) => {
             Authorization: `${token}`,
         },
     });
-    console.log('Que devuelve respose de consul no asignadas', response);
-
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
 
-    console.log(
-        'esto es lo que retorna el deleteConsultarionsService',
-        data
-    );
 
     return data;
 };
