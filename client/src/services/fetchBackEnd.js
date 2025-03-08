@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 const backEndPath = import.meta.env.VITE_BACKEND_HOST;
 
 export const getOwnUserService = async (token) => {
@@ -8,6 +9,7 @@ export const getOwnUserService = async (token) => {
     });
     return response;
 };
+
 
 export const getAllDoctorsService = async () => {
 
@@ -246,9 +248,9 @@ export const registerDoctorService = async (doctorData) => {
 
 
 export const deleteConsultationService = async (consultationId, token) => {
-    console.log('Esta es la ruta del fech', `${backEndPath}/consultations${consultationId}`);
+    
 
-    const response = await fetch(`${backEndPath}/consultations/:${consultationId}`, {
+    const response = await fetch(`${backEndPath}/consultations/${consultationId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `${token}`,
@@ -260,12 +262,9 @@ export const deleteConsultationService = async (consultationId, token) => {
 
     if (!response.ok) throw new Error(message);
 
-    console.log(
-        'esto es lo que retorna el deleteConsultarionsService',
-        data
-    );
+    
 
-    return data;
+    return response;
 };
 
 export const getConsultationImages = (userId, consultationId, files = []) => {
