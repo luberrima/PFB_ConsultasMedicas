@@ -1,5 +1,4 @@
 import { useState,useEffect } from 'react';
-import { useParams } from "react-router-dom";
 import { useForm } from '../../hooks/useForm.js';
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
@@ -23,7 +22,7 @@ export const ConsultForm = () => {
     const [skillSeleccionada, setSkillSeleccionada] = useState('');
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const { doctorbyskills } = getAllDoctorBySkill();
-    
+   
 
 
     useEffect(() => {
@@ -55,7 +54,7 @@ export const ConsultForm = () => {
         setDoctorSeleccionado(''); 
         
         if (idSkill) {
-            
+
           const doctoresFiltrados = doctorbyskills
             .filter(item => item.skillId === parseInt(idSkill))
             .map(item => ({
@@ -73,59 +72,7 @@ export const ConsultForm = () => {
       const handleDoctorChange = (e) => {
         setDoctorSeleccionado(e.target.value);
         info.doctorId=e.target.value;
-        console.log("valor de target",e.target.value)
       };
-
-     
-      const { urlid, urlskill } = useParams();
-
-      console.log("Valor de url id",urlid);
-      console.log("Valor de url urlskill",urlskill);
-
-      console.log("valor de infodoctorid",info.doctorId);
-
-      if (!info.doctorId)
-      {
-      setTimeout(() => {
-        if (urlid && urlskill)
-
-
-          {
-            console.log("hay valores definidos")
-            setSkillSeleccionada(urlskill);
-            
-            console.log("que valores tiene doctorbyskills en la subfuccion",doctorbyskills);
-            const doctoresFiltrados = doctorbyskills
-            .filter(item => item.skillId === parseInt(urlskill))
-            .map(item => ({
-              id: item.id              ,
-              nombre: item.username
-            }));
-          
-            setDoctores(doctoresFiltrados);
-        
-
-
-            setDoctorSeleccionado(urlid);
-            info.doctorId=urlid;
-            info.skillId=urlskill;
-  
-          }
-        
-
-
-
-      }, 1000);
-
-    }
-
-
-
-
-     
-
-
-
 
     const handleSubmit = async (e) => {
         try {
