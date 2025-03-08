@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { voteConsultationService } from '../../services/fetchBackEnd.js';
 
-export const VoteForm = ({ onRatingSubmit }) => {
+export const VoteForm = ({ consultationId, token }) => {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
+
+    const navigate = useNavigate();
 
     const handleClick = (value) => {
         setRating(value);
@@ -17,12 +22,19 @@ export const VoteForm = ({ onRatingSubmit }) => {
         setHover(0);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (onRatingSubmit) {
-            onRatingSubmit(rating);
+        if (!rating) return;
+        try {
+            await voteConsultationService(consultationId, token, rating);
+
+            toast.success(`Has votado con ${rating} estrellas.`);
+            setTimeout(() => {
+                navigate(0);
+            }, 3000);
+        } catch (error) {
+            toast.error('Error al enviar la votación:', error);
         }
-        alert(`Has votado con ${rating} estrellas.`);
     };
 
     return (

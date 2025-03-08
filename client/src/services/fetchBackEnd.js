@@ -12,7 +12,6 @@ export const getOwnUserService = async (token) => {
 
 
 export const getAllDoctorsService = async () => {
-
     const response = await fetch(`${backEndPath}/users/doctors`);
 
     const { message, data } = await response.json();
@@ -37,19 +36,15 @@ export const getAllConsultasService = async (token) => {
 };
 
 export const getAllConsulNoAsigService = async (token) => {
-    
-
     const response = await fetch(`${backEndPath}/consultations`, {
         headers: {
             Authorization: `${token}`,
         },
     });
 
-
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
-
 
     return data;
 };
@@ -68,7 +63,7 @@ export const getConsultationDetailService = async (consultationId, token) => {
                 },
             }
         );
-        console.log('RESPONSE CONSULTATION:', response.data);
+        // console.log('RESPONSE CONSULTATION:', response.data);
         /* console.log('repsonse en service:', response); */
         if (!response.ok) {
             const errorData = await response.json();
@@ -124,6 +119,28 @@ export const getDoctorProfileService = async (id, token) => {
     if (!response.ok) throw new Error(message);
 
     return { message, data };
+};
+
+export const getDoctorDetailService = async (doctorId, token) => {
+    // console.log('DETALLE DOCTOR EN SERVICE:', doctorId, token);
+    try {
+        const response = await fetch(
+            `${backEndPath}/users/doctors/${doctorId}`,
+            {
+                method: 'GET',
+                headers: {
+                    Authorization: `${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        const data = await response.json();
+        // console.log(response);
+        return data;
+    } catch (error) {
+        console.error('Error al obtener el doctor:', error);
+        return { status: 'error', message: 'No se pudo obtener el doctor' };
+    }
 };
 
 // FALTA GET ALL REPLIES CONTROLLER EN BACK
@@ -228,7 +245,6 @@ export const registerUserService = async (userData) => {
 
         const result = await response.json();
 
-
         return result;
     } catch (error) {
         throw new Error(error.message || 'Error al registrar el usuario');
@@ -246,8 +262,8 @@ export const registerDoctorService = async (doctorData) => {
     return message;
 };
 
-
 export const deleteConsultationService = async (consultationId, token) => {
+
     
 
     const response = await fetch(`${backEndPath}/consultations/${consultationId}`, {
@@ -256,241 +272,177 @@ export const deleteConsultationService = async (consultationId, token) => {
             Authorization: `${token}`,
         },
     });
+
     console.log('Que devuelve respose de consul no asignadas', response);
 
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
 
-    
+
 
     return response;
 };
 
 export const getConsultationImages = (userId, consultationId, files = []) => {
-
-
-
     if (!userId || !consultationId || files.length === 0) {
-
-
         return [];
-
-
     }
-
-
-
-
 
     return files.map((file) => ({
-
-
         url: `${backEndPath}/src/uploads/entries/${userId}/${consultationId}/${file.filename}`,
 
-
         name: file.filename,
-
-
     }));
-
-
 };
 export const takeConsultationService = async (consultationId, token) => {
-
-
-
     try {
-
-
         const response = await fetch(
-
-
             `${backEndPath}/consultations/take/${consultationId}`,
 
-
             {
-
-
                 method: 'PUT',
 
-
                 headers: {
-
-
                     'Content-Type': 'application/json',
 
-
                     Authorization: `${token}`,
-
-
                 },
-
-
             }
-
-
         );
-
-
-
-
-
+        console.log('responseeee:', response);
         const data = await response.json();
-
-
-
-
+        console.log('dataaaaaa:', data);
 
         if (!response.ok) {
-
-
             throw new Error(data.message || 'Error al tomar la consulta');
-
-
         }
 
-
-
-
-
         return data;
-
-
     } catch (error) {
-
-
         console.error('Error en takeConsultationService:', error);
 
-
         throw error;
-
-
     }
-
-
 };
 
-
-
-export const  getAllSkills= async () => {
-
-
-
+export const updateDiagnosticService = async (
+    consultationId,
+    token,
+    diagnostic
+) => {
     try {
-
-
         const response = await fetch(
-
-
-            `${backEndPath}/skills`,
-
+            `${backEndPath}/consultations/updatediagnost/${consultationId}`,
 
             {
+                method: 'PUT',
 
+                headers: {
+                    'Content-Type': 'application/json',
 
-                method: 'get',
+                    Authorization: `${token}`,
+                },
 
-
-                
-
-
+                body: JSON.stringify({
+                    diagnostic: diagnostic,
+                }),
             }
-
-
         );
-
-
-
-
 
         const data = await response.json();
 
-
-
-
+        console.log('Token en service:', token);
+        console.log('Response en service:', response);
+        console.log('Diagnostic en service:', diagnostic);
+        console.log('Data en service:', data);
 
         if (!response.ok) {
-
-
-            throw new Error(data.message || 'Error al tomar la skills');
-
-
+            throw new Error(
+                data.message || 'Error al actualizar el diagnóstico'
+            );
         }
 
-
-
-
-
         return data;
-
-
     } catch (error) {
-
-
-        console.error('Error en servicegetskill:', error);
-
+        console.error('Error en updateDiagnosticService:', error);
 
         throw error;
-
-
     }
-
-
 };
 
+export const voteConsultationService = async (consultationId, token, vote) => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/${consultationId}/vote`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+                body: JSON.stringify({ vote }),
+            }
+        );
 
-export const  getAllDoctorBySkilfetch= async () => {
+        const data = await response.json();
 
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al registrar el voto');
+        }
 
+        return data;
+    } catch (error) {
+        console.error('Error en voteConsultationService:', error);
+        throw error;
+    }
+};
 
+export const getAllSkills = async () => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/skills`,
+
+            {
+                method: 'get',
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al tomar la skills');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Error en servicegetskill:', error);
+
+        throw error;
+    }
+};
+
+export const getAllDoctorBySkilfetch = async () => {
     try {
         const response = await fetch(
             `${backEndPath}/consultations/doctorbyskill`,
             {
-
-
                 method: 'get',
-
             }
-
-
         );
-
-
-
 
         const data = await response.json();
 
-
-
-
-
         if (!response.ok) {
-
-
             throw new Error(data.message || 'Error al tomar la doctorskills');
-
-
         }
 
-
-
-
         return data;
-
-
     } catch (error) {
-
-
         console.error('Error en getalldoctorbyskill:', error);
 
-
         throw error;
-
-
     }
-
 
 };
 
@@ -513,3 +465,4 @@ export const getDoctorDetailService = async (doctorId, token) => {
         return { status: 'error', message: 'No se pudo obtener el doctor' };
     }
 };
+
