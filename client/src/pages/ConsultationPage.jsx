@@ -19,11 +19,16 @@ import { jwtDecode } from 'jwt-decode';
 import { Carruselconsultas } from '../components/Landing/CarruselConsultas.jsx';
 import { CarruselconsultasActivas } from '../components/Landing/CarruselConsultasActivas.jsx';
 import { Estrellas } from '../components/Estrellas.jsx';
+import { DiagnosticForm } from '../components/forms/DiagnosticForm.jsx';
 
 export const ConsultationPage = () => {
     const { consultationId } = useParams();
     const { token } = useContext(AuthContext);
     const decodedToken = token ? jwtDecode(token) : null;
+
+    const isPatient = decodedToken.role === 'paciente';
+    const isDoctor = decodedToken.role === 'doctor';
+    const doctorId = decodedToken.id;
 
     const [consultation, setConsultation] = useState(null);
     const [skills, setSkills] = useState([]);
@@ -31,6 +36,7 @@ export const ConsultationPage = () => {
     const [doctorSkill, setDoctorSkill] = useState('');
 
     const navigate = useNavigate();
+
 
     //datos doctor
     useEffect(() => {
@@ -63,6 +69,7 @@ export const ConsultationPage = () => {
     // console.log('DOCTORNAME:', doctorName);
     // console.log('DOCTORskill:', doctorSkill);
 
+
     //datos consulta
     useEffect(() => {
         if (!consultationId || !token) {
@@ -75,9 +82,9 @@ export const ConsultationPage = () => {
                 token
             );
 
+
             if (response.status === 'ok') {
                 setConsultation(response.data);
-                // IMÁGENES
             } else {
                 console.error('Error al obtener la consulta');
             }
@@ -89,6 +96,63 @@ export const ConsultationPage = () => {
         fetchData();
     }, [consultationId, token]);
 
+    // console.log('!!!!!!!!!!!!!!consulta:', consultation);
+
+    //datos doctor de la consulta
+    useEffect(() => {
+        const fetchDoctorName = async () => {
+            if (!consultation?.doctorId) return;
+            // console.log('DATOS QUE MANDO AL SERVICE:', consultation.doctorId);
+            try {
+                const response = await getDoctorDetailService(
+                    consultation?.doctorId,
+                    token
+                );
+
+                // console.log('DOCTOR RESPONSE.DATA:', response.data);
+
+                if (response.status === 'ok' && response.data) {
+                    setDoctorName(response.data.userDoctor?.nombre);
+                } else {
+                    console.error(
+                        'Error al obtener el nombre del doctor:',
+                        response
+                    );
+                }
+            } catch (error) {
+                console.error('Error en fetchDoctorName:', error);
+            }
+        };
+        fetchDoctorName();
+    }, [consultation?.doctorId, token]);
+
+    //datos doctor logeado
+    useEffect(() => {
+        if (isDoctor) {
+            const fetchLoggedDoctorDetails = async () => {
+                try {
+                    const response = await getDoctorDetailService(
+                        decodedToken.id,
+                        token
+                    );
+                    if (response.status === 'ok') {
+                        // console.log('Doctor details:', response.data);
+                        setDoctorSkill(response.data.userDoctor?.skillId);
+                    }
+                    // console.log('RESPONSE DEL DOCTOR:', response);
+                } catch (error) {
+                    console.error(
+                        'Error al obtener la especialidad del doctor:',
+                        error
+                    );
+                }
+            };
+            // if (decodedToken.id && token) {
+            fetchLoggedDoctorDetails();
+            // }
+        }
+    }, [isDoctor, decodedToken.id, token]);
+
     if (!consultation) {
         return (
             <div>
@@ -99,6 +163,7 @@ export const ConsultationPage = () => {
             </div>
         );
     }
+
 
     const isPatient = decodedToken.role === 'paciente';
     const isDoctor = decodedToken.role === 'doctor';
@@ -113,23 +178,37 @@ export const ConsultationPage = () => {
         (isDoctor && doctorSkill === consultation.skillId) ||
         consultation.skillId === 'null';
 
+
+    const isMyConsultation = doctorId === consultation.doctorId;
+
+
     const hasVote = consultation.vote;
 
     const handleChangeResponderConsulta = async () => {
-        try {
-            console.log('Intentando tomar la consulta...');
-            const data = await takeConsultationService(consultationId, token);
-            console.log('Consulta tomada exitosamente:', data);
 
-            setConsultation((prev) => ({
-                ...prev,
-                doctorId: decodedToken.id,
-            }));
+        if (!consultation.doctorId) {
+            try {
+                const data = await takeConsultationService(
+                    consultationId,
+                    token
+                );
+                console.log('Consulta tomada exitosamente:', data);
 
-            toast.success('Has tomado la consulta con éxito');
-        } catch (error) {
-            console.error('Error en handleChangeResponderConsulta:', error);
-            toast.error('No se pudo tomar la consulta');
+                setConsultation((prev) => ({
+                    ...prev,
+                    doctorId: decodedToken.id,
+                }));
+
+                toast.success('Has tomado la consulta con éxito');
+            } catch (error) {
+                console.error('Error en handleChangeResponderConsulta:', error);
+                toast.error('No se pudo tomar la consulta');
+            }
+        } else if (isMyConsultation) {
+            toast.info('Esta consulta ya es tuya!');
+        } else if (consultation.doctorId) {
+            toast.error('Esta consulta ya está asignada a otrx especialista');
+
         }
     };
 
@@ -176,8 +255,6 @@ export const ConsultationPage = () => {
     //     '<FILES'
     // );
 
-    // console.log('CONSULTATION:', consultation);
-    // console.log('¿El doctor puede tomar la consulta?', canTakeConsultation);
 
     return (
         <section className="consultation-page">
@@ -209,7 +286,7 @@ export const ConsultationPage = () => {
                 {!hasDiagnostic && isPatient && (
                     <Button
                         className="btn btn-naranja"
-                        onClick={handleDeleteConsulta}
+                        handleClick={handleDeleteConsulta}
                     >
                         Eliminar Consulta
                     </Button>
@@ -218,10 +295,7 @@ export const ConsultationPage = () => {
                 {!hasDiagnostic && canTakeConsultation && (
                     <Button
                         className="btn btn-naranja"
-                        handleClick={() => {
-                            console.log('botón pulsado');
-                            handleChangeResponderConsulta;
-                        }}
+                        handleClick={handleChangeResponderConsulta}
                     >
                         Responder a esta consulta
                     </Button>
@@ -255,24 +329,54 @@ export const ConsultationPage = () => {
             </section>
 
             {/* Sección de chat (si no hay diagnóstico) */}
-            {!hasDiagnostic && (
-                <ChatComponent
-                    consultationId={consultationId}
-                    consultation={consultation}
-                />
+            {!hasDiagnostic &&
+                (isPatient || (isDoctor && isMyConsultation)) && (
+                    <ChatComponent
+                        consultationId={consultationId}
+                        consultation={consultation}
+                    />
+                )}
+
+            {/* INPUT PARA ESCRIBIR DIAGNOSTICO */}
+
+            {!hasDiagnostic && isDoctor && isMyConsultation && (
+                <div>
+                    {/* {console.log('consultationId:', consultationId)}
+                    {console.log(
+                        'Doctor asignado a la consulta:',
+                        consultation.doctorId
+                    )}
+                    {console.log(
+                        'ID del usuario autenticado:',
+                        decodedToken.id
+                    )} */}
+                    <h3>Diagnóstico</h3>
+                    <DiagnosticForm
+                        consultationId={consultationId}
+                        token={token}
+                    />
+                </div>
             )}
 
             {/* Diagnóstico y valoración (si hay diagnóstico) */}
-            {hasDiagnostic && isPatient && !hasVote && (
+            {hasDiagnostic && (
                 <>
                     <section className="diagnostic">
                         <h3>Diagnóstico</h3>
                         <p>{consultation.diagnostic}</p>
                     </section>
 
+                </>
+            )}
+
+            {isPatient && hasDiagnostic && !hasVote && (
+                <>
                     <section className="vote-form-section">
                         <h3>Valora el diagnóstico</h3>
-                        <VoteForm consultationId={consultationId} />
+                        <VoteForm
+                            consultationId={consultationId}
+                            token={token}
+                        />
                     </section>
                 </>
             )}
