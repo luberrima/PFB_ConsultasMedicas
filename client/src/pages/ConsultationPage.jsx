@@ -213,21 +213,26 @@ export const ConsultationPage = () => {
     };
 
     const handleDeleteConsulta = async () => {
-        const confirmDelete = window.confirm(
+        console.log("handleDeleteConsulta ha sido llamado");
+        /* const confirmDelete = window.confirm(
             '¿Estás seguro de que deseas eliminar esta consulta? Esta acción no se puede deshacer.'
         );
-
+        console.log("que tiene consfirmacion delete",confirmDelete);
+    
         if (!confirmDelete) return;
-
+        console.log("que tiene cconsultarionId y token",consultationId, token); */
+    
+        if (!consultationId || !token) {
+            toast.error('Faltan datos para eliminar la consulta.');
+            return;
+        }
+    
         try {
-            const response = await deleteConsultationService(
-                consultationId,
-                token
-            );
-
-            if (response.status === 'ok') {
+            const response = await deleteConsultationService(consultationId, token);
+            
+            if (response.ok) { // Verifica que la respuesta no sea null o undefined
                 toast.success('Consulta eliminada correctamente');
-
+    
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
@@ -282,11 +287,15 @@ export const ConsultationPage = () => {
                     </p>
                 </article>
 
-                {/* HAY QUE HACER FUNCIÓN HANDLECHANGE DEL BUTTON */}
+
+                {console.log("hasDiagnostic:", hasDiagnostic, "isPatient:", isPatient)}
                 {!hasDiagnostic && isPatient && (
                     <Button
-                        className="btn btn-naranja"
-                        handleClick={handleDeleteConsulta}
+
+                         className="btn btn-naranja" 
+                        
+                        handleClick={handleDeleteConsulta} 
+
                     >
                         Eliminar Consulta
                     </Button>
