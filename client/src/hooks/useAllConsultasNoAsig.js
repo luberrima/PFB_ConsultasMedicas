@@ -24,7 +24,6 @@ export const useAllConsultasNoAsig = () => {
         fetchConsultas();
     }, []);
 
-     console.log('Esto es lo que devuelve el useAllConsultas No  Asignadas', consultasAllAs);   
     
     return { consultasAllAs, loading2, error2 };
 };

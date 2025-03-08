@@ -13,7 +13,7 @@ export const CardAllInfoDoctor = ({ doctor }) => {
             >
                 <li className="card-doctor">
                     <header>
-                        <a href={`/users/doctors/${doctor.userId}`}>
+                        
                             <img
                                 src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
                                 alt="Foto usuario"
@@ -23,7 +23,7 @@ export const CardAllInfoDoctor = ({ doctor }) => {
                                 }}
 
                             />
-                        </a>
+                    
                         <div>
                             <h3>{doctor.username}</h3>
                             <p>{doctor.Name}</p>

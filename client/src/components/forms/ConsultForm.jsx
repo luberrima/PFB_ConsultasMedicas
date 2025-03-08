@@ -23,7 +23,7 @@ export const ConsultForm = () => {
     const [skillSeleccionada, setSkillSeleccionada] = useState('');
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const { doctorbyskills } = getAllDoctorBySkill();
-    console.log ("valor de doctorbyskills",doctorbyskills);
+    
 
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export const ConsultForm = () => {
         setDoctorSeleccionado(''); 
         
         if (idSkill) {
-            console.log("que valores tiene doctorbyskills en la subfuccion",doctorbyskills);
+            
           const doctoresFiltrados = doctorbyskills
             .filter(item => item.skillId === parseInt(idSkill))
             .map(item => ({

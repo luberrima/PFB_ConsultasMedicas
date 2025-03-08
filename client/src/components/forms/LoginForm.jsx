@@ -55,13 +55,13 @@ export const LoginForm = () => {
                 },
                 body: JSON.stringify(value),
             });
-            console.log(response);
+            
 
             if (response.ok) {
                 const result = await response.json();
 
                 const token = result.data || result.token;
-                console.log('Token:', token);
+                
 
                 if (!token) {
                     console.error('No se recibió un token válido');
@@ -103,13 +103,7 @@ export const LoginForm = () => {
 
     const handleChange = (event) => {
         setData({ ...data, [event.target.name]: event.target.value });
-        console.log(
-            'lo que hay en el input:',
-            'name:',
-            event.target.name,
-            'value.',
-            event.target.value
-        );
+        
     };
 
     return (
