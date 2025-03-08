@@ -108,10 +108,7 @@ export const ConsultForm = () => {
                 handleChange={handleChange}
             />
 
-            <fieldset>
-                <label>Especialidad</label>
-                
-            </fieldset>
+ 
 
             <fieldset>
                 <label>Gravedad</label>
