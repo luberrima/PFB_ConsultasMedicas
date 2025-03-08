@@ -1,5 +1,4 @@
 import { useState,useEffect } from 'react';
-import { useParams } from "react-router-dom";
 import { useForm } from '../../hooks/useForm.js';
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
@@ -24,7 +23,7 @@ export const ConsultForm = () => {
     const [skillSeleccionada, setSkillSeleccionada] = useState('');
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const { doctorbyskills } = getAllDoctorBySkill();
-    
+   
 
 
     useEffect(() => {
@@ -56,7 +55,7 @@ export const ConsultForm = () => {
         setDoctorSeleccionado(''); 
         
         if (idSkill) {
-            
+
           const doctoresFiltrados = doctorbyskills
             .filter(item => item.skillId === parseInt(idSkill))
             .map(item => ({
