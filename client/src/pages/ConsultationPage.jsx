@@ -37,7 +37,6 @@ export const ConsultationPage = () => {
 
     const navigate = useNavigate();
 
-
     //datos doctor
     useEffect(() => {
         const fetchDoctorName = async () => {
@@ -69,7 +68,6 @@ export const ConsultationPage = () => {
     // console.log('DOCTORNAME:', doctorName);
     // console.log('DOCTORskill:', doctorSkill);
 
-
     //datos consulta
     useEffect(() => {
         if (!consultationId || !token) {
@@ -81,7 +79,6 @@ export const ConsultationPage = () => {
                 consultationId,
                 token
             );
-
 
             if (response.status === 'ok') {
                 setConsultation(response.data);
@@ -164,9 +161,8 @@ export const ConsultationPage = () => {
         );
     }
 
-
-    const isPatient = decodedToken.role === 'paciente';
-    const isDoctor = decodedToken.role === 'doctor';
+    // const isPatient = decodedToken.role === 'paciente';
+    // const isDoctor = decodedToken.role === 'doctor';
 
     const hasDiagnostic = !!consultation.diagnostic;
 
@@ -178,14 +174,11 @@ export const ConsultationPage = () => {
         (isDoctor && doctorSkill === consultation.skillId) ||
         consultation.skillId === 'null';
 
-
     const isMyConsultation = doctorId === consultation.doctorId;
-
 
     const hasVote = consultation.vote;
 
     const handleChangeResponderConsulta = async () => {
-
         if (!consultation.doctorId) {
             try {
                 const data = await takeConsultationService(
@@ -208,12 +201,11 @@ export const ConsultationPage = () => {
             toast.info('Esta consulta ya es tuya!');
         } else if (consultation.doctorId) {
             toast.error('Esta consulta ya está asignada a otrx especialista');
-
         }
     };
 
     const handleDeleteConsulta = async () => {
-        console.log("handleDeleteConsulta ha sido llamado");
+        console.log('handleDeleteConsulta ha sido llamado');
         /* const confirmDelete = window.confirm(
             '¿Estás seguro de que deseas eliminar esta consulta? Esta acción no se puede deshacer.'
         );
@@ -221,18 +213,22 @@ export const ConsultationPage = () => {
     
         if (!confirmDelete) return;
         console.log("que tiene cconsultarionId y token",consultationId, token); */
-    
+
         if (!consultationId || !token) {
             toast.error('Faltan datos para eliminar la consulta.');
             return;
         }
-    
+
         try {
-            const response = await deleteConsultationService(consultationId, token);
-            
-            if (response.ok) { // Verifica que la respuesta no sea null o undefined
+            const response = await deleteConsultationService(
+                consultationId,
+                token
+            );
+
+            if (response.ok) {
+                // Verifica que la respuesta no sea null o undefined
                 toast.success('Consulta eliminada correctamente');
-    
+
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
@@ -260,7 +256,6 @@ export const ConsultationPage = () => {
     //     '<FILES'
     // );
 
-
     return (
         <section className="consultation-page">
             <h1 className="page-title">{consultation.title}</h1>
@@ -287,15 +282,16 @@ export const ConsultationPage = () => {
                     </p>
                 </article>
 
-
-                {console.log("hasDiagnostic:", hasDiagnostic, "isPatient:", isPatient)}
+                {console.log(
+                    'hasDiagnostic:',
+                    hasDiagnostic,
+                    'isPatient:',
+                    isPatient
+                )}
                 {!hasDiagnostic && isPatient && (
                     <Button
-
-                         className="btn btn-naranja" 
-                        
-                        handleClick={handleDeleteConsulta} 
-
+                        className="btn btn-naranja"
+                        handleClick={handleDeleteConsulta}
                     >
                         Eliminar Consulta
                     </Button>
@@ -374,8 +370,11 @@ export const ConsultationPage = () => {
                         <h3>Diagnóstico</h3>
                         <p>{consultation.diagnostic}</p>
                     </section>
-
                 </>
+            )}
+
+            {isDoctor && hasDiagnostic && !hasVote && (
+                <>{/* boton borrar diagnostico */}</>
             )}
 
             {isPatient && hasDiagnostic && !hasVote && (

@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+// import { Navigate } from 'react-router-dom';
 const backEndPath = import.meta.env.VITE_BACKEND_HOST;
 
 export const getOwnUserService = async (token) => {
@@ -9,7 +9,6 @@ export const getOwnUserService = async (token) => {
     });
     return response;
 };
-
 
 export const getAllDoctorsService = async () => {
     const response = await fetch(`${backEndPath}/users/doctors`);
@@ -103,7 +102,6 @@ export const newConsultService = async (info, token) => {
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
-   
 
     return { message, data };
 };
@@ -122,7 +120,6 @@ export const getDoctorProfileService = async (id, token) => {
 };
 
 export const getDoctorDetailService = async (doctorId, token) => {
-    // console.log('DETALLE DOCTOR EN SERVICE:', doctorId, token);
     try {
         const response = await fetch(
             `${backEndPath}/users/doctors/${doctorId}`,
@@ -135,7 +132,6 @@ export const getDoctorDetailService = async (doctorId, token) => {
             }
         );
         const data = await response.json();
-        // console.log(response);
         return data;
     } catch (error) {
         console.error('Error al obtener el doctor:', error);
@@ -263,23 +259,21 @@ export const registerDoctorService = async (doctorData) => {
 };
 
 export const deleteConsultationService = async (consultationId, token) => {
-
-    
-
-    const response = await fetch(`${backEndPath}/consultations/${consultationId}`, {
-        method: 'DELETE',
-        headers: {
-            Authorization: `${token}`,
-        },
-    });
+    const response = await fetch(
+        `${backEndPath}/consultations/${consultationId}`,
+        {
+            method: 'DELETE',
+            headers: {
+                Authorization: `${token}`,
+            },
+        }
+    );
 
     console.log('Que devuelve respose de consul no asignadas', response);
 
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
-
-
 
     return response;
 };
@@ -443,26 +437,4 @@ export const getAllDoctorBySkilfetch = async () => {
 
         throw error;
     }
-
 };
-
-export const getDoctorDetailService = async (doctorId, token) => {
-    try {
-        const response = await fetch(
-            `${backEndPath}/users/doctors/${doctorId}`,
-            {
-                method: 'GET',
-                headers: {
-                    Authorization: `${token}`,
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error al obtener el doctor:', error);
-        return { status: 'error', message: 'No se pudo obtener el doctor' };
-    }
-};
-
