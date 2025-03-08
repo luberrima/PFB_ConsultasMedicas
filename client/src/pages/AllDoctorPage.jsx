@@ -7,7 +7,7 @@ import '../components/cardDoctor.css';
 export const AllDoctorPage = () => {
     const { doctors /*, loading, error */ } = useAllDoctor();
 
-    console.log(doctors);
+    
 
     const doctorList = doctors?.doctors || []; // Asegurarse de que tenemos los doctores
 
