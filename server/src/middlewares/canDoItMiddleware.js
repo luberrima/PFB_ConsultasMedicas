@@ -3,24 +3,26 @@ import { genereErrorUtils } from '../utils/genereErrorUtils.js';
 export const canDoItMiddleware = async (req, res, next) => {
     // Tareas:
     // 1. Comprobar si el usuario puede editar una entrada
-
+    console.log('LO QUE VIENE DEL REQ:', req);
     try {
         // Datos del usuario autenticado
         const { id: idUserLogged, role: roleUserLogged } = req.user;
 
         // ID del doctor propietario de la entrada
-        const { doctorId } = req.consutl || {};
+        const { doctorId } = req.consult || {};
         const { userId } = req.consult || {};
-        console.log('QUE TENGO DE USER req', req );
-        console.log('QUE TENGO DE USER req.user', req.user ); 
-        console.log('QUE TENGO DE USER req.consut', req.consult );
+        console.log('QUE TENGO DE USER req', req);
+        console.log('QUE TENGO DE USER req.user', req.user);
+        console.log('QUE TENGO DE USER req.consut', req.consult);
         console.log('QUE TENGO DE CandoItMidelware idUserLogged', idUserLogged);
         console.log('QUE TENGO DE CandoItMidelware userId', userId);
-        console.log('QUE TENGO DE CandoItMidelware roleUserLogged', roleUserLogged);
+        console.log(
+            'QUE TENGO DE CandoItMidelware roleUserLogged',
+            roleUserLogged
+        );
 
-        
         //
-   
+
         if (
             req.method === 'POST' &&
             req.body.value >= 1 &&
@@ -44,8 +46,6 @@ export const canDoItMiddleware = async (req, res, next) => {
         } else {
             // Para cualquier otro método, permitir solo si es el dueño
             if (idUserLogged !== doctorId) {
-                
-
                 throw genereErrorUtils(
                     403,
                     'FORBIDDEN',
