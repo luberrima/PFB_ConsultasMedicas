@@ -37,6 +37,39 @@ export const ConsultationPage = () => {
 
     const navigate = useNavigate();
 
+
+    //datos doctor
+    useEffect(() => {
+        const fetchDoctorName = async () => {
+            if (!consultation?.doctorId) return;
+
+            try {
+                const response = await getDoctorDetailService(
+                    consultation.doctorId,
+                    token
+                );
+
+                console.log('DOCTOR RESPONSE.DATA:', response.data);
+
+                if (response.status === 'ok' && response.data) {
+                    setDoctorName(response.data.userDoctor?.nombre);
+                    setDoctorSkill(response.data.userDoctor?.skillId);
+                } else {
+                    console.error(
+                        'Error al obtener el nombre del doctor:',
+                        response
+                    );
+                }
+            } catch (error) {
+                console.error('Error en fetchDoctorName:', error);
+            }
+        };
+        fetchDoctorName();
+    }, [consultation?.doctorId, token]);
+    // console.log('DOCTORNAME:', doctorName);
+    // console.log('DOCTORskill:', doctorSkill);
+
+
     //datos consulta
     useEffect(() => {
         if (!consultationId || !token) {
@@ -48,8 +81,7 @@ export const ConsultationPage = () => {
                 consultationId,
                 token
             );
-            // console.log('response:', response);
-            // console.log('response.data:', response.data);
+
 
             if (response.status === 'ok') {
                 setConsultation(response.data);
@@ -132,6 +164,10 @@ export const ConsultationPage = () => {
         );
     }
 
+
+    const isPatient = decodedToken.role === 'paciente';
+    const isDoctor = decodedToken.role === 'doctor';
+
     const hasDiagnostic = !!consultation.diagnostic;
 
     const skill =
@@ -141,15 +177,15 @@ export const ConsultationPage = () => {
     const canTakeConsultation =
         (isDoctor && doctorSkill === consultation.skillId) ||
         consultation.skillId === 'null';
-    // console.log('isDoctor:', isDoctor);
-    // console.log('doctorSkill:', doctorSkill);
-    // console.log('consultation.skillId:', consultation.skillId);
+
 
     const isMyConsultation = doctorId === consultation.doctorId;
+
 
     const hasVote = consultation.vote;
 
     const handleChangeResponderConsulta = async () => {
+
         if (!consultation.doctorId) {
             try {
                 const data = await takeConsultationService(
@@ -172,6 +208,7 @@ export const ConsultationPage = () => {
             toast.info('Esta consulta ya es tuya!');
         } else if (consultation.doctorId) {
             toast.error('Esta consulta ya está asignada a otrx especialista');
+
         }
     };
 
@@ -218,8 +255,6 @@ export const ConsultationPage = () => {
     //     '<FILES'
     // );
 
-    // console.log('Doctor asignado a la consulta:', consultation.doctorId);
-    // console.log('ID del usuario autenticado:', decodedToken.id);
 
     return (
         <section className="consultation-page">
@@ -330,6 +365,7 @@ export const ConsultationPage = () => {
                         <h3>Diagnóstico</h3>
                         <p>{consultation.diagnostic}</p>
                     </section>
+
                 </>
             )}
 

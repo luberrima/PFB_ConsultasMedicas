@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import { useForm } from '../../hooks/useForm.js';
+import { useParams } from "react-router-dom";
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
 import { Form } from './Form.jsx';
@@ -12,6 +13,7 @@ import { toast } from 'react-toastify';
 import { ImageInput } from './ImageInput.jsx';
 import { getAllDoctorBySkill } from '../../hooks/getdoctorbyskill.js';
 
+
 export const ConsultForm = () => {
     const { token } = useAuth();
     const { info, previews, /*errors,*/ validate, handleChange } = useForm();
@@ -22,7 +24,7 @@ export const ConsultForm = () => {
     const [skillSeleccionada, setSkillSeleccionada] = useState('');
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const { doctorbyskills } = getAllDoctorBySkill();
-    console.log ("valor de doctorbyskills",doctorbyskills);
+   
 
 
     useEffect(() => {
@@ -54,7 +56,7 @@ export const ConsultForm = () => {
         setDoctorSeleccionado(''); 
         
         if (idSkill) {
-            console.log("que valores tiene doctorbyskills en la subfuccion",doctorbyskills);
+
           const doctoresFiltrados = doctorbyskills
             .filter(item => item.skillId === parseInt(idSkill))
             .map(item => ({
@@ -72,7 +74,53 @@ export const ConsultForm = () => {
       const handleDoctorChange = (e) => {
         setDoctorSeleccionado(e.target.value);
         info.doctorId=e.target.value;
+        
       };
+
+     
+      const { urlid, urlskill } = useParams();
+      if (!info.doctorId)
+      {
+      setTimeout(() => {
+        if (urlid && urlskill)
+
+
+          {
+           
+            setSkillSeleccionada(urlskill);
+            
+            
+            const doctoresFiltrados = doctorbyskills
+            .filter(item => item.skillId === parseInt(urlskill))
+            .map(item => ({
+              id: item.id              ,
+              nombre: item.username
+            }));
+          
+            setDoctores(doctoresFiltrados);
+        
+
+
+            setDoctorSeleccionado(urlid);
+            info.doctorId=urlid;
+            info.skillId=urlskill;
+  
+          }
+        
+
+
+
+      }, 1000);
+
+    }
+
+
+
+
+     
+
+
+
 
     const handleSubmit = async (e) => {
         try {

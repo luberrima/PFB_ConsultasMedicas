@@ -35,6 +35,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
                     <Route path="/new-consult" element={<NewConsultPage />} />
+                    <Route path="/new-consult/:urlid/:urlskill" element={<NewConsultPage />} />
                     <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
                     <Route path="*" element={<NotFoundPage />} />
                     <Route

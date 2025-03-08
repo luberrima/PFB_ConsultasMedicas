@@ -5,6 +5,9 @@ import avatardefault from "../assets/avatar-default.jpg"
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 export const CardAllInfoDoctor = ({ doctor }) => {
+    console.log("data de doctor",doctor);
+    const urllink=`/new-consult/${doctor.userId}/${doctor.skillId}`
+
     return (
         <>
             <Link
@@ -13,7 +16,7 @@ export const CardAllInfoDoctor = ({ doctor }) => {
             >
                 <li className="card-doctor">
                     <header>
-                        <a href={`/users/doctors/${doctor.userId}`}>
+                        
                             <img
                                 src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
                                 alt="Foto usuario"
@@ -23,7 +26,7 @@ export const CardAllInfoDoctor = ({ doctor }) => {
                                 }}
 
                             />
-                        </a>
+                    
                         <div>
                             <h3>{doctor.username}</h3>
                             <p>{doctor.Name}</p>
@@ -41,7 +44,7 @@ export const CardAllInfoDoctor = ({ doctor }) => {
                 <p>Fecha de inicio en GoodDoctor: {doctor.credatedAt}</p>
                 <p>Identificacion en GoodDoctor {doctor.UserId}</p> */}
                     <footer>
-                        <Link to="/new-consult" className="btn btn-azul">
+                        <Link to={urllink} className="btn btn-azul">
                             Hacer una consulta
                         </Link>
                     </footer>

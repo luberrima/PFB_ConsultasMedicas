@@ -101,8 +101,7 @@ export const newConsultService = async (info, token) => {
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
-    console.log('Valor de message', message);
-    console.log('Valor de data');
+   
 
     return { message, data };
 };
@@ -446,4 +445,26 @@ export const getAllDoctorBySkilfetch = async () => {
 
         throw error;
     }
+
 };
+
+export const getDoctorDetailService = async (doctorId, token) => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/users/doctors/${doctorId}`,
+            {
+                method: 'GET',
+                headers: {
+                    Authorization: `${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error al obtener el doctor:', error);
+        return { status: 'error', message: 'No se pudo obtener el doctor' };
+    }
+};
+
