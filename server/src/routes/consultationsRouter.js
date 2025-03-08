@@ -12,6 +12,7 @@ import { deleteConsultationController } from '../controllers/consultations/delet
 import { editDiagnistConsultController } from '../controllers/consultations/editDiagnistConsultController.js';
 import { getConsultationBySkillController } from '../controllers/consultations/getConsultationBySkillController.js';
 import { takeEmpyConsultationController } from '../controllers/consultations/takeEmpyConsultationController.js';
+import { getAllDoctorBySkillController} from '../controllers/consultations/getAllDoctorBySkillController.js'
 
 export const consultationsRouter = express.Router();
 
@@ -21,6 +22,14 @@ consultationsRouter.get(
     authUserMiddleware,
 
     getConsultationBySkillController
+);
+
+
+
+consultationsRouter.get(
+    '/consultations/doctorbyskill',
+
+    getAllDoctorBySkillController
 );
 
 consultationsRouter.put(

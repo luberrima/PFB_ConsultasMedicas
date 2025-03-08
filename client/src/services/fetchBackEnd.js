@@ -440,7 +440,62 @@ export const  getAllSkills= async () => {
     } catch (error) {
 
 
-        console.error('Error en takeConsultationService:', error);
+        console.error('Error en servicegetskill:', error);
+
+
+        throw error;
+
+
+    }
+
+
+};
+
+
+export const  getAllDoctorBySkilfetch= async () => {
+
+
+
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/doctorbyskill`,
+            {
+
+
+                method: 'get',
+
+            }
+
+
+        );
+
+
+
+
+        const data = await response.json();
+
+
+
+
+
+        if (!response.ok) {
+
+
+            throw new Error(data.message || 'Error al tomar la doctorskills');
+
+
+        }
+
+
+
+
+        return data;
+
+
+    } catch (error) {
+
+
+        console.error('Error en getalldoctorbyskill:', error);
 
 
         throw error;
