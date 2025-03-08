@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import { ImageInput } from './ImageInput.jsx';
 import { getAllDoctorBySkill } from '../../hooks/getdoctorbyskill.js';
 
+
 export const ConsultForm = () => {
     const { token } = useAuth();
     const { info, previews, /*errors,*/ validate, handleChange } = useForm();
@@ -73,17 +74,11 @@ export const ConsultForm = () => {
       const handleDoctorChange = (e) => {
         setDoctorSeleccionado(e.target.value);
         info.doctorId=e.target.value;
-        console.log("valor de target",e.target.value)
+        
       };
 
      
       const { urlid, urlskill } = useParams();
-
-      console.log("Valor de url id",urlid);
-      console.log("Valor de url urlskill",urlskill);
-
-      console.log("valor de infodoctorid",info.doctorId);
-
       if (!info.doctorId)
       {
       setTimeout(() => {
@@ -91,10 +86,10 @@ export const ConsultForm = () => {
 
 
           {
-            console.log("hay valores definidos")
+           
             setSkillSeleccionada(urlskill);
             
-            console.log("que valores tiene doctorbyskills en la subfuccion",doctorbyskills);
+            
             const doctoresFiltrados = doctorbyskills
             .filter(item => item.skillId === parseInt(urlskill))
             .map(item => ({
