@@ -35,23 +35,19 @@ export const getAllConsultasService = async (token) => {
 };
 
 export const getAllConsulNoAsigService = async (token) => {
-    console.log('Esta es la ruta del fech', `${backEndPath}/consultations`);
+    
 
     const response = await fetch(`${backEndPath}/consultations`, {
         headers: {
             Authorization: `${token}`,
         },
     });
-    console.log('Que devuelve respose de consul no asignadas', response);
+
 
     const { message, data } = await response.json();
 
     if (!response.ok) throw new Error(message);
 
-    console.log(
-        'esto es lo que retorna el getAllConsultas No asginadas Service',
-        data
-    );
 
     return data;
 };
