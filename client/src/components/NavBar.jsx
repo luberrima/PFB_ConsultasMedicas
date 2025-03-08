@@ -18,7 +18,7 @@ export const NavBar = () => {
             console.error('Error al decodificar el token:', error);
         }
     } else {
-        console.log('no hay usuario registrado');
+      
     }
     // try {
     //     decodedToken = token ? jwtDecode(token) : null;

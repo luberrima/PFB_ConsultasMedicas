@@ -16,6 +16,18 @@ import { useForm } from '../../hooks/useForm.js';
 import { getallskills } from '../../hooks/getallskills.js';
 
 export const RegisterForm = () => {
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Hook personalizado `useForm()` que maneja el estado del formulario.
+     * - `userInfo`: Contiene los datos del usuario cuando se registra como paciente.
+     * - `doctorInfo`: Contiene los datos cuando se registra como médico.
+     * - `errors`: Almacena los errores de validación.
+     * - `handleChangeUserInfo`: Función que actualiza los datos del paciente.
+     * - `handleChangeDoctorInfo`: Función que actualiza los datos del médico.
+     */
+    ///////////////////////////////////////////////////////////////////////////////////
+
     const {
         userInfo,
         errors,
@@ -24,64 +36,52 @@ export const RegisterForm = () => {
         handleChangeDoctorInfo,
     } = useForm();
 
-    console.log('info:', userInfo);
-
     const [isLoading, setIsLoading] = useState(false);
-    const [userType, setUserType] = useState('patient');
+    const [userType, setUserType] = useState('patient'); //Tipo de usuario (paciente/médico)//
     const navigate = useNavigate();
-    const { skills } = getallskills();
+    const { skills } = getallskills(); //Obtiene la lista de habilidades/especialidades//
     const [selectedValue, setSelectedValue] = useState(""); 
+
+    // Maneja el cambio en la selección de especialidad //
     const handleChange = (event) => {
-        console.log("Valor (event:", event);
-        console.log("Valor seleccionado:", event.target.value);
-        doctorInfo.skillId=event.target.value;
+        doctorInfo.skillId = event.target.value;
         setSelectedValue(event.target.value);
+    };
 
-      };
-
-
+    // Maneja el envío del formulario de registro //
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-
-
-            console.log('hasta aqui llega el try1');
-            // const schema =
-            //     userType === 'doctor' ? newDoctorSchema : newUserSchema;
-            console.log('hasta aqui llega el try2');
-
+            // Validaciones desactivadas temporalmente
+            // const schema = userType === 'doctor' ? newDoctorSchema : newUserSchema;
             // const validationResult = validate(schema);
-            console.log('hasta aqui llega el try3');
-
             // if (validationResult) {
-            //     // Si hay errores, no continuamos
             //     toast.error('Hay errores en el formulario');
             //     return;
             // }
-            console.log('hasta aqui llega el try4');
 
             setIsLoading(true);
-            console.log('hasta aqui llega el try5');
+        
+            // Si es doctor, copia los datos de usuario en doctorInfo//
+            doctorInfo.username = userInfo.username;
+            doctorInfo.email = userInfo.email;
+            doctorInfo.password = userInfo.password;
 
-          
-            doctorInfo.username=userInfo.username;
-            doctorInfo.email=userInfo.email;
-            doctorInfo.password=userInfo.password;
-            
-
+            // Llamada al servicio de registro según el tipo de usuario//
             const message =
                 userType === 'doctor'
                     ? await registerDoctorService(doctorInfo)
                     : await registerUserService(userInfo);
-            console.log('hasta aqui llega el try6');
 
+            // Redirige a la pantalla de login después del registro exitoso//
             const params = new URLSearchParams({ type: 'success', message });
             setTimeout(() => {
                 navigate(`/login?${params.toString()}`);
                 toast.info('Comprueba tu correo para activar tu cuenta');
             }, 2000);
-            console.log('hasta aqui llega el try7');
+           
         } catch (error) {
+            // Muestra error en caso de fallo en el registro//
             toast.error(error.message || 'Error al registrar el usuario');
         } finally {
             setIsLoading(false);
@@ -120,6 +120,7 @@ export const RegisterForm = () => {
                 </div>
             </div>
 
+            {/* Campos del formulario */}
             <Input
                 label="Nombre de Usuario"
                 type="text"
@@ -150,6 +151,8 @@ export const RegisterForm = () => {
                     userInfo ? handleChangeUserInfo : handleChangeDoctorInfo
                 }
             />
+
+            {/* Campos adicionales si el usuario es doctor */}
             {userType === 'doctor' && (
                 <>
                     <Input
@@ -168,22 +171,24 @@ export const RegisterForm = () => {
                         errors={errors}
                         handleChange={handleChangeDoctorInfo}
                     />
-                   
 
+                    {/* Selector de especialidad médica */}
                     <select
-                     label="Especialidad" 
-                     value={selectedValue}
-                     onChange={handleChange}
-                     >
-                    <option value="">Selecciona una opción</option>
-                    { skills?.data?.skills?.map((skill) => (
-                    <option key={ skill.id} value={skill.id}>
-                    { skill.Name} 
-                    </option>
-      ))}
-    </select>
+                        label="Especialidad" 
+                        value={selectedValue}
+                        onChange={handleChange}
+                    >
+                        <option value="">Selecciona una opción</option>
+                        {skills?.data?.skills?.map((skill) => (
+                            <option key={skill.id} value={skill.id}>
+                                {skill.Name}
+                            </option>
+                        ))}
+                    </select>
                 </>
             )}
+
+            {/* Botón de envío del formulario */}
             <Button
                 id="register"
                 className="btn btn-azul"
