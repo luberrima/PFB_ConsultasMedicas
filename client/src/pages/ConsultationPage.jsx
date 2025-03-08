@@ -4,6 +4,7 @@ import { AuthContext } from '../contexts/auth/AuthContext.js';
 import { Button } from '../components/Button.jsx';
 import {
     deleteConsultationService,
+    deleteDiagnosticoService,
     getAllSkillsService,
     getConsultationDetailService,
     getConsultationImages,
@@ -241,6 +242,35 @@ export const ConsultationPage = () => {
         }
     };
 
+    const handleDeleteDiganostico = async () => {
+        
+        if (!consultationId || !token) {
+            toast.error('Faltan datos para eliminar el diagnostico.');
+            return;
+        }
+
+        try {
+            const response = await deleteDiagnosticoService(
+                consultationId,
+                token
+            );
+
+            if (response.ok) {
+               
+                toast.success('Diganostico eliminado correctamente');
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            } else {
+                throw new Error('No se pudo eliminar el diagnostico');
+            }
+        } catch (error) {
+            console.error('Error al borrar el diaganostico:', error);
+            toast.error('Hubo un problema al eliminar el diagnostico');
+        }
+    };
+
     const images = getConsultationImages(
         consultation.userId,
         consultation.id,
@@ -374,7 +404,12 @@ export const ConsultationPage = () => {
             )}
 
             {isDoctor && hasDiagnostic && !hasVote && (
-                <>{/* boton borrar diagnostico */}</>
+                <Button
+                className="btn btn-naranja"
+                handleClick={handleDeleteDiganostico}
+            >
+                Eliminar Diagnostico
+            </Button>
             )}
 
             {isPatient && hasDiagnostic && !hasVote && (

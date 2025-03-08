@@ -278,6 +278,28 @@ export const deleteConsultationService = async (consultationId, token) => {
     return response;
 };
 
+export const deleteDiagnosticoService = async (consultationId, token) => {
+    console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
+    console.log('Que trae token en el deleteDiagnistcServide',token);
+    
+    
+    const response = await fetch(
+        `${backEndPath}/consultations/removediagnost/${consultationId}`,
+        {
+            method: 'PUT',
+            headers: {
+                Authorization: `${token}`,
+            },
+        }
+    );
+    const { message, data } = await response.json();
+    console.log('Que devuelve respose de consul no asignadas',response.data);
+
+    if (!response.ok) throw new Error(message);
+
+    return response;
+};
+
 export const getConsultationImages = (userId, consultationId, files = []) => {
     if (!userId || !consultationId || files.length === 0) {
         return [];
