@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { ImageInput } from './ImageInput.jsx';
 import { getAllDoctorBySkill } from '../../hooks/getdoctorbyskill.js';
 
-export const ConsultForm = () => {
+export const ConsultForm = ({ doctorId }) => {
     const { token } = useAuth();
     const { info, previews, /*errors,*/ validate, handleChange } = useForm();
     const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +23,13 @@ export const ConsultForm = () => {
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const { doctorbyskills } = getAllDoctorBySkill();
     console.log ("valor de doctorbyskills",doctorbyskills);
+
+    useEffect(() => {
+      if (doctorId) {
+          info.doctorId = doctorId;
+          setDoctorSeleccionado(doctorId);  
+      }
+  }, [doctorId]);
 
 
     useEffect(() => {

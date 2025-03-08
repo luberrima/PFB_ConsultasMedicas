@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ConsultForm } from '../components/forms/ConsultForm.jsx';
 
 import logo from '../assets/good-doctor-logo.svg';
@@ -10,6 +11,8 @@ import { Link } from 'react-router-dom';
 
 export const NewConsultPage = () => {
     useProtect('/new-travel');
+    const [searchParams] = useSearchParams();
+    const doctorId = searchParams.get("doctorId");
     useEffect(() => {
         document.body.classList.add('no-header-footer');
 
@@ -28,7 +31,7 @@ export const NewConsultPage = () => {
                 <h1>Haz una consulta</h1>
                 <p>Cuéntanos lo que te pasa</p>
                 <FormContextProvider>
-                    <ConsultForm />
+                    <ConsultForm doctorId={doctorId} />
                 </FormContextProvider>
             </div>
             <img

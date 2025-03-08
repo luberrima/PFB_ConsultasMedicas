@@ -9,6 +9,11 @@ import { useDoctorProfile } from '../../hooks/useDoctorProfile.js';
 import { useNavigate } from 'react-router-dom';
 import { CardAllInfoDoctor } from '../CardAllInfoDoctor.jsx';
 
+////////////////////////////////////////////////////////////////
+//dfsadfasdfa
+//asdfasdfadf
+//asdfasdf
+////////////////////////////////////////////////////////////////
 export const DoctorUserProfile = ({ doctorId }) => {
     
     const { doctorsbio /*, loadingbio, errorbio*/ } =
@@ -56,7 +61,7 @@ export const DoctorUserProfile = ({ doctorId }) => {
         }
     }
     const handleClickConsulta = () => {
-        navigate('/registro');
+        navigate(`/new-consult?doctorId=${doctorinfo?.userDoctor?.id}`);
     };
 
     return (
