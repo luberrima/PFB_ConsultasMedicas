@@ -5,44 +5,44 @@ import {
     sendChatMessageService,
 } from '../services/fetchBackEnd.js';
 import { CarReplica } from './carReplica.jsx';
-// import { jwtDecode } from 'jwt-decode';
 import './chatComponent.css';
 
 export const ChatComponent = ({ consultationId, consultation }) => {
     const { token, user } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    /* console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG',decodedToken); */
+
+    const fetchMessages = async () => {
+        if (!consultationId || !token) return;
+
+        setLoading(true);
+        const response = await getChatMessagesService(consultationId, token);
+        console.log("llega esto:", response)
+            setMessages(response.data);
+
+        setLoading(false);
+    };
 
     useEffect(() => {
-        const fetchMessages = async () => {
-            if (!consultationId || !token) return;
-
-            //esto falta por hacer el controller
-            const response = await getChatMessagesService(
-                consultationId,
-                token
-            );
-            if (response.status === 'ok') {
-                setMessages(response.data);
-            }
-        };
         fetchMessages();
     }, [consultationId, token]);
 
     const handleSendMessage = async () => {
         if (!newMessage.trim()) return;
 
-        // HAY QUE MODIFICAR CREATE REPLY CONTROLLER PARA QUE SEA DE UNA CONSULTA ESPECIFICA
-        const response = await sendChatMessageService(
-            consultationId,
-            newMessage,
-            token
-        );
-        if (response.status === 'ok') {
-            setMessages([...messages, response.data]);
+        const response = await sendChatMessageService(consultationId, newMessage, token);
+        if (response?.status === 'ok') {
             setNewMessage('');
+            await fetchMessages();
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
         }
     };
 
@@ -50,29 +50,34 @@ export const ChatComponent = ({ consultationId, consultation }) => {
         <section className="chat-container">
             <h3>Chat de la consulta</h3>
             <ul>
-                {consultation?.replies.map((repli) => (
-                    <CarReplica key={repli.id} repli={repli} />
+                {consultation?.replies?.map((repli) => (
+                    <CarReplica key={repli.createdAt} repli={repli} />
                 ))}
             </ul>
             <div className="chat-messages">
-                {messages.map((msg) => (
-                    <div
-                        key={msg.id}
-                        className={`chat-message ${
-                            msg.userId === user.id ? 'own-message' : ''
-                        }`}
-                    >
-                        <p>
-                            <strong>{msg.username}:</strong> {msg.reply}
-                        </p>
-                    </div>
-                ))}
+                {loading ? (
+                    <p>Cargando mensajes...</p>
+                ) : (
+                    messages?.map((msg) => (
+                        <div
+                            key={msg.createdAt}
+                            className={`chat-message ${
+                                msg.userId === user?.id ? 'own-message' : ''
+                            }`}
+                        >
+                            <p>
+                                <strong>{msg.username}:</strong> {msg.reply}
+                            </p>
+                        </div>
+                    ))
+                )}
             </div>
             <div className="chat-input">
                 <input
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Escribe tu mensaje..."
                 />
                 <button className="btn btn-azul" onClick={handleSendMessage}>

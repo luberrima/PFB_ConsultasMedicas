@@ -7,7 +7,8 @@ export const CarReplica = (repli) => {
     const decodedToken = token ? jwtDecode(token) : null;
 
     return (
-        <li key={repli.id}>
+        console.log("esto es repli:", repli),
+        <li key={repli.createdAt}>
             <section
                 className={
                     repli.repli.userId === decodedToken.id

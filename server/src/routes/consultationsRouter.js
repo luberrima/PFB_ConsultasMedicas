@@ -12,63 +12,65 @@ import { deleteConsultationController } from '../controllers/consultations/delet
 import { editDiagnistConsultController } from '../controllers/consultations/editDiagnistConsultController.js';
 import { getConsultationBySkillController } from '../controllers/consultations/getConsultationBySkillController.js';
 import { takeEmpyConsultationController } from '../controllers/consultations/takeEmpyConsultationController.js';
-import { getAllDoctorBySkillController} from '../controllers/consultations/getAllDoctorBySkillController.js'
+import { getAllDoctorBySkillController } from '../controllers/consultations/getAllDoctorBySkillController.js';
+import { getChatMessagesController } from '../controllers/consultations/getChatMessagesController.js';
+import { sendChatMessageController } from '../controllers/consultations/sendChatMessageController.js';
 
 export const consultationsRouter = express.Router();
 
 consultationsRouter.get(
     '/consultations/skills/:skillId',
-
     authUserMiddleware,
-
     getConsultationBySkillController
 );
 
-
-
 consultationsRouter.get(
     '/consultations/doctorbyskill',
-
     getAllDoctorBySkillController
 );
 
 consultationsRouter.put(
     '/consultations/take/:consultationId',
-
     authUserMiddleware,
-
     takeEmpyConsultationController
 );
 
-
 consultationsRouter.get(
     '/consultations/:consultationId',
-
     authUserMiddleware,
-
     getConsultationDetailController
 );
 
 consultationsRouter.post(
     '/consultations/replies',
-
     authUserMiddleware,
-
     createReplyController
+);
+
+consultationsRouter.get(
+    '/consultations/:consultationId/getreplies',
+    authUserMiddleware,
+    getChatMessagesController
+);
+
+consultationsRouter.post(
+    '/consultations/:consultationId/sendreplies',
+    authUserMiddleware,
+    sendChatMessageController
 );
 
 consultationsRouter.put(
     '/consultations/:id/vote',
-
     authUserMiddleware,
-
     voteDoctorController
 );
+
 consultationsRouter.post(
     '/new-consultation',
     authUserMiddleware,
     newConsultController
 );
+
 consultationsRouter.get('/consultations', getAllConsultationController);
 
 consultationsRouter.put(
@@ -86,6 +88,7 @@ consultationsRouter.delete(
     canDoItMiddleware,
     deleteConsultationController
 );
+
 consultationsRouter.put(
     '/consultations/updatediagnost/:id',
     authUserMiddleware,

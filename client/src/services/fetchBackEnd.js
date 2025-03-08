@@ -133,7 +133,7 @@ export const getDoctorProfileService = async (id, token) => {
 export const getChatMessagesService = async (consultationId, token) => {
     try {
         const response = await fetch(
-            `${backEndPath}/consultations/${consultationId}/replies`,
+            `${backEndPath}/consultations/${consultationId}/getreplies`,
             {
                 method: 'GET',
                 headers: {
@@ -169,7 +169,7 @@ export const sendChatMessageService = async (
 ) => {
     try {
         const response = await fetch(
-            `${backEndPath}/consultations/${consultationId}/replies`,
+            `${backEndPath}/consultations/${consultationId}/sendreplies`,
             {
                 method: 'POST',
                 headers: {
