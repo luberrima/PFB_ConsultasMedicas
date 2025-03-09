@@ -23,9 +23,6 @@ export const useAllUser = () => {
 
         fetchAllUser();
     }, []);
-
-       console.log('Que es lo que manda el useAllUser',users.data); 
-     
-    
+         
     return { users, loading4, error4 };
 };

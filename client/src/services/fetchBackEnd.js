@@ -490,45 +490,64 @@ export const getAllUserService = async (token) => {
 
 
 export const validateDoctorService = async (
-    deleteUserId,
+    userId,
     token,
+    
 ) => {
     try {
         const response = await fetch(
-            `${backEndPath}/consultations/updatediagnost/${consultationId}`,
-
+            `${AdminPath}validate`,
             {
                 method: 'PUT',
-
                 headers: {
                     'Content-Type': 'application/json',
-
                     Authorization: `${token}`,
                 },
-
                 body: JSON.stringify({
-                    diagnostic: diagnostic,
+                    doctorId: userId,
+                    validate: 1,
                 }),
             }
         );
 
         const data = await response.json();
-
-      /*   console.log('Token en service:', token);
-        console.log('Response en service:', response);
-        console.log('Diagnostic en service:', diagnostic);
         console.log('Data en service:', data);
- */
+ 
         if (!response.ok) {
             throw new Error(
                 data.message || 'Error al Validar el Doctor'
             );
         }
 
-        return data;
+        return response;
     } catch (error) {
-        console.error('Error en updateDiagnosticService:', error);
+        console.error('Error en ValidateDoctorService:', error);
 
         throw error;
     }
+};
+
+export const deleteUserService = async (userId, token) => {
+   /*  console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
+    console.log('Que trae token en el deleteDiagnistcServide',token); */
+    const response = await fetch(
+        `${AdminPath}alluser/delete`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+                body: JSON.stringify({
+                    id: userId,
+                    
+                }),
+            }
+    );
+    const { message, data } = await response.json();
+    console.log('Que devuelve respose el deleteUserService ',response.data);
+
+    if (!response.ok) throw new Error(message);
+
+    return response;
 };

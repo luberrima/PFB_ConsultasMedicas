@@ -3,10 +3,9 @@ import { CardUserForAdmin } from './CardUserForAdmin.jsx';
 
 
 
+
 export const AllUserList = ({ users }) => {
     
- console.log('Que tenfo en AllUserList',users?.data?.users);
- console.log('Que tenfo en AllUserList',users?.data?.users.length);
 
  
     if (!users.status) {
@@ -19,10 +18,12 @@ export const AllUserList = ({ users }) => {
                 {users?.data?.users.length > 0 ? (
                     users?.data?.users?.map(
                         (user) => (
+                            
                                 <CardUserForAdmin
-                                    key={user.id}
+                                    key={user.userId}
                                     user={user}
                                 />
+                            
                             )
                     )
                 ) : (

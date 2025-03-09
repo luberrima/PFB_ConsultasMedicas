@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { Estrellas } from '../Estrellas.jsx';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { validateDoctorService } from '../../services/fetchBackEnd.js';
+import {  useNavigate } from 'react-router-dom';
+import { deleteUserService, validateDoctorService } from '../../services/fetchBackEnd.js';
 import { Button } from '../Button.jsx';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../contexts/auth/AuthContext.js';
@@ -9,41 +8,67 @@ import { AuthContext } from '../../contexts/auth/AuthContext.js';
 // const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
 export const CardUserForAdmin = ({ user }) => {
-    console.log('Que tenfo en CarAllUserForAdmin como userAll',user);
+    /* console.log('Que tenfo en CarAllUserForAdmin como userAll',user); */
     const doctor = user.role === 'doctor';
     const validado = user.validate === '1';
     const { token } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleDeleteUser = async () => {
-            
+    const handleValidateUser = async () => {
+            const userId = user.userId
             if (!user.userId || !token) {
-                toast.error('Faltan datos para eliminar el diagnostico.');
+                toast.error('Faltan datos para validar el doctor.');
                 return;
             }
-            const deleteUserId = user.userId
-    
             try {
                 const response = await validateDoctorService(
-                    deleteUserId,
+                    userId,
                     token
                 );
-    
                 if (response.ok) {
                    
-                    toast.success('Usuario eliminado correctamente');
+                    toast.success('Doctor validado correctamente');
     
                     setTimeout(() => {
-                        Navigate('/');
+                        navigate('/'); 
                     }, 2000);
+                    
                 } else {
-                    throw new Error('No se pudo eliminar el Usuario');
+                    throw new Error('No se pudo validar el doctor');
                 }
             } catch (error) {
-                console.error('Error al borrar el usuario:', error);
+                console.error('Error al validar el doctor:', error);
+                toast.error('Hubo un problema al validar el doctor');
+            }
+        };
+        const handleDeleteUser = async () => {
+            const userId = user.userId
+            if (!user.userId || !token) {
+                toast.error('Faltan datos para Eliminar usuario.');
+                return;
+            }
+            try {
+                const response = await deleteUserService(
+                    userId,
+                    token
+                );
+                if (response.ok) {
+                   
+                    toast.success('Usuario Eliminado correctamente');
+    
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 2000);
+                    
+                } else {
+                    throw new Error('No se pudo eliminar el usuario');
+                }
+            } catch (error) {
+                console.error('Error al eliminar el usuario:', error);
                 toast.error('Hubo un problema al eliminar el usuario');
             }
         };
+       
     
     return (
         <>
@@ -54,25 +79,31 @@ export const CardUserForAdmin = ({ user }) => {
                 <p>email es:{user.email}</p> 
                 <p>Estado de Activo es:{user.active}</p>
                 <p>Rol es:{user.role}</p>
+                <Button
+                    className="btn btn-naranja"
+                    handleClick={handleDeleteUser}
+                >
+                    Eliminar Usuario
+                </Button>
                 
                 {doctor &&(
                     <>
                         <p>Estado de Validacion es:{user.validate}</p>
-                                        <p>Su especialidad es:{user.Especialidad}</p>
-                                        <p>Numero de colegiado es:{user.collegeNumber}</p>
-                                        <p>Fecha de colegiado es:{user.validate}</p>
+                        <p>Su especialidad es:{user.Especialidad}</p>
+                        <p>Numero de colegiado es:{user.collegeNumber}</p>
+                        <p>Fecha de colegiado es:{user.validate}</p>
                                     
                     </>
                                 )}
                 {doctor && !(user.validate ===1) &&(
                     <>
-                     
-                                        <Button
-                                            className="btn btn-naranja"
-                                            handleClick={handleDeleteUser}
-                                        >
-                                            Valida doctor
-                                        </Button>
+        
+                        <Button
+                            className="btn btn-naranja"
+                            handleClick={handleValidateUser}
+                        >
+                            Validar doctor
+                        </Button>
                     </>
                                 )}
                 

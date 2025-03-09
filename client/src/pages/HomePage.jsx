@@ -30,7 +30,7 @@ export const HomePage = () => {
     const { consultas /*,loading2, error2*/ } = useAllConsultas();
     const { consultasAllAs /*,loading3, error3*/ } = useAllConsultasNoAsig();
     const { users/*,loading4, error4*/ } = useAllUser();
-    console.log('Que tengo en la homePage para mostrar de todos lo usuarios',users.data);
+    
     
     /* console.log('Que tengo en la homePage para mostrar de todos lo usuarios',userAll.data); */
     
