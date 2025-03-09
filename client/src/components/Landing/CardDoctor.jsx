@@ -7,6 +7,12 @@ const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
 
 export const CardDoctor = ({ doctor }) => {
+
+    let urlavatar="/src/assets/avatar-default.png"
+    if(doctor.avatar)
+    {
+        urlavatar=`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`;
+    }
     
 
     return (
@@ -17,7 +23,7 @@ export const CardDoctor = ({ doctor }) => {
                     className="card-doctor-inicio-avatar"
                 >
                     <img
-                        src={`${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`}
+                        src={urlavatar}
                         alt="Foto usuario"
                         onError={(e) => {
                             e.target.onerror = null;  
