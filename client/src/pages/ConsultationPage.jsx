@@ -80,7 +80,7 @@ export const ConsultationPage = () => {
                 consultationId,
                 token
             );
-
+            console.log("valor de response en la consulta",response);
             if (response.status === 'ok') {
                 setConsultation(response.data);
             } else {
@@ -274,17 +274,12 @@ export const ConsultationPage = () => {
     const images = getConsultationImages(
         consultation.userId,
         consultation.id,
-        consultation.files || []
+        consultation.documents || []
     );
-    // console.log(
-    //     '📸FOTOS:',
-    //     consultation.userId,
-    //     '<USERID',
-    //     consultation.id,
-    //     '<CONSULTA ID',
-    //     consultation.arch,
-    //     '<FILES'
-    // );
+
+
+    console.log("valor de consultation",consultation);
+    console.log("valor de images",images);
 
     return (
         <section className="consultation-page">
@@ -347,17 +342,17 @@ export const ConsultationPage = () => {
                 <h3>Archivos subidos</h3>
 
                 {images && images.length > 0 ? (
-                    // <div className="image-gallery">
-                    //     {images.map((img, index) => (
-                    //         <img
-                    //             key={index}
-                    //             src={img.url}
-                    //             alt={img.name}
-                    //             className="uploaded-image"
-                    //         />
-                    //     ))}
-                    // </div>
-                    console.log('images', images)
+                     <div className="image-gallery">
+                       {images.map((img, index) => (
+                            <img
+                                key={index}
+                                src={img.url}
+                                alt={img.name}
+                                className="uploaded-image"
+                            />
+                        ))}
+                     </div>
+                    
                 ) : (
                     <p>No hay imágenes subidas para esta consulta.</p>
                 )}
