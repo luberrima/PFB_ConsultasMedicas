@@ -306,9 +306,9 @@ export const getConsultationImages = (userId, consultationId, files = []) => {
     }
 
     return files.map((file) => ({
-        url: `${backEndPath}/src/uploads/entries/${userId}/${consultationId}/${file.filename}`,
+        url: `${backEndPath}/uploads/entries/${userId}/${consultationId}/${file.name}`,
 
-        name: file.filename,
+        name: file.name,
     }));
 };
 export const takeConsultationService = async (consultationId, token) => {

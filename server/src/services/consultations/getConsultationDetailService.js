@@ -1,5 +1,6 @@
 import { getConsultationDetailModel } from '../../models/consultations/getConsultationDetailModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
+import { selectPhotoByIdModel } from '../../models/photos/selectPhotoByIdModel.js';
 
 export const getConsultationDetailService = async (consultationId) => {
     const consultationDetail = await getConsultationDetailModel(consultationId);
@@ -11,6 +12,9 @@ export const getConsultationDetailService = async (consultationId) => {
             'No se pudo encontrar la consulta'
         );
     }
+
+      const documents = await selectPhotoByIdModel(consultationId);
+      consultationDetail.documents = documents;
 
     return consultationDetail;
 };
