@@ -18,6 +18,8 @@ import { Carruselconsultaspasadas } from '../components/Landing/CarruselConsulta
 import { CarruselconsultasNoA } from '../components/Landing/CarruselConsultasNoA.jsx';
 import { CarruselconsultasActivas } from '../components/Landing/CarruselConsultasActivas.jsx';
 import { useAllConsultasNoAsig } from '../hooks/useAllConsultasNoAsig.js';
+import { useAllUser } from '../hooks/useAllUser.js';
+import { AllUserList } from '../components/Admin/AllUserList.jsx';
 
 export const HomePage = () => {
     const { token } = useContext(AuthContext);
@@ -27,6 +29,11 @@ export const HomePage = () => {
     const { doctors /*, loading, error */ } = useAllDoctor();
     const { consultas /*,loading2, error2*/ } = useAllConsultas();
     const { consultasAllAs /*,loading3, error3*/ } = useAllConsultasNoAsig();
+    const { users/*,loading4, error4*/ } = useAllUser();
+    console.log('Que tengo en la homePage para mostrar de todos lo usuarios',users.data);
+    
+    /* console.log('Que tengo en la homePage para mostrar de todos lo usuarios',userAll.data); */
+    
 
     // const navigate = useNavigate();
 
@@ -90,8 +97,8 @@ export const HomePage = () => {
             ) : decodedToken && decodedToken.role === 'admin' ? (
                 <>
                 <h3>ERES EL ADMINISTRADOR</h3>
-                <h2>Todos los pacientes</h2>
-                <h2>Todos los doctores</h2>
+                <h2>Todos los Usuarios</h2>
+                <AllUserList users= {users}/>
 
                 
                 
