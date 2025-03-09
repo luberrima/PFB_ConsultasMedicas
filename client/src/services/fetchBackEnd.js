@@ -200,6 +200,34 @@ export const sendChatMessageService = async (
     }
 };
 
+export const deleteChatMessageService = async (messageId, token) => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/messages/${messageId}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`,
+                },
+            }
+        );
+
+        if (response.ok) {
+            return { status: "ok" };
+        } else {
+            const errorData = await response.json();
+            return {
+                status: "error",
+                message: errorData.message || "Error al eliminar el mensaje",
+            };
+        }
+    } catch (error) {
+        console.error("Error en deleteChatMessage:", error);
+        return { status: "error", message: "Error en la solicitud" };
+    }
+};
+
 export const getAllSkillsService = async () => {
     try {
         const response = await fetch(`${backEndPath}/skills`);
