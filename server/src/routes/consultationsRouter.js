@@ -86,6 +86,7 @@ consultationsRouter.delete(
     canDoItMiddleware,
     deleteConsultationController
 );
+
 consultationsRouter.put(
     '/consultations/updatediagnost/:id',
     authUserMiddleware,
