@@ -17,7 +17,7 @@ if(doctor.avatar)
 
     return (
         <> 
-            <section>
+            <section className="main-doctor-card">
             <Link
                 to={`/users/doctors/${doctor.userId}`}
                 className="link-card-doctor"
