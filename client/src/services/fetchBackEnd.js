@@ -161,7 +161,7 @@ export const getDoctorDetailService = async (doctorId, token) => {
 export const getChatMessagesService = async (consultationId, token) => {
     try {
         const response = await fetch(
-            `${backEndPath}/consultations/${consultationId}/replies`,
+            `${backEndPath}/consultations/${consultationId}/getreplies`,
             {
                 method: 'GET',
                 headers: {
@@ -197,7 +197,7 @@ export const sendChatMessageService = async (
 ) => {
     try {
         const response = await fetch(
-            `${backEndPath}/consultations/${consultationId}/replies`,
+            `${backEndPath}/consultations/${consultationId}/sendreplies`,
             {
                 method: 'POST',
                 headers: {
@@ -225,6 +225,34 @@ export const sendChatMessageService = async (
     } catch (error) {
         console.error('Error en sendChatMessage:', error);
         return { status: 'error', message: 'Error en la solicitud' };
+    }
+};
+
+export const deleteChatMessageService = async (messageId, token) => {
+    try {
+        const response = await fetch(
+            `${backEndPath}/consultations/Replies/${messageId}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`,
+                },
+            }
+        );
+
+        if (response.ok) {
+            return { status: "ok" };
+        } else {
+            const errorData = await response.json();
+            return {
+                status: "error",
+                message: errorData.message || "Error al eliminar el mensaje",
+            };
+        }
+    } catch (error) {
+        console.error("Error en deleteChatMessage:", error);
+        return { status: "error", message: "Error en la solicitud" };
     }
 };
 
