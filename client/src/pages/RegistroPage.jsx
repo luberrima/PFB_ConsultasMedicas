@@ -31,6 +31,11 @@ export const RegistroPage = () => {
                         Inicia Sesión
                     </Link>
                 </p>
+                <p>
+                    <Link to="/" className="form-link-inicio">
+                        Volver a Inicio
+                    </Link>
+                </p>
             </div>
             <img
                 className="illustration registro-illustration"

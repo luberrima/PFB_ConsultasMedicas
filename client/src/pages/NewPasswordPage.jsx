@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Form } from '../components/forms/Form.jsx';
 import { Input } from '../components/forms/Input.jsx';
 import { Button } from '../components/Button.jsx';
 import { toast } from 'react-toastify';
+import logo from '../assets/good-doctor-logo-navbar.svg';
+import '../components/forms/forms.css';
 
 export const NewPasswordPage = () => {
     const { recoveryPassCode } = useParams(); // El código viene desde el enlace enviado por email
@@ -12,6 +14,13 @@ export const NewPasswordPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const apiPath = import.meta.env.VITE_BACKEND_HOST;
+
+    useEffect(() => {
+        document.body.classList.add('no-header-footer');
+        return () => {
+            document.body.classList.remove('no-header-footer');
+        };
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,32 +63,42 @@ export const NewPasswordPage = () => {
 
     return (
         <div className="new-password-page">
-            <h2>Restablecer Contraseña</h2>
-            <Form handleSubmit={handleSubmit} className="form">
-                <Input
-                    handleChange={(e) => setNewPass(e.target.value)}
-                    label="Nueva Contraseña"
-                    type="password"
-                    name="newPass"
-                    value={newPass}
-                    placeholder="Escribe tu nueva contraseña"
-                />
-                <Input
-                    handleChange={(e) => setConfirmPass(e.target.value)}
-                    label="Confirmar Contraseña"
-                    type="password"
-                    name="confirmPass"
-                    value={confirmPass}
-                    placeholder="Confirma tu nueva contraseña"
-                />
-                <Button
-                    type="submit"
-                    isLoading={isLoading}
-                    className="btn btn-azul"
-                >
-                    Actualizar Contraseña
-                </Button>
-            </Form>
+            <Link to="/">
+                <img className="logo" src={logo} alt="Good Doctor Logo" />
+            </Link>
+            <div className="form-card">
+                <h1>Restablecer Contraseña</h1>
+                <Form handleSubmit={handleSubmit} className="form">
+                    <Input
+                        handleChange={(e) => setNewPass(e.target.value)}
+                        label="Nueva Contraseña"
+                        type="password"
+                        name="newPass"
+                        value={newPass}
+                        placeholder="Escribe tu nueva contraseña"
+                    />
+                    <Input
+                        handleChange={(e) => setConfirmPass(e.target.value)}
+                        label="Confirmar Contraseña"
+                        type="password"
+                        name="confirmPass"
+                        value={confirmPass}
+                        placeholder="Confirma tu nueva contraseña"
+                    />
+                    <Button
+                        type="submit"
+                        isLoading={isLoading}
+                        className="btn btn-azul"
+                    >
+                        Actualizar Contraseña
+                    </Button>
+                    <p>
+                        <Link to="/" className="form-link-inicio">
+                            Volver a Inicio
+                        </Link>
+                    </p>
+                </Form>
+            </div>
         </div>
     );
 };

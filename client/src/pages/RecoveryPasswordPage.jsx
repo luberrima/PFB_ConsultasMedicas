@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RecoveryPasswordForm } from '../components/forms/RecoveryPasswordForm';
 import { Link } from 'react-router-dom';
-import logo from '../assets/good-doctor-logo-login.svg';
+import logo from '../assets/good-doctor-logo-navbar.svg';
 import '../components/forms/forms.css';
 
 export const RecoveryPasswordPage = () => {
@@ -18,7 +18,7 @@ export const RecoveryPasswordPage = () => {
                 <img className="logo" src={logo} alt="Good Doctor Logo" />
             </Link>
             <div className="form-card">
-                <h2>Recuperar Contraseña</h2>
+                <h1>Recuperar Contraseña</h1>
                 <p>
                     Introduce tu correo para recibir instrucciones de
                     recuperación
