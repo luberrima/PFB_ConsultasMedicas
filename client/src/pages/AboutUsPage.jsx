@@ -62,7 +62,7 @@ const teamMembers = [
             'Fran ha optimizado más código del que podemos contar. Si algo se puede hacer en la mitad de líneas, él ya lo redujo antes de que lo pidieras.',
         avatar: fran,
         github: 'https://github.com/Franollie',
-        linkedin: '#',
+        linkedin: 'https://www.linkedin.com/in/fran-bejarano-02793a333/',
     },
 ];
 
