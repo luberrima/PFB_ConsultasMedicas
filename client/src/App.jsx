@@ -18,6 +18,9 @@ import { RecoveryPasswordPage } from './pages/RecoveryPasswordPage.jsx';
 import { NewPasswordPage } from './pages/NewPasswordPage.jsx';
 import { EditProfileForm } from './components/forms/EditProfileForm.jsx';
 import { AboutUsPage } from './pages/AboutUsPage.jsx';
+import { ContactPage } from './pages/ContactPage.jsx';
+
+
 
 function App() {
     return (
@@ -52,6 +55,7 @@ function App() {
                     <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
                     <Route path="/consultations/:consultationId" element={<ConsultationPage />} />
                     <Route path="/about" element={<AboutUsPage />} />
+                    <Route path="/contacto" element={<ContactPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
