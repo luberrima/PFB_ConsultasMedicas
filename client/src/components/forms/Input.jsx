@@ -11,6 +11,8 @@ export const Input = ({
     // errors,
     placeholder,
     className,
+    rows,
+    cols,
 }) => {
     const [inputType, setInputType] = useState(type);
     const [showPass, setShowPass] = useState(false);
@@ -22,17 +24,30 @@ export const Input = ({
 
     return (
         <label>
-            <p>{label}</p>
+            {label && <p>{label}</p>}
+
             <div className="input-container">
-                <input
-                    onChange={handleChange}
-                    type={inputType}
-                    name={name}
-                    value={value}
-                    autoComplete={`new-${name}`}
-                    placeholder={placeholder}
-                    className={className}
-                />
+                {type === 'textarea' ? (
+                    <textarea
+                        name={name}
+                        rows={rows}
+                        cols={cols}
+                        value={value}
+                        onChange={handleChange}
+                        placeholder={placeholder}
+                        className={className}
+                    />
+                ) : (
+                    <input
+                        type={inputType}
+                        name={name}
+                        value={value}
+                        onChange={handleChange}
+                        autoComplete={`new-${name}`}
+                        placeholder={placeholder}
+                        className={className}
+                    />
+                )}
                 {type === 'password' && (
                     <Button
                         handleClick={handleClick}
@@ -44,6 +59,7 @@ export const Input = ({
                     </Button>
                 )}
             </div>
+
             {/* <span className="inputError" id={`error-${name}`}>
                 {errors?.map((error) => {
                     if (error.context && error.context.key === name) {

@@ -43,46 +43,64 @@ export const ProfileUserPage = () => {
 
     return (
         <>
-            <div className="user-profile">
-                <h2>Perfil de Usuario</h2>
-                <span>
-                    <h3>Nombre:</h3>
-                    <p>{user.nombre ? user.nombre : 'No especificado'}</p>
-                </span>
-                <span>
-                    <h3>Avatar</h3>
-                    <img
-                        src={`${staticPath}/avatars/${user.id}/${user.avatar}`}
-                        alt="Foto usuario"
-                    />
-                    <h3>Username:</h3>
-                    <p>{user.username}</p>
-                </span>
-                <span>
-                    <h3>Email:</h3>
-                    <p>{user.email}</p>
-                </span>
-                <span>
-                    <h3>Contraseña:</h3>
-                    <p>******</p>
-                    <Button
-                        handleClick={() => navigate('/password-recovery')}
-                        className="btn btn-naranja"
-                    >
-                        Cambiar Contraseña
-                    </Button>
-                </span>
-                <span>
-                    <h3>Bio:</h3>
-                    <p>{user.bio ? user.bio : 'No especificado'}</p>
-                </span>
-                <Button
-                    handleClick={() => navigate('/profile/edit')}
-                    className="edit-profile-btn"
-                >
-                    Editar Perfil
-                </Button>
-            </div>
+            <section className="ficha-user">
+                <h1 className="page-title">Perfil de Usuario</h1>
+                <article className="ficha-user-container">
+                    <article className="ficha-user-img">
+                        <img
+                            src={`${staticPath}/avatars/${user.id}/${user.avatar}`}
+                            alt="Foto usuario"
+                        />
+                    </article>
+
+                    <article className="ficha-user-info">
+                        <ul>
+                            <li>
+                                <h3>Nombre</h3>
+                                <p>
+                                    {user.nombre
+                                        ? user.nombre
+                                        : 'No especificado'}
+                                </p>
+                            </li>
+                            <li>
+                                <h3>Username</h3>
+                                <p>{user.username}</p>
+                            </li>
+                            <li>
+                                <h3>Biografía</h3>
+                                <p>{user.bio ? user.bio : 'No especificado'}</p>
+                            </li>
+                            <li>
+                                <h3>Email</h3>
+                                <p>{user.email}</p>
+                            </li>
+                            <li className="ficha-user-edit-contraseña">
+                                <h3>Contraseña</h3>
+                                <p>******</p>
+                                <Button
+                                    handleClick={() =>
+                                        navigate('/password-recovery')
+                                    }
+                                    className="btn btn-naranja"
+                                >
+                                    Cambiar Contraseña
+                                </Button>
+                            </li>
+                            <li>
+                                <Button
+                                    handleClick={() =>
+                                        navigate('/profile/edit')
+                                    }
+                                    className="btn btn-azul"
+                                >
+                                    Editar Perfil
+                                </Button>
+                            </li>
+                        </ul>
+                    </article>
+                </article>
+            </section>
         </>
     );
 };

@@ -23,13 +23,18 @@ export const NewConsultPage = () => {
             <Link to="/">
                 <img className="logo" src={logo} alt="logo Good Doctor" />
             </Link>
-            <div className="form-card">
+            <div className="form-card new-consultation-form-card">
                 <h2>¿Tienes dudas médicas?</h2>
                 <h1>Haz una consulta</h1>
                 <p>Cuéntanos lo que te pasa</p>
                 <FormContextProvider>
                     <ConsultForm />
                 </FormContextProvider>
+                <p>
+                    <Link to="/" className="form-link-inicio">
+                        Volver a Inicio
+                    </Link>
+                </p>
             </div>
             <img
                 className="illustration new-consult-illustration"

@@ -35,6 +35,11 @@ export const LoginPage = () => {
                         Regístrate
                     </Link>
                 </p>
+                <p>
+                    <Link to="/" className="form-link-inicio">
+                        Volver a Inicio
+                    </Link>
+                </p>
             </div>
             <img className="illustration" src={illustration} alt="" />
         </div>

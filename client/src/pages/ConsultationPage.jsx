@@ -80,7 +80,7 @@ export const ConsultationPage = () => {
                 consultationId,
                 token
             );
-            console.log("valor de response en la consulta",response);
+            console.log('valor de response en la consulta', response);
             if (response.status === 'ok') {
                 setConsultation(response.data);
             } else {
@@ -243,7 +243,6 @@ export const ConsultationPage = () => {
     };
 
     const handleDeleteDiganostico = async () => {
-        
         if (!consultationId || !token) {
             toast.error('Faltan datos para eliminar el diagnostico.');
             return;
@@ -256,7 +255,6 @@ export const ConsultationPage = () => {
             );
 
             if (response.ok) {
-               
                 toast.success('Diganostico eliminado correctamente');
 
                 setTimeout(() => {
@@ -277,9 +275,8 @@ export const ConsultationPage = () => {
         consultation.documents || []
     );
 
-
-    console.log("valor de consultation",consultation);
-    console.log("valor de images",images);
+    console.log('valor de consultation', consultation);
+    console.log('valor de images', images);
 
     return (
         <section className="consultation-page">
@@ -342,8 +339,8 @@ export const ConsultationPage = () => {
                 <h3>Archivos subidos</h3>
 
                 {images && images.length > 0 ? (
-                     <div className="image-gallery">
-                       {images.map((img, index) => (
+                    <div className="image-gallery">
+                        {images.map((img, index) => (
                             <img
                                 key={index}
                                 src={img.url}
@@ -351,10 +348,11 @@ export const ConsultationPage = () => {
                                 className="uploaded-image"
                             />
                         ))}
-                     </div>
-                    
+                    </div>
                 ) : (
-                    <p>No hay imágenes subidas para esta consulta.</p>
+                    <p className="consultation-page-no-img">
+                        No hay imágenes subidas para esta consulta.
+                    </p>
                 )}
             </section>
 
@@ -370,7 +368,7 @@ export const ConsultationPage = () => {
             {/* INPUT PARA ESCRIBIR DIAGNOSTICO */}
 
             {!hasDiagnostic && isDoctor && isMyConsultation && (
-                <div>
+                <section>
                     {/* {console.log('consultationId:', consultationId)}
                     {console.log(
                         'Doctor asignado a la consulta:',
@@ -385,7 +383,7 @@ export const ConsultationPage = () => {
                         consultationId={consultationId}
                         token={token}
                     />
-                </div>
+                </section>
             )}
 
             {/* Diagnóstico y valoración (si hay diagnóstico) */}
@@ -400,11 +398,11 @@ export const ConsultationPage = () => {
 
             {isDoctor && hasDiagnostic && !hasVote && (
                 <Button
-                className="btn btn-naranja"
-                handleClick={handleDeleteDiganostico}
-            >
-                Eliminar Diagnostico
-            </Button>
+                    className="btn btn-naranja"
+                    handleClick={handleDeleteDiganostico}
+                >
+                    Eliminar Diagnostico
+                </Button>
             )}
 
             {isPatient && hasDiagnostic && !hasVote && (

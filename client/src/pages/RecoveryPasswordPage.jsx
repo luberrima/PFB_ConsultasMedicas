@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RecoveryPasswordForm } from '../components/forms/RecoveryPasswordForm';
 import { Link } from 'react-router-dom';
-import logo from '../assets/good-doctor-logo-login.svg';
+import logo from '../assets/good-doctor-logo-navbar.svg';
 import '../components/forms/forms.css';
 
 export const RecoveryPasswordPage = () => {

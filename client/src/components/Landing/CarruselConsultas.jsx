@@ -10,7 +10,7 @@ export const Carruselconsultas = ({ consultas }) => {
     //  const photos = consultas?.consultas || [];
 
     if (consultas?.user?.consult === undefined) {
-        return <div> No tienes consultas</div>;
+        return <p className="consulta-not-found"> No tienes consultas</p>;
     }
 
     return (

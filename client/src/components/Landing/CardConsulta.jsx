@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 
 export const CardConsulta = ({ consulta }) => {
     return (
-        <>
+        <section className="card-consulta">
             <Link
                 to={`/consultations/${consulta.id}`}
                 className="link-card-consulta"
             >
-                <li className="card-consulta">
+                <li className="">
                     <header>
                         <p>{consulta.Especialidad}</p>
                         <p>{consulta.gravedad}</p>
@@ -33,6 +33,6 @@ export const CardConsulta = ({ consulta }) => {
                     {/* <p>Diagnostico: {consulta.diagnostic}</p> */}
                 </li>
             </Link>
-        </>
+        </section>
     );
 };
