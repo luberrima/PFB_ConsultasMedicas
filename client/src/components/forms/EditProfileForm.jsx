@@ -11,9 +11,8 @@ export const EditProfileForm = () => {
     const { usersOwn, loadingOwn, errorOwn } = useUserProfile();
     const { token } = useAuth();
     const navigate = useNavigate();
-    const apiPath = import.meta.env.VITE_BACKEND_HOST; // Ejemplo: "http://localhost:3001"
+    const apiPath = import.meta.env.VITE_BACKEND_HOST;
 
-    // Se añade el email y active al estado inicial
     const [formData, setFormData] = useState({
         username: '',
         nombre: '',
@@ -26,7 +25,6 @@ export const EditProfileForm = () => {
     });
     const [avatarFile, setAvatarFile] = useState(null);
 
-    // Rellenar el formulario con los datos actuales del usuario
     useEffect(() => {
         if (
             usersOwn &&
@@ -55,7 +53,6 @@ export const EditProfileForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Maneja la subida del avatar
     const handleAvatarChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -63,8 +60,8 @@ export const EditProfileForm = () => {
             const dataToUpload = new FormData();
             dataToUpload.append('avatar', file);
             try {
-                const response = await fetch(`${apiPath}/users/upload`, {
-                    method: 'POST',
+                const response = await fetch(`${apiPath}/users/updateavatar`, {
+                    method: 'PUT',
                     headers: {
                         Authorization: token,
                     },
@@ -72,7 +69,7 @@ export const EditProfileForm = () => {
                 });
                 if (response.ok) {
                     const result = await response.json();
-                    // result.filePath debe ser algo como "userId/fileName.jpg"
+
                     setFormData((prev) => ({
                         ...prev,
                         avatar: result.filePath,
@@ -149,7 +146,7 @@ export const EditProfileForm = () => {
                 handleChange={handleChange}
                 placeholder="Escribe una breve bio"
             />
-            {/* Campo para email, de solo lectura o editable según convenga */}
+
             <Input
                 label="Email"
                 type="email"
