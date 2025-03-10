@@ -99,7 +99,7 @@ export const NavBar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/" className="navbar-link">
+                                <Link to="/profile" className="navbar-link">
                                     Mi Perfil
                                 </Link>
                             </li>
