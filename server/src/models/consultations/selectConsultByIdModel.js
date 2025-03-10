@@ -12,6 +12,6 @@ export const selectConsultByIdModel = async (id) => {
     );
 
     // 3. Devolver el resultado
-    console.log('QUE TENGO EN EL retorno del model LA CONSUTA', consulta[0]); 
+    
     return consulta[0];
 };

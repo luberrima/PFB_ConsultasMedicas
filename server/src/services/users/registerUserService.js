@@ -53,16 +53,16 @@ export const registerUserService = async (username, email, password) => {
     // Enviar el mail de confirmación
         // Asunto del email
         const emailSubject = 'Activa tu cuenta de Good Doctor';
-        console.log("paso por el asunto", emailSubject )
+        
         // Cuerpo del email
         const emailText = `
         <h2>¡Bienvenid@ ${username} a Good Doctor!</h2>
         <p>Gracias por registrarte en nuestra aplicación. Para activar tu cuenta, haz click en el siguiente enlace:</p>
         <p><a href="http://localhost:5173/validate/${registrationCode}">Activa tu cuenta</a></p>
         `;
-        console.log("paso por el texto", emailText )
+        
         // Llamar al servicio que envía el email
-        console.log("paso por al utils", email, emailSubject, emailText )
+        
         await sendEmailBrevoUtils(email, emailSubject, emailText);
         
 

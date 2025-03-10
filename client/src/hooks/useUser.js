@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getOwnUserService2 } from '../services/fetchBackEnd.js';
+import { getOwnUserService2,getOwnUserService3 } from '../services/fetchBackEnd.js';
 import { useAuth } from './useAuth.js';
 
-export const useUserProfile = () => {
+export const useUserProfile = (role) => {
     const [usersOwn, setUsersOwn] = useState([]);
     const [loadingOwn, setLoadingOwn] = useState(true);
     const [errorOwn, setErrorOwn] = useState(null);
@@ -13,9 +13,17 @@ export const useUserProfile = () => {
         const fetchUsersOwn = async () => {
             try {
                 setLoadingOwn(true);
-                const data = await getOwnUserService2(token);
+                let data="";
+                if (role==="paciente")
+                {
+                data = await getOwnUserService2(token);
+                }  
+                if (role==="doctor")
+                    {
+                    data = await getOwnUserService3(token);
+                    } 
                 console.log("LO QUE TIENE EL USEUSERPROFILE",data);
-                
+                console.log("el valor de data",data);
                 setUsersOwn(data);
              
             } catch (error) {

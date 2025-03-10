@@ -32,7 +32,7 @@ export const editUserInfoService = async (id,nombre,  bio, collegeNumber,  dateO
        
      const resultdoctor= await editDoctorUserInfoModel(id, collegeNumber,  dateOfCollege)
  
-    console.log("result de doctor",resultdoctor)
+
      if (resultdoctor.affectedRows !== 1) {
         throw genereErrorUtils(
             404,

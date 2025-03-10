@@ -5,18 +5,18 @@ export const getOwnUserDoctorController = async (req, res, next) => {
         const { id } = req.user;
         
     
-        const userDoctor = await getOwnUserDoctorService(id);
+        const user = await getOwnUserDoctorService(id);
 
-        console.log(userDoctor);
+        console.log(user);
      
-        delete userDoctor.user.password;
-        delete userDoctor.user.registrationCode;
-        delete userDoctor.user.recoveryPassCode;
+        delete user.user[0].password;
+        delete user.user[0].registrationCode;
+        delete user.user[0].recoveryPassCode;
 
         res.send({
             status: 'ok',
             data: {
-                userDoctor,
+                user,
             },
         });
     } catch (error) {

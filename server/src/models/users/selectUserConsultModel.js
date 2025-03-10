@@ -1,5 +1,6 @@
 import { getPool } from '../../db/getPool.js';
 
+
 export const selectUserConsultModel = async (userId) => {
     const pool = await getPool();
 

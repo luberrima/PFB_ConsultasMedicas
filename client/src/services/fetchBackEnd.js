@@ -28,6 +28,23 @@ export const getOwnUserService2 = async (token) => {
     return await response.json();
 };
 
+export const getOwnUserService3 = async (token) => {
+    const response = await fetch(`${backEndPath}/users/doctorsown`, {
+        headers: {
+            Authorization: token,
+        },
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+            errorData.message || 'Error al obtener el perfil de usuario'
+        );
+    }
+
+    return await response.json();
+};
+
 export const getAllDoctorsService = async () => {
     const response = await fetch(`${backEndPath}/users/doctors`);
 
