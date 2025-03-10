@@ -25,6 +25,7 @@ export const getPool = async () => {
 			await poolTemp.query(`CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}`);
 
 			// Crear la conexión con la DDBB
+			console.log("Conexión a la base de datos inicializada");
 			pool = mysql.createPool({
 				host: MYSQL_HOST,
 				user: MYSQL_USER,

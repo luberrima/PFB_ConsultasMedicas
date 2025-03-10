@@ -60,7 +60,7 @@ consultationsRouter.post(
     sendChatMessageController
 );
 
-consultationsRouter.delete("/Replies/:messageId", authUserMiddleware, deleteReplyController);
+consultationsRouter.delete("/consultations/Replies/:replyId", authUserMiddleware, deleteReplyController);
 
 consultationsRouter.put(
     '/consultations/:id/vote',

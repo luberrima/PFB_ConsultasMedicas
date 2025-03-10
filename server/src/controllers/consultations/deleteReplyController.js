@@ -2,10 +2,11 @@ import { deleteReplyService } from "../../services/consultations/deleteReplyServ
 
 export const deleteReplyController = async (req, res, next) => {
     try {
-        const { messageId } = req.params;
+        console.log("entro en el controlador")
+        const { replyId } = req.params;
         const { id: userId } = req.user; // ID del usuario autenticado
-
-        await deleteReplyService(messageId, userId);
+        console.log("recibo estos datos:", replyId, userId)
+        await deleteReplyService(replyId, userId);
 
         res.status(200).json({ status: "ok", message: "Mensaje eliminado correctamente" });
     } catch (error) {

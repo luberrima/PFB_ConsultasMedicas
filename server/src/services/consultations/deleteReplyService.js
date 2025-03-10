@@ -2,8 +2,9 @@ import { findReplyById } from "../../models/consultations/findReplyByIdModel.js"
 import { deleteReplyById } from "../../models/consultations/deleteReplyByIdModel.js";
 import { genereErrorUtils } from "../../utils/genereErrorUtils.js";
 
-export const deleteReplyService = async (messageId, userId) => {
-    const reply = await findReplyById(messageId);
+export const deleteReplyService = async (replyId, userId) => {
+    console.log("entro en el service")
+    const reply = await findReplyById(replyId);
 
     if (!reply) {
         throw genereErrorUtils("Mensaje no encontrado", 404);
@@ -13,5 +14,5 @@ export const deleteReplyService = async (messageId, userId) => {
         throw genereErrorUtils("No tienes permiso para eliminar este mensaje", 403);
     }
 
-    await deleteReplyById(messageId);
+    await deleteReplyById(replyId);
 };
