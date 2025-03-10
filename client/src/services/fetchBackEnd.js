@@ -11,6 +11,23 @@ export const getOwnUserService = async (token) => {
     return response;
 };
 
+export const getOwnUserService2 = async (token) => {
+    const response = await fetch(`${backEndPath}/users/profile`, {
+        headers: {
+            Authorization: token,
+        },
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+            errorData.message || 'Error al obtener el perfil de usuario'
+        );
+    }
+
+    return await response.json();
+};
+
 export const getAllDoctorsService = async () => {
     const response = await fetch(`${backEndPath}/users/doctors`);
 
@@ -280,10 +297,11 @@ export const deleteConsultationService = async (consultationId, token) => {
 };
 
 export const deleteDiagnosticoService = async (consultationId, token) => {
-    console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
-    console.log('Que trae token en el deleteDiagnistcServide',token);
-    
-    
+    console.log(
+        `${backEndPath}/consultations/removediagnost/${consultationId}`
+    );
+    console.log('Que trae token en el deleteDiagnistcServide', token);
+
     const response = await fetch(
         `${backEndPath}/consultations/removediagnost/${consultationId}`,
         {
@@ -294,7 +312,7 @@ export const deleteDiagnosticoService = async (consultationId, token) => {
         }
     );
     const { message, data } = await response.json();
-    console.log('Que devuelve respose de consul no asignadas',response.data);
+    console.log('Que devuelve respose de consul no asignadas', response.data);
 
     if (!response.ok) throw new Error(message);
 
