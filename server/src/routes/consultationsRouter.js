@@ -15,6 +15,7 @@ import { takeEmpyConsultationController } from '../controllers/consultations/tak
 import { getAllDoctorBySkillController } from '../controllers/consultations/getAllDoctorBySkillController.js';
 import { getChatMessagesController } from '../controllers/consultations/getChatMessagesController.js';
 import { sendChatMessageController } from '../controllers/consultations/sendChatMessageController.js';
+import { deleteReplyController } from "../controllers/consultations/deleteReplyController.js";
 
 export const consultationsRouter = express.Router();
 
@@ -59,6 +60,8 @@ consultationsRouter.post(
     sendChatMessageController
 );
 
+consultationsRouter.delete("/Replies/:messageId", authUserMiddleware, deleteReplyController);
+
 consultationsRouter.put(
     '/consultations/:id/vote',
     authUserMiddleware,
@@ -96,3 +99,5 @@ consultationsRouter.put(
     canDoItMiddleware,
     editDiagnistConsultController
 );
+
+

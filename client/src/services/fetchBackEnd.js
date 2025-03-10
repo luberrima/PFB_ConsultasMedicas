@@ -203,7 +203,7 @@ export const sendChatMessageService = async (
 export const deleteChatMessageService = async (messageId, token) => {
     try {
         const response = await fetch(
-            `${backEndPath}/consultations/messages/${messageId}`,
+            `${backEndPath}/consultations/Replies/${messageId}`,
             {
                 method: "DELETE",
                 headers: {
