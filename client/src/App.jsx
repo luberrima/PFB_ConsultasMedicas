@@ -22,15 +22,13 @@ function App() {
         <AppErrorBoundary>
             {' '}
             {/* Aquí envolvemos toda la app */}
+
             <ToastContainer />
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
                     <Route index element={<HomePage />} />
-                    <Route path="/registro" element={<RegistroPage />} />;
-                    <Route
-                        path="/validate/:registrationCode"
-                        element={<ValidatePage />}
-                    />
+                    <Route path="/registro" element={<RegistroPage />} />
+                    <Route path="/validate/:registrationCode" element={<ValidatePage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/profile/edit" element={<EditProfileForm />} />
                     <Route path="/profile" element={<ProfileUserPage />} />
@@ -42,23 +40,17 @@ function App() {
                         path="/password-reset/:recoveryPassCode"
                         element={<NewPasswordPage />}
                     />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/login" element={<LoginPage />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
                     <Route path="/new-consult" element={<NewConsultPage />} />
-                    <Route
-                        path="/new-consult/:urlid/:urlskill"
-                        element={<NewConsultPage />}
-                    />
                     <Route
                         path="/users/doctors/:id"
                         element={<DoctorUserProfilePage />}
                     />
+                    <Route path="/new-consult/:urlid/:urlskill" element={<NewConsultPage />} />
+                    <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
+                    <Route path="/consultations/:consultationId" element={<ConsultationPage />} />
+                    <Route path="/about" element={<AboutUsPage />} />
                     <Route path="*" element={<NotFoundPage />} />
-                    <Route
-                        path="/consultations/:consultationId"
-                        element={<ConsultationPage />}
-                    />
                 </Route>
             </Routes>
         </AppErrorBoundary>

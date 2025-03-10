@@ -1,5 +1,6 @@
 // import { Navigate } from 'react-router-dom';
 const backEndPath = import.meta.env.VITE_BACKEND_HOST;
+const AdminPath = import.meta.env.VITE_BACKEND_ADMIN;
 
 export const getOwnUserService = async (token) => {
     const response = await fetch(`${backEndPath}/users/profile`, {
@@ -477,4 +478,94 @@ export const getAllDoctorBySkilfetch = async () => {
 
         throw error;
     }
+};
+export const getAllUserService = async (token) => {
+    try {
+        const response = await fetch(
+            `${AdminPath}alluser`,
+            {
+                headers: {
+                    Authorization: `${token}`,
+                },  
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al los usuarios');
+        }
+        
+        
+        return data;
+
+    } catch (error) {
+        console.error('Error en getallUserService:', error);
+
+        throw error;
+    }
+};
+
+
+export const validateDoctorService = async (
+    userId,
+    token,
+    
+) => {
+    try {
+        const response = await fetch(
+            `${AdminPath}validate`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+                body: JSON.stringify({
+                    doctorId: userId,
+                    validate: 1,
+                }),
+            }
+        );
+
+        const data = await response.json();
+        console.log('Data en service:', data);
+ 
+        if (!response.ok) {
+            throw new Error(
+                data.message || 'Error al Validar el Doctor'
+            );
+        }
+
+        return response;
+    } catch (error) {
+        console.error('Error en ValidateDoctorService:', error);
+
+        throw error;
+    }
+};
+
+export const deleteUserService = async (userId, token) => {
+   /*  console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
+    console.log('Que trae token en el deleteDiagnistcServide',token); */
+    const response = await fetch(
+        `${AdminPath}alluser/delete`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${token}`,
+                },
+                body: JSON.stringify({
+                    id: userId,
+                    
+                }),
+            }
+    );
+    const { message, data } = await response.json();
+    console.log('Que devuelve respose el deleteUserService ',response.data);
+
+    if (!response.ok) throw new Error(message);
+
+    return response;
 };
