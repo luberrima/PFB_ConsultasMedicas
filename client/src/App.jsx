@@ -9,20 +9,19 @@ import { RegistroPage } from './pages/RegistroPage.jsx';
 import NotFoundPage from './pages/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import { AllDoctorPage } from "./pages/AllDoctorPage.jsx";
+import { AllDoctorPage } from './pages/AllDoctorPage.jsx';
 import { NewConsultPage } from './pages/NewConsultPage.jsx';
-import {DoctorUserProfilePage} from './pages/DoctorUserProfilePage.jsx'
+import { DoctorUserProfilePage } from './pages/DoctorUserProfilePage.jsx';
 import { ConsultationPage } from './pages/ConsultationPage.jsx';
-
-
-
+import { ProfileUserPage } from './pages/ProfileUserPage.jsx';
+import { RecoveryPasswordPage } from './pages/RecoveryPasswordPage.jsx';
+import { NewPasswordPage } from './pages/NewPasswordPage.jsx';
+import { EditProfileForm } from './components/forms/EditProfileForm.jsx';
 function App() {
     return (
-
-        
-        <AppErrorBoundary> {/* Aquí envolvemos toda la app */}
-
+        <AppErrorBoundary>
+            {' '}
+            {/* Aquí envolvemos toda la app */}
             <ToastContainer />
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
@@ -33,10 +32,28 @@ function App() {
                         element={<ValidatePage />}
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/profile/edit" element={<EditProfileForm />} />
+                    <Route path="/profile" element={<ProfileUserPage />} />
+                    <Route
+                        path="/password-recovery"
+                        element={<RecoveryPasswordPage />}
+                    />
+                    <Route
+                        path="/password-reset/:recoveryPassCode"
+                        element={<NewPasswordPage />}
+                    />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/login" element={<LoginPage />} />
                     <Route path="/alldoctors" element={<AllDoctorPage />} />
                     <Route path="/new-consult" element={<NewConsultPage />} />
-                    <Route path="/new-consult/:urlid/:urlskill" element={<NewConsultPage />} />
-                    <Route path="/users/doctors/:id" element={<DoctorUserProfilePage />} />
+                    <Route
+                        path="/new-consult/:urlid/:urlskill"
+                        element={<NewConsultPage />}
+                    />
+                    <Route
+                        path="/users/doctors/:id"
+                        element={<DoctorUserProfilePage />}
+                    />
                     <Route path="*" element={<NotFoundPage />} />
                     <Route
                         path="/consultations/:consultationId"
@@ -45,7 +62,6 @@ function App() {
                 </Route>
             </Routes>
         </AppErrorBoundary>
-        
     );
 }
 
