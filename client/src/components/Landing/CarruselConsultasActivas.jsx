@@ -9,7 +9,7 @@ export const CarruselconsultasActivas = ({ consultas }) => {
     //  let miArray = [];
 
     if (!consultas?.user?.consult) {
-        return <div> No tienes consultas</div>;
+        return <p className="consulta-not-found"> No tienes consultas</p>;
     }
 
     return (
@@ -26,7 +26,9 @@ export const CarruselconsultasActivas = ({ consultas }) => {
                             )
                     )
                 ) : (
-                    <p>No hay consultas activas</p>
+                    <p className="consulta-not-found">
+                        No hay consultas activas
+                    </p>
                 )}
             </ul>
         </>

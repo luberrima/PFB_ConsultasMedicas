@@ -16,7 +16,6 @@ import { useForm } from '../../hooks/useForm.js';
 import { getallskills } from '../../hooks/getallskills.js';
 
 export const RegisterForm = () => {
-
     ////////////////////////////////////////////////////////////////////////////////////
     /**
      * Hook personalizado `useForm()` que maneja el estado del formulario.
@@ -40,7 +39,7 @@ export const RegisterForm = () => {
     const [userType, setUserType] = useState('patient'); //Tipo de usuario (paciente/médico)//
     const navigate = useNavigate();
     const { skills } = getallskills(); //Obtiene la lista de habilidades/especialidades//
-    const [selectedValue, setSelectedValue] = useState(""); 
+    const [selectedValue, setSelectedValue] = useState('');
 
     // Maneja el cambio en la selección de especialidad //
     const handleChange = (event) => {
@@ -61,7 +60,7 @@ export const RegisterForm = () => {
             // }
 
             setIsLoading(true);
-        
+
             // Si es doctor, copia los datos de usuario en doctorInfo//
             doctorInfo.username = userInfo.username;
             doctorInfo.email = userInfo.email;
@@ -79,7 +78,6 @@ export const RegisterForm = () => {
                 navigate(`/login?${params.toString()}`);
                 toast.info('Comprueba tu correo para activar tu cuenta');
             }, 2000);
-           
         } catch (error) {
             // Muestra error en caso de fallo en el registro//
             toast.error(error.message || 'Error al registrar el usuario');
@@ -155,36 +153,42 @@ export const RegisterForm = () => {
             {/* Campos adicionales si el usuario es doctor */}
             {userType === 'doctor' && (
                 <>
-                    <Input
-                        label="Nº de Colegiad@"
-                        type="text"
-                        name="collegeNumber"
-                        value={doctorInfo.collegeNumber}
-                        errors={errors}
-                        handleChange={handleChangeDoctorInfo}
-                    />
-                    <Input
-                        label="Fecha de Colegiad@"
-                        type="date"
-                        name="dateOfCollege"
-                        value={doctorInfo.dateOfCollege}
-                        errors={errors}
-                        handleChange={handleChangeDoctorInfo}
-                    />
+                    <div className="form-mobile-doc">
+                        <Input
+                            label="Nº de Colegiad@"
+                            type="text"
+                            name="collegeNumber"
+                            value={doctorInfo.collegeNumber}
+                            errors={errors}
+                            handleChange={handleChangeDoctorInfo}
+                        />
+                        <Input
+                            label="Fecha de Colegiad@"
+                            type="date"
+                            name="dateOfCollege"
+                            value={doctorInfo.dateOfCollege}
+                            errors={errors}
+                            handleChange={handleChangeDoctorInfo}
+                        />
+                    </div>
 
                     {/* Selector de especialidad médica */}
-                    <select
-                        label="Especialidad" 
-                        value={selectedValue}
-                        onChange={handleChange}
-                    >
-                        <option value="">Selecciona una opción</option>
-                        {skills?.data?.skills?.map((skill) => (
-                            <option key={skill.id} value={skill.id}>
-                                {skill.Name}
-                            </option>
-                        ))}
-                    </select>
+                    <fieldset>
+                        <label htmlFor="selectDoctor">Especialidad</label>
+                        <select
+                            label="Especialidad"
+                            value={selectedValue}
+                            onChange={handleChange}
+                            className="form-select-input"
+                        >
+                            <option value="">Selecciona una opción</option>
+                            {skills?.data?.skills?.map((skill) => (
+                                <option key={skill.id} value={skill.id}>
+                                    {skill.Name}
+                                </option>
+                            ))}
+                        </select>
+                    </fieldset>
                 </>
             )}
 

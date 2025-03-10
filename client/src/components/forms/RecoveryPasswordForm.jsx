@@ -3,6 +3,7 @@ import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { Button } from '../Button.jsx';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 export const RecoveryPasswordForm = () => {
     const [email, setEmail] = useState('');
@@ -39,7 +40,7 @@ export const RecoveryPasswordForm = () => {
 
     if (showInstructions) {
         return (
-            <div>
+            <div className="recovery-pass-answer">
                 <p>
                     Se ha enviado un correo a <strong>{email}</strong> con las
                     instrucciones para restablecer tu contraseña.
@@ -48,6 +49,9 @@ export const RecoveryPasswordForm = () => {
                     Revisa también la carpeta de spam. Si no lo recibes,
                     inténtalo de nuevo o comunícate con soporte.
                 </p>
+                <Link to="/" className="btn btn-azul">
+                    Volver a inicio
+                </Link>
             </div>
         );
     }

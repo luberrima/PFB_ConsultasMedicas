@@ -17,8 +17,8 @@ export const NavBar = () => {
         } catch (error) {
             console.error('Error al decodificar el token:', error);
         }
-    } else {
-    }
+    } /*  else {
+    } */
     // try {
     //     decodedToken = token ? jwtDecode(token) : null;
     // } catch (error) {
@@ -124,7 +124,7 @@ export const NavBar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/" className="navbar-link">
+                                <Link to="/profile" className="navbar-link">
                                     Mi Perfil
                                 </Link>
                             </li>

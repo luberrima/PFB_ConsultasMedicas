@@ -29,11 +29,9 @@ export const HomePage = () => {
     const { doctors /*, loading, error */ } = useAllDoctor();
     const { consultas /*,loading2, error2*/ } = useAllConsultas();
     const { consultasAllAs /*,loading3, error3*/ } = useAllConsultasNoAsig();
-    const { users/*,loading4, error4*/ } = useAllUser();
-    
-    
+    const { users /*,loading4, error4*/ } = useAllUser();
+
     /* console.log('Que tengo en la homePage para mostrar de todos lo usuarios',userAll.data); */
-    
 
     // const navigate = useNavigate();
 
@@ -95,15 +93,12 @@ export const HomePage = () => {
                     </section>
                 </>
             ) : decodedToken && decodedToken.role === 'admin' ? (
-                <>
-                <h3>ERES EL ADMINISTRADOR</h3>
-                <h2>Todos los Usuarios</h2>
-                <AllUserList users= {users}/>
-
-                
-                
-                </>
-            ): (
+                <section className="admin-page">
+                    <h3 className="page-title">ERES EL ADMINISTRADOR</h3>
+                    <h2 className="page-title-2">Todos los Usuarios</h2>
+                    <AllUserList users={users} />
+                </section>
+            ) : (
                 //
                 // USUARIO NO REGISTRADO
                 //
@@ -117,7 +112,16 @@ export const HomePage = () => {
                                 alt="logo de la app"
                             />
                             <p>
-                            Un lugar al que pertenecer, en el que puedes encontrar diagnóstico de médicos sobre tus dolencias y todo a unos pocos clips. Puedes formar parte de nuestra comunidad, ver tu historial de cosultas, con una red amplia de médicos a tu disposición y elección, ya que puedes ver el ratio de satisfacción de sus diagnósticos. Todo ello en un entorno cómodo e intuitivo, puedes verlo en tu Tablet, ordenador o teléfono. 
+                                Te damos la bienvenida a GoodDoctor, la
+                                plataforma que revoluciona la atención médica en
+                                línea. Aquí puedes registrar tu perfil como
+                                paciente, realizar consultas médicas detalladas
+                                según tus síntomas, elegir la especialidad
+                                adecuada y recibir respuestas de médicos
+                                certificados. Nuestro objetivo es brindarte una
+                                experiencia segura, ágil y confiable, para que
+                                puedas resolver tus dudas de salud sin necesidad
+                                de trasladarte a un centro médico.
                             </p>
                             <Link to="/signup" className="btn btn-naranja">
                                 Registro
@@ -140,10 +144,19 @@ export const HomePage = () => {
                             <div>
                                 <h3>Equipo médico a tu disposición</h3>
                                 <p>
-                                    Un lugar al que pertenecer, en el que puedes
-                                    encontrar una red amplia de médicos a tu
-                                    disposición y elección, ya que puedes ver su
-                                    ratio de satisfacción de sus diagnósticos.{' '}
+                                    En GoodDoctor, contamos con un equipo de
+                                    médicos verificados y especializados en
+                                    distintas áreas de la salud, quienes están
+                                    disponibles para responder tus consultas de
+                                    manera rápida y profesional. Cada
+                                    diagnóstico o recomendación médica que
+                                    recibas puede ser valorada por los
+                                    pacientes, promoviendo la transparencia y
+                                    asegurando un servicio de alta calidad.
+                                    Además, nuestro sistema te permite hacer un
+                                    seguimiento de tus consultas para mantener
+                                    un historial médico accesible en todo
+                                    momento.{' '}
                                 </p>
                             </div>
                         </article>
@@ -155,29 +168,31 @@ export const HomePage = () => {
                             <div>
                                 <h3>En cualquier momento y lugar</h3>
                                 <p>
-                                    Puedes encontrar diagnóstico de médicos
-                                    sobre tus dolencias y todo a unos pocos
-                                    clips. Puedes formar parte de nuestra
-                                    comunidad, ver tu historial por si algún
-                                    dolor o duda regresa. Todo ello en un
-                                    entorno cómodo, intuitivo y responsive,
-                                    puede verlo en tu Tablet, ordenador o
-                                    teléfono.{' '}
+                                    Si buscas un especialista en particular,
+                                    puedes acceder a nuestro directorio médico y
+                                    conocer en detalle la experiencia,
+                                    especialización y calificaciones de cada
+                                    profesional. Encuentra al médico que mejor
+                                    se adapte a tus necesidades y obtén
+                                    respuestas confiables con la tranquilidad de
+                                    saber que estás en manos de expertos. En
+                                    GoodDoctor, la salud está a un clic de
+                                    distancia.{' '}
                                 </p>
                             </div>
                         </article>
                     </section>
 
                     <section className="seccion seccion-banner">
-                        <h3>Empieza a usar good doctor</h3>
+                        <h3>Empieza a usar GoodDoctor</h3>
                         <p>
-                            Un lugar al que pertenecer, en el que puedes
-                            encontrar diagnóstico de médicos sobre tus dolencias
-                            y todo a unos pocos clicks.
+                            Regístrate o inicia sesión para realizar consultas,
+                            recibir diagnósticos y conectar con médicos
+                            certificados.
                         </p>
                         <div>
                             <span>
-                                <Link to="/signup" className="btn btn-azul">
+                                <Link to="/registro" className="btn btn-azul">
                                     Registro
                                 </Link>
                             </span>

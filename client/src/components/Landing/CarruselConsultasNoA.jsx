@@ -21,7 +21,9 @@ export const CarruselconsultasNoA = ({ consultasAllAs }) => {
                             />
                         ))
                 ) : (
-                    <p>No hay consultas no asignadas.</p>
+                    <p className="consulta-not-found">
+                        No hay consultas no asignadas.
+                    </p>
                 )}
             </ul>
         </>

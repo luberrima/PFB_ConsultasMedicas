@@ -1,16 +1,15 @@
 import React /*, { useState }*/ from 'react';
-import { Button } from '../Button.jsx';
+import { Button } from './Button.jsx';
 // import { Icon } from '../Icon.jsx';
-import { useAllDoctor } from '../../hooks/useAllDoctor.js';
-import avatardefault from "../../assets/avatar-default.jpg"
+import { useAllDoctor } from '../hooks/useAllDoctor.js';
+import avatardefault from '../assets/avatar-default.jpg';
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
-import { useDoctorProfile } from '../../hooks/useDoctorProfile.js';
+import { useDoctorProfile } from '../hooks/useDoctorProfile.js';
 import { useNavigate } from 'react-router-dom';
-import { CardAllInfoDoctor } from '../CardAllInfoDoctor.jsx';
+import { CardAllInfoDoctor } from './CardAllInfoDoctor.jsx';
 
 export const DoctorUserProfile = ({ doctorId }) => {
-    
     const { doctorsbio /*, loadingbio, errorbio*/ } =
         useDoctorProfile(doctorId);
     const { doctors /*, loading, error*/ } = useAllDoctor();
@@ -25,11 +24,9 @@ export const DoctorUserProfile = ({ doctorId }) => {
     } else {
         if (/* typeof */ doctorList === undefined) {
             return <div> Perfil del doctor No disponible</div>;
-        } else {
+        } /*  else {
             
-        }
-
-        
+        } */
 
         if (!doctorinfo?.userDoctor?.media_valoracion) {
             valoracion = 0;
@@ -56,27 +53,31 @@ export const DoctorUserProfile = ({ doctorId }) => {
         }
     }
     const handleClickConsulta = () => {
-        navigate(`/new-consult/${doctorId}/${doctorinfo?.userDoctor?.skillId}`)
+        navigate(`/new-consult/${doctorId}/${doctorinfo?.userDoctor?.skillId}`);
     };
 
     return (
         <>
-            <section className="ficha-medico">
-                <article className="ficha-medico-container">
-                    <article className="ficha-medico-img">
+            <section className="ficha-user">
+                <article className="ficha-user-container">
+                    <article className="ficha-user-img">
                         <img
                             src={`${staticPath}/avatars/${doctorinfo?.userDoctor?.id}/${doctorinfo?.userDoctor?.avatar}`}
                             alt="Foto usuario"
                             onError={(e) => {
-                                e.target.onerror = null;  
-                                e.target.src = avatardefault; 
+                                e.target.onerror = null;
+                                e.target.src = avatardefault;
                             }}
                         />
                     </article>
-                    <article className="ficha-medico-info">
+                    <article className="ficha-user-info">
                         <ul>
                             <li>
                                 <h3>Nombre</h3>
+                                <p>{doctorinfo?.userDoctor?.nombre}</p>
+                            </li>
+                            <li>
+                                <h3>Nombre de usuario</h3>
                                 <p>{doctorinfo?.userDoctor?.username}</p>
                             </li>
                             <li>
@@ -131,7 +132,7 @@ export const DoctorUserProfile = ({ doctorId }) => {
                 <h3 className="page-title">Otros Especialistas</h3>
                 <ul className="lista-doctores">
                     {/* Mapeamos todos los doctores para mostrarlos */}
-                   
+
                     {doctorList.map((doctor) => (
                         <CardAllInfoDoctor key={doctor.id} doctor={doctor} />
                     ))}
