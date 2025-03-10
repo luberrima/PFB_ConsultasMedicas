@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useContext,useEffect, useState } from 'react';
 import { Form } from './Form.jsx';
 import { Input } from './Input.jsx';
 import { Button } from '../Button.jsx';
@@ -7,12 +7,22 @@ import { useUserProfile } from '../../hooks/useUser.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../..//assets/good-doctor-logo-navbar.svg';
+import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../contexts/auth/AuthContext.js";
 
 export const EditProfileForm = () => {
-    const { usersOwn, loadingOwn, errorOwn } = useUserProfile();
-    const { token } = useAuth();
+
+
+    
+   // const { token } = useAuth();
     const navigate = useNavigate();
     const apiPath = import.meta.env.VITE_BACKEND_HOST;
+    const { token } = useContext(AuthContext);
+    console.log("valor de token aqui",token)
+    const decodedToken = token ? jwtDecode(token) : null;
+    console.log("valor de decode token",decodedToken);
+
+    const { usersOwn, loadingOwn, errorOwn } = useUserProfile(decodedToken.role);
 
     const [formData, setFormData] = useState({
         username: '',

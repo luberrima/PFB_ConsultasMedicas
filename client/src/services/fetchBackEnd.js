@@ -526,6 +526,7 @@ export const getAllDoctorBySkilfetch = async () => {
 };
 export const getAllUserService = async (token) => {
     try {
+        
         const response = await fetch(
             `${AdminPath}alluser`,
             {

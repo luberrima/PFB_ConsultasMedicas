@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getOwnUserService2,getOwnUserService3 } from '../services/fetchBackEnd.js';
+import { getOwnUserService2, getOwnUserService3 } from '../services/fetchBackEnd.js';
 import { useAuth } from './useAuth.js';
 
 export const useUserProfile = (role) => {
@@ -18,6 +18,10 @@ export const useUserProfile = (role) => {
                 {
                 data = await getOwnUserService2(token);
                 }  
+                if (role==="admin")
+                    {
+                    data = await getOwnUserService2(token);
+                    }  
                 if (role==="doctor")
                     {
                     data = await getOwnUserService3(token);
@@ -34,7 +38,7 @@ export const useUserProfile = (role) => {
         };
 
         fetchUsersOwn();
-    }, []);
+    }, [token]);
 
     console.log("esto es lo que devuelve usersOwn", usersOwn);
     
