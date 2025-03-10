@@ -23,7 +23,7 @@ server.use(morgan('dev'));
 //bodyParser
 server.use(express.json());
 server.use(fileupload());
-const uploadsDir = path.join(process.cwd(), `src/${UPLOADS_DIR}`);
+const uploadsDir = path.join(process.cwd(), `/${UPLOADS_DIR}`);
 server.use('/uploads', express.static(uploadsDir));
 /*staticFilesMiddleware(server);*/
 server.use(cors(/* { origin: FRONTEND_HOST } */));

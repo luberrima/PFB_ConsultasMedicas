@@ -1,4 +1,4 @@
-import AppErrorBoundary from './components/ErrorBoundary';
+import { AppErrorBoundary } from './components/ErrorBoundary';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { HomePage } from './pages/HomePage.jsx';
@@ -6,7 +6,7 @@ import { LoginPage } from './pages/loginPage.jsx';
 import { ValidatePage } from './pages/ValidatePage.jsx';
 import { LayoutPage } from './pages/LayoutPage.jsx';
 import { RegistroPage } from './pages/RegistroPage.jsx';
-import NotFoundPage from './pages/NotFoundPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AllDoctorPage } from './pages/AllDoctorPage.jsx';
@@ -17,6 +17,8 @@ import { ProfileUserPage } from './pages/ProfileUserPage.jsx';
 import { RecoveryPasswordPage } from './pages/RecoveryPasswordPage.jsx';
 import { NewPasswordPage } from './pages/NewPasswordPage.jsx';
 import { EditProfileForm } from './components/forms/EditProfileForm.jsx';
+import { AboutUsPage } from './pages/AboutUsPage.jsx';
+
 function App() {
     return (
         <AppErrorBoundary>

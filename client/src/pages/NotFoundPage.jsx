@@ -4,7 +4,7 @@ import logo from '../assets/good-doctor-logo.svg'; // Logo
 import notFoundImage from '../assets/notfound.png'; // Imagen del personaje con la manzana
 import { Button } from '../components/Button.jsx';
 
-const NotFoundPage = () => {
+export const NotFoundPage = () => {
     const navigate = useNavigate();
     useEffect(() => {
         document.body.classList.add('no-header-footer');
@@ -61,4 +61,3 @@ const NotFoundPage = () => {
     );
 };
 
-export default NotFoundPage;

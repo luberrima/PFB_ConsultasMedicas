@@ -1,9 +1,9 @@
 import randomstring from 'randomstring';
-import { selectUserByEmailModel } from '../../models/users/selectUserbyEmailModel.js';
 import { updateRecoveryPassModel } from '../../models/users/updateRecoveryPassModel.js';
 import { genereErrorUtils } from '../../utils/genereErrorUtils.js';
 import { validateSchemaUtil } from '../../utils/validateSchemaUtil.js';
 import { recoveryPassSchema } from '../../schemas/users/recoveryPassSchema.js';
+import { selectUserByEmailModel } from '../../models/users/selectUserByEmailModel.js';
 
 export const recoveryPassController = async (req, res, next) => {
     try {

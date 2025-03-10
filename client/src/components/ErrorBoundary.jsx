@@ -30,12 +30,10 @@ function ErrorFallback() {
     );
 }
 
-const AppErrorBoundary = ({ children }) => {
+export const AppErrorBoundary = ({ children }) => {
     return (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
             {children}
         </ErrorBoundary>
     );
 };
-
-export default AppErrorBoundary;

@@ -65,7 +65,7 @@ const teamMembers = [
   }
 ];
 
-const AboutUs = () => {
+export const AboutUsPage = () => {
   return (
     <div className="about-container">
       <section className="team-section">
@@ -127,5 +127,3 @@ const AboutUs = () => {
     </div>
   );
 };
-
-export default AboutUs;
