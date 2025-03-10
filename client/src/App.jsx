@@ -20,8 +20,6 @@ import { EditProfileForm } from './components/forms/EditProfileForm.jsx';
 import { AboutUsPage } from './pages/AboutUsPage.jsx';
 import { ContactPage } from './pages/ContactPage.jsx';
 
-
-
 function App() {
     return (
         <AppErrorBoundary>
@@ -56,10 +54,6 @@ function App() {
                     <Route
                         path="/new-consult/:urlid/:urlskill"
                         element={<NewConsultPage />}
-                    />
-                    <Route
-                        path="/users/doctors/:id"
-                        element={<DoctorUserProfilePage />}
                     />
                     <Route
                         path="/consultations/:consultationId"
