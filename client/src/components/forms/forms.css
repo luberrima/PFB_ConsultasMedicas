@@ -16,7 +16,8 @@
 }
 
 .edit-profile-page,
-.recovery-page {
+.recovery-page,
+.new-password-page {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(to right, var(--main-color) 50%, white 50%);
