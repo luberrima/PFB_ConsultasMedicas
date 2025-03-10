@@ -5,15 +5,15 @@ import { Button } from '../Button.jsx';
 import { toast } from 'react-toastify';
 import { useUserProfile } from '../../hooks/useUser.js';
 import { useAuth } from '../../hooks/useAuth.js';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../..//assets/good-doctor-logo-navbar.svg';
 
 export const EditProfileForm = () => {
     const { usersOwn, loadingOwn, errorOwn } = useUserProfile();
     const { token } = useAuth();
     const navigate = useNavigate();
-    const apiPath = import.meta.env.VITE_BACKEND_HOST; // Ejemplo: "http://localhost:3001"
+    const apiPath = import.meta.env.VITE_BACKEND_HOST;
 
-    // Se añade el email y active al estado inicial
     const [formData, setFormData] = useState({
         username: '',
         nombre: '',
@@ -24,9 +24,16 @@ export const EditProfileForm = () => {
         dateOfCollege: '',
         avatar: '',
     });
-    const [avatarFile, setAvatarFile] = useState(null);
+    const [/* avatarFile, */ setAvatarFile] = useState(null);
 
-    // Rellenar el formulario con los datos actuales del usuario
+    useEffect(() => {
+        document.body.classList.add('no-header-footer');
+
+        return () => {
+            document.body.classList.remove('no-header-footer');
+        };
+    }, []);
+
     useEffect(() => {
         if (
             usersOwn &&
@@ -55,7 +62,6 @@ export const EditProfileForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Maneja la subida del avatar
     const handleAvatarChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -63,8 +69,8 @@ export const EditProfileForm = () => {
             const dataToUpload = new FormData();
             dataToUpload.append('avatar', file);
             try {
-                const response = await fetch(`${apiPath}/users/upload`, {
-                    method: 'POST',
+                const response = await fetch(`${apiPath}/users/updateavatar`, {
+                    method: 'PUT',
                     headers: {
                         Authorization: token,
                     },
@@ -72,7 +78,7 @@ export const EditProfileForm = () => {
                 });
                 if (response.ok) {
                     const result = await response.json();
-                    // result.filePath debe ser algo como "userId/fileName.jpg"
+
                     setFormData((prev) => ({
                         ...prev,
                         avatar: result.filePath,
@@ -124,70 +130,83 @@ export const EditProfileForm = () => {
     if (errorOwn) return <p>Error: {errorOwn}</p>;
 
     return (
-        <Form handleSubmit={handleSubmit} className="form">
-            <Input
-                label="Username"
-                type="text"
-                name="username"
-                value={formData.username}
-                handleChange={handleChange}
-                placeholder="Escribe tu username"
-            />
-            <Input
-                label="Nombre"
-                type="text"
-                name="nombre"
-                value={formData.nombre}
-                handleChange={handleChange}
-                placeholder="Escribe tu nombre"
-            />
-            <Input
-                label="Bio"
-                type="text"
-                name="bio"
-                value={formData.bio}
-                handleChange={handleChange}
-                placeholder="Escribe una breve bio"
-            />
-            {/* Campo para email, de solo lectura o editable según convenga */}
-            <Input
-                label="Email"
-                type="email"
-                name="email"
-                value={formData.email}
-                handleChange={handleChange}
-                placeholder="Correo electrónico"
-            />
-            <label>
-                Avatar:
-                <input
-                    type="file"
-                    name="avatar"
-                    onChange={handleAvatarChange}
-                />
-            </label>
-            {usersOwn.data.user.user[0].role === 'doctor' && (
-                <>
+        <section className="edit-profile-page">
+            <Link to="/">
+                <img className="logo" src={logo} alt="logo Good Doctor" />
+            </Link>
+            <div className="form-card">
+                <h1>Edita tu perfil</h1>
+                <Form handleSubmit={handleSubmit} className="form">
                     <Input
-                        label="Número de colegiado"
+                        label="Username"
                         type="text"
-                        name="collegeNumber"
-                        value={formData.collegeNumber}
+                        name="username"
+                        value={formData.username}
                         handleChange={handleChange}
-                        placeholder="Número de colegiado"
+                        placeholder="Escribe tu username"
                     />
                     <Input
-                        label="Fecha de colegiado"
-                        type="date"
-                        name="dateOfCollege"
-                        value={formData.dateOfCollege}
+                        label="Nombre"
+                        type="text"
+                        name="nombre"
+                        value={formData.nombre}
                         handleChange={handleChange}
+                        placeholder="Escribe tu nombre"
                     />
-                </>
-            )}
-            <Button type="submit" className="btn btn-azul">
-                Actualizar Perfil
-            </Button>
-        </Form>
+                    <Input
+                        label="Bio"
+                        type="text"
+                        name="bio"
+                        value={formData.bio}
+                        handleChange={handleChange}
+                        placeholder="Escribe una breve bio"
+                    />
+
+                    <Input
+                        label="Email"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        handleChange={handleChange}
+                        placeholder="Correo electrónico"
+                    />
+                    <label>
+                        Avatar:
+                        <input
+                            type="file"
+                            name="avatar"
+                            onChange={handleAvatarChange}
+                        />
+                    </label>
+                    {usersOwn.data.user.user[0].role === 'doctor' && (
+                        <>
+                            <Input
+                                label="Número de colegiado"
+                                type="text"
+                                name="collegeNumber"
+                                value={formData.collegeNumber}
+                                handleChange={handleChange}
+                                placeholder="Número de colegiado"
+                            />
+                            <Input
+                                label="Fecha de colegiado"
+                                type="date"
+                                name="dateOfCollege"
+                                value={formData.dateOfCollege}
+                                handleChange={handleChange}
+                            />
+                        </>
+                    )}
+                    <Button type="submit" className="btn btn-azul">
+                        Actualizar Perfil
+                    </Button>
+                </Form>
+                <p>
+                    <Link to="/" className="form-link-inicio">
+                        Volver a Inicio
+                    </Link>
+                </p>
+            </div>
+        </section>
     );
 };

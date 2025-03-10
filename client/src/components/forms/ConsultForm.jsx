@@ -1,6 +1,6 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from '../../hooks/useForm.js';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { Button } from '../Button.jsx';
 // import { Icon } from '../Icon.jsx';
 import { Form } from './Form.jsx';
@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 import { ImageInput } from './ImageInput.jsx';
 import { getAllDoctorBySkill } from '../../hooks/getdoctorbyskill.js';
 
-
 export const ConsultForm = () => {
     const { token } = useAuth();
     const { info, previews, /*errors,*/ validate, handleChange } = useForm();
@@ -24,103 +23,72 @@ export const ConsultForm = () => {
     const [skillSeleccionada, setSkillSeleccionada] = useState('');
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const { doctorbyskills } = getAllDoctorBySkill();
-   
-
 
     useEffect(() => {
         if (doctorbyskills && doctorbyskills.length > 0) {
-          // Crear un Map para eliminar duplicados
-          const skillsMap = new Map();
-          
-          doctorbyskills.forEach(item => {
-            if (!skillsMap.has(item.skillId)) {
-              skillsMap.set(item.skillId, {
-                id: item.skillId,
-                nombre: item.Name
-              });
-            }
-          });
-          
-         
+            // Crear un Map para eliminar duplicados
+            const skillsMap = new Map();
 
-          const skillsArray = Array.from(skillsMap.values());
-          setSkills(skillsArray);
+            doctorbyskills.forEach((item) => {
+                if (!skillsMap.has(item.skillId)) {
+                    skillsMap.set(item.skillId, {
+                        id: item.skillId,
+                        nombre: item.Name,
+                    });
+                }
+            });
+
+            const skillsArray = Array.from(skillsMap.values());
+            setSkills(skillsArray);
         }
-      }, [doctorbyskills]);
-    
-      
-      const handleSkillChange = (e) => {
+    }, [doctorbyskills]);
+
+    const handleSkillChange = (e) => {
         const idSkill = e.target.value;
         setSkillSeleccionada(idSkill);
-        info.skillId=e.target.value;
-        setDoctorSeleccionado(''); 
-        
+        info.skillId = e.target.value;
+        setDoctorSeleccionado('');
+
         if (idSkill) {
-
-          const doctoresFiltrados = doctorbyskills
-            .filter(item => item.skillId === parseInt(idSkill))
-            .map(item => ({
-              id: item.id              ,
-              nombre: item.username
-            }));
-          
-          setDoctores(doctoresFiltrados);
-        } else {
-          setDoctores([]);
-        }
-      };
-
-
-      const handleDoctorChange = (e) => {
-        setDoctorSeleccionado(e.target.value);
-        info.doctorId=e.target.value;
-        
-      };
-
-     
-      const { urlid, urlskill } = useParams();
-      if (!info.doctorId)
-      {
-      setTimeout(() => {
-        if (urlid && urlskill)
-
-
-          {
-           
-            setSkillSeleccionada(urlskill);
-            
-            
             const doctoresFiltrados = doctorbyskills
-            .filter(item => item.skillId === parseInt(urlskill))
-            .map(item => ({
-              id: item.id              ,
-              nombre: item.username
-            }));
-          
+                .filter((item) => item.skillId === parseInt(idSkill))
+                .map((item) => ({
+                    id: item.id,
+                    nombre: item.username,
+                }));
+
             setDoctores(doctoresFiltrados);
-        
+        } else {
+            setDoctores([]);
+        }
+    };
 
+    const handleDoctorChange = (e) => {
+        setDoctorSeleccionado(e.target.value);
+        info.doctorId = e.target.value;
+    };
 
-            setDoctorSeleccionado(urlid);
-            info.doctorId=urlid;
-            info.skillId=urlskill;
-  
-          }
-        
+    const { urlid, urlskill } = useParams();
+    if (!info.doctorId) {
+        setTimeout(() => {
+            if (urlid && urlskill) {
+                setSkillSeleccionada(urlskill);
 
+                const doctoresFiltrados = doctorbyskills
+                    .filter((item) => item.skillId === parseInt(urlskill))
+                    .map((item) => ({
+                        id: item.id,
+                        nombre: item.username,
+                    }));
 
+                setDoctores(doctoresFiltrados);
 
-      }, 1000);
-
+                setDoctorSeleccionado(urlid);
+                info.doctorId = urlid;
+                info.skillId = urlskill;
+            }
+        }, 1000);
     }
-
-
-
-
-     
-
-
-
 
     const handleSubmit = async (e) => {
         try {
@@ -146,7 +114,10 @@ export const ConsultForm = () => {
         }
     };
     return (
-        <Form className="form" handleSubmit={handleSubmit}>
+        <Form
+            className="form new-consultation-form"
+            handleSubmit={handleSubmit}
+        >
             <Input
                 label="Título de la consulta"
                 name="title"
@@ -155,8 +126,6 @@ export const ConsultForm = () => {
                 value={info.title}
                 handleChange={handleChange}
             />
-
- 
 
             <fieldset>
                 <label>Gravedad</label>
@@ -175,46 +144,44 @@ export const ConsultForm = () => {
                 </select>
             </fieldset>
 
-    
-
             <fieldset>
-            <label htmlFor="selectSkill">Especialidad:</label>
-            <select 
-            id="selectSkill" 
-            value={skillSeleccionada} 
-            onChange={handleSkillChange}
-            className="form-select"
-        >
-          <option value="">Seleccione una especialidad</option>
-          {skills.map((skill) => (
-            <option key={skill.id} value={skill.id}>
-              {skill.nombre}
-            </option>
-          ))}
-        </select>
+                <label htmlFor="selectSkill">Especialidad</label>
+                <select
+                    id="selectSkill"
+                    value={skillSeleccionada}
+                    onChange={handleSkillChange}
+                    className="form-select-input"
+                >
+                    <option value="">Seleccione una especialidad</option>
+                    {skills.map((skill) => (
+                        <option key={skill.id} value={skill.id}>
+                            {skill.nombre}
+                        </option>
+                    ))}
+                </select>
             </fieldset>
 
             <fieldset>
-            <label htmlFor="selectDoctor">Doctor:</label>
-        <select 
-          id="selectDoctor" 
-          value={doctorSeleccionado} 
-          onChange={handleDoctorChange}
-          className="form-select"
-          disabled={!skillSeleccionada}
-        >
-          <option value="">Seleccione un doctor</option>
-          {doctores.map((doctor) => (
-            <option key={doctor.id} value={doctor.id}>
-              {doctor.nombre}
-            </option>
-          ))}
-           </select>
-          </fieldset>
-           
+                <label htmlFor="selectDoctor">Doctor</label>
+                <select
+                    id="selectDoctor"
+                    value={doctorSeleccionado}
+                    onChange={handleDoctorChange}
+                    className="form-select-input"
+                    disabled={!skillSeleccionada}
+                >
+                    <option value="">Seleccione un doctor</option>
+                    {doctores.map((doctor) => (
+                        <option key={doctor.id} value={doctor.id}>
+                            {doctor.nombre}
+                        </option>
+                    ))}
+                </select>
+            </fieldset>
+
             <Input
                 label="Descripción"
-                type="textarea"
+                type="text"
                 placeholder="Escribe aquí"
                 name="description"
                 value={info.description}

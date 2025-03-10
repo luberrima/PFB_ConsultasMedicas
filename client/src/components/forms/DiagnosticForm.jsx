@@ -39,7 +39,9 @@ export const DiagnosticForm = ({ consultationId, token }) => {
             <Input
                 type="textarea"
                 name="diagnostic"
-                label="Diagnóstico"
+                rows="7"
+                cols="90"
+                label=""
                 value={diagnostic}
                 handleChange={handleDiagnosticChange}
                 placeholder="Escribe el diagnóstico aquí..."

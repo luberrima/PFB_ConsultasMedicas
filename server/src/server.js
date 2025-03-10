@@ -1,4 +1,5 @@
 import express from 'express';
+import fs from 'fs';
 import morgan from 'morgan';
 import fileupload from 'express-fileupload';
 import cors from 'cors';
@@ -8,9 +9,8 @@ import { router } from './routes/indexRouter.js';
 
 import { UPLOADS_DIR, FRONTEND_HOST } from '../env.js';
 /*esto es para probar*/
-import { uploadMiddleware } from "./middlewares/uploadMiddleware.js"; // Corrección aquí
+//import { uploadMiddleware } from './middlewares/uploadMiddleware.js'; // Corrección aquí
 /*import { staticFilesMiddleware } from "./middlewares/staticFilesMiddleware.js";*/
-
 
 export const server = express();
 
@@ -23,8 +23,15 @@ server.use(morgan('dev'));
 //bodyParser
 server.use(express.json());
 server.use(fileupload());
-const uploadsDir = path.join(process.cwd(), `/${UPLOADS_DIR}`);
-server.use('/uploads', express.static(uploadsDir));
+
+console.log('UPLOADS_DIR', UPLOADS_DIR);
+
+if (!fs.existsSync(path.join('src', UPLOADS_DIR))) {
+    fs.mkdirSync(path.join('src', UPLOADS_DIR), { recursive: true });
+}
+
+server.use('/uploads', express.static(path.join('src', UPLOADS_DIR)));
+
 /*staticFilesMiddleware(server);*/
 server.use(cors(/* { origin: FRONTEND_HOST } */));
 
@@ -47,7 +54,6 @@ server.use((req, res, next) => {
     next(error);
 });
 
-
 // Gestor de errores
 server.use((error, req, res, next) => {
     console.error(error);
@@ -61,4 +67,3 @@ server.use((error, req, res, next) => {
 
     //res.status(500).send("Hola")
 });
-
