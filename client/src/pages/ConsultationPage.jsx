@@ -27,6 +27,13 @@ export const ConsultationPage = () => {
     const { token } = useContext(AuthContext);
     const decodedToken = token ? jwtDecode(token) : null;
 
+    console.log(
+        'TOOOOKEEEEEEEN:',
+        token,
+        'decodedToken.role',
+        decodedToken.role
+    );
+
     const isPatient = decodedToken.role === 'paciente';
     const isDoctor = decodedToken.role === 'doctor';
     const doctorId = decodedToken.id;
@@ -53,7 +60,7 @@ export const ConsultationPage = () => {
 
                 if (response.status === 'ok' && response.data) {
                     setDoctorName(response.data.userDoctor?.nombre);
-                    setDoctorSkill(response.data.userDoctor?.skillId);
+                    // setDoctorSkill(response.data.userDoctor?.skillId);
                 } else {
                     console.error(
                         'Error al obtener el nombre del doctor:',
@@ -133,9 +140,12 @@ export const ConsultationPage = () => {
                         decodedToken.id,
                         token
                     );
+                    console.log('OOOOOOOOO ||||| REPSONSE:', response);
                     if (response.status === 'ok') {
                         // console.log('Doctor details:', response.data);
-                        setDoctorSkill(response.data.userDoctor?.skillId);
+                        setDoctorSkill(
+                            response?.data?.userDoctor?.['0']?.skillId
+                        );
                     }
                     // console.log('RESPONSE DEL DOCTOR:', response);
                 } catch (error) {
@@ -171,9 +181,14 @@ export const ConsultationPage = () => {
         skills.find((skill) => skill.id === consultation.skillId)?.Name ||
         'Especialidad desconocida';
 
+    console.log(
+        'AAAAAAAAA ||||||| DOCTORskill:',
+        doctorSkill,
+        'consultarion.skillid:',
+        consultation.skillId
+    );
     const canTakeConsultation =
-        (isDoctor && doctorSkill === consultation.skillId) ||
-        consultation.skillId === 'null';
+        isDoctor && doctorSkill === consultation.skillId;
 
     const isMyConsultation = doctorId === consultation.doctorId;
 
@@ -182,10 +197,13 @@ export const ConsultationPage = () => {
     const handleChangeResponderConsulta = async () => {
         if (!consultation.doctorId) {
             try {
+                console.log('TRY 1');
                 const data = await takeConsultationService(
                     consultationId,
                     token
                 );
+                console.log('TRY 2');
+
                 console.log('Consulta tomada exitosamente:', data);
 
                 setConsultation((prev) => ({

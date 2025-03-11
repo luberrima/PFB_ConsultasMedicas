@@ -250,26 +250,26 @@ export const deleteChatMessageService = async (replyId, token) => {
         const response = await fetch(
             `${backEndPath}/consultations/Replies/${replyId}`,
             {
-                method: "DELETE",
+                method: 'DELETE',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                     Authorization: `${token}`,
                 },
             }
         );
 
         if (response.ok) {
-            return { status: "ok" };
+            return { status: 'ok' };
         } else {
             const errorData = await response.json();
             return {
-                status: "error",
-                message: errorData.message || "Error al eliminar el mensaje",
+                status: 'error',
+                message: errorData.message || 'Error al eliminar el mensaje',
             };
         }
     } catch (error) {
-        console.error("Error en deleteChatMessage:", error);
-        return { status: "error", message: "Error en la solicitud" };
+        console.error('Error en deleteChatMessage:', error);
+        return { status: 'error', message: 'Error en la solicitud' };
     }
 };
 
@@ -526,25 +526,19 @@ export const getAllDoctorBySkilfetch = async () => {
 };
 export const getAllUserService = async (token) => {
     try {
-        
-        const response = await fetch(
-            `${AdminPath}alluser`,
-            {
-                headers: {
-                    Authorization: `${token}`,
-                },  
-            }
-        );
+        const response = await fetch(`${AdminPath}alluser`, {
+            headers: {
+                Authorization: `${token}`,
+            },
+        });
 
         const data = await response.json();
 
         if (!response.ok) {
             throw new Error(data.message || 'Error al los usuarios');
         }
-        
-        
-        return data;
 
+        return data;
     } catch (error) {
         console.error('Error en getallUserService:', error);
 
@@ -552,35 +546,25 @@ export const getAllUserService = async (token) => {
     }
 };
 
-
-export const validateDoctorService = async (
-    userId,
-    token,
-    
-) => {
+export const validateDoctorService = async (userId, token) => {
     try {
-        const response = await fetch(
-            `${AdminPath}validate`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `${token}`,
-                },
-                body: JSON.stringify({
-                    doctorId: userId,
-                    validate: 1,
-                }),
-            }
-        );
+        const response = await fetch(`${AdminPath}validate`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${token}`,
+            },
+            body: JSON.stringify({
+                doctorId: userId,
+                validate: 1,
+            }),
+        });
 
         const data = await response.json();
         console.log('Data en service:', data);
- 
+
         if (!response.ok) {
-            throw new Error(
-                data.message || 'Error al Validar el Doctor'
-            );
+            throw new Error(data.message || 'Error al Validar el Doctor');
         }
 
         return response;
@@ -592,24 +576,20 @@ export const validateDoctorService = async (
 };
 
 export const deleteUserService = async (userId, token) => {
-   /*  console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
+    /*  console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
     console.log('Que trae token en el deleteDiagnistcServide',token); */
-    const response = await fetch(
-        `${AdminPath}alluser/delete`,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `${token}`,
-                },
-                body: JSON.stringify({
-                    id: userId,
-                    
-                }),
-            }
-    );
+    const response = await fetch(`${AdminPath}alluser/delete`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token}`,
+        },
+        body: JSON.stringify({
+            id: userId,
+        }),
+    });
     const { message, data } = await response.json();
-    console.log('Que devuelve respose el deleteUserService ',response.data);
+    console.log('Que devuelve respose el deleteUserService ', response.data);
 
     if (!response.ok) throw new Error(message);
 
