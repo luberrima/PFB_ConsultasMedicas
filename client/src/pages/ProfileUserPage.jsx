@@ -109,7 +109,9 @@ export const ProfileUserPage = () => {
                                 </li>
                                 <li>
                                     <h3>Fecha de colegiado</h3>
-                                    <p>{user.dateOfCollege}</p>
+                                    <p>{user.dateOfCollege
+                                        ? new Date(user.dateOfCollege).toLocaleDateString('es-ES')
+                                        : 'No especificado'}</p>
                                 </li>
                                 <li>
                                     <h3>Valoración</h3>
