@@ -1,9 +1,12 @@
 import { useContext,useEffect, useState } from 'react';
 import { useUserProfile } from '../hooks/useUser.js';
+import { useNavigate } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Button.jsx';
-import { useNavigate } from 'react-router-dom';
-import avatardefault from "../assets/avatar-default.jpg"
+import { Estrellas } from '../components/Estrellas.jsx';
+
+
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../contexts/auth/AuthContext.js";
@@ -96,6 +99,24 @@ export const ProfileUserPage = () => {
                             <li className="ficha-user-edit-contraseña">
                                 <h3>Contraseña</h3>
                                 <p>******</p>
+                            </li>
+                            {decodedToken && decodedToken.role === 'doctor' && (
+                                <>
+                                <li>
+                                    <h3>Numero de colegiado</h3>
+                                    <p>{user.collegeNumber}</p>
+                                    
+                                </li>
+                                <li>
+                                    <h3>Fecha de colegiado</h3>
+                                    <p>{user.dateOfCollege}</p>
+                                </li>
+                                <li>
+                                    <h3>Valoración</h3>
+                                    <Estrellas rating={user.media_valoracion} />
+                                </li>
+                                </>
+                                    )}
                                 <Button
                                     handleClick={() =>
                                         navigate('/password-recovery')
@@ -104,7 +125,7 @@ export const ProfileUserPage = () => {
                                 >
                                     Cambiar Contraseña
                                 </Button>
-                            </li>
+                            
                             <li>
                                 <Button
                                     handleClick={() =>
