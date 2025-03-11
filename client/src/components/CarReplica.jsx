@@ -14,18 +14,23 @@ export const CarReplica = ({ repli, userId, onDelete }) => {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            <section
+            <div
                 className={
                     isOwnMessage ? 'chat-active-user' : 'chat-other-user'
                 }
             >
                 <p>
-                    <strong>{repli.userName}:</strong> {repli.reply}
+                    <strong>{repli.userName}</strong> {repli.reply}
                 </p>
                 {isOwnMessage && hover && (
-                    <button onClick={() => onDelete(repli.id)}>🗑</button>
+                    <button
+                        onClick={() => onDelete(repli.id)}
+                        className="btn-papelera-chat"
+                    >
+                        🗑
+                    </button>
                 )}
-            </section>
+            </div>
         </li>
     );
 };

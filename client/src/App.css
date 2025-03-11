@@ -261,18 +261,13 @@
     gap: 1rem;
 }
 
-.ficha-user-img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-}
-
 .ficha-user-img img {
+    object-fit: cover;
     border: 1px solid var(--main-color);
+    border-radius: 50%;
     width: 250px;
     height: 250px;
     margin: 25px;
-    border-radius: 100%;
     display: block;
 }
 
@@ -352,6 +347,15 @@
     box-shadow: none !important;
 }
 
+.consultation-detail {
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .consultation-info {
     display: flex;
     flex-direction: column;
@@ -390,7 +394,7 @@
 .consulta-archivos {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
@@ -412,31 +416,86 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 20px 40px;
 }
 
 .chat-messages {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: space-between; */
-    border: 1px solid red;
+    gap: 1rem;
+    padding: 10px;
+    /* max-height: 400px; */
+    /* overflow-y: auto; */
 }
 
 .chat-messages ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: space-between;
+    gap: 1rem;
+}
+
+.chat-messages li {
+    width: 100%;
+}
+
+li:has(.chat-active-user) {
+    align-self: flex-end;
+    background-color: var(--main-color);
+    color: var(--color-white);
+    padding: 10px 20px;
+    max-width: 80%;
+    min-width: 30%;
+    border-radius: 15px;
+    word-wrap: break-word;
+    text-align: right;
 }
 
 .chat-active-user {
-    background-color: var(--main-color);
+    display: flex;
+    flex-direction: row !important;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
 }
 
-.chat-other-user {
-    background-color: aqua;
+li:has(.chat-other-user) {
+    align-self: flex-start;
+    background-color: var(--color-white);
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    padding: 10px 20px;
+    max-width: 80%;
+    min-width: 30%;
+    border-radius: 15px;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.btn-papelera-chat {
+    background-color: var(--color-white);
+    padding: 2px 5px;
+    border: none !important;
+    border-radius: 50%;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
 }
 
 .diagnostic,
@@ -568,6 +627,55 @@
     align-items: center;
 }
 
+/* ADMIN PAGE */
+.admin-lista-usuarios {
+    padding: 20px 40px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin-user-card {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0.5px 0.5px 2px var(--color-black);
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+    word-wrap: break-word;
+}
+
+.admin-user-card span {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-user-card h4 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.admin-user-card p {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.admin-user-card-btns {
+    padding: 10px 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (min-width: 780px) {
     .seccion {
         padding: 100px;
@@ -579,7 +687,7 @@
         justify-content: space-between;
         align-items: center;
         margin-top: -50px;
-        margin-bottom: -150px;
+        margin-bottom: 50px;
         min-height: 80vh;
     }
 
@@ -656,6 +764,37 @@
 
     /* PAGINA DETALLE MEDICO */
 
+    .consultation-detail {
+        flex-direction: row;
+    }
+
+    .consultation-info {
+        flex: 8;
+    }
+    .consulta-archivos {
+        flex: 4;
+    }
+
+    li:has(.chat-active-user) {
+        width: 40%;
+    }
+
+    li:has(.chat-other-user) {
+        max-width: 40%;
+    }
+
+    .admin-lista-usuarios {
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .admin-user-card {
+        width: 60%;
+    }
+}
+
+@media (min-width: 980px) {
     .ficha-user {
         width: 90vw;
         gap: 3rem;

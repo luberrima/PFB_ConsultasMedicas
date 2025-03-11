@@ -28,6 +28,7 @@
 .btn-naranja:hover {
     background-color: var(--color-white);
     color: var(--secondary-color);
+    box-shadow: inset 0 0 0 1px var(--secondary-color);
 }
 
 .btn-azul {
@@ -38,6 +39,7 @@
 .btn-azul:hover {
     background-color: var(--color-white);
     color: var(--main-color);
+    box-shadow: inset 0 0 0 1px var(--main-color);
 }
 
 .btn-blanco {
