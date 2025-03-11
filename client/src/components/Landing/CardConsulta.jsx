@@ -6,33 +6,31 @@ import { Link } from 'react-router-dom';
 
 export const CardConsulta = ({ consulta }) => {
     return (
-        <section className="card-consulta">
+        <li className="card-consulta">
             <Link
                 to={`/consultations/${consulta.id}`}
                 className="link-card-consulta"
             >
-                <li className="">
-                    <header>
-                        <p>{consulta.Especialidad}</p>
-                        <p>{consulta.gravedad}</p>
-                    </header>
-                    <main>
-                        <h5>
-                            {/* Título de la consulta:  */}
-                            {consulta.title}
-                        </h5>
-                        {/* <p>identificicador de consulta: {consulta.id}</p> */}
-                        <p>
-                            {/* Descripcion:  */}
-                            {consulta.description}
-                        </p>
-                    </main>
-                    <footer>
-                        <Estrellas rating={consulta.vote} />
-                    </footer>
-                    {/* <p>Diagnostico: {consulta.diagnostic}</p> */}
-                </li>
+                <header>
+                    <p>{consulta.Especialidad}</p>
+                    <p>{consulta.gravedad}</p>
+                </header>
+                <main>
+                    <h5>
+                        {/* Título de la consulta:  */}
+                        {consulta.title}
+                    </h5>
+                    {/* <p>identificicador de consulta: {consulta.id}</p> */}
+                    <p>
+                        {/* Descripcion:  */}
+                        {consulta.description}
+                    </p>
+                </main>
+                <footer>
+                    <Estrellas rating={consulta.vote} />
+                </footer>
+                {/* <p>Diagnostico: {consulta.diagnostic}</p> */}
             </Link>
-        </section>
+        </li>
     );
 };
