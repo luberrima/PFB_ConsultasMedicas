@@ -34,7 +34,7 @@ export const EditProfileForm = () => {
         dateOfCollege: '',
         avatar: '',
     });
-    const [/* avatarFile, */ setAvatarFile] = useState(null);
+    const [avatarFile, setAvatarFile] = useState(null);
 
     useEffect(() => {
         document.body.classList.add('no-header-footer');

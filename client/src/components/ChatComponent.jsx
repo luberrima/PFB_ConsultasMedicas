@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../contexts/auth/AuthContext.js";
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../contexts/auth/AuthContext.js';
 import {
     getChatMessagesService,
     sendChatMessageService,
-    deleteChatMessageService
-} from "../services/fetchBackEnd.js";
-import { CarReplica } from "./CarReplica.jsx";
-import { jwtDecode } from "jwt-decode";
+    deleteChatMessageService,
+} from '../services/fetchBackEnd.js';
+import { CarReplica } from './CarReplica.jsx';
+import { jwtDecode } from 'jwt-decode';
 
 export const ChatComponent = ({ consultationId }) => {
     const { token } = useContext(AuthContext);
@@ -14,7 +14,7 @@ export const ChatComponent = ({ consultationId }) => {
     const userId = decodedToken?.id;
 
     const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState("");
+    const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
     const fetchMessages = async () => {
@@ -22,9 +22,9 @@ export const ChatComponent = ({ consultationId }) => {
 
         setLoading(true);
         const response = await getChatMessagesService(consultationId, token);
-        if (response.status === "ok") {
-            const sortedMessages = response.data.sort((a, b) =>
-                new Date(a.createdAt) - new Date(b.createdAt)
+        if (response.status === 'ok') {
+            const sortedMessages = response.data.sort(
+                (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
             );
             setMessages(sortedMessages);
         }
@@ -44,15 +44,15 @@ export const ChatComponent = ({ consultationId }) => {
             token
         );
 
-        if (response?.status === "ok") {
-            setNewMessage("");
+        if (response?.status === 'ok') {
+            setNewMessage('');
             await fetchMessages();
         }
     };
 
     const handleDeleteMessage = async (messageId) => {
         const response = await deleteChatMessageService(messageId, token);
-        if (response?.status === "ok") {
+        if (response?.status === 'ok') {
             setMessages((prevMessages) =>
                 prevMessages.filter((msg) => msg.id !== messageId)
             );
@@ -60,7 +60,7 @@ export const ChatComponent = ({ consultationId }) => {
     };
 
     const handleKeyDown = (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
+        if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             handleSendMessage();
         }

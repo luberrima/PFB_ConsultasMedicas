@@ -281,79 +281,77 @@ export const ConsultationPage = () => {
     return (
         <section className="consultation-page">
             <h1 className="page-title">{consultation.title}</h1>
-            <section className="consultation-info">
-                <article>
-                    <h4>Descripción</h4> <p>{consultation.description}</p>
-                </article>
-                <article>
-                    <h4>Gravedad</h4> <p>{consultation.gravedad}</p>
-                </article>
-                <article>
-                    <h4>Especialidad</h4> <p>{skill}</p>
-                </article>
-                <article>
-                    <h4>Especialista asignado</h4>{' '}
-                    <p>{doctorName || 'No hay especialista asignado'}</p>
-                </article>
-                <article>
-                    <h4>Estado</h4>{' '}
-                    <p>
-                        {hasDiagnostic
-                            ? 'Consulta terminada'
-                            : 'Consulta activa'}
-                    </p>
-                </article>
-
-                {console.log(
-                    'hasDiagnostic:',
-                    hasDiagnostic,
-                    'isPatient:',
-                    isPatient
-                )}
-                {!hasDiagnostic && isPatient && (
-                    <Button
-                        className="btn btn-naranja"
-                        handleClick={handleDeleteConsulta}
-                    >
-                        Eliminar Consulta
-                    </Button>
-                )}
-
-                {!hasDiagnostic && canTakeConsultation && (
-                    <Button
-                        className="btn btn-naranja"
-                        handleClick={handleChangeResponderConsulta}
-                    >
-                        Responder a esta consulta
-                    </Button>
-                )}
-
-                {!hasDiagnostic && isDoctor && !canTakeConsultation && (
-                    <p className="no-take-consultation">
-                        No puedes tomar esta consulta porque no coincide con tu
-                        especialidad.
-                    </p>
-                )}
-            </section>
-            <section className="consulta-archivos">
-                <h3>Archivos subidos</h3>
-
-                {images && images.length > 0 ? (
-                    <div className="image-gallery">
-                        {images.map((img, index) => (
-                            <img
-                                key={index}
-                                src={img.url}
-                                alt={img.name}
-                                className="uploaded-image"
-                            />
-                        ))}
-                    </div>
-                ) : (
-                    <p className="consultation-page-no-img">
-                        No hay imágenes subidas para esta consulta.
-                    </p>
-                )}
+            <section className="consultation-detail">
+                <section className="consultation-info">
+                    <article>
+                        <h4>Descripción</h4> <p>{consultation.description}</p>
+                    </article>
+                    <article>
+                        <h4>Gravedad</h4> <p>{consultation.gravedad}</p>
+                    </article>
+                    <article>
+                        <h4>Especialidad</h4> <p>{skill}</p>
+                    </article>
+                    <article>
+                        <h4>Especialista asignado</h4>{' '}
+                        <p>{doctorName || 'No hay especialista asignado'}</p>
+                    </article>
+                    <article>
+                        <h4>Estado</h4>{' '}
+                        <p>
+                            {hasDiagnostic
+                                ? 'Consulta terminada'
+                                : 'Consulta activa'}
+                        </p>
+                    </article>
+                    {console.log(
+                        'hasDiagnostic:',
+                        hasDiagnostic,
+                        'isPatient:',
+                        isPatient
+                    )}
+                    {!hasDiagnostic && isPatient && (
+                        <Button
+                            className="btn btn-naranja"
+                            handleClick={handleDeleteConsulta}
+                        >
+                            Eliminar Consulta
+                        </Button>
+                    )}
+                    {!hasDiagnostic && canTakeConsultation && (
+                        <Button
+                            className="btn btn-naranja"
+                            handleClick={handleChangeResponderConsulta}
+                        >
+                            Responder a esta consulta
+                        </Button>
+                    )}
+                    {!hasDiagnostic && isDoctor && !canTakeConsultation && (
+                        <p className="no-take-consultation">
+                            No puedes tomar esta consulta porque no coincide con
+                            tu especialidad.
+                        </p>
+                    )}
+                </section>
+                <section className="consulta-archivos">
+                    <h3>Archivos subidos</h3>
+                    {images && images.length > 0 ? (
+                        <div className="image-gallery">
+                            {images.map((img, index) => (
+                                <img
+                                    key={index}
+                                    src={img.url}
+                                    alt={img.name}
+                                    className="uploaded-image"
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="consultation-page-no-img">
+                            No hay imágenes subidas para esta consulta.
+                        </p>
+                    )}
+                </section>
             </section>
 
             {/* Sección de chat (si no hay diagnóstico) */}

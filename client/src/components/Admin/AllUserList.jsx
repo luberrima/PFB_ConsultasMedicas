@@ -16,7 +16,7 @@ export const AllUserList = ({ users }) => {
 
     return (
         <>
-            <ul className="lista-consultas">
+            <ul className="admin-lista-usuarios">
                 {users?.data?.users.length > 0 ? (
                     users?.data?.users?.map((user) => (
                         <CardUserForAdmin key={user.userId} user={user} />
