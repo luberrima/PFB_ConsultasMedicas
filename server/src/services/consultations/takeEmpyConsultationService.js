@@ -17,7 +17,7 @@ export const takeEmpyConsultationService = async (id,consultationId) => {
                 'Doctor no encontrado o inactivo/No validado'
             );
         }
-        if (user.role !== 'doctor') {
+        if (user[0].role !== 'doctor') {
             throw genereErrorUtils(
                 401,
                 'INVALID_ROLE_USER',
@@ -33,7 +33,7 @@ export const takeEmpyConsultationService = async (id,consultationId) => {
             );
         }
 
-        if(user.skillId!==consultation.skillId)
+        if(user[0].skillId!==consultation.skillId)
         {
             throw genereErrorUtils(
                 401,

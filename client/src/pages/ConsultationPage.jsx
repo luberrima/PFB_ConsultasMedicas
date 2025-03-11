@@ -325,8 +325,11 @@ export const ConsultationPage = () => {
                     {console.log(
                         'hasDiagnostic:',
                         hasDiagnostic,
+                        'isDoctor:',
+                        isDoctor,
                         'isPatient:',
                         isPatient
+                       
                     )}
                     {!hasDiagnostic && isPatient && (
                         <Button
@@ -348,6 +351,10 @@ export const ConsultationPage = () => {
                         <p className="no-take-consultation">
                             No puedes tomar esta consulta porque no coincide con
                             tu especialidad.
+
+                            
+
+
                         </p>
                     )}
                 </section>

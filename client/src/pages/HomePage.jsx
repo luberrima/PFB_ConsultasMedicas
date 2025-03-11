@@ -9,7 +9,7 @@ import deco from '../assets/asset-home.svg';
 import equipo from '../assets/Fotomedicos.png'; // Equipo medico
 import famila from '../assets/madrehijotablet.jpg'; // familiatablet
 import { useAllDoctor } from '../hooks/useAllDoctor.js';
-import React, { useContext } from 'react';
+import React, { useContext,useState,useEffect } from 'react';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
 import { Carruselconsultas } from '../components/Landing/CarruselConsultas.jsx';
 import { useAllConsultas } from '../hooks/useAllConsultas.js';
@@ -29,7 +29,23 @@ export const HomePage = () => {
     const { doctors /*, loading, error */ } = useAllDoctor();
     const { consultas /*,loading2, error2*/ } = useAllConsultas();
     const { consultasAllAs /*,loading3, error3*/ } = useAllConsultasNoAsig();
-    const { users /*,loading4, error4*/ } = useAllUser();
+    const [listUsers,setListUsers] =useState();
+    const [refreshCounter, setRefreshCounter] = useState(0);
+    const { users } = useAllUser(refreshCounter);
+ 
+     
+
+    useEffect(() => {
+        if (users) {
+            setListUsers(users);
+        }
+      }, [users]); 
+
+      const refreshLink = (nuevosDatos) => {
+        setRefreshCounter(prev => prev + 1); 
+        console.log("id cambiado con los nuevos DATOS", nuevosDatos);
+      };
+
 
     /* console.log('Que tengo en la homePage para mostrar de todos lo usuarios',userAll.data); */
 
@@ -96,7 +112,7 @@ export const HomePage = () => {
                 <section className="admin-page">
                     <h3 className="page-title">ERES EL ADMINISTRADOR</h3>
                     <h2 className="page-title-2">Todos los Usuarios</h2>
-                    <AllUserList users={users} />
+                    <AllUserList users={listUsers} refreshLink={refreshLink} />
                 </section>
             ) : (
                 //

@@ -8,7 +8,7 @@ export const takeEmpyConsultationController = async (req, res, next) => {
 
         const { consultationId } = req.params;
         const { id } =req.user;
-
+        console.log("Valor de user ID",id);
 
 
 

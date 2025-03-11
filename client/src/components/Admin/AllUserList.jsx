@@ -1,8 +1,10 @@
-import React /*, { useState }*/ from 'react';
+import React, { useEffect } /*, { useState }*/ from 'react';
 import { CardUserForAdmin } from './CardUserForAdmin.jsx';
 
-export const AllUserList = ({ users }) => {
-    if (!users.status) {
+
+
+export const AllUserList = ({ users, refreshLink}) => {
+    if (!users?.status) {
         return (
             <div>
                 {' '}
@@ -16,10 +18,10 @@ export const AllUserList = ({ users }) => {
 
     return (
         <>
-            <ul className="admin-lista-usuarios">
+            <ul className="lista-consultas">
                 {users?.data?.users.length > 0 ? (
                     users?.data?.users?.map((user) => (
-                        <CardUserForAdmin key={user.userId} user={user} />
+                        <CardUserForAdmin key={user.userId} user={user} refreshLink={refreshLink}  />
                     ))
                 ) : (
                     <p>No tienes Usuarios</p>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllUserService } from '../services/fetchBackEnd.js';
 import { useAuth } from './useAuth.js';
 
-export const useAllUser = () => {
+export const useAllUser = (refreshCounter) => {
     const { token } = useAuth();
     const [users, setUser] = useState([]);
     const [loading4, setLoading] = useState(true);
@@ -22,7 +22,7 @@ export const useAllUser = () => {
         };
 
         fetchAllUser();
-    }, []);
+    },[refreshCounter]);
          
     return { users, loading4, error4 };
 };
