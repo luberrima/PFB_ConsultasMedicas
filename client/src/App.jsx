@@ -19,6 +19,7 @@ import { NewPasswordPage } from './pages/NewPasswordPage.jsx';
 import { EditProfileForm } from './components/forms/EditProfileForm.jsx';
 import { AboutUsPage } from './pages/AboutUsPage.jsx';
 import { ContactPage } from './pages/ContactPage.jsx';
+import {LegalWarning} from "./pages/LegalWarning.jsx";
 
 
 
@@ -67,6 +68,7 @@ function App() {
                     />
                     <Route path="/about" element={<AboutUsPage />} />
                     <Route path="/contacto" element={<ContactPage />} />
+                    <Route path="/aviso-legal" element={<LegalWarning />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
