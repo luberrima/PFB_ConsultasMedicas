@@ -30,7 +30,7 @@ export const Footer = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/about" className="footer-link">
+                        <Link to="/aviso-legal" className="footer-link">
                             Aviso Legal
                         </Link>
                     </li>
