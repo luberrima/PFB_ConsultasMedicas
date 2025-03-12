@@ -115,14 +115,14 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                             >
                                 Validar doctor
                             </Button>
-                            <Button
-                                className="btn btn-naranja"
-                                handleClick={handleDeleteUser}
-                            >
-                                Eliminar Usuario
-                            </Button>
                         </>
                     )}
+                    <Button
+                        className="btn btn-naranja"
+                        handleClick={handleDeleteUser}
+                    >
+                        Eliminar Usuario
+                    </Button>
                 </span>
             </li>
         </>
