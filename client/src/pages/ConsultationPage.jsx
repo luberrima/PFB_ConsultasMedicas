@@ -54,7 +54,7 @@ export const ConsultationPage = () => {
                
 
                 if (response.status === 'ok' && response.data) {
-                    setDoctorName(response.data.userDoctor?.nombre);
+                    setDoctorName(response.data.userDoctor[0]?.username);
                     // setDoctorSkill(response.data.userDoctor?.skillId);
                 } else {
 
@@ -107,7 +107,8 @@ export const ConsultationPage = () => {
                
 
                 if (response.status === 'ok' && response.data) {
-                    setDoctorName(response.data.userDoctor?.nombre);
+                    
+                    setDoctorName(response.data.userDoctor[0]?.username);
                 } else {
   
                 }
@@ -265,6 +266,7 @@ export const ConsultationPage = () => {
         consultation.documents || []
     );
 
+   console.log("valor de doctorName",doctorName);
    
 
     return (
