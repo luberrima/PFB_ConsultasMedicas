@@ -1,5 +1,5 @@
 import React from "react";
-import appleIcon from "../assets/favicon/favicon.svg"; // Ruta correcta de la manzanita
+import appleIcon from "../assets/favicon/favicon.svg"; // Ruta correcta de la manzanitay
 
 export const LegalWarning = () => {
   return (
