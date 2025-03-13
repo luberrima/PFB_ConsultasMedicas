@@ -69,7 +69,7 @@ export const ProfileUserPage = () => {
                 <article className="ficha-user-container">
                     <article className="ficha-user-img">
                         <img
-                            src={`${staticPath}/avatars/${user.id}/${user.avatar}`}
+                            src={urlavatar}
                             alt="Foto usuario"
                         />
                     </article>

@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
 
 export const useAuth = () => {
-	const { token, currentUser, onLogin, onLogout } = useContext(AuthContext);
+	const { token, currentUser, onLogin, onLogOut } = useContext(AuthContext);
 
 	return {
 		token,
 		currentUser,
 		onLogin,
-		onLogout,
+		onLogOut,
 	};
 };

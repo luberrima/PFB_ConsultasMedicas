@@ -1,14 +1,21 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Button } from './Button.jsx';
 import { useAllDoctor } from '../hooks/useAllDoctor.js';
 import avatardefault from '../assets/avatar-default.jpg';
 import { useDoctorProfile } from '../hooks/useDoctorProfile.js';
 import { useNavigate } from 'react-router-dom';
 import { CardAllInfoDoctor } from './CardAllInfoDoctor.jsx';
+import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../contexts/auth/AuthContext.js";
+
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
 export const DoctorUserProfile = ({ doctorId }) => {
+
+    const { token } = useContext(AuthContext);
+    const decodedToken = token ? jwtDecode(token) : null;
     const { doctorsbio } = useDoctorProfile(doctorId);
     const { doctors } = useAllDoctor();
     const doctorList = doctors?.doctors || [];
@@ -63,9 +70,11 @@ export const DoctorUserProfile = ({ doctorId }) => {
                             <li><h3>Años de Experiencia</h3><p>{anios}</p></li>
                             <li><h3>Número de colegiad@</h3><p>{userDoctor.collegeNumber || 'No disponible'}</p></li>
                         </ul>
+                        {decodedToken?.role === "paciente" && (
                         <Button handleClick={handleClickConsulta} className="btn btn-azul">
-                            Nueva consulta
-                        </Button>
+                          Nueva consulta
+                         </Button>
+                        )}
                     </article>
                 </article>
 
