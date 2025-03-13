@@ -7,7 +7,7 @@ export const getOwnUserDoctorController = async (req, res, next) => {
     
         const user = await getOwnUserDoctorService(id);
 
-        console.log(user);
+        
      
         delete user.user[0].password;
         delete user.user[0].registrationCode;

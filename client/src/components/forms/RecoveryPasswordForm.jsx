@@ -31,7 +31,7 @@ export const RecoveryPasswordForm = () => {
                 toast.error(errorResult.message || 'Error en la recuperación');
             }
         } catch (error) {
-            console.error('Error en la conexión:', error);
+          
             toast.error('Error en la conexión al servidor');
         } finally {
             setIsLoading(false);

@@ -17,7 +17,7 @@ export const sendEmailBrevoUtils = async (to, subject, text) => {
             email: SMTP_USER,
         };
         await apiInstance.sendTransacEmail(sendSmtpEmail);
-        console.log("envio mail")
+        
     } catch (error) {
         throw genereErrorUtils(
             500,

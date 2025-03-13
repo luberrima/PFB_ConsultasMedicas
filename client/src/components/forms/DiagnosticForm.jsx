@@ -23,14 +23,14 @@ export const DiagnosticForm = ({ consultationId, token }) => {
                 token,
                 diagnostic
             );
-            console.log('Diagnóstico actualizado:', response);
+           
 
             toast.success('Diagnóstico enviado!');
             setTimeout(() => {
                 navigate(0);
             }, 3000);
         } catch (error) {
-            console.error('Error al actualizar el diagnóstico:', error);
+            
         }
     };
 

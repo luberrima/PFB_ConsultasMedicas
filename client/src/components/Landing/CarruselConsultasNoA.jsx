@@ -5,7 +5,7 @@ import { CardConsulta } from './CardConsulta.jsx';
 export const CarruselconsultasNoA = ({ consultasAllAs }) => {
     // const [currentIndex, setCurrentIndex] = useState(0);
     //  const photos = consultasAllAs?.consultas || [];
-    console.log(consultasAllAs);
+   
 
     return (
         <>

@@ -22,7 +22,7 @@ export const useAllDoctor = () => {
 		fetchDoctors();
 	}, []);
 
-    /*  console.log('Esto es lo que devuelve el useAllDoctor', doctors);   */
+   
     
 	return { doctors, loading, error };
 };

@@ -11,7 +11,7 @@ import { AuthContext } from '../../contexts/auth/AuthContext.js';
 // const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
 export const CardUserForAdmin = ({ user, refreshLink }) => {
-    /* console.log('Que tenfo en CarAllUserForAdmin como userAll',user); */
+
     const doctor = user.role === 'doctor';
     const validado = user.validate === '1';
     const { token } = useContext(AuthContext);
@@ -35,7 +35,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                 throw new Error('No se pudo validar el doctor');
             }
         } catch (error) {
-            console.error('Error al validar el doctor:', error);
+        
             toast.error('Hubo un problema al validar el doctor');
         }
     };
@@ -57,7 +57,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                 throw new Error('No se pudo eliminar el usuario');
             }
         } catch (error) {
-            console.error('Error al eliminar el usuario:', error);
+           
             toast.error('Hubo un problema al eliminar el usuario');
         }
     };

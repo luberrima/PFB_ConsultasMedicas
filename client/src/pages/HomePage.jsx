@@ -43,13 +43,11 @@ export const HomePage = () => {
 
       const refreshLink = (nuevosDatos) => {
         setRefreshCounter(prev => prev + 1); 
-        console.log("id cambiado con los nuevos DATOS", nuevosDatos);
+        
       };
 
 
-    /* console.log('Que tengo en la homePage para mostrar de todos lo usuarios',userAll.data); */
 
-    // const navigate = useNavigate();
 
     return (
         <>

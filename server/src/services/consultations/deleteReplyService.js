@@ -3,7 +3,7 @@ import { deleteReplyById } from "../../models/consultations/deleteReplyByIdModel
 import { genereErrorUtils } from "../../utils/genereErrorUtils.js";
 
 export const deleteReplyService = async (replyId, userId) => {
-    console.log("entro en el service")
+    
     const reply = await findReplyById(replyId);
 
     if (!reply) {
