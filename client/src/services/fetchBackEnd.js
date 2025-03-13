@@ -1,8 +1,10 @@
 // import { Navigate } from 'react-router-dom';
 const backEndPath = import.meta.env.VITE_BACKEND_HOST;
 const AdminPath = import.meta.env.VITE_BACKEND_ADMIN;
-
+// Exportamos una función asíncrona llamada getOwnUserService que recibe un token como parámetro.
 export const getOwnUserService = async (token) => {
+    // Realizamos una petición fetch al endpoint del backend que obtiene el perfil del usuario.
+    // Se usa la variable backEndPath para la ruta base de la API.
     const response = await fetch(`${backEndPath}/users/profile`, {
         headers: {
             Authorization: `${token}`,
