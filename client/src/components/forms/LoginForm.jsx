@@ -64,7 +64,7 @@ export const LoginForm = () => {
                 
 
                 if (!token) {
-                    console.error('No se recibió un token válido');
+                  
                     return;
                 }
 
@@ -88,7 +88,7 @@ export const LoginForm = () => {
                 toast.error(errorMessage);
             }
         } catch (error) {
-            console.error('Error durante el fetch:', error);
+           
             setErrors([
                 {
                     message:

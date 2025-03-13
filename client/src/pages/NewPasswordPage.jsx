@@ -54,7 +54,7 @@ export const NewPasswordPage = () => {
                 );
             }
         } catch (error) {
-            console.error('Error en la conexión:', error);
+            
             toast.error('Error en la conexión al servidor');
         } finally {
             setIsLoading(false);

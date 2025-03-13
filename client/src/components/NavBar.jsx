@@ -15,15 +15,9 @@ export const NavBar = () => {
         try {
             decodedToken = jwtDecode(token);
         } catch (error) {
-            console.error('Error al decodificar el token:', error);
+            
         }
-    } /*  else {
-    } */
-    // try {
-    //     decodedToken = token ? jwtDecode(token) : null;
-    // } catch (error) {
-    //     console.error('Error al decodificar el token:', error);
-    // }
+    } 
 
     return (
         <nav className="navbar">

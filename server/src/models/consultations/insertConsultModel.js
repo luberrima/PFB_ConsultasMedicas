@@ -5,7 +5,7 @@ export const insertConsultModel = async (consult) => {
     //  Crear la conexión 
     const pool = await getPool();
    
-    console.log("valor de consult.doctorId",consult.doctorId);
+    
     let result=[]
 
     if (!consult.doctorId || consult.doctorId=="" )

@@ -1,11 +1,18 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Estrellas } from './Estrellas.jsx';
 import avatardefault from '../assets/avatar-default.jpg';
+import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../contexts/auth/AuthContext.js";
+
+
 
 const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
 export const CardAllInfoDoctor = ({ doctor }) => {
+    const { token } = useContext(AuthContext);
+    const decodedToken = token ? jwtDecode(token) : null;
     let urlavatar = '/src/assets/avatar-default.png';
     if (doctor.avatar) {
         urlavatar = `${staticPath}/avatars/${doctor.userId}/${doctor.avatar}`;
@@ -49,9 +56,11 @@ export const CardAllInfoDoctor = ({ doctor }) => {
                     </li>
                 </Link>
                 <footer>
+                {decodedToken?.role === "paciente" && (
                     <Link to={urllink} className="btn btn-azul">
                         Hacer una consulta
                     </Link>
+                    )}
                 </footer>
             </section>
         </>

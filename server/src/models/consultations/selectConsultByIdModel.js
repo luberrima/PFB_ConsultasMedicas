@@ -2,7 +2,7 @@ import { getPool } from '../../db/getPool.js';
 
 export const selectConsultByIdModel = async (id) => {
     //  Obtener la conexión con la base de datos
-    console.log('QUE TENGO COMO ID en el MODEL', id); 
+    
     const pool = await getPool();
 
     //  Realizar la consulta

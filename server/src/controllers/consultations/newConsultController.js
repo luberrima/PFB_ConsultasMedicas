@@ -21,7 +21,7 @@ export const newConsultController = async (req, res, next) => {
 
         let Receta = [];
 
-        console.log("valor de doctorid",doctorId);
+        
         if (doctorId==="")
         {
             doctorId=null;

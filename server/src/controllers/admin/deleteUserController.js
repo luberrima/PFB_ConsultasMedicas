@@ -3,7 +3,7 @@ import { deleteUserService } from '../../services/admin/deleteUserService.js';
 export const deleteUserController = async (req, res, next) => {
     try {
 
-        console.log('QUE TENGO DE USER req.consut', req.consult );
+        
         
 
         const user = req.body;

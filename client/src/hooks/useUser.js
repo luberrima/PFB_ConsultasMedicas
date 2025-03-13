@@ -26,8 +26,7 @@ export const useUserProfile = (role) => {
                     {
                     data = await getOwnUserService3(token);
                     } 
-                console.log("LO QUE TIENE EL USEUSERPROFILE",data);
-                console.log("el valor de data",data);
+              
                 setUsersOwn(data);
              
             } catch (error) {
@@ -40,7 +39,7 @@ export const useUserProfile = (role) => {
         fetchUsersOwn();
     }, [token]);
 
-    console.log("esto es lo que devuelve usersOwn", usersOwn);
+  
     
     return { usersOwn, loadingOwn, errorOwn };
 };

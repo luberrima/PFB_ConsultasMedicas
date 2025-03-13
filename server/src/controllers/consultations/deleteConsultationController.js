@@ -3,7 +3,7 @@ import { deleteConsultationService } from '../../services/consultations/deleteCo
 export const deleteConsultationController = async (req, res, next) => {
     try {
 
-        console.log('QUE TENGO DE USER req.consut', req.consult );
+        
 
 
         const consultation = req.consult;

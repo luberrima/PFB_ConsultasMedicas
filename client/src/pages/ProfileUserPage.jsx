@@ -31,7 +31,7 @@ export const ProfileUserPage = () => {
             usersOwn.data.user.user &&
             usersOwn.data.user.user.length > 0
         ) {
-            console.log("el valor del useeffect de los datos llegado AAAAAAAA",usersOwn.data.user.user[0])
+            
             setUser(usersOwn.data.user.user[0]);
         }
     }, [usersOwn]);
@@ -43,7 +43,7 @@ export const ProfileUserPage = () => {
     if (errorOwn) {
         return <p>Error: {errorOwn}</p>;
     }
-    console.log("valor de user",user);
+   
     if (!user) {
         return (
             <div>
@@ -56,7 +56,7 @@ export const ProfileUserPage = () => {
     }
 
     let urlavatar="/src/assets/avatar-default.png"
-    console.log("Comprobamos que viene de user",user.avatar);
+    
     if(user.avatar)
     {
         urlavatar=`${staticPath}/avatars/${user.id}/${user.avatar}`;
@@ -69,7 +69,7 @@ export const ProfileUserPage = () => {
                 <article className="ficha-user-container">
                     <article className="ficha-user-img">
                         <img
-                            src={`${staticPath}/avatars/${user.id}/${user.avatar}`}
+                            src={urlavatar}
                             alt="Foto usuario"
                         />
                     </article>

@@ -18,9 +18,9 @@ export const EditProfileForm = () => {
     const navigate = useNavigate();
     const apiPath = import.meta.env.VITE_BACKEND_HOST;
     const { token } = useContext(AuthContext);
-    console.log("valor de token aqui",token)
+   
     const decodedToken = token ? jwtDecode(token) : null;
-    console.log("valor de decode token",decodedToken);
+    
 
     const { usersOwn, loadingOwn, errorOwn } = useUserProfile(decodedToken.role);
 
@@ -101,7 +101,7 @@ export const EditProfileForm = () => {
                     );
                 }
             } catch (error) {
-                console.error('Error al subir avatar:', error);
+              
                 toast.error('Error en la conexión al subir el avatar');
             }
         }
@@ -131,7 +131,7 @@ export const EditProfileForm = () => {
                 );
             }
         } catch (error) {
-            console.error('Error en la actualización:', error);
+          
             toast.error('Error en la conexión con el servidor');
         }
     };

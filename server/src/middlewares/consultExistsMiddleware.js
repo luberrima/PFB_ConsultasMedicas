@@ -12,7 +12,7 @@ export const consultExistsMiddleware = async (req, res, next) => {
         // Adjuntar la entrada al objeto req
         req.consult = consult;
         
-        console.log("valor de request on mideweare",req);
+        
         next();
     } catch (error) {
         next(error);

@@ -27,7 +27,7 @@ export const updateUserController = async (req, res) => {
 
         return res.status(200).json({ message: 'Usuario actualizado con éxito' });
     } catch (error) {
-        console.error('Error al actualizar el usuario', error);
+       
 
         // Aquí, utilizamos `genereErrorUtils` para enviar el error con un formato homogéneo
         const status = error.httpStatus || 500;

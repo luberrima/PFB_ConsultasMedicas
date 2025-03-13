@@ -24,7 +24,7 @@ server.use(morgan('dev'));
 server.use(express.json());
 server.use(fileupload());
 
-console.log('UPLOADS_DIR', UPLOADS_DIR);
+
 
 if (!fs.existsSync(path.join('src', UPLOADS_DIR))) {
     fs.mkdirSync(path.join('src', UPLOADS_DIR), { recursive: true });
@@ -56,7 +56,7 @@ server.use((req, res, next) => {
 
 // Gestor de errores
 server.use((error, req, res, next) => {
-    console.error(error);
+    
 
     res.status(error.httpStatus || 500).send({
         httpStatus: error.httpStatus || 500,

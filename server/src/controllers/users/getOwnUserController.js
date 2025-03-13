@@ -8,7 +8,7 @@ export const getOwnUserController = async (req, res, next) => {
         delete user.user[0].registrationCode;
         delete user.user[0].recoveryPassCode;
 
-        console.log("data user",user.user[0]);
+       
 
         res.send({
             status: 'ok',

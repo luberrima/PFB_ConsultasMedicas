@@ -9,16 +9,16 @@ import { deleteConsultationAllByIdModel } from '../../models/consultations/delet
 
 export const deleteUserService = async (user) => {
 
-    console.log('QUE TENGO EN SEVICE COMO User', user );
+    
    
     
     const consults = await getConsultationByUserIDModel(user.id);
-    console.log('QUE TENGO EN SERVICE COMO consult:', consults);
+   
 
     if (consults.length>0) {
 
         for (const consult of consults) {
-            console.log('Eliminando consulta con ID:', consult.id);
+            
             
             const consultDelete = await deletePhotoModel(consult.id);
         
