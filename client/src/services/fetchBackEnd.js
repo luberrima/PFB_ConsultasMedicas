@@ -2,6 +2,11 @@
 const backEndPath = import.meta.env.VITE_BACKEND_HOST;
 const AdminPath = import.meta.env.VITE_BACKEND_ADMIN;
 
+// ================================
+// SERVICIOS DE USUARIO
+// ================================
+
+// Obtiene los datos del perfil del usuario autenticado.
 export const getOwnUserService = async (token) => {
     const response = await fetch(`${backEndPath}/users/profile`, {
         headers: {
@@ -10,6 +15,7 @@ export const getOwnUserService = async (token) => {
     });
     return response;
 };
+// Obtiene el perfil del usuario con manejo de errores.
 
 export const getOwnUserService2 = async (token) => {
     const response = await fetch(`${backEndPath}/users/profile`, {
@@ -27,7 +33,7 @@ export const getOwnUserService2 = async (token) => {
 
     return await response.json();
 };
-
+// Obtiene datos del perfil del doctor autenticado.
 export const getOwnUserService3 = async (token) => {
     const response = await fetch(`${backEndPath}/users/doctorsown`, {
         headers: {
@@ -44,7 +50,12 @@ export const getOwnUserService3 = async (token) => {
 
     return await response.json();
 };
+// ================================
+// SERVICIOS DE DOCTORES
+// ================================
 
+// Obtiene la lista de todos los doctores registrados en la plataforma.
+// Retorna un array con la información de los doctores disponibles.
 export const getAllDoctorsService = async () => {
     const response = await fetch(`${backEndPath}/users/doctors`);
 
@@ -54,7 +65,12 @@ export const getAllDoctorsService = async () => {
 
     return data;
 };
+// ================================
+// SERVICIOS DE CONSULTAS MÉDICAS
+// ================================
 
+// Obtiene todas las consultas médicas del usuario autenticado.
+// Retorna un array con la información de las consultas médicas asociadas al usuario.
 export const getAllConsultasService = async (token) => {
     const response = await fetch(`${backEndPath}/users/profile`, {
         headers: {
@@ -68,7 +84,7 @@ export const getAllConsultasService = async (token) => {
 
     return data;
 };
-
+// Obtiene todas las consultas médicas no asignadas a un doctor.
 export const getAllConsulNoAsigService = async (token) => {
     const response = await fetch(`${backEndPath}/consultations`, {
         headers: {
@@ -82,10 +98,9 @@ export const getAllConsulNoAsigService = async (token) => {
 
     return data;
 };
-
+// Obtiene los detalles de una consulta médica específica por su ID.
 export const getConsultationDetailService = async (consultationId, token) => {
-    /*   console.log('token en service:', token);
-    console.log('id en servide:', consultationId); */
+
     try {
         const response = await fetch(
             `${backEndPath}/consultations/${consultationId}`,
@@ -97,8 +112,7 @@ export const getConsultationDetailService = async (consultationId, token) => {
                 },
             }
         );
-        // console.log('RESPONSE CONSULTATION:', response.data);
-        /* console.log('repsonse en service:', response); */
+
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(
@@ -108,13 +122,18 @@ export const getConsultationDetailService = async (consultationId, token) => {
         }
         return response.json();
     } catch (error) {
-        console.error('Error en getConsultationDetailService:', error);
+        
         throw error;
     }
 };
 
+
+ //Crea una nueva consulta médica enviando los datos al backend.
+// Obtiene todas las consultas médicas que aún no han sido asignadas a un doctor.
+// Requiere autenticación y retorna un array de consultas médicas disponibles.
+ 
 export const newConsultService = async (info, token) => {
-    /* console.log('Esto es lo que llega al server',info,token); */
+    
 
     const formData = new FormData();
     formData.append('title', info.title || '');
@@ -140,7 +159,11 @@ export const newConsultService = async (info, token) => {
 
     return { message, data };
 };
-
+// ================================
+// SERVICIOS DE DOCTORES
+// ================================
+//Obtiene el perfil de un doctor en base a su ID.
+ 
 export const getDoctorProfileService = async (id, token) => {
     const response = await fetch(`${backEndPath}/users/doctors/${id}`, {
         headers: {
@@ -153,7 +176,8 @@ export const getDoctorProfileService = async (id, token) => {
 
     return { message, data };
 };
-
+// Obtiene los detalles de un doctor específico.
+// Si ocurre un error, devuelve un mensaje indicando que no se pudo obtener la información.
 export const getDoctorDetailService = async (doctorId, token) => {
     try {
         const response = await fetch(
@@ -169,12 +193,16 @@ export const getDoctorDetailService = async (doctorId, token) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error al obtener el doctor:', error);
+        
         return { status: 'error', message: 'No se pudo obtener el doctor' };
     }
 };
 
-// FALTA GET ALL REPLIES CONTROLLER EN BACK
+// ================================
+// SERVICIOS DE CHAT
+// ================================
+
+// Obtiene los mensajes del chat de una consulta específica.
 export const getChatMessagesService = async (consultationId, token) => {
     try {
         const response = await fetch(
@@ -201,12 +229,14 @@ export const getChatMessagesService = async (consultationId, token) => {
             };
         }
     } catch (error) {
-        console.error('Error en getChatMessages:', error);
+        
         return { status: 'error', message: 'Error en la solicitud' };
     }
 };
 
-// ESTO HAY QUE REVISARLO
+// Envía un mensaje dentro del chat de una consulta médica.
+// En caso de éxito, retorna el mensaje enviado.
+// En caso de error, retorna un mensaje indicando la falla.
 export const sendChatMessageService = async (
     consultationId,
     message,
@@ -240,11 +270,11 @@ export const sendChatMessageService = async (
             };
         }
     } catch (error) {
-        console.error('Error en sendChatMessage:', error);
+        
         return { status: 'error', message: 'Error en la solicitud' };
     }
 };
-
+// Elimina un mensaje del chat en una consulta específica.
 export const deleteChatMessageService = async (replyId, token) => {
     try {
         const response = await fetch(
@@ -268,11 +298,15 @@ export const deleteChatMessageService = async (replyId, token) => {
             };
         }
     } catch (error) {
-        console.error('Error en deleteChatMessage:', error);
+        
         return { status: 'error', message: 'Error en la solicitud' };
     }
 };
+// ================================
+// SERVICIOS DE ESPECIALIDADES (SKILLS)
+// ================================
 
+// Obtiene todas las especialidades (skills) disponibles en la plataforma.
 export const getAllSkillsService = async () => {
     try {
         const response = await fetch(`${backEndPath}/skills`);
@@ -280,16 +314,20 @@ export const getAllSkillsService = async () => {
         if (data.status === 'ok') {
             return data.data;
         }
-        /* console.log('data.data:', data.data); */
+       
         throw new Error('Error al obtener las skills');
     } catch (error) {
-        console.error('Error en getAllSkillsService:', error);
+        
         return [];
     }
 };
+// ================================
+// SERVICIOS DE USUARIOS
+// ================================
 
+// Registra un nuevo usuario en la plataforma.
 export const registerUserService = async (userData) => {
-    try {
+    
         const response = await fetch(`${backEndPath}/users/register`, {
             method: 'POST',
             headers: {
@@ -298,18 +336,14 @@ export const registerUserService = async (userData) => {
             body: JSON.stringify(userData),
         });
 
-        if (!response.ok) {
-            throw new Error('Error al registrar el usuario');
-        }
+  
 
-        const result = await response.json();
-
-        return result;
-    } catch (error) {
-        throw new Error(error.message || 'Error al registrar el usuario');
-    }
+        const { message } = await response.json();
+        if (!response.ok) throw new Error(message);
+        return message;
+    
 };
-
+// Registra un nuevo doctor en la plataforma.
 export const registerDoctorService = async (doctorData) => {
     const response = await fetch(`${backEndPath}/users/register-doctor`, {
         method: 'POST',
@@ -320,7 +354,11 @@ export const registerDoctorService = async (doctorData) => {
     if (!response.ok) throw new Error(message);
     return message;
 };
+// ================================
+// SERVICIOS DE CONSULTAS MÉDICAS
+// ================================
 
+// Elimina una consulta médica de la plataforma.
 export const deleteConsultationService = async (consultationId, token) => {
     const response = await fetch(
         `${backEndPath}/consultations/${consultationId}`,
@@ -332,7 +370,7 @@ export const deleteConsultationService = async (consultationId, token) => {
         }
     );
 
-    console.log('Que devuelve respose de consul no asignadas', response);
+    
 
     const { message, data } = await response.json();
 
@@ -340,12 +378,9 @@ export const deleteConsultationService = async (consultationId, token) => {
 
     return response;
 };
-
+// Elimina el diagnóstico de una consulta médica.
 export const deleteDiagnosticoService = async (consultationId, token) => {
-    console.log(
-        `${backEndPath}/consultations/removediagnost/${consultationId}`
-    );
-    console.log('Que trae token en el deleteDiagnistcServide', token);
+
 
     const response = await fetch(
         `${backEndPath}/consultations/removediagnost/${consultationId}`,
@@ -357,13 +392,13 @@ export const deleteDiagnosticoService = async (consultationId, token) => {
         }
     );
     const { message, data } = await response.json();
-    console.log('Que devuelve respose de consul no asignadas', response.data);
+    
 
     if (!response.ok) throw new Error(message);
 
     return response;
 };
-
+// Obtiene las imágenes asociadas a una consulta médica.
 export const getConsultationImages = (userId, consultationId, files = []) => {
     if (!userId || !consultationId || files.length === 0) {
         return [];
@@ -375,6 +410,7 @@ export const getConsultationImages = (userId, consultationId, files = []) => {
         name: file.name,
     }));
 };
+// Toma una consulta médica y la asigna a un doctor.
 export const takeConsultationService = async (consultationId, token) => {
     try {
         const response = await fetch(
@@ -390,9 +426,9 @@ export const takeConsultationService = async (consultationId, token) => {
                 },
             }
         );
-        console.log('responseeee:', response);
+     
         const data = await response.json();
-        console.log('dataaaaaa:', data);
+      
 
         if (!response.ok) {
             throw new Error(data.message || 'Error al tomar la consulta');
@@ -400,12 +436,13 @@ export const takeConsultationService = async (consultationId, token) => {
 
         return data;
     } catch (error) {
-        console.error('Error en takeConsultationService:', error);
+        
 
         throw error;
     }
 };
 
+// Actualiza el diagnóstico de una consulta médica.
 export const updateDiagnosticService = async (
     consultationId,
     token,
@@ -432,10 +469,7 @@ export const updateDiagnosticService = async (
 
         const data = await response.json();
 
-        console.log('Token en service:', token);
-        console.log('Response en service:', response);
-        console.log('Diagnostic en service:', diagnostic);
-        console.log('Data en service:', data);
+     
 
         if (!response.ok) {
             throw new Error(
@@ -445,12 +479,12 @@ export const updateDiagnosticService = async (
 
         return data;
     } catch (error) {
-        console.error('Error en updateDiagnosticService:', error);
+       
 
         throw error;
     }
 };
-
+// Registra un voto para una consulta médica.
 export const voteConsultationService = async (consultationId, token, vote) => {
     try {
         const response = await fetch(
@@ -473,11 +507,15 @@ export const voteConsultationService = async (consultationId, token, vote) => {
 
         return data;
     } catch (error) {
-        console.error('Error en voteConsultationService:', error);
+        
         throw error;
     }
 };
+// ================================
+// SERVICIOS DE ESPECIALIDADES (SKILLS)
+// ================================
 
+// Obtiene todas las especialidades disponibles en la plataforma.
 export const getAllSkills = async () => {
     try {
         const response = await fetch(
@@ -496,12 +534,12 @@ export const getAllSkills = async () => {
 
         return data;
     } catch (error) {
-        console.error('Error en servicegetskill:', error);
+        
 
         throw error;
     }
 };
-
+// Obtiene todos los doctores filtrados por especialidad.
 export const getAllDoctorBySkilfetch = async () => {
     try {
         const response = await fetch(
@@ -519,11 +557,16 @@ export const getAllDoctorBySkilfetch = async () => {
 
         return data;
     } catch (error) {
-        console.error('Error en getalldoctorbyskill:', error);
+        
 
         throw error;
     }
 };
+// ================================
+// SERVICIOS DE ADMINISTRADOR
+// ================================
+
+// Obtiene la lista de todos los usuarios registrados en la plataforma.
 export const getAllUserService = async (token) => {
     try {
         const response = await fetch(`${AdminPath}alluser`, {
@@ -540,12 +583,13 @@ export const getAllUserService = async (token) => {
 
         return data;
     } catch (error) {
-        console.error('Error en getallUserService:', error);
+        
 
         throw error;
     }
 };
-
+// Valida la cuenta de un doctor en la plataforma.
+// Requiere autenticación y el ID del doctor a validar
 export const validateDoctorService = async (userId, token) => {
     try {
         const response = await fetch(`${AdminPath}validate`, {
@@ -561,7 +605,7 @@ export const validateDoctorService = async (userId, token) => {
         });
 
         const data = await response.json();
-        console.log('Data en service:', data);
+        
 
         if (!response.ok) {
             throw new Error(data.message || 'Error al Validar el Doctor');
@@ -569,15 +613,17 @@ export const validateDoctorService = async (userId, token) => {
 
         return response;
     } catch (error) {
-        console.error('Error en ValidateDoctorService:', error);
+        
 
         throw error;
     }
 };
-
+// Elimina un usuario de la plataforma.
+// Requiere autenticación y el ID del usuario a eliminar.
+// En caso de éxito, el usuario es eliminado de la base de datos.
+// En caso de error, lanza un mensaje con la causa del fallo.
 export const deleteUserService = async (userId, token) => {
-    /*  console.log(`${backEndPath}/consultations/removediagnost/${consultationId}`);
-    console.log('Que trae token en el deleteDiagnistcServide',token); */
+ 
     const response = await fetch(`${AdminPath}alluser/delete`, {
         method: 'DELETE',
         headers: {
@@ -589,7 +635,7 @@ export const deleteUserService = async (userId, token) => {
         }),
     });
     const { message, data } = await response.json();
-    console.log('Que devuelve respose el deleteUserService ', response.data);
+    
 
     if (!response.ok) throw new Error(message);
 
