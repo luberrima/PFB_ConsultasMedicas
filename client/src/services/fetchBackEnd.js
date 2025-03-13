@@ -16,7 +16,6 @@ export const getOwnUserService = async (token) => {
     return response;
 };
 // Obtiene el perfil del usuario con manejo de errores.
-
 export const getOwnUserService2 = async (token) => {
     const response = await fetch(`${backEndPath}/users/profile`, {
         headers: {
@@ -84,6 +83,7 @@ export const getAllConsultasService = async (token) => {
 
     return data;
 };
+
 // Obtiene todas las consultas médicas no asignadas a un doctor.
 export const getAllConsulNoAsigService = async (token) => {
     const response = await fetch(`${backEndPath}/consultations`, {
@@ -98,6 +98,7 @@ export const getAllConsulNoAsigService = async (token) => {
 
     return data;
 };
+
 // Obtiene los detalles de una consulta médica específica por su ID.
 export const getConsultationDetailService = async (consultationId, token) => {
 
@@ -131,8 +132,7 @@ export const getConsultationDetailService = async (consultationId, token) => {
  //Crea una nueva consulta médica enviando los datos al backend.
 // Obtiene todas las consultas médicas que aún no han sido asignadas a un doctor.
 // Requiere autenticación y retorna un array de consultas médicas disponibles.
- 
-export const newConsultService = async (info, token) => {
+ export const newConsultService = async (info, token) => {
     
 
     const formData = new FormData();
@@ -162,9 +162,9 @@ export const newConsultService = async (info, token) => {
 // ================================
 // SERVICIOS DE DOCTORES
 // ================================
+
 //Obtiene el perfil de un doctor en base a su ID.
- 
-export const getDoctorProfileService = async (id, token) => {
+ export const getDoctorProfileService = async (id, token) => {
     const response = await fetch(`${backEndPath}/users/doctors/${id}`, {
         headers: {
             Authorization: `${token}`,
@@ -176,6 +176,7 @@ export const getDoctorProfileService = async (id, token) => {
 
     return { message, data };
 };
+
 // Obtiene los detalles de un doctor específico.
 // Si ocurre un error, devuelve un mensaje indicando que no se pudo obtener la información.
 export const getDoctorDetailService = async (doctorId, token) => {
@@ -274,6 +275,7 @@ export const sendChatMessageService = async (
         return { status: 'error', message: 'Error en la solicitud' };
     }
 };
+
 // Elimina un mensaje del chat en una consulta específica.
 export const deleteChatMessageService = async (replyId, token) => {
     try {
@@ -343,6 +345,7 @@ export const registerUserService = async (userData) => {
         return message;
     
 };
+
 // Registra un nuevo doctor en la plataforma.
 export const registerDoctorService = async (doctorData) => {
     const response = await fetch(`${backEndPath}/users/register-doctor`, {
@@ -354,6 +357,7 @@ export const registerDoctorService = async (doctorData) => {
     if (!response.ok) throw new Error(message);
     return message;
 };
+
 // ================================
 // SERVICIOS DE CONSULTAS MÉDICAS
 // ================================
@@ -378,6 +382,7 @@ export const deleteConsultationService = async (consultationId, token) => {
 
     return response;
 };
+
 // Elimina el diagnóstico de una consulta médica.
 export const deleteDiagnosticoService = async (consultationId, token) => {
 
@@ -398,6 +403,7 @@ export const deleteDiagnosticoService = async (consultationId, token) => {
 
     return response;
 };
+
 // Obtiene las imágenes asociadas a una consulta médica.
 export const getConsultationImages = (userId, consultationId, files = []) => {
     if (!userId || !consultationId || files.length === 0) {
@@ -410,6 +416,7 @@ export const getConsultationImages = (userId, consultationId, files = []) => {
         name: file.name,
     }));
 };
+
 // Toma una consulta médica y la asigna a un doctor.
 export const takeConsultationService = async (consultationId, token) => {
     try {
@@ -484,6 +491,7 @@ export const updateDiagnosticService = async (
         throw error;
     }
 };
+
 // Registra un voto para una consulta médica.
 export const voteConsultationService = async (consultationId, token, vote) => {
     try {
@@ -511,6 +519,7 @@ export const voteConsultationService = async (consultationId, token, vote) => {
         throw error;
     }
 };
+
 // ================================
 // SERVICIOS DE ESPECIALIDADES (SKILLS)
 // ================================
@@ -539,6 +548,7 @@ export const getAllSkills = async () => {
         throw error;
     }
 };
+
 // Obtiene todos los doctores filtrados por especialidad.
 export const getAllDoctorBySkilfetch = async () => {
     try {
@@ -562,6 +572,7 @@ export const getAllDoctorBySkilfetch = async () => {
         throw error;
     }
 };
+
 // ================================
 // SERVICIOS DE ADMINISTRADOR
 // ================================
@@ -588,6 +599,7 @@ export const getAllUserService = async (token) => {
         throw error;
     }
 };
+
 // Valida la cuenta de un doctor en la plataforma.
 // Requiere autenticación y el ID del doctor a validar
 export const validateDoctorService = async (userId, token) => {
@@ -618,6 +630,7 @@ export const validateDoctorService = async (userId, token) => {
         throw error;
     }
 };
+
 // Elimina un usuario de la plataforma.
 // Requiere autenticación y el ID del usuario a eliminar.
 // En caso de éxito, el usuario es eliminado de la base de datos.
