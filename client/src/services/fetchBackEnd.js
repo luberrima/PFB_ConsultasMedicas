@@ -287,7 +287,7 @@ export const getAllSkillsService = async () => {
 };
 
 export const registerUserService = async (userData) => {
-    try {
+    
         const response = await fetch(`${backEndPath}/users/register`, {
             method: 'POST',
             headers: {
@@ -296,16 +296,12 @@ export const registerUserService = async (userData) => {
             body: JSON.stringify(userData),
         });
 
-        if (!response.ok) {
-            throw new Error('Error al registrar el usuario');
-        }
+  
 
-        const result = await response.json();
-
-        return result;
-    } catch (error) {
-        throw new Error(error.message || 'Error al registrar el usuario');
-    }
+        const { message } = await response.json();
+        if (!response.ok) throw new Error(message);
+        return message;
+    
 };
 
 export const registerDoctorService = async (doctorData) => {
