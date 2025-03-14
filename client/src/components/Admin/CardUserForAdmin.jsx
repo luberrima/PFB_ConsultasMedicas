@@ -10,8 +10,8 @@ import { AuthContext } from '../../contexts/auth/AuthContext.js';
 
 // const staticPath = import.meta.env.VITE_BACKEND_STATIC;
 
-export const CardUserForAdmin = ({ user, refreshLink }) => {
-
+export const CardUserForAdmin = ({ user }) => {
+    /* console.log('Que tenfo en CarAllUserForAdmin como userAll',user); */
     const doctor = user.role === 'doctor';
     const validado = user.validate === '1';
     const { token } = useContext(AuthContext);
@@ -27,7 +27,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
             const response = await validateDoctorService(userId, token);
             if (response.ok) {
                 toast.success('Doctor validado correctamente');
-                refreshLink((prev) => prev + 1);
+
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
@@ -35,7 +35,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                 throw new Error('No se pudo validar el doctor');
             }
         } catch (error) {
-        
+            console.error('Error al validar el doctor:', error);
             toast.error('Hubo un problema al validar el doctor');
         }
     };
@@ -49,7 +49,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
             const response = await deleteUserService(userId, token);
             if (response.ok) {
                 toast.success('Usuario Eliminado correctamente');
-                refreshLink((prev) => prev + 1);
+
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
@@ -57,7 +57,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                 throw new Error('No se pudo eliminar el usuario');
             }
         } catch (error) {
-           
+            console.error('Error al eliminar el usuario:', error);
             toast.error('Hubo un problema al eliminar el usuario');
         }
     };
@@ -79,7 +79,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                 </span>
                 <span>
                     <h4>Usuario Activo</h4>
-                    <p>{user.active}</p>
+                    <p>{user.active === 1 ? 'Activado' : 'No Activado'}</p>
                 </span>
                 <span>
                     <h4>Rol</h4>
@@ -90,7 +90,7 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                     <>
                         <span>
                             <h4>Doctor Validado</h4>
-                            <p>{user.validate}</p>
+                            <p>{user.validate === 1 ? 'Validado' : 'No Validado'}</p>
                         </span>
                         <span>
                             <h4>Especialidad</h4>
@@ -102,21 +102,20 @@ export const CardUserForAdmin = ({ user, refreshLink }) => {
                         </span>
                         <span>
                             <h4>Fecha de Colegiado</h4>
-                            <p>{user.validate}</p>
+                            <p>{new Date(user.dateOfCollege).toLocaleDateString('en-CA')}</p>
                         </span>
                     </>
                 )}
                 <span className="admin-user-card-btns">
                     {doctor && !(user.validate === 1) && (
-                        <>
-                            <Button
-                                className="btn btn-azul"
-                                handleClick={handleValidateUser}
-                            >
-                                Validar doctor
-                            </Button>
-                        </>
+                        <Button
+                            className="btn btn-azul"
+                            handleClick={handleValidateUser}
+                        >
+                            Validar doctor
+                        </Button>
                     )}
+
                     <Button
                         className="btn btn-naranja"
                         handleClick={handleDeleteUser}
