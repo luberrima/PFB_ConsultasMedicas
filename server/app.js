@@ -3,7 +3,6 @@ import { server } from './src/server.js';
 
 import { PORT } from './env.js';
 
-
 const puerto = PORT || 3001;
 
 server.listen(puerto, () => {
