@@ -617,6 +617,118 @@ li:has(.chat-other-user) {
     vertical-align: middle;
 }
 
+/*CONTACT PAGE*/
+
+
+.contact-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-white);
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.contact-title {
+    font-size: 30px;
+    color: var(--main-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.contact-text {
+    font-size: 18px;
+    color: var(--color-black);
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+
+.contact-info {
+    background-color: var(--background-light);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.8;
+    border-left: 6px solid var(--main-color);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.faq-section {
+    text-align: left;
+    margin-top: 20px;
+}
+
+
+.faq-question {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: var(--color-white);
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    color: var(--main-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+
+.faq-question:hover {
+    background-color: var(--main-color);
+    color: var(--color-white);
+    transform: scale(1.02);
+}
+
+
+.faq-question span {
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+
+.faq-question[aria-expanded="true"] span {
+    transform: rotate(180deg);
+}
+
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    background-color: var(--background-light);
+    border-radius: 8px;
+    padding: 0 16px;
+}
+
+
+.faq-answer.show {
+    max-height: 200px;
+    opacity: 1;
+    padding: 16px;
+}
+
+
+.contact-image {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* VALIDATION PAGE */
 .validation-page {
     width: 100vw;
