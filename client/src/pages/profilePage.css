@@ -1,0 +1,130 @@
+/* DETALLE MÉDICO PAGE */
+.ficha-user {
+    width: 85vw;
+    margin: 30px auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.ficha-user-container {
+    width: 100%;
+    /* padding: 20px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ficha-user-img img {
+    object-fit: cover;
+    border: 1px solid var(--main-color);
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    margin: 25px;
+    display: block;
+}
+
+.ficha-medico-rating {
+    margin: 0 20px;
+}
+
+.ficha-user-info,
+.ficha-medico-rating {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+}
+
+.ficha-user-info ul,
+.ficha-medico-rating ul {
+    list-style: none;
+}
+
+.ficha-user-info ul li,
+.ficha-medico-rating ul li {
+    margin: 25px 0;
+}
+
+.ficha-medico-rating ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ficha-user-info ul li h3,
+.ficha-medico-rating h3 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.ficha-medico-rating h4 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.ficha-user-info ul li p,
+.ficha-medico-rating ul li p {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.ficha-user-info ul li:last-child {
+    margin-top: 50px;
+}
+
+@media (min-width: 980px) {
+    .ficha-user {
+        width: 90vw;
+        gap: 3rem;
+    }
+
+    .ficha-user-container {
+        flex-direction: row;
+        justify-content: start;
+        align-items: start;
+        gap: 3rem;
+    }
+
+    .ficha-user-img {
+        border: 1px solid var(--main-color);
+        border-radius: 5px;
+    }
+
+    .ficha-user-info,
+    .ficha-medico-rating {
+        padding: 50px 60px;
+    }
+
+    .ficha-user-rating {
+        text-align: center;
+    }
+
+    .ficha-user-info ul li h3,
+    .ficha-medico-rating h3 {
+        font-size: 25px;
+    }
+
+    .ficha-user-rating h4 {
+        font-size: 19px;
+    }
+
+    .ficha-user-info ul li p,
+    .ficha-medico-rating ul li p {
+        font-size: 18px;
+    }
+
+    .ficha-user-edit-contraseña {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 2rem;
+    }
+}
