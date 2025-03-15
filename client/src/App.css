@@ -139,7 +139,6 @@
 .card-doctor-inicio-avatar {
     width: 100px;
     height: 100px;
-    object-fit: cover;
     border-radius: 100%;
     margin-bottom: 10px;
     align-self: center;
@@ -149,7 +148,9 @@
 }
 
 .card-doctor-inicio-avatar img {
-    width: 100%;
+    object-fit: cover;
+    width: 100px !important;
+    height: 100px !important;
     height: auto;
 }
 
