@@ -4,6 +4,7 @@
 @import './pages/aboutPage.css';
 @import './pages/contactPage.css';
 @import './pages/validationPage.css';
+@import './pages/legalWarning.css';
 
 .page-title {
     font-size: 38px;

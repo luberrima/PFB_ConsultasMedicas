@@ -71,4 +71,3 @@ const faqData = [
   { question: "¿Cómo puedo convertirme en doctor en la plataforma?", answer: "Si eres médico titulado, puedes registrarte en la sección 'Médico', enviar tu información y ser verificado por nuestro equipo." },
 ];
 
-export default ContactPage;
