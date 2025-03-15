@@ -23,13 +23,16 @@ export const DoctorUserProfile = ({ doctorId }) => {
 
     const doctorinfo = doctorsbio?.data || {}; 
     const userDoctor = doctorinfo?.userDoctor?.[0] || {};
+    console.log("Valor de userdoctor",userDoctor);
+    console.log(doctorinfo);
+    console.log(doctorinfo?.userDoctor?.ConsultasTotales);
 
     if (!userDoctor || Object.keys(userDoctor).length === 0) {
         return <div>Perfil del doctor No disponible</div>;
     }
 
     let anios = 0;
-    let valoracion = userDoctor?.media_valoracion ? Math.round(userDoctor.media_valoracion) : 0;
+    let valoracion = doctorinfo?.userDoctor?.media_valoracion ? Math.round(doctorinfo?.userDoctor?.media_valoracion) : 0;
 
     if (userDoctor?.dateOfCollege) {
         const fechaInicio = new Date(userDoctor.dateOfCollege);
@@ -81,9 +84,9 @@ export const DoctorUserProfile = ({ doctorId }) => {
                 <article className="ficha-medico-rating">
                     <h3>Valoración del doctor</h3>
                     <ul>
-                        <li><h4>Consultas Totales</h4><p>{userDoctor.ConsultasTotales || 0}</p></li>
-                        <li><h4>Consultas respondidas</h4><p>{userDoctor.total_respuestas || 0}</p></li>
-                        <li><h4>Valoraciones recibidas</h4><p>{userDoctor.Votos_recibidos || 0}</p></li>
+                        <li><h4>Consultas Totales</h4><p>{doctorinfo?.userDoctor?.ConsultasTotales || 0}</p></li>
+                        <li><h4>Consultas respondidas</h4><p>{doctorinfo?.userDoctor?.total_respuestas || 0}</p></li>
+                        <li><h4>Valoraciones recibidas</h4><p>{doctorinfo?.userDoctor?.Votos_recibidos || 0}</p></li>
                         <li><h4>Media de valoraciones</h4><p>{valoracion}</p></li>
                     </ul>
                 </article>
