@@ -5,11 +5,11 @@
 
 ## 📌 Descripción del Proyecto
 
-Consultas Médicas Online es una plataforma diseñada para conectar pacientes y doctores de manera rápida y eficiente a través de Internet. Los pacientes pueden buscar médicos por especialidad y programar consultas, mientras que los médicos pueden gestionar y responder a las consultas de los pacientes, que pueden ser valoradas por los mismos. La plataforma permite la interacción segura entre ambos tipos de usuarios, facilitando la atención médica en línea.
+**Good Doctor** es una plataforma diseñada para conectar pacientes y doctores de manera rápida y eficiente a través de Internet. Los pacientes pueden buscar médicos por especialidad y programar consultas, mientras que los médicos pueden gestionar y responder a las consultas de los pacientes, que pueden ser valoradas por los mismos. La plataforma permite la interacción segura entre ambos tipos de usuarios, facilitando la atención médica en línea.
 
 ## 💻 Wireframe
 
-- [🔗 Ver Wireframe en Figma](https://www.figma.com/design/8KbufN3pFNyJ7peSqSUaCg/good-doctor?node-id=0-1&t=xfwRB8WJGqWMy5Gz-1)
+[🔗 Ver Wireframe en Figma](https://www.figma.com/design/8KbufN3pFNyJ7peSqSUaCg/good-doctor?node-id=0-1&t=xfwRB8WJGqWMy5Gz-1)
 
 ## 🚀 Características Principales
 
@@ -181,7 +181,7 @@ npm run build
   - [LinkedIn](https://www.linkedin.com/in/javier-navarro-robles-948990ab/)
   - [GitHub](https://github.com/JavierNavarroRobles)
 - **Rafa López**
-  - [GitHub](hhttps://github.com/RafVianney)
+  - [GitHub](https://github.com/RafVianney)
 - **Alejandro Andrés**
   - [LinkedIn](https://www.linkedin.com/in/alejandro-andres-sorribas-436868152?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
   - [GitHub](https://github.com/Vikingracer89)
