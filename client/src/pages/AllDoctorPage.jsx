@@ -2,12 +2,11 @@ import React from 'react';
 import { useAllDoctor } from '../hooks/useAllDoctor.js';
 import { CardAllInfoDoctor } from '../components/CardAllInfoDoctor.jsx';
 
-import '../components/cardDoctor.css';
+import '../components/cardAllInfoDoctor.css';
 
 export const AllDoctorPage = () => {
     const { doctors /*, loading, error */ } = useAllDoctor();
 
-   
     const doctorList = doctors?.doctors || []; // Asegurarse de que tenemos los doctores
 
     return (
