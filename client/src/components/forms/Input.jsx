@@ -23,7 +23,7 @@ export const Input = ({
     };
 
     return (
-        <label>
+        <label className="input-wrapper">
             {label && <p>{label}</p>}
 
             <div className="input-container">
@@ -38,25 +38,37 @@ export const Input = ({
                         className={className}
                     />
                 ) : (
-                    <input
-                        type={inputType}
-                        name={name}
-                        value={value}
-                        onChange={handleChange}
-                        autoComplete={`new-${name}`}
-                        placeholder={placeholder}
-                        className={className}
-                    />
-                )}
-                {type === 'password' && (
-                    <Button
-                        handleClick={handleClick}
-                        className="visibility-btn"
-                    >
-                        <Icon
-                            name={showPass ? 'visibility_off' : 'visibility'}
+                    <div className="input-field">
+                        <input
+                            type={inputType}
+                            name={name}
+                            value={value}
+                            onChange={handleChange}
+                            autoComplete={`new-${name}`}
+                            placeholder={placeholder}
+                            className={`input ${className}`}
                         />
-                    </Button>
+                        {type === 'password' && (
+                            <button
+                                type="button"
+                                className="visibility-btn"
+                                onClick={handleClick}
+                            >
+                                <Button
+                                    handleClick={handleClick}
+                                    className="visibility-btn"
+                                >
+                                    <Icon
+                                        name={
+                                            showPass
+                                                ? 'visibility_off'
+                                                : 'visibility'
+                                        }
+                                    />
+                                </Button>
+                            </button>
+                        )}
+                    </div>
                 )}
             </div>
 

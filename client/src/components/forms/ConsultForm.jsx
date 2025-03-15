@@ -188,7 +188,7 @@ export const ConsultForm = () => {
                 handleChange={handleChange}
             />
 
-            <ImageInput label="Imágenes" name="images" previews={previews} />
+            <ImageInput label="Archivos" name="images" previews={previews} />
             <Button
                 id="register"
                 className="btn btn-azul"

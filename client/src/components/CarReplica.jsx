@@ -27,7 +27,7 @@ export const CarReplica = ({ repli, userId, onDelete }) => {
                         onClick={() => onDelete(repli.id)}
                         className="btn-papelera-chat"
                     >
-                        🗑
+                        ❌
                     </button>
                 )}
             </div>

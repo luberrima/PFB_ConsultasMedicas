@@ -52,11 +52,15 @@
     color: var(--secondary-color);
 }
 
-.new-consultation-link {
+.new-consultation-btn {
+    all: unset;
     color: var(--secondary-color);
+    background-color: none;
+    border: none;
+    text-transform: uppercase;
 }
 
-.new-consultation-link:hover {
+.new-consultation-btn:hover {
     color: var(--color-white);
 }
 

@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button } from './Button.jsx';
+// import { Button } from './Button.jsx';
 
 export const LogOutButton = () => {
     const { onLogOut } = useContext(AuthContext);
@@ -17,7 +18,7 @@ export const LogOutButton = () => {
     return (
         <Button
             id="logout-btn"
-            className="btn btn-naranja btn-logout"
+            className="navbar-link new-consultation-btn"
             handleClick={handleLogout}
         >
             Cerrar Sesión
