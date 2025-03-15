@@ -23,9 +23,6 @@ export const DoctorUserProfile = ({ doctorId }) => {
 
     const doctorinfo = doctorsbio?.data || {}; 
     const userDoctor = doctorinfo?.userDoctor?.[0] || {};
-    console.log("Valor de userdoctor",userDoctor);
-    console.log(doctorinfo);
-    console.log(doctorinfo?.userDoctor?.ConsultasTotales);
 
     if (!userDoctor || Object.keys(userDoctor).length === 0) {
         return <div>Perfil del doctor No disponible</div>;
