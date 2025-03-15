@@ -153,7 +153,7 @@ export const RegisterForm = () => {
             {/* Campos adicionales si el usuario es doctor */}
             {userType === 'doctor' && (
                 <>
-                    <div className="form-mobile-doc">
+                    <div className="form-doc">
                         <Input
                             label="Nº de Colegiad@"
                             type="text"

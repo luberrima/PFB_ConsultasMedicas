@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import './navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogOutButton } from './LogOutButton.jsx';
 import logonavbar from '../assets/good-doctor-logo-navbar.svg';
 import { AuthContext } from '../contexts/auth/AuthContext.js';
 import { jwtDecode } from 'jwt-decode';
+import { Button } from './Button.jsx';
 
 export const NavBar = () => {
+    const navigate = useNavigate();
     const { token } = useContext(AuthContext);
 
     let decodedToken = null;
@@ -14,10 +16,12 @@ export const NavBar = () => {
     if (token && typeof token === 'string') {
         try {
             decodedToken = jwtDecode(token);
-        } catch (error) {
-            
-        }
-    } 
+        } catch (error) {}
+    }
+
+    const handleClick = () => {
+        navigate('/new-consult');
+    };
 
     return (
         <nav className="navbar">
@@ -70,15 +74,16 @@ export const NavBar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    to="/new-consult"
-                                    className="navbar-link new-consultation-link"
-                                >
-                                    Hacer una consulta
-                                </Link>
+                                <LogOutButton />
                             </li>
                             <li>
-                                <LogOutButton />
+                                <Button
+                                    to="/new-consult"
+                                    className="btn btn-naranja"
+                                    handleClick={handleClick}
+                                >
+                                    Hacer una consulta
+                                </Button>
                             </li>
                         </ul>
                     )}

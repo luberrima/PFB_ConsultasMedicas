@@ -79,7 +79,7 @@ export const CardUserForAdmin = ({ user }) => {
                 </span>
                 <span>
                     <h4>Usuario Activo</h4>
-                    <p>{user.active === 1 ? 'Activado' : 'No Activado'}</p>
+                    <p>{user.active === 1 ? '✔' : '✖️'}</p>
                 </span>
                 <span>
                     <h4>Rol</h4>
@@ -90,7 +90,7 @@ export const CardUserForAdmin = ({ user }) => {
                     <>
                         <span>
                             <h4>Doctor Validado</h4>
-                            <p>{user.validate === 1 ? 'Validado' : 'No Validado'}</p>
+                            <p>{user.validate === 1 ? '✔' : '✖️'}</p>
                         </span>
                         <span>
                             <h4>Especialidad</h4>
@@ -102,7 +102,11 @@ export const CardUserForAdmin = ({ user }) => {
                         </span>
                         <span>
                             <h4>Fecha de Colegiado</h4>
-                            <p>{new Date(user.dateOfCollege).toLocaleDateString('en-CA')}</p>
+                            <p>
+                                {new Date(
+                                    user.dateOfCollege
+                                ).toLocaleDateString('en-CA')}
+                            </p>
                         </span>
                     </>
                 )}
