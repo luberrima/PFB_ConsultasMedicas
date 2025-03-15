@@ -1,56 +1,49 @@
-## 📌 Descripción del Proyecto
+# 💻 Frontend - Consultas Médicas Online
 
-Consultas Médicas Online es una plataforma diseñada para conectar pacientes y doctores de manera rápida y eficiente a través de Internet. Los pacientes pueden buscar médicos por especialidad y programar consultas, mientras que los médicos pueden gestionar y responder a las consultas de los pacientes. La plataforma permite la interacción segura entre ambos tipos de usuarios, facilitando la atención médica en línea.
-
-## 🚀 Características Principales
-
--   👤 **Usuario No Registrado:**
-    Los usuarios no registrados pueden visualizar la landing page, registrarse con validación por correo electrónico e iniciar sesión con recuperación de contraseña.
-
--   🏥 **Usuarios Pacientes:**
-    Los pacientes pueden ver y gestionar sus consultas, realizar búsquedas por palabra clave, especialidad o gravedad, ordenar resultados, acceder a detalles de consultas y médicos, gestionar su perfil, crear y eliminar consultas sin respuestas, responder sus propias consultas y valorar respuestas médicas.
-
--   👨‍⚕️ **Usuarios Médicos:**
-    Los médicos pueden ver la lista de consultas disponibles, filtrar y ordenar como los pacientes, acceder a detalles de consultas, gestionar su perfil profesional, consultar su histórico de consultas, responder consultas dentro de su especialidad o asignadas, eliminar respuestas propias sin valoración y visualizar la lista de médicos con su media de valoraciones.
+Este es el frontend de la plataforma **Consultas Médicas Online**, desarrollado con **React** y **Vite**.
 
 ## 🛠 Tecnologías Utilizadas
 
--   **Backend:** Node.js con Express.js
+-   **Librerías Principales:** React y ReactDOM
+-   **Enrutamiento:** React Router Dom
+-   **Manejo de formularios y validación:** React Hook Form y Joi
+-   **Manejo de Fechas:** Day.js
+-   **Autenticación:** JWT Decode
+-   **Notificaciones y feedback al usuario:** React Toastify
+-   **Manejo de errores:** React Error Boundary
+-   **Íconos:** React Icons y Google Icons
+-   **Configuración y herramientas de desarrollo:** Vite y ESLint con plugins para React y Hooks
 
-    -   **Base de datos:** MySQL con mysql2
+## 📥 Instalación y Configuración
 
-    -   **Autenticación:** JSON Web Token (jsonwebtoken), bcrypt para hash de contraseñas
+### **Clonar el repositorio**
 
-    -   **Validaciones:** Joi
+```
+git clone git@github.com:luberrima/PFB_ConsultasMedicas.git
+```
 
-    -   **Manejo de archivos:** express-fileupload
+### **Instalar dependencias**
 
-    -   **Configuración y seguridad:** dotenv, cors, crypto, randomstring
+```
+cd client
+npm install
+```
 
-    -   **Utilidades:** path
+### **Configurar las variables de entorno**
 
-    -   **Desarrollo:** Morgan y Nodemon (solo en desarrollo)
+-   Copia el archivo `.env.example` y renómbralo a `.env`.
+-   Completa los valores según la configuración de tu entorno.
 
--   **Frontend:** React
+### **Ejecutar el servidor en modo desarrollo**
 
-## 📌 Instalación y Configuración
+(en server)
 
-**Clonar el repositorio:**
+```
+npm run dev
+```
 
-> git clone git@github.com:luberrima/PFB_ConsultasMedicas_Front.git
+### **Ejecutar el servidor en modo desarrollo**
 
-**Instalar las dependencias:**
-
-> npm install
-
-**Construir la aplicación para producción :**
-
-> npm run build
-
--   Este comando crea el directorio `dist` con los archivos optimizados para producción.
--   Todos los documentos de la app pasan por un proceso de empaquetado y optimización.
--   El código escrito en JSX se compila a código compatible con el navegador.
--   Los archivos CSS se combinan en un solo archivo.
--   Las imágenes y otros recursos se comprimen(minificación) y se copian en el directorio de salida.
-
-##
+```
+npm run build
+```
